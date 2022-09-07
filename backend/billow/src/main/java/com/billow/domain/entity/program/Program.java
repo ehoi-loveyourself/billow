@@ -38,7 +38,7 @@ public class Program {
     @NotNull
     private String broadcastingStation;
 
-    @Column(nullable = false, columnDefinition = "TINYINT", length=1)
+    @NotNull
     private boolean endFlag;
 
     @NotNull
