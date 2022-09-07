@@ -9,8 +9,8 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "tb_actor")
-public class Actor {
+@Table(name = "tb_cast")
+public class Cast {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "actor_id")
