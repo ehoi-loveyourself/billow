@@ -1,8 +1,11 @@
 package com.billow.domain.entity.program;
 
+import com.billow.domain.entity.user.ProfileImg;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -44,9 +47,13 @@ public class Program {
     @NotNull
     private Float averageRating;
 
+    @NotNull
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "poster_img_id")
+    private PosterImg posterImg;
+
     @Builder
-    public Program(Long id, String title, String genre, Integer age, String summary, String broadcastingDay, String broadcastingTime, String broadcastingStation,
-    boolean endFlag, Float averageRating) {
+    public Program(Long id, String title, String genre, Integer age, String summary, String broadcastingDay, String broadcastingTime, String broadcastingStation, boolean endFlag, Float averageRating, PosterImg posterImg) {
         this.id = id;
         this.title = title;
         this.genre = genre;
@@ -57,6 +64,6 @@ public class Program {
         this.broadcastingStation = broadcastingStation;
         this.endFlag = endFlag;
         this.averageRating = averageRating;
+        this.posterImg = posterImg;
     }
-
 }

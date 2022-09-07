@@ -1,8 +1,11 @@
 package com.billow.domain.entity.organization;
 
+import com.billow.domain.entity.program.Program;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -33,13 +36,20 @@ public class Organization {
     @NotNull
     private String broadcastingType;
 
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "program_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Program program;
+
     @Builder
-    public Organization(Long id, String programTitle, String broadcastingDay, String broadcastingTime, String broadcastingStation, String broadcastingType ) {
+    public Organization(Long id, String programTitle, String broadcastingDay, String broadcastingTime, String broadcastingStation, String broadcastingType, Program program) {
         this.id = id;
         this.programTitle = programTitle;
         this.broadcastingDay = broadcastingDay;
         this.broadcastingTime = broadcastingTime;
         this.broadcastingStation = broadcastingStation;
         this.broadcastingType = broadcastingType;
+        this.program = program;
     }
 }
