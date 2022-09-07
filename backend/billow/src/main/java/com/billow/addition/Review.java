@@ -30,5 +30,4 @@ public class Review {
         this.id = id;
         this.dateTime = dateTime;
     }
-
 }

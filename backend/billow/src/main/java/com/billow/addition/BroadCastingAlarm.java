@@ -26,5 +26,4 @@ public class BroadCastingAlarm {
         this.id = id;
         this.dateTime = dateTime;
     }
-
 }

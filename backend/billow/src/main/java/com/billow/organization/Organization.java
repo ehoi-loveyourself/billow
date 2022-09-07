@@ -22,25 +22,24 @@ public class Organization {
     private String programTitle;
 
     @NotNull
-    private String broadCastingDay;
+    private String broadcastingDay;
 
     @NotNull
-    private String broadCastingTime;
+    private String broadcastingTime;
 
     @NotNull
-    private String broadCastingStation;
+    private String broadcastingStation;
 
     @NotNull
-    private String broadCastingType;
+    private String broadcastingType;
 
     @Builder
-    public Organization(Long id, String programTitle, String broadCastingDay, String broadCastingTime, String broadCastingStation, String broadCastingType ) {
+    public Organization(Long id, String programTitle, String broadcastingDay, String broadcastingTime, String broadcastingStation, String broadcastingType ) {
         this.id = id;
         this.programTitle = programTitle;
-        this.broadCastingDay = broadCastingDay;
-        this.broadCastingTime = broadCastingTime;
-        this.broadCastingStation = broadCastingStation;
-        this.broadCastingType = broadCastingType;
+        this.broadcastingDay = broadcastingDay;
+        this.broadcastingTime = broadcastingTime;
+        this.broadcastingStation = broadcastingStation;
+        this.broadcastingType = broadcastingType;
     }
-
 }

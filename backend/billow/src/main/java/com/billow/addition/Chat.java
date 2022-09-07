@@ -29,5 +29,4 @@ public class Chat {
         this.id = id;
         this.dateTime = dateTime;
     }
-
 }
