@@ -27,7 +27,7 @@ public class ProgramPosterImg {
     private String saveName;
 
     @Builder
-    public PosterImg(Long id, String saveFolder, String originName, String saveName) {
+    public ProgramPosterImg(Long id, String saveFolder, String originName, String saveName) {
         this.id = id;
         this.saveFolder = saveFolder;
         this.originName = originName;
