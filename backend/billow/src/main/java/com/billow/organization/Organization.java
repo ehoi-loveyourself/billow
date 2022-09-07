@@ -22,16 +22,16 @@ public class Organization {
     private String programTitle;
 
     @NotNull
-    private String broadCastingDay;
+    private String broadcastingDay;
 
     @NotNull
-    private String broadCastingTime;
+    private String broadcastingTime;
 
     @NotNull
-    private String broadCastingStation;
+    private String broadcastingStation;
 
     @NotNull
-    private String broadCastingType;
+    private String broadcastingType;
 
     @Builder
     public Organization(Long id, String programTitle, String broadCastingDay, String broadCastingTime, String broadCastingStation, String broadCastingType ) {
