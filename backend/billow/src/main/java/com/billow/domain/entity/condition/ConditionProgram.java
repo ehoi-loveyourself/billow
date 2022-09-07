@@ -1,28 +1,23 @@
-package com.billow.model.entity.user;
+package com.billow.domain.entity.condition;
 
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "tb_region")
+@Table(name = "tb_condition_program")
 @Entity
-public class Region {
+public class ConditionProgram {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "region_id")
+    @Column(name = "condition_program_id")
     private Long id;
 
-    @NotNull
-    private String region;
-
     @Builder
-    public Region(Long id, String region) {
+    public ConditionProgram(Long id) {
         this.id = id;
-        this.region = region;
     }
 }

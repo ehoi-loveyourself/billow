@@ -1,4 +1,4 @@
-package com.billow.organization;
+package com.billow.domain.entity.organization;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -6,15 +6,16 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "tb_program_organization")
+@Table(name = "tb_organization")
 @Entity
-public class ProgramOrganization {
+public class Organization {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "program_organization_id")
+    @Column(name = "organization_id")
     private Long id;
 
     @NotNull
@@ -33,7 +34,7 @@ public class ProgramOrganization {
     private String broadcastingType;
 
     @Builder
-    public ProgramOrganization(Long id, String programTitle, String broadcastingDay, String broadcastingTime, String broadcastingStation, String broadcastingType ) {
+    public Organization(Long id, String programTitle, String broadcastingDay, String broadcastingTime, String broadcastingStation, String broadcastingType ) {
         this.id = id;
         this.programTitle = programTitle;
         this.broadcastingDay = broadcastingDay;

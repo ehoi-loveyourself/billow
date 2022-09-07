@@ -1,4 +1,4 @@
-package com.billow.addition;
+package com.billow.domain.entity.user;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -8,21 +8,21 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "tb_broadcasting_alarm")
+@Table(name = "tb_region")
 @Entity
-public class BroadcastingAlarm {
+public class Region {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "broadcasting_alarm_id")
+    @Column(name = "region_id")
     private Long id;
 
     @NotNull
-    private String dateTime;
+    private String region;
 
     @Builder
-    public BroadcastingAlarm(Long id, String dateTime) {
+    public Region(Long id, String region) {
         this.id = id;
-        this.dateTime = dateTime;
+        this.region = region;
     }
 }

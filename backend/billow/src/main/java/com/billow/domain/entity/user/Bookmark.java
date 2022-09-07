@@ -1,4 +1,4 @@
-package com.billow.model.entity.condition;
+package com.billow.domain.entity.user;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -7,17 +7,17 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "tb_condition_program")
+@Table(name = "tb_bookmark")
 @Entity
-public class ConditionProgram {
+public class Bookmark {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "condition_program_id")
+    @Column(name = "bookmark_id")
     private Long id;
 
     @Builder
-    public ConditionProgram(Long id) {
+    public Bookmark(Long id) {
         this.id = id;
     }
 }

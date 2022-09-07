@@ -1,4 +1,4 @@
-package com.billow.model.entity.condition;
+package com.billow.domain.entity.condition;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -8,21 +8,21 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "tb_condition_with_whom")
+@Table(name = "tb_condition_genre")
 @Entity
-public class ConditionWithWhom {
+public class ConditionGenre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "with_whom_id")
+    @Column(name = "genre_id")
     private Long id;
 
     @NotNull
-    private String who;
+    private String genre;
 
     @Builder
-    public ConditionWithWhom(Long id, String who) {
+    public ConditionGenre(Long id, String genre) {
         this.id = id;
-        this.who = who;
+        this.genre = genre;
     }
 }

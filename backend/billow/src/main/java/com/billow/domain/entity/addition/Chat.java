@@ -1,4 +1,4 @@
-package com.billow.addition;
+package com.billow.domain.entity.addition;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -6,23 +6,27 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "tb_rating")
+@Table(name = "tb_chat")
 @Entity
-public class Rating {
+public class Chat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "rating_id")
+    @Column(name = "chat_id")
     private Long id;
 
     @NotNull
-    private float score;
+    private String content;
+
+    @NotNull
+    private String dateTime;
 
     @Builder
-    public Rating(Long id, float score) {
+    public Chat(Long id, String content, String dateTime ) {
         this.id = id;
-        this.score = score;
+        this.dateTime = dateTime;
     }
 }

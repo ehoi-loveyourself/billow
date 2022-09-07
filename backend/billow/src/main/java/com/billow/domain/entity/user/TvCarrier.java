@@ -1,28 +1,27 @@
-package com.billow.model.entity.condition;
+package com.billow.domain.entity.user;
 
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "tb_condition_genre")
+@Table(name = "tb_tv_carrier")
 @Entity
-public class ConditionGenre {
+public class TvCarrier {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "genre_id")
+    @Column(name = "tv_carrier_id")
     private Long id;
 
     @NotNull
-    private String genre;
+    private String company;
 
-    @Builder
-    public ConditionGenre(Long id, String genre) {
+    @NotNull
+    public TvCarrier(Long id, String company) {
         this.id = id;
-        this.genre = genre;
+        this.company = company;
     }
 }

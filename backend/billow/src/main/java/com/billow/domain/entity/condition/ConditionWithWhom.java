@@ -1,4 +1,4 @@
-package com.billow.addition;
+package com.billow.domain.entity.condition;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -6,27 +6,23 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "tb_chat")
+@Table(name = "tb_condition_with_whom")
 @Entity
-public class Chat {
+public class ConditionWithWhom {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "chat_id")
+    @Column(name = "with_whom_id")
     private Long id;
 
     @NotNull
-    private String content;
-
-    @NotNull
-    private String dateTime;
+    private String who;
 
     @Builder
-    public Chat(Long id, String content, String dateTime ) {
+    public ConditionWithWhom(Long id, String who) {
         this.id = id;
-        this.dateTime = dateTime;
+        this.who = who;
     }
 }

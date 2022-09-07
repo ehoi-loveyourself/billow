@@ -1,4 +1,4 @@
-package com.billow.addition;
+package com.billow.domain.entity.addition;
 
 import lombok.AccessLevel;
 import lombok.Builder;

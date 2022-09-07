@@ -1,4 +1,4 @@
-package com.billow.model.entity.user;
+package com.billow.domain.entity.user;
 
 import lombok.AccessLevel;
 import lombok.Builder;
