@@ -6,12 +6,11 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tb_broadcasting_alarm")
 @Entity
-public class BroadCastingAlarm {
+public class BroadcastingAlarm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,9 +21,8 @@ public class BroadCastingAlarm {
     private String dateTime;
 
     @Builder
-    public BroadCastingAlarm(Long id, String dateTime) {
+    public BroadcastingAlarm(Long id, String dateTime) {
         this.id = id;
         this.dateTime = dateTime;
     }
-
 }
