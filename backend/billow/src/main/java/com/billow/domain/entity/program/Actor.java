@@ -28,7 +28,7 @@ public class Cast {
     private String saveName;
 
     @Builder
-    public Actor(Long id, String actorName, String playName, String saveFolder, String saveName){
+    public Cast(Long id, String actorName, String playName, String saveFolder, String saveName){
         this.id = id;
         this.actorName = actorName;
         this.playName = playName;
