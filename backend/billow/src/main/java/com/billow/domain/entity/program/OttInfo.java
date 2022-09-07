@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -15,16 +16,16 @@ public class OttInfo {
     @Column(name = "ott_info_id")
     private Long id;
 
-    @Column(nullable = false)
+    @NotNull
     private String name;
 
-    @Column(nullable = false)
+    @NotNull
     private String url;
 
-    @Column(nullable = false)
+    @NotNull
     private String saveFolder;
 
-    @Column(nullable = false)
+    @NotNull
     private String saveName;
 
 

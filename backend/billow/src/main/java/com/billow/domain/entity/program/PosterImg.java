@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -15,12 +16,12 @@ public class PosterImg {
     @Column(name = "poster_img")
     private Long id;
 
-    @Column(nullable = false)
+    @NotNull
     private String saveFolder;
 
-    @Column(nullable = false)
+    @NotNull
     private String originName;
 
-    @Column(nullable = false)
+    @NotNull
     private String saveName;
 }

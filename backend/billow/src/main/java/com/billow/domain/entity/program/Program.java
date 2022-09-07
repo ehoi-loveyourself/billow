@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -16,31 +17,31 @@ public class Program {
     @Column(name = "program_id")
     private Long id;
 
-    @Column(nullable = false)
+    @NotNull
     private String title;
 
-    @Column(nullable = false)
+    @NotNull
     private String genre;
 
-    @Column(nullable = false)
+    @NotNull
     private Integer age;
 
-    @Column(nullable = false)
+    @NotNull
     private String summary;
 
-    @Column(nullable = false)
+    @NotNull
     private String broadcastingDay;
 
-    @Column(nullable = false)
+    @NotNull
     private String broadcastingTime;
 
-    @Column(nullable = false)
+    @NotNull
     private String broadcastingStation;
 
     @Column(nullable = false, columnDefinition = "TINYINT", length=1)
     private boolean endFlag;
 
-    @Column(nullable = false)
+    @NotNull
     private  float average_rating;
 
 

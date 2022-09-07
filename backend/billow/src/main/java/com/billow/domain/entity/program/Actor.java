@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -14,10 +15,10 @@ public class Actor {
     @Column(name = "actor_id")
     private Long id;
 
-    @Column(nullable = false)
+    @NotNull
     private String actorName;
 
-    @Column(nullable = false)
+    @NotNull
     private String playName;
 
     private String saveFolder;
