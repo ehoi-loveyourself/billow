@@ -42,7 +42,7 @@ public class Program {
     private boolean endFlag;
 
     @NotNull
-    private  float average_rating;
+    private Float averageRating;
 
     @Builder
     public Program(Long id, String title, String genre, Integer age, String summary, String broadcastingDay, String broadcastingTime, String broadcastingStation,
