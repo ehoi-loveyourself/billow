@@ -46,7 +46,7 @@ public class Program {
 
     @Builder
     public Program(Long id, String title, String genre, Integer age, String summary, String broadcastingDay, String broadcastingTime, String broadcastingStation,
-    boolean endFlag, float average_rating) {
+    boolean endFlag, Float averageRating) {
         this.id = id;
         this.title = title;
         this.genre = genre;
@@ -56,7 +56,7 @@ public class Program {
         this.broadcastingTime = broadcastingTime;
         this.broadcastingStation = broadcastingStation;
         this.endFlag = endFlag;
-        this.average_rating =average_rating;
+        this.averageRating = averageRating;
     }
 
 }
