@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tb_program")
-@Builder
 public class Program {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
