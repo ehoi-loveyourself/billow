@@ -25,5 +25,4 @@ public class Rating {
         this.id = id;
         this.score = score;
     }
-
 }
