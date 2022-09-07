@@ -13,7 +13,7 @@ public class Ott {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ott")
+    @Column(name = "ott_id")
     private Long id;
 
     @Builder
