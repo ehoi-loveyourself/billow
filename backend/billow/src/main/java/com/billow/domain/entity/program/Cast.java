@@ -35,5 +35,4 @@ public class Cast {
         this.saveFolder = saveFolder;
         this.saveName = saveName;
     }
-
 }
