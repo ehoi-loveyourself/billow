@@ -7,17 +7,19 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "tb_user_profile_img")
+@Table(name = "tb_profile_img")
 @Entity
 public class ProfileImg {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_profile_img_id")
+    @Column(name = "profile_img_id")
     private Long id;
 
     private String saveFolder;
+
     private String originName;
+
     private String saveName;
 
     @Builder
