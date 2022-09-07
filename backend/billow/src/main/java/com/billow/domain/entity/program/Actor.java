@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 public class Cast {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "actor_id")
+    @Column(name = "cast_id")
     private Long id;
 
     @NotNull
