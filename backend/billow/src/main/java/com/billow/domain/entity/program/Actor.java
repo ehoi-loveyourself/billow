@@ -1,6 +1,7 @@
 package com.billow.domain.entity.program;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -24,5 +25,14 @@ public class Actor {
     private String saveFolder;
 
     private String saveName;
+
+    @Builder
+    public Actor(Long id, String actorName, String playName, String saveFolder, String saveName){
+        this.id = id;
+        this.actorName = actorName;
+        this.playName = playName;
+        this.saveFolder = saveFolder;
+        this.saveName = saveName;
+    }
 
 }

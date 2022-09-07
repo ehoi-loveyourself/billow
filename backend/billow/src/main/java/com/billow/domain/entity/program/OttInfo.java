@@ -1,6 +1,7 @@
 package com.billow.domain.entity.program;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -28,5 +29,12 @@ public class OttInfo {
     @NotNull
     private String saveName;
 
-
+    @Builder
+    public OttInfo(Long id, String name, String url, String saveFolder, String saveName) {
+        this.id = id;
+        this.name = name;
+        this.url = url;
+        this.saveFolder = saveFolder;
+        this.saveName = saveName;
+    }
 }

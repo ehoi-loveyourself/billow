@@ -1,6 +1,7 @@
 package com.billow.domain.entity.program;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -24,4 +25,12 @@ public class PosterImg {
 
     @NotNull
     private String saveName;
+
+    @Builder
+    public PosterImg(Long id, String saveFolder, String originName, String saveName) {
+        this.id = id;
+        this.saveFolder = saveFolder;
+        this.originName = originName;
+        this.saveName = saveName;
+    }
 }

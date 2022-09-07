@@ -44,6 +44,19 @@ public class Program {
     @NotNull
     private  float average_rating;
 
-
+    @Builder
+    public Program(Long id, String title, String genre, Integer age, String summary, String broadcastingDay, String broadcastingTime, String broadcastingStation,
+    boolean endFlag, float average_rating) {
+        this.id = id;
+        this.title = title;
+        this.genre = genre;
+        this.age = age;
+        this.summary = summary;
+        this.broadcastingDay = broadcastingDay;
+        this.broadcastingTime = broadcastingTime;
+        this.broadcastingStation = broadcastingStation;
+        this.endFlag = endFlag;
+        this.average_rating =average_rating;
+    }
 
 }
