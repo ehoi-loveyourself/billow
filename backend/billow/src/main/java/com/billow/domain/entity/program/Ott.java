@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tb_ott")
+@Entity
 public class Ott {
 
     @Id

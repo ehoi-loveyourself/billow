@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tb_program_poster_img")
+@Entity
 public class ProgramPosterImg {
 
     @Id
