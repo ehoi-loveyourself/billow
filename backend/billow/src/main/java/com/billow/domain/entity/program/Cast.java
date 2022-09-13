@@ -25,23 +25,21 @@ public class Cast {
     @NotNull
     private String playName;
 
-    private String saveFolder;
+    private String imgUrl;
 
-    private String saveName;
-
-    @NotNull
+    //TODO : 널 해제
+//    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "program_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Program program;
 
     @Builder
-    public Cast(Long id, String actorName, String playName, String saveFolder, String saveName, Program program) {
+    public Cast(Long id, String actorName, String playName, String imgUrl, Program program) {
         this.id = id;
         this.actorName = actorName;
         this.playName = playName;
-        this.saveFolder = saveFolder;
-        this.saveName = saveName;
+        this.imgUrl = imgUrl;
         this.program = program;
     }
 }
