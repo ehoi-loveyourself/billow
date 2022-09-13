@@ -26,7 +26,4 @@ footer {
   font-size: smaller;
   color: #666665;
 }
-/* .hide{
-    color:white;
-  } */
 </style>
