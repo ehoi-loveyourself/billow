@@ -2,8 +2,9 @@
     <router-view>
         <br>
         <div style="text-align:center">
-        <br/>
+        <br/><br/>
         <img src="@/assets/image_1.png"/>
+        <br/><br/><br/><br/><br/>
       </div>
     </router-view>
   </template>
