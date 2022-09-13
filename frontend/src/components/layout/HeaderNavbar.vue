@@ -4,7 +4,7 @@
       <br>
             <b-row>
         <b-col cols="3">
-          <router-link to="/home">
+          <router-link :to="{ name: 'home' }" class="nav-link">
             <span class="logo">
             <svg width="167" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -16,7 +16,7 @@
           </router-link>
         </b-col>
         <b-col class="navbar">
-          <router-link :to="{ name: 'home' }" class="nav-link"> 홈&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</router-link>
+          <router-link :to="{ name: 'main' }" class="nav-link"> 홈&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</router-link>
         </b-col>
         <b-col class="navbar">
           <router-link :to="{ name: 'situation' }" class="nav-link"> 상황별 추천&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</router-link>

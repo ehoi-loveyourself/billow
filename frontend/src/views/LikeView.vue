@@ -1,6 +1,6 @@
 <template>
   <router-view>
-    <div>찜한 콘텐츠 화면</div>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
   </router-view>
 </template>
 

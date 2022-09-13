@@ -1,6 +1,6 @@
 <template>
   <router-view>
-    <div>상황별 추천 화면</div>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
   </router-view>
 </template>
 

@@ -2,7 +2,7 @@
     <div class="about">
       <div id="app">
         <header-bar /> 
-            <router-view />   
+         <router-view />   
     </div>
     </div>
   </template>

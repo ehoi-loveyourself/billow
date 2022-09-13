@@ -33,10 +33,10 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView,
-    redirect: "/main",
+    redirect: "/loginmain",
     children: [
       {
-        path:'/main',
+        path:'/loginmain',
         name:'loginmain',
         component:()=>import("@/components/login/LoginMain.vue"),
       },
@@ -48,6 +48,7 @@ const routes = [
     name: 'about',
     component: AboutView,
     children:[
+      
               {
                 path: '/situation',
                 name: 'situation',
@@ -57,6 +58,11 @@ const routes = [
                 path: '/like',
                 name: 'like',
                 component: () => import('@/views/LikeView.vue'),
+              },
+              {
+                path: '/main',
+                name: 'main',
+                component: () => import('@/views/MainView.vue'),
               },
     ]
   }
