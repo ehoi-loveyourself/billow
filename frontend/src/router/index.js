@@ -8,16 +8,27 @@ const routes = [
     component: HomeView,
     redirect: '/main',
   },
+
   {
-    path: '/situation',
-    name: 'situation',
-    component: () => import('@/views/SituationView.vue'),
-  },
-  {
-    path: '/like',
-    name: 'like',
-    component: () => import('@/views/LikeView.vue'),
-  },
+    path: '/about',
+    name: 'about',
+    component: ()=>import("@/views/AboutView.vue"),
+    redirect:'/home',
+    children:[
+      {
+        path: '/situation',
+        name: 'situation',
+        component: () => import('@/views/SituationView.vue'),
+      },
+      {
+        path: '/like',
+        name: 'like',
+        component: () => import('@/views/LikeView.vue'),
+      },
+    ]
+  }
+
+  
 ];
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
