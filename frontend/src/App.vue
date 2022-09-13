@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <b-container>
       <router-view />
-    </b-container>
     <footer-bar />
   </div>
 </template>
@@ -27,16 +25,17 @@ body {
 
 a {
   text-decoration: none;
+  color: #a1a1a1;
 }
 
-a:hover {
+/* a:hover {
   text-decoration: none;
   font-weight: bold;
   color: chartreuse;
-}
+} */
 
 a.router-link-exact-active {
-  color: #064635;
+  color: white;
   font-weight: bold;
 }
 

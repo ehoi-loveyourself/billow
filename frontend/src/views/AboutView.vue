@@ -1,14 +1,8 @@
 <template>
     <div class="about">
       <div id="app">
-      <b-container>
-        <header-bar />
-        <b-row>
-          <b-col>
-            <router-view />
-          </b-col>
-        </b-row>
-      </b-container>
+        <header-bar /> 
+            <router-view />   
     </div>
     </div>
   </template>
