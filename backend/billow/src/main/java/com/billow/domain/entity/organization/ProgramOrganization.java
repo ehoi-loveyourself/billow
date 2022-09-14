@@ -4,6 +4,7 @@ import com.billow.domain.entity.program.Program;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tb_program_organization")
 @Entity
+@ToString
 public class ProgramOrganization {
 
     @Id
@@ -21,34 +23,36 @@ public class ProgramOrganization {
     private Long id;
 
     @NotNull
-    private String programTitle;
-
-    @NotNull
     private String broadcastingDay;
 
     @NotNull
     private String broadcastingTime;
 
+    private String broadcastingEpisode;
+
+    private String broadcastingAge;
+
+    private String broadcastingRerun;
+
     @NotNull
     private String broadcastingStation;
 
-    @NotNull
-    private String broadcastingType;
-
-    @NotNull
+    //TODO : 널 해제
+//    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "program_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Program program;
 
     @Builder
-    public ProgramOrganization(Long id, String programTitle, String broadcastingDay, String broadcastingTime, String broadcastingStation, String broadcastingType, Program program) {
+    public ProgramOrganization(Long id, String broadcastingDay, String broadcastingTime, String broadcastingEpisode, String broadcastingAge, String broadcastingRerun, String broadcastingStation, Program program) {
         this.id = id;
-        this.programTitle = programTitle;
         this.broadcastingDay = broadcastingDay;
         this.broadcastingTime = broadcastingTime;
+        this.broadcastingEpisode = broadcastingEpisode;
+        this.broadcastingAge = broadcastingAge;
+        this.broadcastingRerun = broadcastingRerun;
         this.broadcastingStation = broadcastingStation;
-        this.broadcastingType = broadcastingType;
-        this.program = program;
+//        this.program = program;
     }
 }
