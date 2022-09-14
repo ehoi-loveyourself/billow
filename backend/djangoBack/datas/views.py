@@ -81,7 +81,6 @@ def program_data(request):
     for i in range(1, 501):
         res = requests.get(BASE_URL+str(i))
         program_page_list = res.json()['results']
-
         for program_data in program_page_list:
             program_id=program_data['id']
             program_detail = f'https://api.themoviedb.org/3/tv/{program_id}?api_key=3beacdbb8f7b35eb8c782851ddc5b403&language=ko-kr'
@@ -104,7 +103,6 @@ def program_data(request):
                         continue
                 except:
                     continue
-
                 program = Program.objects.create(
                     id = program_id,
                     title = title,
@@ -120,7 +118,6 @@ def program_data(request):
                         break
                     genre = Genre.objects.get(pk=program_genre.get('id'))
                     program.genres.add(genre)
-
                 kr_ott = ott_data.get('KR')
                 if kr_ott != None:
                     print(kr_ott)
@@ -130,14 +127,7 @@ def program_data(request):
                             if ott_detail == NULL:
                                 break
                             ott = Ott.objects.get(pk=ott_detail.get('provider_id'))
-                            program.ott.add(ott)
-                # for ott_provider in kr_ott:
-                #     ott_list = ott_provider.get('flatrate')
-                #     for ott_detail in ott_list:
-                #         ott = Ott.objects.get(pk=ott_detail.get('provider_id'))
-                #         program.ott.add(ott)
-
-            
+                            program.ott.add(ott)     
     return Response()
 
 @api_view(['GET'])
@@ -198,6 +188,3 @@ def ott_data(request):
             name = name
         )
     return Response()
-
-    
-
