@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface kPopRepository extends JpaRepository<kPop, Long> {
@@ -31,5 +32,5 @@ public interface kPopRepository extends JpaRepository<kPop, Long> {
             "sum(k.male_n50s_wtchng_rt)/count(k.program_nm) as male50,\n" +
             "sum(k.male_n60s_above_wtchng_rt)/count(k.program_nm) as male60\n" +
             "from tb_k_pop k group by k.program_nm", nativeQuery = true)
-    List<GenderAgeViewerInformation> getData();
+    Optional<List<GenderAgeViewerInformation>> getData();
 }
