@@ -67,4 +67,14 @@ public class User {
         this.region = region;
         this.tvCarrier = tvCarrier;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof User && this.getEmail().equals(((User) o).getEmail());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getEmail());
+    }
 }
