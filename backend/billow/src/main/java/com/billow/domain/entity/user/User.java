@@ -4,6 +4,7 @@ package com.billow.domain.entity.user;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tb_user")
 @Entity
+@ToString
 public class User {
 
     @Id
@@ -30,7 +32,7 @@ public class User {
     private String nickName;
 
     @NotNull
-    private boolean gender;
+    private String gender;
 
     @NotNull
     private Integer age;
@@ -51,7 +53,8 @@ public class User {
     private TvCarrier tvCarrier;
 
     @Builder
-    public User(Long id, String email, String name, String nickName, boolean gender, Integer age, ProfileImg profileImg, Region region, TvCarrier tvCarrier) {
+
+    public User(Long id, String email, String name, String nickName, String gender, Integer age, ProfileImg profileImg, Region region, TvCarrier tvCarrier) {
         this.id = id;
         this.email = email;
         this.name = name;

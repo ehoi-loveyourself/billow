@@ -2,14 +2,16 @@ package com.billow.model.service.organization;
 
 import com.billow.domain.entity.organization.ProgramOrganization;
 import com.billow.model.repository.organization.ProgramOrganizationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+@RequiredArgsConstructor
 @Service
 public class ProgramOrganozationService {
 
-    @Autowired
-    private ProgramOrganizationRepository programOrganizationRepository;
+    private final ProgramOrganizationRepository programOrganizationRepository;
 
     public void save(ProgramOrganization programOrganization) {
         programOrganizationRepository.save(programOrganization);
@@ -17,5 +19,9 @@ public class ProgramOrganozationService {
 
     public void deleteByBroadcastingDayStartingWith(String yesterDay) {
         programOrganizationRepository.deleteByBroadcastingDayStartingWith(yesterDay);
+    }
+
+    public List<ProgramOrganization> findByProgramId(Long id) {
+        return programOrganizationRepository.findByProgramId(id);
     }
 }

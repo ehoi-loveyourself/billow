@@ -1,9 +1,11 @@
 package com.billow.controller.user;
 
 import com.billow.domain.dto.addtion.RatingRequest;
+import com.billow.model.service.user.UserService;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.json.simple.parser.ParseException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +14,16 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/users")
 public class UserController{
+
+    private final UserService userService;
+
+    @GetMapping("/oauth")
+    public ResponseEntity<Object> kakao(String code) throws ParseException {
+        userService.kakaoLogin(code);
+        Message response = new Message("succeeded");
+        return ResponseEntity.ok()
+                .body(response);
+    }
 
     @GetMapping
     public ResponseEntity<Object> selectUser() {
