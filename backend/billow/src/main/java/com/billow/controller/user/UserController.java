@@ -1,17 +1,23 @@
 package com.billow.controller.user;
 
 import com.billow.domain.dto.addtion.RatingRequest;
+import com.billow.domain.dto.addtion.RatingResponse;
+import com.billow.model.service.user.UserService;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/users")
 public class UserController{
+
+    private final UserService userService;
 
     @GetMapping
     public ResponseEntity<Object> selectUser() {
@@ -42,22 +48,29 @@ public class UserController{
     }
 
     @GetMapping("/rating")
-    public ResponseEntity<Object> selectRating() {
-        Message response = new Message("succeeded");
+    public ResponseEntity<Object> selectRating(@RequestHeader("Auth-access") String token) {
+        log.info("평점 조회 API 호출");
+        List<RatingResponse> response = userService.selectRating(0L);
+        log.info("평점 조회 성공");
         return ResponseEntity.ok()
                 .body(response);
     }
 
     @PutMapping("/rating/{ratingId}")
-    public ResponseEntity<Object> updateRating(@PathVariable("ratingId") Long ratingId, @RequestBody RatingRequest ratingRequest) {
-        Message response = new Message("succeeded");
+    public ResponseEntity<Object> updateRating(@RequestHeader("Auth-access") String token,
+                                               @PathVariable("ratingId") Long ratingId,
+                                               @RequestBody RatingRequest ratingRequest) {
+        log.info("평점 수정 API 호출");
+        Message response = userService.updateRating(0L, ratingId, ratingRequest);
+        log.info("평점 수정 성공");
         return ResponseEntity.ok()
                 .body(response);
     }
 
     @DeleteMapping("/rating/{ratingId}")
-    public ResponseEntity<Object> deleteRating(@PathVariable("ratingId") Long ratingId) {
-        Message response = new Message("succeeded");
+    public ResponseEntity<Object> deleteRating(@RequestHeader("Auth-access") String token, @PathVariable("ratingId") Long ratingId) {
+        log.info("평점 삭제 API 호출");
+        Message response = userService.deleteRating(0L, ratingId);
         return ResponseEntity.ok()
                 .body(response);
     }

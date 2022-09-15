@@ -1,15 +1,19 @@
 
 package com.billow.domain.entity.user;
 
+import com.billow.domain.entity.addition.Rating;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tb_user")
 @Entity
@@ -50,6 +54,9 @@ public class User {
     @JoinColumn(name = "tv_carrier_id")
     private TvCarrier tvCarrier;
 
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Rating> ratings = new ArrayList<>();
+
     @Builder
     public User(Long id, String email, String name, String nickName, boolean gender, Integer age, ProfileImg profileImg, Region region, TvCarrier tvCarrier) {
         this.id = id;
@@ -61,5 +68,15 @@ public class User {
         this.profileImg = profileImg;
         this.region = region;
         this.tvCarrier = tvCarrier;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof User && this.getEmail().equals(((User) o).getEmail());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getEmail());
     }
 }
