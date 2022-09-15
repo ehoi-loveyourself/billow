@@ -51,4 +51,8 @@ public class Review {
         this.user = user;
         this.program = program;
     }
+
+    public void updateReview(String content) {
+        this.content = content;
+    }
 }
