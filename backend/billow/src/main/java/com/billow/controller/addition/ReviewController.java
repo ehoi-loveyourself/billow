@@ -49,7 +49,8 @@ public class ReviewController {
     @DeleteMapping("/{reviewId}")
     public ResponseEntity<Object> deleteReview(@RequestHeader("Auth-access") String token, @PathVariable("reviewId") Long reviewId) {
         log.info("리뷰 삭제 API 호출");
-        Message response = new Message("succeeded");
+        Message response = reviewService.deleteReview(0L, reviewId);
+        log.info("리뷰 삭제 성공");
         return ResponseEntity.ok()
                 .body(response);
     }

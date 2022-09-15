@@ -73,4 +73,16 @@ public class ReviewService {
         reviewRepository.save(review);
         return new Message("프로그램 리뷰 수정에 성공하였습니다.");
     }
+
+    public Message deleteReview(Long userId, Long reviewId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new NotFoundException(REVIEW_NOT_FOUND));
+        if (!review.getUser().equals(user)) {
+            throw new BadRequestException(BAD_REQUEST);
+        }
+        reviewRepository.delete(review);
+        return new Message("프로그램 리뷰 삭제에 성공하였습니다.");
+    }
 }
