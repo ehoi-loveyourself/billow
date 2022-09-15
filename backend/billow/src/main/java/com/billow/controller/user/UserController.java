@@ -15,9 +15,12 @@ public class UserController{
 
     @GetMapping
     public ResponseEntity<Object> selectUser() {
-        Message response = new Message("succeeded");
+        Message response = new Message("sdsd");
+        Message response1 = new Message("sdsd");
         return ResponseEntity.ok()
                 .body(response);
+
+
     }
 
     @PutMapping
