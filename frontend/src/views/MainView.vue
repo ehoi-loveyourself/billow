@@ -1,21 +1,17 @@
 <template>
     <router-view>
-        <br>
-      <div style="text-align:center">
-        <br/><br/>
-        <img src="@/assets/image_1.png"/>
-        <br/><br/><br/><br/><br/>
-      </div>
-      <MainOnAirProgram></MainOnAirProgram>
+        <NewProgram></NewProgram>
+      <RecommendedProgram></RecommendedProgram>
     </router-view>
   </template>
   
   <script>
-import MainOnAirProgram from "../components/main/MainOnAirProgram.vue";
+import RecommendedProgram from "../components/main/RecommendedProgram.vue";
+import NewProgram from "../components/main/NewProgram.vue";
 
     export default {
     name: "MainView",
-    components: { MainOnAirProgram }
+    components: { RecommendedProgram, NewProgram }
 };
   </script>
   

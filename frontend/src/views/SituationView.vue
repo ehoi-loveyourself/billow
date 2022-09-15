@@ -1,7 +1,7 @@
 <template>
   <router-view>
     <SituationIntroduction></SituationIntroduction>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <br/>
   </router-view>
 </template>
 
