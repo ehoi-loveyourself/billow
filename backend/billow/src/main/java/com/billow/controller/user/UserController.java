@@ -5,7 +5,6 @@ import com.billow.model.service.user.UserService;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.json.simple.parser.ParseException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,16 +12,20 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/users")
-public class UserController{
+public class UserController {
 
     private final UserService userService;
 
     @GetMapping("/oauth")
-    public ResponseEntity<Object> kakao(String code) throws ParseException {
-        userService.kakaoLogin(code);
-        Message response = new Message("succeeded");
-        return ResponseEntity.ok()
-                .body(response);
+    public ResponseEntity<Object> kakaoLogin(String code) {
+        try {
+            log.info("카카오 로그인 API 호출");
+            Message response = userService.kakaoLogin(code);
+            log.info("카카오 로그인 API 성공");
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new Message("로그인에 실패하였습니다."));
+        }
     }
 
     @GetMapping
