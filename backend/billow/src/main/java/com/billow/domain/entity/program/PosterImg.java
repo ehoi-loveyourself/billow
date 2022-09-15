@@ -17,13 +17,10 @@ public class PosterImg {
     @Column(name = "poster_img_id")
     private Long id;
 
-    @NotNull
     private String saveFolder;
 
-    @NotNull
     private String originName;
 
-    @NotNull
     private String saveName;
 
     @Builder
