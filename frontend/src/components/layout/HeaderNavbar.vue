@@ -1,7 +1,7 @@
 <template>
   <b-navbar toggleable="lg" type="dark" variant="dark">
     <b-navbar-nav>
-      <br>
+      <br> 
             <b-row>
         <b-col cols="3">
           <router-link :to="{ name: 'home' }" class="nav-link">
