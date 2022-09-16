@@ -6,7 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -19,43 +20,35 @@ public class Program {
     @Column(name = "program_id")
     private Long id;
 
-    @NotNull
     private String title;
 
-    @NotNull
-    private String genre;
-
-    @NotNull
     private Integer age;
 
-    @NotNull
+    @Column(length = 1000)
     private String summary;
 
-    @NotNull
     private String broadcastingDay;
 
-    @NotNull
     private String broadcastingTime;
 
-    @NotNull
     private String broadcastingStation;
 
-    @NotNull
     private boolean endFlag;
 
-    @NotNull
     private Float averageRating;
 
-    @NotNull
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "poster_img_id")
-    private PosterImg posterImg;
+    private String posterImg;
+
+    private String backdropPath;
+
+    @OneToMany(mappedBy = "program", cascade = CascadeType.ALL)
+    private List<Genre> genreList = new ArrayList<>();
 
     @Builder
-    public Program(Long id, String title, String genre, Integer age, String summary, String broadcastingDay, String broadcastingTime, String broadcastingStation, boolean endFlag, Float averageRating, PosterImg posterImg) {
+    public Program(Long id, String title, Integer age, String summary, String broadcastingDay, String broadcastingTime,
+                   String broadcastingStation, boolean endFlag, Float averageRating, String posterImg, String backdropPath, List<Genre> genreList) {
         this.id = id;
         this.title = title;
-        this.genre = genre;
         this.age = age;
         this.summary = summary;
         this.broadcastingDay = broadcastingDay;
@@ -64,5 +57,7 @@ public class Program {
         this.endFlag = endFlag;
         this.averageRating = averageRating;
         this.posterImg = posterImg;
+        this.backdropPath = backdropPath;
+        this.genreList = genreList;
     }
 }

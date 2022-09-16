@@ -4,6 +4,7 @@ import com.billow.domain.entity.program.Program;
 import com.billow.domain.entity.user.User;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tb_review")
 @Entity
@@ -48,5 +50,9 @@ public class Review {
         this.dateTime = dateTime;
         this.user = user;
         this.program = program;
+    }
+
+    public void updateReview(String content) {
+        this.content = content;
     }
 }

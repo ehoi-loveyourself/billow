@@ -2,6 +2,7 @@ package com.billow.model.service.data;
 
 import com.billow.domain.dto.program.GenderAgeViewerInformation;
 import com.billow.domain.entity.program.GenderAgeViewer;
+import com.billow.exception.NotFoundException;
 import com.billow.model.repository.data.kDramaRepository;
 import com.billow.model.repository.data.kPopRepository;
 import com.billow.model.repository.program.GenderAgeViewerRepository;
@@ -15,13 +16,14 @@ import java.util.List;
 @Service
 public class DataService {
 
+    private static final String DATA_NOT_FOUND = "데이터가 존재하지 않습니다.";
     private final kDramaRepository kDramaRepository;
     private final kPopRepository kPopRepository;
     private final GenderAgeViewerRepository genderAgeViewerRepository;
 
     public Message getkdramaData() {
         List<GenderAgeViewerInformation> kDramaList = kDramaRepository.getData()
-                .orElseThrow();
+                .orElseThrow(() -> new NotFoundException(DATA_NOT_FOUND));
         for (GenderAgeViewerInformation drama : kDramaList) {
             GenderAgeViewer program = GenderAgeViewer.builder()
                     .programTitle(drama.getProgram_Title())
@@ -37,7 +39,7 @@ public class DataService {
     }
     public Message getkpopData() {
         List<GenderAgeViewerInformation> kPopList = kPopRepository.getData()
-                .orElseThrow();
+                .orElseThrow(() -> new NotFoundException(DATA_NOT_FOUND));
         for (GenderAgeViewerInformation pop : kPopList) {
             GenderAgeViewer program = GenderAgeViewer.builder()
                     .programTitle(pop.getProgram_Title())

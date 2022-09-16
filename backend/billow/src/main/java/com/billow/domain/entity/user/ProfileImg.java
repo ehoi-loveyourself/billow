@@ -18,15 +18,12 @@ public class ProfileImg {
 
     private String saveFolder;
 
-    private String originName;
-
-    private String saveName;
+    private String imgName;
 
     @Builder
-    public ProfileImg(Long id, String saveFolder, String originName, String saveName) {
+    public ProfileImg(Long id, String saveFolder, String imgName) {
         this.id = id;
         this.saveFolder = saveFolder;
-        this.originName = originName;
-        this.saveName = saveName;
+        this.imgName = imgName;
     }
 }

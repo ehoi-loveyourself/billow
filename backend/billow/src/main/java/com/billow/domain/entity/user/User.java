@@ -1,18 +1,13 @@
 
 package com.billow.domain.entity.user;
 
-import com.billow.domain.entity.addition.Rating;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
+@ToString
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tb_user")
@@ -30,41 +25,35 @@ public class User {
     @NotNull
     private String name;
 
-    @NotNull
     private String nickName;
 
-    @NotNull
-    private boolean gender;
+    private String gender;
 
-    @NotNull
     private Integer age;
 
-    @NotNull
+    private String refreshToken;
+
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "profile_img_id")
     private ProfileImg profileImg;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")
     private Region region;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tv_carrier_id")
     private TvCarrier tvCarrier;
 
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<Rating> ratings = new ArrayList<>();
-
     @Builder
-    public User(Long id, String email, String name, String nickName, boolean gender, Integer age, ProfileImg profileImg, Region region, TvCarrier tvCarrier) {
+    public User(Long id, String email, String name, String nickName, String gender, Integer age, String refreshToken, ProfileImg profileImg, Region region, TvCarrier tvCarrier) {
         this.id = id;
         this.email = email;
         this.name = name;
         this.nickName = nickName;
         this.gender = gender;
         this.age = age;
+        this.refreshToken = refreshToken;
         this.profileImg = profileImg;
         this.region = region;
         this.tvCarrier = tvCarrier;

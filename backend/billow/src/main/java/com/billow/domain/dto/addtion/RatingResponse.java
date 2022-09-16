@@ -11,5 +11,6 @@ import lombok.NoArgsConstructor;
 public class RatingResponse {
 
     private String title;
+
     private Float score;
 }
