@@ -37,8 +37,11 @@ public class Program {
 
     private String posterImg;
 
+    private String backdropPath;
+
     @Builder
-    public Program(Long id, String title, Integer age, String summary, String broadcastingDay, String broadcastingTime, String broadcastingStation, boolean endFlag, Float averageRating, String posterImg) {
+    public Program(Long id, String title, Integer age, String summary, String broadcastingDay, String broadcastingTime,
+                   String broadcastingStation, boolean endFlag, Float averageRating, String posterImg, String backdropPath) {
         this.id = id;
         this.title = title;
         this.age = age;
@@ -49,5 +52,6 @@ public class Program {
         this.endFlag = endFlag;
         this.averageRating = averageRating;
         this.posterImg = posterImg;
+        this.backdropPath = backdropPath;
     }
 }
