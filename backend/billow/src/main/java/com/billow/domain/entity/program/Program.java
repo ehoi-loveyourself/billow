@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -39,9 +41,12 @@ public class Program {
 
     private String backdropPath;
 
+    @OneToMany(mappedBy = "program", cascade = CascadeType.ALL)
+    private List<Genre> genreList = new ArrayList<>();
+
     @Builder
     public Program(Long id, String title, Integer age, String summary, String broadcastingDay, String broadcastingTime,
-                   String broadcastingStation, boolean endFlag, Float averageRating, String posterImg, String backdropPath) {
+                   String broadcastingStation, boolean endFlag, Float averageRating, String posterImg, String backdropPath, List<Genre> genreList) {
         this.id = id;
         this.title = title;
         this.age = age;
@@ -53,5 +58,6 @@ public class Program {
         this.averageRating = averageRating;
         this.posterImg = posterImg;
         this.backdropPath = backdropPath;
+        this.genreList = genreList;
     }
 }
