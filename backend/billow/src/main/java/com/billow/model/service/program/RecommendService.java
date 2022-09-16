@@ -31,9 +31,7 @@ public class RecommendService {
     }
 
     public List<CastResponse> recommendActor(Long userId) {
-        List<Rating> ratingList = ratingRepository.findByUser_Id(userId)
-                .orElseThrow(() -> new NotFoundException(RATING_NOT_FOUND));
-
+        List<Rating> ratingList = ratingRepository.findByUser_Id(userId);
         List<String> actorList = castRepository.findMaxCountByProgram_Id(ratingList.get(0).getProgram().getId(), ratingList.get(1).getProgram().getId(), ratingList.get(2).getProgram().getId(), ratingList.get(3).getProgram().getId(), ratingList.get(4).getProgram().getId());
         List<Cast> castList = castRepository.findByActorName(actorList.get(0))
                 .orElseThrow(() -> new NotFoundException(ACTOR_NOT_FOUND));
@@ -42,12 +40,15 @@ public class RecommendService {
                 .stream()
                 .map(cast -> CastResponse.builder()
                         .programId(cast.getProgram().getId())
-                        .posterImgId(cast.getProgram().getPosterImg().getId())
+                        .posterImg(cast.getProgram().getPosterImg())
                         .actorName(actorList.get(0))
                         .title(cast.getProgram().getTitle())
                         .age(cast.getProgram().getAge())
                         .averageRating(cast.getProgram().getAverageRating())
-                        .genre(cast.getProgram().getGenre())
+                        .genres(cast.getProgram().getGenreList()
+                                .stream()
+                                .map(genre -> genre.getGenreInfo().getName())
+                                .collect(Collectors.toList()))
                         .summary(cast.getProgram().getSummary())
                         .build())
                 .collect(Collectors.toList());
