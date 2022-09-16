@@ -4,8 +4,8 @@ import com.billow.domain.dto.addtion.RatingRequest;
 import com.billow.domain.dto.addtion.RatingResponse;
 import com.billow.domain.entity.addition.Rating;
 import com.billow.domain.entity.user.User;
+import com.billow.exception.BadRequestException;
 import com.billow.exception.NotFoundException;
-import com.billow.exception.WrongAccessException;
 import com.billow.model.repository.addition.RatingRepository;
 import com.billow.model.repository.user.UserRepository;
 import com.billow.util.Message;
@@ -21,7 +21,7 @@ public class UserService {
 
     private static final String USER_NOT_FOUND = "해당 유저를 찾을 수 없습니다.";
     private static final String RATING_NOT_FOUND = "해당 평점을 찾을 수 없습니다.";
-    private static final String WRONG_ACCESS = "잘못된 접근입니다.";
+    private static final String BAD_REQUEST = "잘못된 요청입니다.";
 
     private final UserRepository userRepository;
     private final RatingRepository ratingRepository;
@@ -47,7 +47,7 @@ public class UserService {
                 .orElseThrow(() -> new NotFoundException(RATING_NOT_FOUND));
 
         if (!user.equals(rating.getUser())) {
-            throw new WrongAccessException(WRONG_ACCESS);
+            throw new BadRequestException(BAD_REQUEST);
         }
 
         rating.updateRating(ratingRequest.getScore());
@@ -68,7 +68,7 @@ public class UserService {
                 .orElseThrow(() -> new NotFoundException(RATING_NOT_FOUND));
 
         if (!user.equals(rating.getUser())) {
-            throw new WrongAccessException(WRONG_ACCESS);
+            throw new BadRequestException(BAD_REQUEST);
         }
 
         ratingRepository.delete(rating);
