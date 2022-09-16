@@ -98,7 +98,7 @@ public class UserService {
         if (!user.equals(rating.getUser())) {
             throw new BadRequestException(BAD_REQUEST);
         }
-
+        rating.getProgram().updateAverageRatingByDelete(rating.getScore());
         ratingRepository.delete(rating);
 
         return new Message("회원님의 평점내역 삭제에 성공하였습니다.");
