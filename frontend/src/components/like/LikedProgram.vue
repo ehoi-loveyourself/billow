@@ -21,6 +21,6 @@ img{
     padding-right:10px;
     margin-bottom: 4px;
     margin-right: 0;
-    width:15.5%
+    width:15.57%
 }
 </style>

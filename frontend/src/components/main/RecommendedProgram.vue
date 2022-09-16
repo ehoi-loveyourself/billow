@@ -3,6 +3,14 @@
 <h2 style="color:white">지금 방송 중인 프로그램(ON AIR)</h2>
 <!-- <div class="card" style="color:white"> -->
   <splide id="carousel_recommend" :options="options">
+    <splide-slide>
+  <img src="@/assets/gs.png" alt="Image" />
+  <img src="@/assets/hyori.png" alt="Image"/>
+  <img src="@/assets/song.png" alt="Image"/>
+  <img src="@/assets/sign.png" alt="Image"/>
+  <img src="@/assets/heart_to_heart.png" alt="Image"/>
+  <img src="@/assets/alham.png" alt="Image"/>
+  </splide-slide>
         <splide-slide>
   <img src="@/assets/runningman.png" alt="Image">
   <img src="@/assets/thatman.png" alt="Image"/>
@@ -11,14 +19,6 @@
   <img src="@/assets/image_2.png" alt="Image"/>
   <img src="@/assets/laggi.png" alt="Image"/>
 </splide-slide>
-        <splide-slide>
-  <img src="@/assets/gs.png" alt="Image" />
-  <img src="@/assets/hyori.png" alt="Image"/>
-  <img src="@/assets/song.png" alt="Image"/>
-  <img src="@/assets/sign.png" alt="Image"/>
-  <img src="@/assets/heart_to_heart.png" alt="Image"/>
-  <img src="@/assets/alham.png" alt="Image"/>
-  </splide-slide>
   </splide>
   <!-- <div class="container">
     <h4><b>호버 했을 때 제목 등등</b></h4> 
@@ -49,6 +49,14 @@
 
   <h2 style="color:white">재현님에게 추천드려요!</h2>
   <splide id="carousel_recommend" :options="options">
+    <splide-slide>
+      <img src="@/assets/alham.png" alt="Image"/>
+  <img src="@/assets/gs.png" alt="Image" />
+  <img src="@/assets/hyori.png" alt="Image"/>
+  <img src="@/assets/song.png" alt="Image"/>
+  <img src="@/assets/sign.png" alt="Image"/>
+  <img src="@/assets/heart_to_heart.png" alt="Image" />
+  </splide-slide>
   <splide-slide>
   <img src="@/assets/nangman.png" alt="Image"/>
   <img src="@/assets/thatman.png" alt="Image"/>
@@ -57,15 +65,6 @@
   <img src="@/assets/runningman.png" alt="Image"/>
   <img src="@/assets/laggi.png" alt="Image"/>
 </splide-slide>
-
-  <splide-slide>
-  <img src="@/assets/gs.png" alt="Image" />
-  <img src="@/assets/hyori.png" alt="Image"/>
-  <img src="@/assets/song.png" alt="Image"/>
-  <img src="@/assets/sign.png" alt="Image"/>
-  <img src="@/assets/heart_to_heart.png" alt="Image"/>
-  <img src="@/assets/alham.png" alt="Image"/>
-  </splide-slide>
 </splide>
 
   <h2 style="color:white">20대 남자에게 인기 많은 프로그램</h2>
@@ -90,9 +89,17 @@
 </splide>
 
 
-<h2 style="color:white">혹시 이병헌님에게 관심이 있으신가요?</h2>
+<h2 style="color:white">혹시 안소희님에게 관심이 있으신가요?</h2>
 <splide id="carousel_recommend" :options="options">
 <!-- <div class="card" style="color:white"> -->
+  <splide-slide>
+    <img src="@/assets/heart_to_heart.png" alt="Image" />
+  <img src="@/assets/gs.png" alt="Image" />
+  <img src="@/assets/hyori.png" alt="Image"/>
+  <img src="@/assets/song.png" alt="Image"/>
+  <img src="@/assets/sign.png" alt="Image"/>
+  <img src="@/assets/alham.png" alt="Image"/>
+  </splide-slide>
   <splide-slide>
   <img src="@/assets/image_2.png" alt="Image"/>
   <img src="@/assets/thatman.png" alt="Image"/>
@@ -101,15 +108,6 @@
   <img src="@/assets/runningman.png" alt="Image"/>
   <img src="@/assets/laggi.png" alt="Image"/>
 </splide-slide>
-
-  <splide-slide>
-  <img src="@/assets/gs.png" alt="Image" />
-  <img src="@/assets/hyori.png" alt="Image"/>
-  <img src="@/assets/song.png" alt="Image"/>
-  <img src="@/assets/sign.png" alt="Image"/>
-  <img src="@/assets/heart_to_heart.png" alt="Image"/>
-  <img src="@/assets/alham.png" alt="Image"/>
-  </splide-slide>
   <!-- <div class="container">
     <h4><b>카드 형식</b></h4> 
     <p>카드 형식 사용</p> 
@@ -171,7 +169,7 @@
 
   img{
     margin-bottom: 20px;
-    width:15.5%;
+    width:15.57%;
     padding-right: 10px;
   }
   </style>

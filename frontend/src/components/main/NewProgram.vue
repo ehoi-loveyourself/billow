@@ -57,15 +57,15 @@
   background: none;
 }
 .img_1{
-  width:1700px;
+  width:1760px;
 }
 .img_2{
   height: 650px;
-  width: 1700px;
+  width: 1760px;
   border-radius: 20px;
 }
 .img_3{
-  width: 1700px;
+  width: 1760px;
   height: 650px;
 }
 .splide__arrow svg {
