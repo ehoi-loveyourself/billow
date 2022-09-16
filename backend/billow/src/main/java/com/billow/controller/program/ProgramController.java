@@ -2,7 +2,7 @@ package com.billow.controller.program;
 
 import com.billow.domain.dto.addtion.RatingRequest;
 import com.billow.domain.dto.program.ProgramResponse;
-import com.billow.model.service.ProgramService;
+import com.billow.model.service.program.ProgramService;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

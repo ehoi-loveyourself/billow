@@ -1,4 +1,4 @@
-package com.billow.model.service;
+package com.billow.model.service.program;
 
 import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.model.repository.program.ProgramRepository;
