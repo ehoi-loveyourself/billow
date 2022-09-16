@@ -42,20 +42,34 @@ public class DataController {
 
     @GetMapping(value = "/kdrama")
     public ResponseEntity<Object> kdramaData() {
+        log.info("kdrama 데이터 수집 API 호출");
         Message message = dataService.getkdramaData();
+        log.info("kdrama 데이터 수집 API 성공");
         return ResponseEntity.ok()
                 .body(message);
     }
 
     @GetMapping(value = "/kpop")
     public ResponseEntity<Object> kpopData() {
+        log.info("kpop 데이터 수집 API 호출");
         Message message = dataService.getkpopData();
+        log.info("kpop 데이터 수집 API 성공");
+        return ResponseEntity.ok()
+                .body(message);
+    }
+
+    @GetMapping(value = "/insert")
+    public ResponseEntity<Object> insertProgramId() {
+        log.info("성연령별 데이터 프로그램 매핑 API 호출");
+        Message message = dataService.insertProgramId();
+        log.info("성연령별 데이터 프로그램 매핑 API 성공");
         return ResponseEntity.ok()
                 .body(message);
     }
 
     @GetMapping(value = "/programorganization")
     public ResponseEntity<Object> programorganization() throws IOException {
+        log.info("프로그램 편성표 데이터 수집 Scheduer 호출");
         //하루 전 데이터 삭제
         LocalDate today = LocalDate.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM.dd.");
@@ -68,17 +82,14 @@ public class DataController {
             Connection connection = Jsoup.connect("https://search.naver.com/search.naver?query=" + programList.get(i).getTitle() + "방송시간");
             Document document = connection.get();
             List<ProgramOrganization> programOrganizationList = programOrganozationService.findByProgram_Id(programList.get(i).getId());
-            System.out.println(programList.get(i).getTitle()+"크롤링 시작");
 
             Elements channel = document.select(".table_scroll_wrap>.table_top_area>.cm_table tr a");
             if (!channel.isEmpty()) {
-                System.out.println("현재 방영 중");
                 Elements broadcastingDay = document.select(".table_fixed_wrap span");
                 Elements broadcastingDayRow = document.select(".table_scroll_wrap>.table_body_area>.cm_table tr"); //이 사이즈는 날짜 index와 매칭
 
                 for (int d = 0; d < broadcastingDayRow.size(); d++) {//d는 날짜 인덱스와 같음
                     if (!programOrganizationList.isEmpty() && !broadcastingDay.get(d).text().substring(0, 6).equals(today.plusDays(6).format(dateTimeFormatter))) {
-                        System.out.println("continue에 걸림");
                         continue;
                     }
                     Elements broadcastingTimeRow = broadcastingDayRow.get(d).select(">td");
@@ -101,7 +112,6 @@ public class DataController {
                     }
                 }
             } else {
-                System.out.println("현재 미방영");
                 Elements broadcastingDayRow = document.select(".tvtime_list .info_list");
                 for (int d = 0; d < broadcastingDayRow.size(); d++) {
                     Elements broadcastingInfos = broadcastingDayRow.get(d).select(".info");
@@ -124,12 +134,14 @@ public class DataController {
                 }
             }
         }
+        log.info("프로그램 편성표 데이터 수집 Scheduer 성공");
         return ResponseEntity.ok()
                 .body(new Message("succeeded"));
     }
 
     @GetMapping(value = "/cast")
     public ResponseEntity<Object> cast() throws IOException {
+        log.info("출연진 데이터 수집 Scheduer 실행");
         List<Program> programList = programService.findAll();
         for (int i = 0; i< 5; i++){
 //            for (Program program : programList) {
@@ -153,6 +165,7 @@ public class DataController {
                 }
             }
         }
+        log.info("출연진 데이터 수집 Scheduer 성공");
         return ResponseEntity.ok()
                 .body(new Message("succeeded"));
     }
