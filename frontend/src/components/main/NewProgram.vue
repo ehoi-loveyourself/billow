@@ -9,10 +9,10 @@
         <img class="img_2" src="https://image.tmdb.org/t/p/original/FbUIi5WeDU5j1EtipQ274tts1E.jpg" alt="main2">
         </splide-slide>
         <splide-slide>
-        <img class="img_3" src="@/assets/daedang.png" alt="main3">
+        <img class="img_1" src="@/assets/daedang.png" alt="main3">
         </splide-slide>
         <splide-slide>
-        <img class="img_3" src="@/assets/mondai.png" alt="main3">
+        <img class="img_1" src="@/assets/mondai.png" alt="main3">
         </splide-slide>
     </splide>
     </div>
@@ -58,15 +58,12 @@
 }
 .img_1{
   width:1760px;
+  height: 650px;
 }
 .img_2{
   height: 650px;
   width: 1760px;
   border-radius: 20px;
-}
-.img_3{
-  width: 1760px;
-  height: 650px;
 }
 .splide__arrow svg {
     fill: white;
