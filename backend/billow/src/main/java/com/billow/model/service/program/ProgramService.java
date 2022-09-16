@@ -59,17 +59,14 @@ public class ProgramService {
         Program program = programRepository.findById(programId)
                 .orElseThrow(() -> new NotFoundException(PROGRAM_NOT_FOUND));
 
+        program.updateAverageRatingByPost(ratingRequest.getScore());
+
         Rating rating = Rating.builder()
                 .user(user)
                 .program(program)
                 .score(ratingRequest.getScore())
                 .build();
         ratingRepository.save(rating);
-
-//        program.updateAverageRatingByPost(ratingRequest.getScore());
-
-        // 프로그램 평점 평균에 적용을 해야해
-        // 평점 삭제했을 때도 적용 시켜야 한다!
 
         return new Message("프로그램 평점 등록에 성공하였습니다.");
     }
