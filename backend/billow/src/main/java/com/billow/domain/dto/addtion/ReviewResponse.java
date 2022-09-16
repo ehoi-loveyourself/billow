@@ -9,6 +9,8 @@ import lombok.*;
 public class ReviewResponse {
 
     private String userNickName;
+
     private String content;
+
     private String regDateTime;
 }
