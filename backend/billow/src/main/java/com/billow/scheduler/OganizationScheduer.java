@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Component
-public class OganizationScheduer {
+public class OganizationcheduerS {
 
     @Autowired
     private ProgramOrganozationService programOrganozationService;

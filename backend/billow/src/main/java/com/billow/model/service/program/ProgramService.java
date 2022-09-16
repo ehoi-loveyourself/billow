@@ -31,7 +31,7 @@ public class ProgramService {
                         .age(program.getAge())
                         .summary(program.getSummary())
                         .broadcastingDay(program.getBroadcastingDay())
-                        .broadcastingTime(program.getBroadcastingTime())
+                        .broadcastingEpisode(program.getBroadcastingEpisode())
                         .broadcastingStation(program.getBroadcastingStation())
                         .endFlag(program.isEndFlag())
                         .averageRating(program.getAverageRating())
@@ -39,5 +39,9 @@ public class ProgramService {
                         .backdropPath(program.getBackdropPath())
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    public void save(Program program) {
+        programRepository.save(program);
     }
 }
