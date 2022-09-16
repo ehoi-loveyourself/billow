@@ -63,4 +63,20 @@ public class Program {
         this.backdropPath = backdropPath;
         this.genreList = genreList;
     }
+
+    public void updateAverageRatingByPost(Float score) {
+        averageRating = (getWholeRatings() + score) / ++ratingCnt;
+    }
+
+    public void updateAverageRatingByDelete(Float score) {
+        if (ratingCnt < 2) {
+            averageRating = 0f;
+        } else {
+            averageRating = (getWholeRatings() - score) / --ratingCnt;
+        }
+    }
+
+    private float getWholeRatings() {
+        return averageRating * ratingCnt;
+    }
 }
