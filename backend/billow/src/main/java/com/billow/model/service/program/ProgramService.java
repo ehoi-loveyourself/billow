@@ -36,6 +36,7 @@ public class ProgramService {
                         .endFlag(program.isEndFlag())
                         .averageRating(program.getAverageRating())
                         .posterImg(program.getPosterImg())
+                        .backdropPath(program.getBackdropPath())
                         .build())
                 .collect(Collectors.toList());
     }

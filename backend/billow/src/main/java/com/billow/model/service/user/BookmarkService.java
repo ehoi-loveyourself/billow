@@ -46,6 +46,7 @@ public class BookmarkService {
                         .endFlag(bookmark.getProgram().isEndFlag())
                         .averageRating(bookmark.getProgram().getAverageRating())
                         .posterImg(bookmark.getProgram().getPosterImg())
+                        .backdropPath(bookmark.getProgram().getBackdropPath())
                         .build())
                 .collect(Collectors.toList());
     }

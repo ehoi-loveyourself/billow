@@ -29,4 +29,6 @@ public class ProgramResponse {
     private Float averageRating;
 
     private String posterImg;
+
+    private String backdropPath;
 }
