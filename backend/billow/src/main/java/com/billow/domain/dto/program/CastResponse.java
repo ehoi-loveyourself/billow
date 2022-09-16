@@ -2,6 +2,8 @@ package com.billow.domain.dto.program;
 
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Builder
 @AllArgsConstructor
@@ -10,7 +12,7 @@ public class CastResponse {
 
     Long programId;
 
-    Long posterImgId;
+    String posterImg;
 
     String actorName;
 
@@ -18,10 +20,9 @@ public class CastResponse {
 
     String summary;
 
-    String genre;
+    List<String> genres;
 
     Integer age;
 
     Float averageRating;
-
 }
