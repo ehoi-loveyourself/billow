@@ -1,12 +1,14 @@
 
 package com.billow.domain.entity.user;
 
-import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -55,5 +57,15 @@ public class User {
         this.profileImg = profileImg;
         this.region = region;
         this.tvCarrier = tvCarrier;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof User && this.getEmail().equals(((User) o).getEmail());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getEmail());
     }
 }

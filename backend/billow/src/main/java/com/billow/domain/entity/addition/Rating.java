@@ -45,4 +45,10 @@ public class Rating {
         this.user = user;
         this.program = program;
     }
+
+    public void updateRating(Float score) {
+        this.score = score;
+    }
+
+
 }

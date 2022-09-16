@@ -1,10 +1,14 @@
 package com.billow.controller.user;
 
+import com.billow.domain.dto.program.ProgramResponse;
+import com.billow.model.service.user.BookmarkService;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -12,23 +16,31 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/bookmark")
 public class BookmarkController {
 
+    private final BookmarkService bookmarkService;
+
     @GetMapping
-    public ResponseEntity<Object> selectBookmark() {
-        Message response = new Message("succeeded");
+    public ResponseEntity<Object> selectBookmark(@RequestHeader("Auth-access") String token) {
+        log.info("즐겨찾기 조회 API 호출");
+        List<ProgramResponse> responses = bookmarkService.selectBookmark(0L);
+        log.info("즐겨찾기 조회 성공");
         return ResponseEntity.ok()
-                .body(response);
+                .body(responses);
     }
 
     @PostMapping("/{programId}")
-    public ResponseEntity<Object> postBookmark(@PathVariable("programId") Long programId) {
-        Message response = new Message("succeeded");
+    public ResponseEntity<Object> postBookmark(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId) {
+        log.info("즐겨찾기 등록 API 호출");
+        Message response = bookmarkService.postBookmark(0L, programId);
+        log.info("즐겨찾기 등록 성공");
         return ResponseEntity.ok()
                 .body(response);
     }
 
     @DeleteMapping("/{bookmarkId}")
-    public ResponseEntity<Object> deleteBookmark(@PathVariable("bookmarkId") Long bookmarkId) {
-        Message response = new Message("succeeded");
+    public ResponseEntity<Object> deleteBookmark(@RequestHeader("Auth-access") String token, @PathVariable("bookmarkId") Long bookmarkId) {
+        log.info("즐겨찾기 삭제 API 호출");
+        Message response = bookmarkService.deleteBookmark(0L, bookmarkId);
+        log.info("즐겨찾기 삭제 성공");
         return ResponseEntity.ok()
                 .body(response);
     }

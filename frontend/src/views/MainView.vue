@@ -1,18 +1,18 @@
 <template>
     <router-view>
-        <br>
-        <div style="text-align:center">
-        <br/><br/>
-        <img src="@/assets/image_1.png"/>
-        <br/><br/><br/><br/><br/>
-      </div>
+        <NewProgram></NewProgram>
+      <RecommendedProgram></RecommendedProgram>
     </router-view>
   </template>
   
   <script>
+import RecommendedProgram from "../components/main/RecommendedProgram.vue";
+import NewProgram from "../components/main/NewProgram.vue";
+
     export default {
-      name:"MainView",
-  };
+    name: "MainView",
+    components: { RecommendedProgram, NewProgram }
+};
   </script>
   
   <style></style>

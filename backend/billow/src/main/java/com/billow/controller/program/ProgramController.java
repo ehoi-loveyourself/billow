@@ -1,11 +1,15 @@
 package com.billow.controller.program;
 
 import com.billow.domain.dto.addtion.RatingRequest;
+import com.billow.domain.dto.program.ProgramResponse;
+import com.billow.model.service.program.ProgramService;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -13,11 +17,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/program")
 public class ProgramController {
 
+    private final ProgramService programService;
+
     @GetMapping
     public ResponseEntity<Object> searchProgram(@RequestParam(value = "word") String word) {
-        Message response = new Message("succeeded");
+        log.info("프로그램 검색 API 호출");
+        List<ProgramResponse> responses = programService.searchProgram(word);
+        log.info("프로그램 검색 성공");
         return ResponseEntity.ok()
-                .body(response);
+                .body(responses);
     }
 
     @GetMapping("/{programId}")
@@ -28,7 +36,7 @@ public class ProgramController {
     }
 
     @GetMapping("/random")
-    public ResponseEntity<Object> randomProgram(){
+    public ResponseEntity<Object> randomProgram() {
         Message response = new Message("succeeded");
         return ResponseEntity.ok()
                 .body(response);
