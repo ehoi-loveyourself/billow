@@ -31,9 +31,7 @@ public class RecommendService {
     }
 
     public List<CastResponse> recommendActor(Long userId) {
-        List<Rating> ratingList = ratingRepository.findByUser_Id(userId)
-                .orElseThrow(() -> new NotFoundException(RATING_NOT_FOUND));
-
+        List<Rating> ratingList = ratingRepository.findByUser_Id(userId);
         List<String> actorList = castRepository.findMaxCountByProgram_Id(ratingList.get(0).getProgram().getId(), ratingList.get(1).getProgram().getId(), ratingList.get(2).getProgram().getId(), ratingList.get(3).getProgram().getId(), ratingList.get(4).getProgram().getId());
         List<Cast> castList = castRepository.findByActorName(actorList.get(0))
                 .orElseThrow(() -> new NotFoundException(ACTOR_NOT_FOUND));
