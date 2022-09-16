@@ -27,10 +27,7 @@ public class UserService {
     private final RatingRepository ratingRepository;
 
     public List<RatingResponse> selectRating(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
-
-        return user.getRatings()
+        return ratingRepository.findByUserId(userId)
                 .stream()
                 .map(rating -> RatingResponse.builder()
                         .title(rating.getProgram().getTitle())
