@@ -30,7 +30,7 @@ public class BookmarkService {
     private final UserRepository userRepository;
 
     public List<ProgramResponse> selectBookmark(Long userId) {
-        return bookmarkRepository.findByUserId(userId)
+        return bookmarkRepository.findByUser_Id(userId)
                 .stream()
                 .map(bookmark -> ProgramResponse.builder()
                         .title(bookmark.getProgram().getTitle())
