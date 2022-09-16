@@ -14,6 +14,7 @@ import java.util.Objects;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tb_user")
 @Entity
+@ToString
 public class User {
 
     @Id
@@ -27,32 +28,26 @@ public class User {
     @NotNull
     private String name;
 
-    @NotNull
     private String nickName;
 
-    @NotNull
-    private boolean gender;
+    private String gender;
 
-    @NotNull
     private Integer age;
 
-    @NotNull
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "profile_img_id")
     private ProfileImg profileImg;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")
     private Region region;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tv_carrier_id")
     private TvCarrier tvCarrier;
 
     @Builder
-    public User(Long id, String email, String name, String nickName, boolean gender, Integer age, ProfileImg profileImg, Region region, TvCarrier tvCarrier) {
+    public User(Long id, String email, String name, String nickName, String gender, Integer age, ProfileImg profileImg, Region region, TvCarrier tvCarrier) {
         this.id = id;
         this.email = email;
         this.name = name;
