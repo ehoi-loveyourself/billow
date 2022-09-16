@@ -29,8 +29,7 @@ public class Cast {
 
     private String imgUrl;
 
-    //TODO : 널 해제
-//    @NotNull
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "program_id")
     @OnDelete(action = OnDeleteAction.CASCADE)

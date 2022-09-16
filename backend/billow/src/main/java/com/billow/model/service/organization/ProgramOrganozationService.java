@@ -21,7 +21,7 @@ public class ProgramOrganozationService {
         programOrganizationRepository.deleteByBroadcastingDayStartingWith(yesterDay);
     }
 
-    public List<ProgramOrganization> findByProgramId(Long id) {
-        return programOrganizationRepository.findByProgramId(id);
+    public List<ProgramOrganization> findByProgram_Id(Long id) {
+        return programOrganizationRepository.findByProgram_Id(id);
     }
 }

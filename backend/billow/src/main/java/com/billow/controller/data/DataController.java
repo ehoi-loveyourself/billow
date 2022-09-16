@@ -35,7 +35,6 @@ public class DataController {
 
     private static final String PROGRAM_NOT_FOUND = "프로그램이 존재하지 않습니다.";
 
-    //TODO : Exception추가하기
     private final DataService dataService;
     private final ProgramOrganozationService programOrganozationService;
     private final CastService castService;
@@ -64,18 +63,22 @@ public class DataController {
         programOrganozationService.deleteByBroadcastingDayStartingWith(yesterDay);
 
         List<Program> programList = programService.findAll();
-        for (Program program : programList) {
-            Connection connection = Jsoup.connect("https://search.naver.com/search.naver?query=" + program.getTitle() + "방송시간");
+        for (int i = 0; i< 5; i++){
+//        for (Program program : programList) {
+            Connection connection = Jsoup.connect("https://search.naver.com/search.naver?query=" + programList.get(i).getTitle() + "방송시간");
             Document document = connection.get();
-            List<ProgramOrganization> programOrganizationList = programOrganozationService.findByProgramId(program.getId());
+            List<ProgramOrganization> programOrganizationList = programOrganozationService.findByProgram_Id(programList.get(i).getId());
+            System.out.println(programList.get(i).getTitle()+"크롤링 시작");
 
             Elements channel = document.select(".table_scroll_wrap>.table_top_area>.cm_table tr a");
             if (!channel.isEmpty()) {
+                System.out.println("현재 방영 중");
                 Elements broadcastingDay = document.select(".table_fixed_wrap span");
                 Elements broadcastingDayRow = document.select(".table_scroll_wrap>.table_body_area>.cm_table tr"); //이 사이즈는 날짜 index와 매칭
 
                 for (int d = 0; d < broadcastingDayRow.size(); d++) {//d는 날짜 인덱스와 같음
                     if (!programOrganizationList.isEmpty() && !broadcastingDay.get(d).text().substring(0, 6).equals(today.plusDays(6).format(dateTimeFormatter))) {
+                        System.out.println("continue에 걸림");
                         continue;
                     }
                     Elements broadcastingTimeRow = broadcastingDayRow.get(d).select(">td");
@@ -84,6 +87,7 @@ public class DataController {
                         if (!broadcastingInfos.isEmpty()) {
                             for (Element broadcastingInfo : broadcastingInfos) {
                                 ProgramOrganization programOrganization = ProgramOrganization.builder()
+                                        .program(programList.get(i))
                                         .broadcastingDay(broadcastingDay.get(d).text())
                                         .broadcastingTime(broadcastingInfo.select(".time").text())
                                         .broadcastingEpisode(broadcastingInfo.select(".number_text").text())
@@ -91,13 +95,13 @@ public class DataController {
                                         .broadcastingRerun(broadcastingInfo.select(".blind").text())
                                         .broadcastingStation(channel.get(c).text())
                                         .build();
-//                          programOrganozationService.save(programOrganization);
-//                          System.out.println(programOrganization);
+                          programOrganozationService.save(programOrganization);
                             }
                         }
                     }
                 }
             } else {
+                System.out.println("현재 미방영");
                 Elements broadcastingDayRow = document.select(".tvtime_list .info_list");
                 for (int d = 0; d < broadcastingDayRow.size(); d++) {
                     Elements broadcastingInfos = broadcastingDayRow.get(d).select(".info");
@@ -107,6 +111,7 @@ public class DataController {
                     }
                     for (Element broadcastingInfo : broadcastingInfos) {
                         ProgramOrganization programOrganization = ProgramOrganization.builder()
+                                .program(programList.get(i))
                                 .broadcastingDay(broadcastingDayRow.get(d).select(".cm_date").text())
                                 .broadcastingTime(broadcastingInfo.select(".time").text())
                                 .broadcastingEpisode(broadcastingInfo.select(".number_text").text())
@@ -114,8 +119,7 @@ public class DataController {
                                 .broadcastingRerun(broadcastingInfo.select(".blind").text())
                                 .broadcastingStation(broadcastingInfo.select("a").text())
                                 .build();
-//                      programOrganozationService.save(programOrganization);
-//                      System.out.println(programOrganization);
+                      programOrganozationService.save(programOrganization);
                     }
                 }
             }
@@ -126,14 +130,12 @@ public class DataController {
 
     @GetMapping(value = "/cast")
     public ResponseEntity<Object> cast() throws IOException {
-        //TODO : 프로그램 조회 후 크롤링
-        //TODO : 신규 프로그램 필터링 해서 업데이트
-        //TODO : 테스트용 코드, 스케줄러로 이동 예정
         List<Program> programList = programService.findAll();
-        for (Program program : programList) {
-            Optional<Cast> castList = castService.findById(program.getId());
+        for (int i = 0; i< 5; i++){
+//            for (Program program : programList) {
+            Optional<List<Cast>> castList = castService.findByProgram_Id(programList.get(i).getId());
             if (!castList.isPresent()) {
-                Connection connection = Jsoup.connect("https://search.naver.com/search.naver?query=" + program.getTitle() + "출연진");
+                Connection connection = Jsoup.connect("https://search.naver.com/search.naver?query=" + programList.get(i).getTitle() + "출연진");
                 Document document = connection.get();
 
                 Elements castInfos = document.select(".list_image_info .item");
@@ -142,6 +144,7 @@ public class DataController {
                     String playName = castInfo.select(".title_box .name a").text();
                     String actorName = castInfo.select(".title_box .sub_text").text();
                     Cast cast = Cast.builder()
+                            .program(programList.get(i))
                             .actorName(actorName)
                             .playName(playName)
                             .imgUrl(imgUrl)

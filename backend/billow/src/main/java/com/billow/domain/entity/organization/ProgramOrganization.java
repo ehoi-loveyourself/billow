@@ -37,8 +37,7 @@ public class ProgramOrganization {
     @NotNull
     private String broadcastingStation;
 
-    //TODO : 널 해제
-//    @NotNull
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "program_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -53,6 +52,6 @@ public class ProgramOrganization {
         this.broadcastingAge = broadcastingAge;
         this.broadcastingRerun = broadcastingRerun;
         this.broadcastingStation = broadcastingStation;
-//        this.program = program;
+        this.program = program;
     }
 }
