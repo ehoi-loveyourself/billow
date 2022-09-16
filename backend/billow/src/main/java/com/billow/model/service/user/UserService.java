@@ -58,7 +58,7 @@ public class UserService {
     }
 
     public List<RatingResponse> selectRating(Long userId) {
-        return ratingRepository.findByUserId(userId)
+        return ratingRepository.findByUser_Id(userId)
                 .stream()
                 .map(rating -> RatingResponse.builder()
                         .title(rating.getProgram().getTitle())

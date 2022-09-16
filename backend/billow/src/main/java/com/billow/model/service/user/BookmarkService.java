@@ -30,11 +30,14 @@ public class BookmarkService {
     private final UserRepository userRepository;
 
     public List<ProgramResponse> selectBookmark(Long userId) {
-        return bookmarkRepository.findByUserId(userId)
+        return bookmarkRepository.findByUser_Id(userId)
                 .stream()
                 .map(bookmark -> ProgramResponse.builder()
                         .title(bookmark.getProgram().getTitle())
-                        .genre(bookmark.getProgram().getGenre())
+                        .genres(bookmark.getProgram().getGenreList()
+                                .stream()
+                                .map(genre -> genre.getGenreInfo().getName())
+                                .collect(Collectors.toList()))
                         .age(bookmark.getProgram().getAge())
                         .summary(bookmark.getProgram().getSummary())
                         .broadcastingDay(bookmark.getProgram().getBroadcastingDay())
@@ -43,6 +46,7 @@ public class BookmarkService {
                         .endFlag(bookmark.getProgram().isEndFlag())
                         .averageRating(bookmark.getProgram().getAverageRating())
                         .posterImg(bookmark.getProgram().getPosterImg())
+                        .backdropPath(bookmark.getProgram().getBackdropPath())
                         .build())
                 .collect(Collectors.toList());
     }
