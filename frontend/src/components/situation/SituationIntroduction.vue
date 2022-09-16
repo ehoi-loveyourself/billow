@@ -12,7 +12,7 @@
     </div>
     
     <div style="text-align:center">
-        <a class="startButton" href="#" role="button" style="border-radius: 14%;">
+        <a class="startButton" href="#" role="button" style="border-radius: 15px;">
             <router-link :to="{ name: 'main' }" class="nav-link" style="font-size:20px; padding:10px; color:black;">
                 상황별 추천 받기
             </router-link>
@@ -34,7 +34,7 @@
     }
 </script>
 
-<style>
+<style scoped>
  .jumbotron {
     background: url('@/assets/before_login.svg') no-repeat center center fixed;
     -webkit-background-size: cover;

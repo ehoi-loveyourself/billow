@@ -1,20 +1,26 @@
 <template>
-<div>
+<div style="padding-left: 70px; margin-top: 10px;">
     <br/>
-  <img src="@/assets/runningman.png" alt="Image" style="margin-top: 10px; padding-left: 70px;">
+  <img src="@/assets/runningman.png" alt="Image">
   <img src="@/assets/thatman.png" alt="Image">
   <img src="@/assets/nangman.png" alt="Image">
   <img src="@/assets/jugun.png" alt="Image">
   <img src="@/assets/image_2.png" alt="Image">
   <img src="@/assets/gs.png" alt="Image">
+  <img src="@/assets/laggi.png" alt="Image">
+  <br/>
 </div>
 </template>
 
+<script>
+
+</script>
+
 <style scoped>
 img{
-    padding-left:15px;
-    margin-bottom: 20px;
+    padding-right:10px;
+    margin-bottom: 4px;
     margin-right: 0;
-    width:14.2%
+    width:15.5%
 }
 </style>

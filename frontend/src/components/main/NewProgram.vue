@@ -1,13 +1,83 @@
 <template>
-<div>
-    <br/>
-      <div style="text-align:center; margin-top: 10px;">
-        <img src="@/assets/image_1.png"/>
-        <br/><br/><br/>
-      </div>
-</div>   
+    <div id="mainslider" style="text-align:center; margin-top: 10px; padding-left: 70px; padding-right: 70px;">
+      <br/>
+        <splide id="carousel_new" :options="options">
+        <splide-slide>
+        <img class="img_1" src="@/assets/image_180.png" alt="main1">
+        </splide-slide>
+        <splide-slide>
+        <img class="img_2" src="https://image.tmdb.org/t/p/original/FbUIi5WeDU5j1EtipQ274tts1E.jpg" alt="main2">
+        </splide-slide>
+        <splide-slide>
+        <img class="img_3" src="@/assets/daedang.png" alt="main3">
+        </splide-slide>
+        <splide-slide>
+        <img class="img_3" src="@/assets/mondai.png" alt="main3">
+        </splide-slide>
+    </splide>
+    </div>
+    <br/><br/><br/>
 </template>
-    
+  
+<script>
+  import { Splide, SplideSlide } from '@splidejs/vue-splide';
+  import '@splidejs/splide/dist/css/themes/splide-default.min.css';
+  
+  export default {
+    name:"MainSlider",
+    components: {
+    Splide,
+    SplideSlide,
+  },
+    data() {
+      return {
+        options: {
+        type : 'fade',
+        rewind      : true,
+        perPage     : 1,
+        autoplay    : true,
+        pauseOnHover: false,
+        arrows      : true,
+        dots: true,
+        animatedDots: true,      
+        },
+      };
+    },
+  }
+</script>
+  
+<style>
+#carousel_new .splide__arrow--next{
+    right:5rem;
+}
+#carousel_new .splide__arrow--prev{
+    left:5rem;
+}
+#carousel_new .splide__arrow{
+  background: none;
+}
+.img_1{
+  width:1700px;
+}
+.img_2{
+  height: 650px;
+  width: 1700px;
+  border-radius: 20px;
+}
+.img_3{
+  width: 1700px;
+  height: 650px;
+}
+.splide__arrow svg {
+    fill: white;
+    height: 6em;
+    width: 6em;
+}
+.splide__arrow{
+  width:fit-content;
+}
+</style>
+
 <style scoped>
 
 </style>

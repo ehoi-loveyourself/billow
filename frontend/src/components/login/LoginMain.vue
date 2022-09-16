@@ -18,7 +18,7 @@ TV프로그램을 추천해줍니다.
 </div>
 <br/>
 <div style="text-align:center">
-<a class="kakao" href="#" role="button" style="border-radius: 14%;">
+<a class="kakao" href="#" role="button" style="border-radius:15px;">
   <router-link :to="{ name: 'main' }" class="nav-link" style="font-size:20px; padding:10px; color:black;">
   카카오로 시작하기
   </router-link>
