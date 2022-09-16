@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tb_poster_img")
@@ -17,13 +16,10 @@ public class PosterImg {
     @Column(name = "poster_img_id")
     private Long id;
 
-    @NotNull
     private String saveFolder;
 
-    @NotNull
     private String originName;
 
-    @NotNull
     private String saveName;
 
     @Builder
