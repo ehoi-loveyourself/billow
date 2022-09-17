@@ -37,6 +37,8 @@ public class Program {
 
     private Float averageRating;
 
+    private Long ratingCnt;
+
     private String posterImg;
 
     private String backdropPath;
@@ -45,8 +47,8 @@ public class Program {
     private List<Genre> genreList = new ArrayList<>();
 
     @Builder
-    public Program(Long id, String title, Integer age, String summary, String broadcastingDay, String broadcastingTime,
-                   String broadcastingStation, boolean endFlag, Float averageRating, String posterImg, String backdropPath, List<Genre> genreList) {
+    public Program(Long id, String title, Integer age, String summary, String broadcastingDay, String broadcastingTime, String broadcastingStation,
+                   boolean endFlag, Float averageRating, Long ratingCnt, String posterImg, String backdropPath, List<Genre> genreList) {
         this.id = id;
         this.title = title;
         this.age = age;
@@ -56,8 +58,25 @@ public class Program {
         this.broadcastingStation = broadcastingStation;
         this.endFlag = endFlag;
         this.averageRating = averageRating;
+        this.ratingCnt = ratingCnt;
         this.posterImg = posterImg;
         this.backdropPath = backdropPath;
         this.genreList = genreList;
+    }
+
+    public void updateAverageRatingByPost(Float score) {
+        averageRating = (getWholeRatings() + score) / ++ratingCnt;
+    }
+
+    public void updateAverageRatingByDelete(Float score) {
+        if (ratingCnt < 2) {
+            averageRating = 0f;
+        } else {
+            averageRating = (getWholeRatings() - score) / --ratingCnt;
+        }
+    }
+
+    private float getWholeRatings() {
+        return averageRating * ratingCnt;
     }
 }

@@ -43,8 +43,10 @@ public class ProgramController {
     }
 
     @PostMapping("/{programId}")
-    public ResponseEntity<Object> postProgramRating(@PathVariable("programId") Long programId, @RequestBody RatingRequest ratingRequest) {
-        Message response = new Message("succeeded");
+    public ResponseEntity<Object> postProgramRating(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId, @RequestBody RatingRequest ratingRequest) {
+        log.info("프로그램 평점 등록 API 호출");
+        Message response = programService.postProgramRating(0L, programId, ratingRequest);
+        log.info("프로그램 평점 등록 성공");
         return ResponseEntity.ok()
                 .body(response);
     }
