@@ -176,7 +176,7 @@ public class DataController {
                 String day = infoDetail.get(1).text();
                 programList.get(i).setBroadcastingDay(day);
                 System.out.println(day);
-            }else{
+            } else {
                 String episode = info.get(0).select("dd .state").text();
                 programList.get(i).setBroadcastingEpisode(episode);
                 System.out.println(episode);
