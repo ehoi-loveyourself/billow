@@ -77,7 +77,7 @@ public class DataController {
         programOrganozationService.deleteByBroadcastingDayStartingWith(yesterDay);
 
         List<Program> programList = programService.findAll();
-        for (int i = 0; i< 5; i++){
+        for (int i = 0; i < 5; i++) {
 //        for (Program program : programList) {
             Connection connection = Jsoup.connect("https://search.naver.com/search.naver?query=" + programList.get(i).getTitle() + "방송시간");
             Document document = connection.get();
