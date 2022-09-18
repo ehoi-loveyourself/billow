@@ -187,5 +187,4 @@ public class DataController {
         return ResponseEntity.ok()
                 .body(new Message("succeeded"));
     }
-
 }
