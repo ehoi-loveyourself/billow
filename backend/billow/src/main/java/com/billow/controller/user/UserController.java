@@ -31,8 +31,6 @@ public class UserController {
         }
     }
 
-    private final UserService userService;
-
     @GetMapping
     public ResponseEntity<Object> selectUser() {
         Message response = new Message("sdsd");
