@@ -60,6 +60,7 @@ public class BookmarkService {
                 .user(user)
                 .program(program)
                 .build();
+        program.addBookmark();
         bookmarkRepository.save(bookmark);
         return new Message("프로그램을 즐겨찾기에 담았습니다.");
     }
@@ -72,6 +73,7 @@ public class BookmarkService {
         if (!bookmark.getUser().equals(user)) {
             throw new BadRequestException(BAD_REQUEST);
         }
+        bookmark.getProgram().deleteBookmark();
         bookmarkRepository.delete(bookmark);
         return new Message("프로그램을 즐겨찾기에서 삭제했습니다.");
     }

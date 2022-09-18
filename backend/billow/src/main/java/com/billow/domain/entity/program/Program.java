@@ -80,4 +80,16 @@ public class Program {
     private float getWholeRatings() {
         return averageRating * ratingCnt;
     }
+
+    public void addBookmark() {
+        bookmarkCnt++;
+    }
+
+    public void deleteBookmark() {
+        if (bookmarkCnt <= 0) {
+            bookmarkCnt = 0;
+        } else {
+            bookmarkCnt--;
+        }
+    }
 }
