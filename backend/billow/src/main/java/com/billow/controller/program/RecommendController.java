@@ -1,6 +1,7 @@
 package com.billow.controller.program;
 
 import com.billow.domain.dto.program.CastResponse;
+import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.domain.entity.program.Program;
 import com.billow.model.service.program.RecommendService;
 import com.billow.util.Message;
@@ -45,9 +46,11 @@ public class RecommendController {
 
     @GetMapping("/popular")
     public ResponseEntity<Object> recommendPopular() {
-        Message response = new Message("succeeded");
+        log.info("인기 프로그램 추천 API 호출");
+        List<ProgramResponse> responses = recommendService.recommendPopular();
+        log.info("인기 프로그램 추천 성공");
         return ResponseEntity.ok()
-                .body(response);
+                .body(responses);
     }
 
     @GetMapping("/actor")
