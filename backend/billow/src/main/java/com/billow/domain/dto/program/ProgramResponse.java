@@ -14,13 +14,13 @@ public class ProgramResponse {
 
     private List<String> genres;
 
-    private Integer age;
+    private String age;
 
     private String summary;
 
     private String broadcastingDay;
 
-    private String broadcastingTime;
+    private String broadcastingEpisode;
 
     private String broadcastingStation;
 

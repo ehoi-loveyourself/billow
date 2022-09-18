@@ -41,7 +41,7 @@ public class BookmarkService {
                         .age(bookmark.getProgram().getAge())
                         .summary(bookmark.getProgram().getSummary())
                         .broadcastingDay(bookmark.getProgram().getBroadcastingDay())
-                        .broadcastingTime(bookmark.getProgram().getBroadcastingTime())
+                        .broadcastingEpisode(bookmark.getProgram().getBroadcastingEpisode())
                         .broadcastingStation(bookmark.getProgram().getBroadcastingStation())
                         .endFlag(bookmark.getProgram().isEndFlag())
                         .averageRating(bookmark.getProgram().getAverageRating())
