@@ -41,6 +41,7 @@ public class DataService {
         }
         return new Message("succeeded");
     }
+
     public Message getkpopData() {
         List<GenderAgeViewerInformation> kPopList = kPopRepository.getData()
                 .orElseThrow(() -> new NotFoundException(DATA_NOT_FOUND));
@@ -58,6 +59,7 @@ public class DataService {
         }
         return new Message("succeeded");
     }
+
     public Message insertProgramId() {
         List<Program> programList = programRepository.findAll();
         for (Program program : programList){
@@ -71,6 +73,4 @@ public class DataService {
         }
         return new Message("succeeded");
     }
-
-
 }
