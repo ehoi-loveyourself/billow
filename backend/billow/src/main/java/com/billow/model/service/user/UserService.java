@@ -70,14 +70,11 @@ public class UserService {
     public Message updateRating(Long userId, Long ratingId, RatingRequest ratingRequest) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
-
         Rating rating = ratingRepository.findById(ratingId)
                 .orElseThrow(() -> new NotFoundException(RATING_NOT_FOUND));
-
         if (!user.equals(rating.getUser())) {
             throw new BadRequestException(BAD_REQUEST);
         }
-
         rating.updateRating(ratingRequest.getScore());
         ratingRepository.save(rating);
 
@@ -91,14 +88,12 @@ public class UserService {
     public Message deleteRating(Long userId, Long ratingId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
-
         Rating rating = ratingRepository.findById(ratingId)
                 .orElseThrow(() -> new NotFoundException(RATING_NOT_FOUND));
-
         if (!user.equals(rating.getUser())) {
             throw new BadRequestException(BAD_REQUEST);
         }
-
+        rating.getProgram().updateAverageRatingByDelete(rating.getScore());
         ratingRepository.delete(rating);
 
         return new Message("회원님의 평점내역 삭제에 성공하였습니다.");

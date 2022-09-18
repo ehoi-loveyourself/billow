@@ -69,7 +69,7 @@ public class DataController {
 
     @GetMapping(value = "/programorganization")
     public ResponseEntity<Object> programorganization() throws IOException {
-        log.info("프로그램 편성표 데이터 수집 Scheduer 호출");
+        log.info("프로그램 편성표 데이터 수집 Scheduler 호출");
         //하루 전 데이터 삭제
         LocalDate today = LocalDate.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM.dd.");
@@ -106,7 +106,7 @@ public class DataController {
                                         .broadcastingRerun(broadcastingInfo.select(".blind").text())
                                         .broadcastingStation(channel.get(c).text())
                                         .build();
-                          programOrganozationService.save(programOrganization);
+                                programOrganozationService.save(programOrganization);
                             }
                         }
                     }
@@ -129,7 +129,7 @@ public class DataController {
                                 .broadcastingRerun(broadcastingInfo.select(".blind").text())
                                 .broadcastingStation(broadcastingInfo.select("a").text())
                                 .build();
-                      programOrganozationService.save(programOrganization);
+                        programOrganozationService.save(programOrganization);
                     }
                 }
             }
@@ -141,9 +141,9 @@ public class DataController {
 
     @GetMapping(value = "/cast")
     public ResponseEntity<Object> cast() throws IOException {
-        log.info("출연진 데이터 수집 Scheduer 실행");
+        log.info("출연진 데이터 수집 Scheduler 실행");
         List<Program> programList = programService.findAll();
-        for (int i = 0; i< 5; i++){
+        for (int i = 0; i < 5; i++) {
 //            for (Program program : programList) {
             Optional<List<Cast>> castList = castService.findByProgram_Id(programList.get(i).getId());
             if (!castList.isPresent()) {
@@ -165,9 +165,39 @@ public class DataController {
                 }
             }
         }
-        log.info("출연진 데이터 수집 Scheduer 성공");
+        log.info("출연진 데이터 수집 Scheduler 성공");
         return ResponseEntity.ok()
                 .body(new Message("succeeded"));
     }
 
+    @GetMapping(value = "/programdetail")
+    public ResponseEntity<Object> programDetail() throws IOException {
+        log.info("프로그램 방영정보 데이터 수집 Scheduer 호출");
+        //TODO: 엔티티 정리 후에 확인 필요
+        List<Program> programList = programService.findAll();
+        for (int i = 0; i < 2; i++) {
+//        for (Program program : programList){
+            Connection connection = Jsoup.connect("https://search.naver.com/search.naver?query=" + programList.get(i).getTitle());
+            Document document = connection.get();
+
+            Elements subTitle = document.select(".sub_title span");
+            String age = subTitle.get(2).text();
+            programList.get(i).setAge(age);
+
+            Elements info = document.select(".info_group");
+            if (subTitle.size() == 3) {
+                programList.get(i).setEndFlag(true);
+                Elements infoDetail = info.get(0).select("dd span");
+                String day = infoDetail.get(1).text();
+                programList.get(i).setBroadcastingDay(day);
+            } else {
+                String episode = info.get(0).select("dd .state").text();
+                programList.get(i).setBroadcastingEpisode(episode);
+            }
+            programService.save(programList.get(i));
+        }
+        log.info("프로그램 방영정보 데이터 수집 Scheduer 성공");
+        return ResponseEntity.ok()
+                .body(new Message("succeeded"));
+    }
 }

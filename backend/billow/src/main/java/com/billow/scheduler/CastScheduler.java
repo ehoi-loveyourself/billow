@@ -15,12 +15,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Component
-public class CastScheduer {
+public class CastScheduler {
 
     @Autowired
     private CastService castService;
 
-//    @Scheduled(cron = "0 0 0 * * *")
+    //    @Scheduled(cron = "0 0 0 * * *")
     public void Cast() throws IOException {
         String programTitle = "빅마우스";
         Connection connection = Jsoup.connect("https://search.naver.com/search.naver?query=" + programTitle + "출연진");

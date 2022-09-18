@@ -22,7 +22,7 @@ public class CastResponse {
 
     List<String> genres;
 
-    Integer age;
+    String age;
 
     Float averageRating;
 }
