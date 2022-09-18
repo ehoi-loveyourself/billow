@@ -5,6 +5,7 @@ import com.billow.model.repository.program.CastRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -16,7 +17,8 @@ public class CastService {
         castRepository.save(cast);
     }
 
-    public Optional<Cast> findById(Long id) {
-        return castRepository.findById(id);
+
+    public Optional<List<Cast>> findByProgram_Id(Long id) {
+        return castRepository.findByProgram_Id(id);
     }
 }

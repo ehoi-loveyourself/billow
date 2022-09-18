@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Component
-public class OganizationScheduer {
+public class OganizationScheduler {
 
     @Autowired
     private ProgramOrganozationService programOrganozationService;
@@ -26,7 +26,7 @@ public class OganizationScheduer {
 //        System.out.println("OganizationScheduer");
 //    }
 
-//    @Scheduled(cron = "0 0 0 * * *")
+    //    @Scheduled(cron = "0 0 0 * * *")
     public void programOrganozationData() throws IOException {
         LocalDate today = LocalDate.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM.dd.");
@@ -86,7 +86,6 @@ public class OganizationScheduer {
                 }
             }
         }
-
 
 
     }

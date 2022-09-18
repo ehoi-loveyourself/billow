@@ -35,7 +35,6 @@ public class DataController {
 
     private static final String PROGRAM_NOT_FOUND = "프로그램이 존재하지 않습니다.";
 
-    //TODO : Exception추가하기
     private final DataService dataService;
     private final ProgramOrganozationService programOrganozationService;
     private final CastService castService;
@@ -43,20 +42,34 @@ public class DataController {
 
     @GetMapping(value = "/kdrama")
     public ResponseEntity<Object> kdramaData() {
+        log.info("kdrama 데이터 수집 API 호출");
         Message message = dataService.getkdramaData();
+        log.info("kdrama 데이터 수집 API 성공");
         return ResponseEntity.ok()
                 .body(message);
     }
 
     @GetMapping(value = "/kpop")
     public ResponseEntity<Object> kpopData() {
+        log.info("kpop 데이터 수집 API 호출");
         Message message = dataService.getkpopData();
+        log.info("kpop 데이터 수집 API 성공");
+        return ResponseEntity.ok()
+                .body(message);
+    }
+
+    @GetMapping(value = "/insert")
+    public ResponseEntity<Object> insertProgramId() {
+        log.info("성연령별 데이터 프로그램 매핑 API 호출");
+        Message message = dataService.insertProgramId();
+        log.info("성연령별 데이터 프로그램 매핑 API 성공");
         return ResponseEntity.ok()
                 .body(message);
     }
 
     @GetMapping(value = "/programorganization")
     public ResponseEntity<Object> programorganization() throws IOException {
+        log.info("프로그램 편성표 데이터 수집 Scheduler 호출");
         //하루 전 데이터 삭제
         LocalDate today = LocalDate.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM.dd.");
@@ -64,10 +77,11 @@ public class DataController {
         programOrganozationService.deleteByBroadcastingDayStartingWith(yesterDay);
 
         List<Program> programList = programService.findAll();
-        for (Program program : programList) {
-            Connection connection = Jsoup.connect("https://search.naver.com/search.naver?query=" + program.getTitle() + "방송시간");
+        for (int i = 0; i < 5; i++) {
+//        for (Program program : programList) {
+            Connection connection = Jsoup.connect("https://search.naver.com/search.naver?query=" + programList.get(i).getTitle() + "방송시간");
             Document document = connection.get();
-            List<ProgramOrganization> programOrganizationList = programOrganozationService.findByProgramId(program.getId());
+            List<ProgramOrganization> programOrganizationList = programOrganozationService.findByProgram_Id(programList.get(i).getId());
 
             Elements channel = document.select(".table_scroll_wrap>.table_top_area>.cm_table tr a");
             if (!channel.isEmpty()) {
@@ -84,6 +98,7 @@ public class DataController {
                         if (!broadcastingInfos.isEmpty()) {
                             for (Element broadcastingInfo : broadcastingInfos) {
                                 ProgramOrganization programOrganization = ProgramOrganization.builder()
+                                        .program(programList.get(i))
                                         .broadcastingDay(broadcastingDay.get(d).text())
                                         .broadcastingTime(broadcastingInfo.select(".time").text())
                                         .broadcastingEpisode(broadcastingInfo.select(".number_text").text())
@@ -91,8 +106,7 @@ public class DataController {
                                         .broadcastingRerun(broadcastingInfo.select(".blind").text())
                                         .broadcastingStation(channel.get(c).text())
                                         .build();
-//                          programOrganozationService.save(programOrganization);
-//                          System.out.println(programOrganization);
+                                programOrganozationService.save(programOrganization);
                             }
                         }
                     }
@@ -107,6 +121,7 @@ public class DataController {
                     }
                     for (Element broadcastingInfo : broadcastingInfos) {
                         ProgramOrganization programOrganization = ProgramOrganization.builder()
+                                .program(programList.get(i))
                                 .broadcastingDay(broadcastingDayRow.get(d).select(".cm_date").text())
                                 .broadcastingTime(broadcastingInfo.select(".time").text())
                                 .broadcastingEpisode(broadcastingInfo.select(".number_text").text())
@@ -114,26 +129,25 @@ public class DataController {
                                 .broadcastingRerun(broadcastingInfo.select(".blind").text())
                                 .broadcastingStation(broadcastingInfo.select("a").text())
                                 .build();
-//                      programOrganozationService.save(programOrganization);
-//                      System.out.println(programOrganization);
+                        programOrganozationService.save(programOrganization);
                     }
                 }
             }
         }
+        log.info("프로그램 편성표 데이터 수집 Scheduer 성공");
         return ResponseEntity.ok()
                 .body(new Message("succeeded"));
     }
 
     @GetMapping(value = "/cast")
     public ResponseEntity<Object> cast() throws IOException {
-        //TODO : 프로그램 조회 후 크롤링
-        //TODO : 신규 프로그램 필터링 해서 업데이트
-        //TODO : 테스트용 코드, 스케줄러로 이동 예정
+        log.info("출연진 데이터 수집 Scheduler 실행");
         List<Program> programList = programService.findAll();
-        for (Program program : programList) {
-            Optional<Cast> castList = castService.findById(program.getId());
+        for (int i = 0; i < 5; i++) {
+//            for (Program program : programList) {
+            Optional<List<Cast>> castList = castService.findByProgram_Id(programList.get(i).getId());
             if (!castList.isPresent()) {
-                Connection connection = Jsoup.connect("https://search.naver.com/search.naver?query=" + program.getTitle() + "출연진");
+                Connection connection = Jsoup.connect("https://search.naver.com/search.naver?query=" + programList.get(i).getTitle() + "출연진");
                 Document document = connection.get();
 
                 Elements castInfos = document.select(".list_image_info .item");
@@ -142,6 +156,7 @@ public class DataController {
                     String playName = castInfo.select(".title_box .name a").text();
                     String actorName = castInfo.select(".title_box .sub_text").text();
                     Cast cast = Cast.builder()
+                            .program(programList.get(i))
                             .actorName(actorName)
                             .playName(playName)
                             .imgUrl(imgUrl)
@@ -150,8 +165,8 @@ public class DataController {
                 }
             }
         }
+        log.info("출연진 데이터 수집 Scheduler 성공");
         return ResponseEntity.ok()
                 .body(new Message("succeeded"));
     }
-
 }

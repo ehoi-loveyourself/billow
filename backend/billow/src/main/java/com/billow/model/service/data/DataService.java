@@ -2,10 +2,12 @@ package com.billow.model.service.data;
 
 import com.billow.domain.dto.program.GenderAgeViewerInformation;
 import com.billow.domain.entity.program.GenderAgeViewer;
+import com.billow.domain.entity.program.Program;
 import com.billow.exception.NotFoundException;
 import com.billow.model.repository.data.kDramaRepository;
 import com.billow.model.repository.data.kPopRepository;
 import com.billow.model.repository.program.GenderAgeViewerRepository;
+import com.billow.model.repository.program.ProgramRepository;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,7 @@ public class DataService {
     private final kDramaRepository kDramaRepository;
     private final kPopRepository kPopRepository;
     private final GenderAgeViewerRepository genderAgeViewerRepository;
+    private final ProgramRepository programRepository;
 
     public Message getkdramaData() {
         List<GenderAgeViewerInformation> kDramaList = kDramaRepository.getData()
@@ -37,10 +40,12 @@ public class DataService {
         }
         return new Message("succeeded");
     }
+
     public Message getkpopData() {
         List<GenderAgeViewerInformation> kPopList = kPopRepository.getData()
                 .orElseThrow(() -> new NotFoundException(DATA_NOT_FOUND));
         for (GenderAgeViewerInformation pop : kPopList) {
+
             GenderAgeViewer program = GenderAgeViewer.builder()
                     .programTitle(pop.getProgram_Title())
                     .area(pop.getArea())
@@ -53,5 +58,17 @@ public class DataService {
         }
         return new Message("succeeded");
     }
-
+    public Message insertProgramId() {
+        List<Program> programList = programRepository.findAll();
+        for (Program program : programList){
+            String programTitle = program.getTitle().replaceAll(" ", "");
+            GenderAgeViewer genderAgeViewer = genderAgeViewerRepository.findByProgramTitle(programTitle);
+            if(genderAgeViewer != null){
+                genderAgeViewer.setProgram(program);
+                genderAgeViewerRepository.save(genderAgeViewer);
+                System.out.println(programTitle);
+            }
+        }
+        return new Message("succeeded");
+    }
 }
