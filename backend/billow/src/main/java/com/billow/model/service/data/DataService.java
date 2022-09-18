@@ -13,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -41,6 +40,7 @@ public class DataService {
         }
         return new Message("succeeded");
     }
+
     public Message getkpopData() {
         List<GenderAgeViewerInformation> kPopList = kPopRepository.getData()
                 .orElseThrow(() -> new NotFoundException(DATA_NOT_FOUND));
@@ -71,6 +71,4 @@ public class DataService {
         }
         return new Message("succeeded");
     }
-
-
 }
