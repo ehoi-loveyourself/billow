@@ -28,6 +28,8 @@ public class ProgramResponse {
 
     private Float averageRating;
 
+    private Integer bookmarkCnt;
+
     private String posterImg;
 
     private String backdropPath;
