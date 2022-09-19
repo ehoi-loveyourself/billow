@@ -37,6 +37,8 @@ public class Program {
 
     private Long ratingCnt;
 
+    private Integer bookmarkCnt;
+
     private String posterImg;
 
     private String backdropPath;
@@ -57,6 +59,7 @@ public class Program {
         this.endFlag = endFlag;
         this.averageRating = averageRating;
         this.ratingCnt = ratingCnt;
+        this.bookmarkCnt = bookmarkCnt;
         this.posterImg = posterImg;
         this.backdropPath = backdropPath;
         this.genreList = genreList;
