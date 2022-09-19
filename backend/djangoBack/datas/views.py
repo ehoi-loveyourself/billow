@@ -5,7 +5,7 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from datas.models import TbGenreInfo, TbOttInfo, TbProgram
+from datas.models import TbGenre, TbGenreInfo, TbOtt, TbOttInfo, TbProgram
 from datas.serializers import TbGenreInfoSerializer
 
 import requests
@@ -97,7 +97,6 @@ def all_program_data(request):
             program_id=program_data['id']
             program_country = program_data['original_language']
             if program_country == 'ko':
-                print('=========================================')
                 program_detail = f'https://api.themoviedb.org/3/tv/{program_id}?api_key=3beacdbb8f7b35eb8c782851ddc5b403&language=ko-kr'
                 program_ott = f'https://api.themoviedb.org/3/tv/{program_id}/watch/providers?api_key=3beacdbb8f7b35eb8c782851ddc5b403'
                 detail_res = requests.get(program_detail)
@@ -111,6 +110,7 @@ def all_program_data(request):
                     networks = data.get('networks')
                     poster_img = data.get('poster_path')
                     backdrop_path = data.get('backdrop_path')
+                    first_air_date = data.get('first_air_date')
                     for network in networks:
                         broadcasting_station = network.get('name')
                         break
@@ -131,13 +131,17 @@ def all_program_data(request):
                         broadcasting_station = broadcasting_station,
                         average_rating = average_rating,
                         poster_img = 'https://image.tmdb.org/t/p/original' + poster_img,
-                        backdrop_path = 'https://image.tmdb.org/t/p/original' + backdrop_path
+                        backdrop_path = 'https://image.tmdb.org/t/p/original' + backdrop_path,
+                        first_air_date = first_air_date
                     )
                     for program_genre in data.get('genres'):
                         if program_genre == NULL:
                             break
                         genre = TbGenreInfo.objects.get(pk=program_genre.get('id'))
-                        program.genres.add(genre)
+                        TbGenre.objects.create(
+                            program_id = program_id,
+                            genre_info = genre
+                        )
                     kr_ott = ott_data.get('KR')
                     if kr_ott != None:
                         ott_list = kr_ott.get('flatrate')
@@ -146,7 +150,10 @@ def all_program_data(request):
                                 if ott_detail == NULL:
                                     break
                                 ott = TbOttInfo.objects.get(pk=ott_detail.get('provider_id'))
-                                program.otts.add(ott)
+                                TbOtt.objects.create(
+                                    ott_info = ott,
+                                    program_id = program_id
+                                )
     return Response()
 
 @api_view(['GET'])
