@@ -70,6 +70,11 @@ const routes = [
     name: 'detail',
     component: ()=> import('@/components/main/ProgramDetail.vue'),
   },
+  {
+    path: '/situationselect',
+    name: 'situationselect',
+    component: () => import('@/components/situation/SituationSelect.vue'),
+  },
 ]
 
 const router = createRouter({

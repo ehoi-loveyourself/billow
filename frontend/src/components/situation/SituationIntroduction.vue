@@ -12,7 +12,7 @@
     
     <div style="text-align:center">
         <a class="startButton" href="#" role="button" style="border-radius: 15px;">
-            <router-link :to="{ name: 'main' }" class="nav-link" style="font-size:20px; padding:10px; color:black;">
+            <router-link :to="{ name: 'situationselect' }" class="nav-link" style="font-size:20px; padding:10px; color:black;">
                 상황별 추천 받기
             </router-link>
         </a>
