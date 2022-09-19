@@ -1,6 +1,7 @@
 package com.billow.model.service.program;
 
 import com.billow.domain.dto.program.CastResponse;
+import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.domain.entity.addition.Rating;
 import com.billow.domain.entity.program.Cast;
 import com.billow.domain.entity.program.Program;
@@ -50,6 +51,29 @@ public class RecommendService {
                                 .map(genre -> genre.getGenreInfo().getName())
                                 .collect(Collectors.toList()))
                         .summary(cast.getProgram().getSummary())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    public List<ProgramResponse> recommendPopular() {
+        return programRepository.findPopularProgram()
+                .stream()
+                .map(program -> ProgramResponse.builder()
+                        .title(program.getTitle())
+                        .genres(program.getGenreList()
+                                .stream()
+                                .map(genre -> genre.getGenreInfo().getName())
+                                .collect(Collectors.toList()))
+                        .age(program.getAge())
+                        .summary(program.getSummary())
+                        .broadcastingDay(program.getBroadcastingDay())
+                        .broadcastingTime(program.getBroadcastingTime())
+                        .broadcastingStation(program.getBroadcastingStation())
+                        .endFlag(program.isEndFlag())
+                        .averageRating(program.getAverageRating())
+                        .bookmarkCnt(program.getBookmarkCnt())
+                        .posterImg(program.getPosterImg())
+                        .backdropPath(program.getBackdropPath())
                         .build())
                 .collect(Collectors.toList());
     }
