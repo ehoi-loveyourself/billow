@@ -4,12 +4,17 @@ import com.billow.domain.dto.program.CastResponse;
 import com.billow.domain.dto.program.ProgramIWatchedRequest;
 import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.domain.entity.addition.Rating;
+import com.billow.domain.entity.condition.ConditionGenre;
 import com.billow.domain.entity.condition.ConditionProgram;
+import com.billow.domain.entity.condition.ConditionWithWhom;
 import com.billow.domain.entity.program.Cast;
 import com.billow.domain.entity.program.Program;
 import com.billow.domain.entity.user.User;
 import com.billow.exception.NotFoundException;
 import com.billow.model.repository.addition.RatingRepository;
+import com.billow.model.repository.condition.ConditionGenreRepository;
+import com.billow.model.repository.condition.ConditionProgramRepository;
+import com.billow.model.repository.condition.ConditionWithWhomRepository;
 import com.billow.model.repository.program.CastRepository;
 import com.billow.model.repository.program.ProgramRepository;
 import com.billow.model.repository.user.UserRepository;
@@ -33,6 +38,9 @@ public class RecommendService {
     private final RatingRepository ratingRepository;
     private final CastRepository castRepository;
     private final UserRepository userRepository;
+    private final ConditionGenreRepository conditionGenreRepository;
+    private final ConditionWithWhomRepository conditionWithWhomRepository;
+    private final ConditionProgramRepository conditionProgramRepository;
 
     public List<Program> recommendOnair() {
         List<Program> programList = programRepository.findAll();
@@ -90,22 +98,20 @@ public class RecommendService {
     }
 
     public Message addProgramIWatched(Long userId, ProgramIWatchedRequest programIWatchedRequest) {
-        // user를 찾는다.
-        // request에서 상황, 누구, 프로그램을 찾는다.
-        // 엔티티 만들어서 save 한다.
-
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
         Program program = programRepository.findById(programIWatchedRequest.getProgramId())
                 .orElseThrow(() -> new NotFoundException(PROGRAM_NOT_FOUND));
+        ConditionGenre conditionGenre = conditionGenreRepository.findByGenre(programIWatchedRequest.getGenre());
+        ConditionWithWhom conditionWithWhom = conditionWithWhomRepository.findByWho(programIWatchedRequest.getWho());
 
         ConditionProgram conditionProgram = ConditionProgram.builder()
                 .user(user)
                 .program(program)
-                .conditionGenre()
-                .conditionWithWhom()
+                .conditionGenre(conditionGenre)
+                .conditionWithWhom(conditionWithWhom)
                 .build();
-
+        conditionProgramRepository.save(conditionProgram);
 
         return new Message("사용자가 특정 상황에 봤던 프로그램을 추가하였습니다.");
     }

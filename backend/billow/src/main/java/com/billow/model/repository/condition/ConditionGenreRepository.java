@@ -1,4 +1,9 @@
 package com.billow.model.repository.condition;
 
-public interface ConditionGenreRepository {
+import com.billow.domain.entity.condition.ConditionGenre;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ConditionGenreRepository extends JpaRepository<ConditionGenre, Long> {
+
+    ConditionGenre findByGenre(String genre);
 }
