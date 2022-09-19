@@ -1,7 +1,7 @@
 FROM node:lts-alpine as build-stage
 WORKDIR /var/jenkins_home/workspace/billow/frontend
 COPY package*.json ./
-RUN npm install --production
+RUN npm install
 COPY . .
 RUN npm run build
 FROM nginx:stable-alpine as production-stage
