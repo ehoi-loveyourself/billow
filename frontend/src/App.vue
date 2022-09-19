@@ -25,18 +25,18 @@ body {
 
 a {
   text-decoration: none;
+  color: #e5e5e5;
+}
+
+a:hover {
+  text-decoration: none;
+  /* font-weight: bold; */
   color: #a1a1a1;
 }
 
-/* a:hover {
-  text-decoration: none;
-  font-weight: bold;
-  color: chartreuse;
-} */
-
 a.router-link-exact-active {
-  color: white;
-  font-weight: bold;
+  color: #ffffff;
+  font-weight: 700;
 }
 
 #app {

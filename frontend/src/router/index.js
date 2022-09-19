@@ -48,7 +48,6 @@ const routes = [
     name: 'about',
     component: AboutView,
     children:[
-      
               {
                 path: '/situation',
                 name: 'situation',
@@ -65,7 +64,12 @@ const routes = [
                 component: () => import('@/views/MainView.vue'),
               },
     ]
-  }
+  },
+  {
+    path: '/detail',
+    name: 'detail',
+    component: ()=> import('@/components/main/ProgramDetail.vue'),
+  },
 ]
 
 const router = createRouter({

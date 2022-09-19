@@ -2,8 +2,10 @@
     <div id="mainslider" style="text-align:center; margin-top: 10px; padding-left: 70px; padding-right: 70px;">
       <br/>
         <splide id="carousel_new" :options="options">
-        <splide-slide>
-        <img class="img_1" src="@/assets/image_180.png" alt="main1">
+        <splide-slide><a class="enterDetail" href="#">
+          <router-link :to="{ name: 'detail' }" class="nav-link">
+        <img class="img_1" src="@/assets/image_180.png" alt="main1"></router-link>
+      </a>
         </splide-slide>
         <splide-slide>
         <img class="img_2" src="https://image.tmdb.org/t/p/original/FbUIi5WeDU5j1EtipQ274tts1E.jpg" alt="main2">
@@ -43,6 +45,11 @@
         },
       };
     },
+    method:{
+    gotoPage(link) {
+      this.$router.push(link);
+    },
+  }
   }
 </script>
   
@@ -67,14 +74,11 @@
 }
 .splide__arrow svg {
     fill: white;
+    opacity: 50%;
     height: 6em;
     width: 6em;
 }
 .splide__arrow{
   width:fit-content;
 }
-</style>
-
-<style scoped>
-
 </style>
