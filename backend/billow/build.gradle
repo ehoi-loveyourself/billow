@@ -56,11 +56,6 @@ sourceSets {
 			srcDirs = ["$projectDir/src/main/java", "$projectDir/build/generated"]
 		}
 	}
-
-	compileJava.options.encoding = 'UTF-8'
-	tasks.withType(JavaCompile) {
-		options.encoding = 'UTF-8'
-	}
 }
 
 tasks.named('test') {
