@@ -148,7 +148,7 @@ class TbCast(models.Model):
     actor_name = models.CharField(max_length=255)
     img_url = models.CharField(max_length=255, blank=True, null=True)
     play_name = models.CharField(max_length=255)
-    program = models.ForeignKey('TbProgram', models.DO_NOTHING, blank=True, null=True)
+    program = models.ForeignKey('TbProgram', models.DO_NOTHING)
 
     class Meta:
         managed = False
@@ -376,19 +376,19 @@ class TbProfileImg(models.Model):
 
 class TbProgram(models.Model):
     program_id = models.BigAutoField(primary_key=True)
-    age = models.IntegerField(blank=True, null=True)
+    age = models.CharField(max_length=255, blank=True, null=True)
     average_rating = models.FloatField(blank=True, null=True)
     backdrop_path = models.CharField(max_length=255, blank=True, null=True)
     broadcasting_day = models.CharField(max_length=255, blank=True, null=True)
+    broadcasting_episode = models.CharField(max_length=255, blank=True, null=True)
     broadcasting_station = models.CharField(max_length=255, blank=True, null=True)
-    broadcasting_time = models.CharField(max_length=255, blank=True, null=True)
     end_flag = models.TextField()  # This field type is a guess.
     poster_img = models.CharField(max_length=255, blank=True, null=True)
+    rating_cnt = models.BigIntegerField(blank=True, null=True)
     summary = models.CharField(max_length=1000, blank=True, null=True)
     title = models.CharField(max_length=255, blank=True, null=True)
-    
-    genres = models.ManyToManyField('TbGenreInfo', through='TbGenre')
-    otts = models.ManyToManyField('TbOttInfo', through='TbOtt')
+    first_air_date = models.DateTimeField(blank=True, null=True)
+
     class Meta:
         managed = False
         db_table = 'tb_program'
@@ -402,7 +402,7 @@ class TbProgramOrganization(models.Model):
     broadcasting_rerun = models.CharField(max_length=255, blank=True, null=True)
     broadcasting_station = models.CharField(max_length=255)
     broadcasting_time = models.CharField(max_length=255)
-    program = models.ForeignKey(TbProgram, models.DO_NOTHING, blank=True, null=True)
+    program = models.ForeignKey(TbProgram, models.DO_NOTHING)
 
     class Meta:
         managed = False
