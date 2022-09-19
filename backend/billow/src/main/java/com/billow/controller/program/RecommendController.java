@@ -54,9 +54,9 @@ public class RecommendController {
     }
 
     @GetMapping("/actor")
-    public ResponseEntity<Object> recommendActor(@RequestHeader("Auth-access") String token) {
+    public ResponseEntity<Object> recommendActor() {
         log.info("특정 배우 프로그램 추천 API 호출");
-        List<CastResponse> response = recommendService.recommendActor(0L);
+        List<CastResponse> response = recommendService.recommendActor(1L);
         log.info("특정 배우 프로그램 추천 API 성공");
         return ResponseEntity.ok()
                 .body(response);
