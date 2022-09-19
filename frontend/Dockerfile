@@ -1,11 +1,12 @@
-docker image prune -a --force
-mkdir -p /var/jenkins_home/images_tar
-cd /var/jenkins_home/workspace/deploytest/testproject_react/
-docker build -t react .
-docker save react > /var/jenkins_home/images_tar/react.tar
+FROM node:lts-alpine as build-stage
+WORKDIR /var/jenkins_home/workspace/billow/frontend
+COPY package*.json ./
+RUN npm install --production
+COPY . .
+RUN npm run build
+FROM nginx:stable-alpine as production-stage
 
-cd /var/jenkins_home/workspace/deploytest/testproject/
-docker build -t django .
-docker save django > /var/jenkins_home/images_tar/django.tar
-
-ls /var/jenkins_home/images_tar
+COPY --from=build-stage /var/jenkins_home/workspace/billow/frontend/dist /usr/share/nginx/html
+#COPY --from=build-stage /var/jenkins_home/workspace/deploytest/testproject_react/deploy_conf/nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g","daemon off;"]
