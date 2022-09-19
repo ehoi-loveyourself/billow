@@ -11,7 +11,8 @@ import javax.persistence.PersistenceContext;
 @Configuration
 public class QueryDslConfig {
 
-    @Autowired
+//    @Autowired
+    @PersistenceContext
     private EntityManager entityManager;
 
     @Bean
