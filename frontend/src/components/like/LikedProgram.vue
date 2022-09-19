@@ -19,7 +19,7 @@
 <style scoped>
 img{
     padding-right:10px;
-    margin-bottom: 4px;
+    margin-bottom: 10px;
     margin-right: 0;
     width:15.57%
 }

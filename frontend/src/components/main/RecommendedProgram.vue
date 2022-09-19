@@ -163,12 +163,13 @@
   }
 
   h2{
-    font-weight: 400;
+    font-weight: 500;
+    font-size: 1.4vw;
     margin-bottom:10px;
   }
 
   img{
-    margin-bottom: 20px;
+    margin-bottom: 32px;
     width:15.57%;
     padding-right: 10px;
   }

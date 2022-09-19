@@ -17,7 +17,7 @@
                     <image id="b" width="61" height="24"
                         xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD0AAAAYCAYAAABJA/VsAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFhSURBVFhHY2RgYPgPxCMKMEHpEQWI9vSeCUpgTC0wkOYR5Wl7A24UTCkYaPOI8nRtgjiUhcomFwy0eQQ9jR56xIYmLjAYzMPraXkJNqwhR27sDBbz4FUWyIB4D0EQk8GOiNACgQcvfjE8fPEbTB+68JXhIBA/BLJBYDCbB/d0HNDAuRUyICbZILnjCcOiHe/B7MFsHjOQ3QASuHjnBzAEGIkKQWxgIdCw5gWvoLzBbR7c0yAAin5yDAYZmAIMRXQwWM1D8TQIkGowKPSKpzyH8jDBYDQPZ9sb1LohZDDIAS4F96A8/GAwmYezypKXYIWycANi1MDAYDIPp6cVgFUENcFgMg+rp7ElG1Bdhw5AFhOTtwabeVg9DWoIwADIMFBhoBpxk0EFiGHFPilgMJoHKshQcF2C+P/fB3TBNDZ5oKUE1SDjQWgehgBYEzZxdDxU1Y0OF40UMOrpkQJGoKcZGABqIX9owqCb9AAAAABJRU5ErkJggg==" />
                 </defs>
-            </svg></span>&nbsp;&nbsp;<span style="vertical-align:27%">3.0</span></div>
+            </svg></span>&nbsp;&nbsp;<span>3.0</span></div>
     <div class="box"><span class="box_design">15+</span><span class="box_design">금 오후7:00</span><span class="box_design">드라마</span><span class="box_design">tvN</span></div>
     <div class="genre"><span>리얼리티</span></div>
     <div class="blabla">′이효리, 이상순 부부′ 두 사람이 제주도에서 부부 민박집을 운영하는 프로그램</div>
@@ -25,13 +25,12 @@
    </div>
    </section>
    <br/><br/><br/>
-    
-   
         
-  <b-tabs content-class="mt-3">
-    <b-tab title="First" active><p>I'm the first tab</p></b-tab>
-    <b-tab title="Second"><p>I'm the second tab</p></b-tab>
-    <b-tab title="Disabled" disabled><p>I'm a disabled tab!</p></b-tab>
+  <b-tabs style="align-items:center">
+    <b-tab title="REVIEW" active><p>REVIEW</p></b-tab>
+    <b-tab title="SCHEDULE"><p>SCHEDULE</p></b-tab>
+    <b-tab title="TALK"><p>TALK</p></b-tab>
+    <b-tab title="RELATED"><LikedProgram/></b-tab>
   </b-tabs>        
 </div>
 <br/><br/><br/>
@@ -40,12 +39,15 @@
 
 <script>
   import HeaderBar from "@/components/layout/HeaderNavBar.vue";
+  import LikedProgram from "@/components/like/LikedProgram.vue"
 
 export default{
   name:"App",
   components:{
     HeaderBar,
-  },
+    LikedProgram,
+    LikedProgram
+},
 }
 </script>
 
@@ -53,6 +55,7 @@ export default{
 .container{
     color:white;
     margin:0;
+    padding:0
 }
 .column-left{ float: left; width: 17%; }
 .column-center{float:inline-block; width:3%}
@@ -98,42 +101,4 @@ section{
     font-family: Noto Sans KR,-apple-system,BlinkMacSystemFont,Roboto,Segoe UI,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
     margin-top: 4px;
 }
-/* .css-1gh3q9p-StyledTab {
-    display: inline-block;
-    position: relative;
-    white-space: nowrap;
-    color: #141414;
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: 0px;
-    line-height: 20px;
-    padding: 14px 20px;
-}
-ol, ul {
-    padding: 0px;
-    list-style-type: none;
-    margin-block: 0px;
-    margin-inline: 0px;
-    padding-inline-start: 0px;
-}
-.css-1wh24pi-ContentPageStickyTabs {
-    display: flex;
-    -webkit-box-pack: center;
-    justify-content: center;
-    padding-right: 40px;
-    padding-left: 40px;
-    position: sticky;
-    background: #141414;
-    margin: 0px 0px 24px;
-}
-button, select {
-    text-transform: none;
-}
-button, input {
-    overflow: visible;
-}
-button, input, optgroup, select, textarea {
-    font-family: inherit;
-    margin: 0;
-} */
 </style>
