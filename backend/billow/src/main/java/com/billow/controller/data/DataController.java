@@ -143,10 +143,11 @@ public class DataController {
     public ResponseEntity<Object> cast() throws IOException {
         log.info("출연진 데이터 수집 Scheduler 실행");
         List<Program> programList = programService.findAll();
-        for (int i = 0; i < 5; i++) {
+        System.out.println(programList);
+        for (int i = 0; i < 50; i++) {
 //            for (Program program : programList) {
             Optional<List<Cast>> castList = castService.findByProgram_Id(programList.get(i).getId());
-            if (!castList.isPresent()) {
+            if (castList.isPresent()) {
                 Connection connection = Jsoup.connect("https://search.naver.com/search.naver?query=" + programList.get(i).getTitle() + "출연진");
                 Document document = connection.get();
 
@@ -155,6 +156,9 @@ public class DataController {
                     String imgUrl = castInfo.select("img").attr("abs:src");
                     String playName = castInfo.select(".title_box .name a").text();
                     String actorName = castInfo.select(".title_box .sub_text").text();
+                    if(actorName.equals("진행") || actorName.equals("출연")){
+                        actorName = playName;
+                    }
                     Cast cast = Cast.builder()
                             .program(programList.get(i))
                             .actorName(actorName)
@@ -172,7 +176,7 @@ public class DataController {
 
     @GetMapping(value = "/programdetail")
     public ResponseEntity<Object> programDetail() throws IOException {
-        log.info("프로그램 방영정보 데이터 수집 Scheduer 호출");
+        log.info("프로그램 방영정보 데이터 수집 Scheduler 호출");
         //TODO: 엔티티 정리 후에 확인 필요
         List<Program> programList = programService.findAll();
         for (int i = 0; i < 2; i++) {
@@ -196,7 +200,7 @@ public class DataController {
             }
             programService.save(programList.get(i));
         }
-        log.info("프로그램 방영정보 데이터 수집 Scheduer 성공");
+        log.info("프로그램 방영정보 데이터 수집 Scheduler 성공");
         return ResponseEntity.ok()
                 .body(new Message("succeeded"));
     }

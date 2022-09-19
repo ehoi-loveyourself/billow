@@ -10,6 +10,8 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ProgramResponse {
 
+    private Long id;
+
     private String title;
 
     private List<String> genres;

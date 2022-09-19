@@ -33,19 +33,22 @@ public class RecommendService {
 
     public List<CastResponse> recommendActor(Long userId) {
         List<Rating> ratingList = ratingRepository.findByUser_Id(userId);
-        List<String> actorList = castRepository.findMaxCountByProgram_Id(ratingList.get(0).getProgram().getId(), ratingList.get(1).getProgram().getId(), ratingList.get(2).getProgram().getId(), ratingList.get(3).getProgram().getId(), ratingList.get(4).getProgram().getId());
-        List<Cast> castList = castRepository.findByActorName(actorList.get(0))
-                .orElseThrow(() -> new NotFoundException(ACTOR_NOT_FOUND));
-
+        String actor= castRepository.findMaxCountByProgram_Id(ratingList);
+        List<Cast> castList = castRepository.findByActorName(userId, actor);
         return castList
                 .stream()
                 .map(cast -> CastResponse.builder()
                         .programId(cast.getProgram().getId())
                         .posterImg(cast.getProgram().getPosterImg())
-                        .actorName(actorList.get(0))
+                        .actorName(actor)
                         .title(cast.getProgram().getTitle())
+                        .genres(cast.getProgram().getGenreList()
+                                .stream()
+                                .map(genre -> genre.getGenreInfo().getName())
+                                .collect(Collectors.toList()))
                         .age(cast.getProgram().getAge())
                         .averageRating(cast.getProgram().getAverageRating())
+                        .posterImg(cast.getProgram().getPosterImg())
                         .genres(cast.getProgram().getGenreList()
                                 .stream()
                                 .map(genre -> genre.getGenreInfo().getName())
@@ -67,7 +70,7 @@ public class RecommendService {
                         .age(program.getAge())
                         .summary(program.getSummary())
                         .broadcastingDay(program.getBroadcastingDay())
-                        .broadcastingTime(program.getBroadcastingTime())
+                        .broadcastingEpisode(program.getBroadcastingEpisode())
                         .broadcastingStation(program.getBroadcastingStation())
                         .endFlag(program.isEndFlag())
                         .averageRating(program.getAverageRating())
