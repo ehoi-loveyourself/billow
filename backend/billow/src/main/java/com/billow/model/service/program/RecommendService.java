@@ -67,7 +67,7 @@ public class RecommendService {
                         .age(program.getAge())
                         .summary(program.getSummary())
                         .broadcastingDay(program.getBroadcastingDay())
-                        .broadcastingTime(program.getBroadcastingTime())
+                        .broadcastingEpisode(program.getBroadcastingEpisode())
                         .broadcastingStation(program.getBroadcastingStation())
                         .endFlag(program.isEndFlag())
                         .averageRating(program.getAverageRating())

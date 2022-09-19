@@ -19,6 +19,8 @@ public class Program {
     @Column(name = "program_id")
     private Long id;
 
+    private Integer programNum;
+
     private String title;
 
     private String age;
@@ -50,9 +52,10 @@ public class Program {
     private List<Genre> genreList = new ArrayList<>();
 
     @Builder
-    public Program(Long id, String title, String age, String summary, String broadcastingDay, String broadcastingEpisode, String broadcastingStation,
+    public Program(Long id, Integer programNum, String title, String age, String summary, String broadcastingDay, String broadcastingEpisode, String broadcastingStation,
                    boolean endFlag, Float averageRating, Long ratingCnt, String posterImg, String backdropPath, List<Genre> genreList, Date firstAirDate) {
         this.id = id;
+        this.programNum = programNum;
         this.title = title;
         this.age = age;
         this.summary = summary;
