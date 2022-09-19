@@ -25,23 +25,16 @@
    </div>
    </section>
    <br/><br/><br/>
-    <!-- <ul class="css-1wh24pi-ContentPageStickyTabs">
-        <li>
-            <button type="button" class="css-1gh3q9p-StyledTab">REVIEW</button>
-        </li>
-        <li>
-            <button type="button" class="css-1gh3q9p-StyledTab">SCHEDULE</button>
-        </li>
-        <li>
-            <button type="button" class="css-1gh3q9p-StyledTab">TALK</button>
-        </li>
-        <li>
-            <button type="button" class="css-1gh3q9p-StyledTab">RELATED</button>
-        </li>
-    </ul> -->
     
+   
+        
+  <b-tabs content-class="mt-3">
+    <b-tab title="First" active><p>I'm the first tab</p></b-tab>
+    <b-tab title="Second"><p>I'm the second tab</p></b-tab>
+    <b-tab title="Disabled" disabled><p>I'm a disabled tab!</p></b-tab>
+  </b-tabs>        
 </div>
-<br/><br/><br/><br/><br/>
+<br/><br/><br/>
 </div>
 </template>
 

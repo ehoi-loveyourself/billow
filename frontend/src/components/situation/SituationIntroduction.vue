@@ -1,14 +1,13 @@
 <template>
   <div class="jumbotron min-vh-100 text-center m-0 bg-info d-flex flex-column justify-content-center">
     
-    <div style="text-align:center">
-        <b-card style="max-width: 40rem; color:white; font-size: 36px;">
+    <div style="text-align:center; color:white; font-size: 36px;">
             <br/><br/><br/><br/>
             누구와 함께 있으신가요?<br>
             오늘 기분은 어떠신가요?<br>
             상황에 맞게 TV 프로그램을 추천해드릴게요.
             <br/><br/>
-        </b-card>
+     
     </div>
     
     <div style="text-align:center">

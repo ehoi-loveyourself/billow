@@ -1,9 +1,8 @@
 <template>
-  <b-navbar toggleable="lg" type="dark" variant="dark">
+  <b-navbar toggleable="lg">
     <b-navbar-nav>
       <br> 
-            <b-row>
-        <b-col cols="3">
+      <b-nav-item>    
           <router-link :to="{ name: 'home' }" class="nav-link">
             <span class="logo">
             <svg width="167" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -14,17 +13,16 @@
             </svg>
           </span>
           </router-link>
-        </b-col>
-        <b-col class="navbar">
-          <router-link :to="{ name: 'main' }" class="nav-link"> 홈&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</router-link>
-        </b-col>
-        <b-col class="navbar">
-          <router-link :to="{ name: 'situation' }" class="nav-link"> 상황별 추천&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</router-link>
-        </b-col>
-        <b-col class="navbar">
-          <router-link :to="{ name: 'like' }" class="nav-link"> 내가 찜한 콘텐츠</router-link>
-        </b-col>
-      </b-row>
+      </b-nav-item>
+        <b-nav-item>
+          <router-link :to="{ name: 'main' }" class="nav-link">홈</router-link>
+        </b-nav-item>
+        <b-nav-item>
+          <router-link :to="{ name: 'situation' }" class="nav-link">상황별 추천</router-link>
+        </b-nav-item>
+        <b-nav-item>
+          <router-link :to="{ name: 'like' }" class="nav-link">내가 찜한 콘텐츠</router-link>
+        </b-nav-item>
     </b-navbar-nav>
   </b-navbar>
 </template>
@@ -38,19 +36,28 @@ export default {
 };
 </script>
 
-<style>
-/* nav .navbar-nav a.router-link-active {
+<style scoped>
+nav .navbar-nav a.router-link-active {
   color: white;
   font-weight: bold;
-} */
-
-.logo {
-  padding-left:70px;
-  padding-right:70px;
 }
-
+nav .navbar-nav a:hover {
+  text-decoration: none;
+  color: #E5E5E5;
+}
+.logo {
+  padding-left:42px;
+  padding-right:42px;
+}
 .navbar {
   font-size: large;
-  /* color: #a1a1a1; */
+  color: #a1a1a1;
+}
+.navbar-expand-lg {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
+.nav-link{
+  color: #a1a1a1;
 }
 </style>

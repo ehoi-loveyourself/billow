@@ -23,21 +23,20 @@ body {
   margin: 0;
 }
 
-a {
+/* a {
   text-decoration: none;
   color: #e5e5e5;
-}
+} */
 
-a:hover {
+/* a:hover {
   text-decoration: none;
-  /* font-weight: bold; */
   color: #a1a1a1;
-}
+} */
 
-a.router-link-exact-active {
+/* a.router-link-exact-active {
   color: #ffffff;
   font-weight: 700;
-}
+} */
 
 #app {
   font-family: basic-scans, sans-serif;
