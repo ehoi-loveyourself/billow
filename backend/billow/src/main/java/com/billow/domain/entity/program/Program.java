@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -41,12 +42,14 @@ public class Program {
 
     private String backdropPath;
 
+    private Date firstAirDate;
+
     @OneToMany(mappedBy = "program", cascade = CascadeType.ALL)
     private List<Genre> genreList = new ArrayList<>();
 
     @Builder
     public Program(Long id, String title, String age, String summary, String broadcastingDay, String broadcastingEpisode, String broadcastingStation,
-                   boolean endFlag, Float averageRating, Long ratingCnt, String posterImg, String backdropPath, List<Genre> genreList) {
+                   boolean endFlag, Float averageRating, Long ratingCnt, String posterImg, String backdropPath, List<Genre> genreList, Date firstAirDate) {
         this.id = id;
         this.title = title;
         this.age = age;
@@ -60,6 +63,7 @@ public class Program {
         this.posterImg = posterImg;
         this.backdropPath = backdropPath;
         this.genreList = genreList;
+        this.firstAirDate = firstAirDate;
     }
 
     public void updateAverageRatingByPost(Float score) {
