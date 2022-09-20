@@ -13,7 +13,9 @@ import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -73,5 +75,43 @@ public class ProgramService {
         ratingRepository.save(rating);
 
         return new Message("프로그램 평점 등록에 성공하였습니다.");
+    }
+
+    public List<ProgramResponse> randomProgram() {
+        // 프로그램 전체 개수를 알아온다
+        // 50개의 난수를 생성한다
+        // 생성된 난수를 가지고 프로그램을 찾아서 response dto를 만들어서 리턴한다.
+        int programCnt = (int) programRepository.count();
+
+        Random r = new Random();
+        int[] random = new int[50];
+        for (int i = 0; i < 50; i++) {
+            random[i] = r.nextInt(programCnt);
+        }
+
+        List<ProgramResponse> responses = new ArrayList<>();
+        for (int i = 0; i < random.length; i++) {
+            Program program = programRepository.findById((long) random[i])
+                    .orElseThrow(() -> new NotFoundException(PROGRAM_NOT_FOUND));
+
+            responses.add(ProgramResponse.builder()
+                    .title(program.getTitle())
+                    .genres(program.getGenreList()
+                            .stream()
+                            .map(genre -> genre.getGenreInfo().getName())
+                            .collect(Collectors.toList()))
+                    .age(program.getAge())
+                    .summary(program.getSummary())
+                    .broadcastingDay(program.getBroadcastingDay())
+                    .broadcastingEpisode(program.getBroadcastingEpisode())
+                    .broadcastingStation(program.getBroadcastingStation())
+                    .endFlag(program.isEndFlag())
+                    .averageRating(program.getAverageRating())
+                    .bookmarkCnt(program.getBookmarkCnt())
+                    .posterImg(program.getPosterImg())
+                    .backdropPath(program.getBackdropPath())
+                    .build());
+        }
+        return responses;
     }
 }
