@@ -6,4 +6,6 @@ urlpatterns = [
     # path('program_data/', views.program_data),
     path('all_program_data/', views.all_program_data),
     path('ott_data/', views.ott_data),
+    path('user/', views.user_create),
+    path('rating/', views.rating_create)
 ]

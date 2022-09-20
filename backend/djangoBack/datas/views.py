@@ -1,14 +1,16 @@
 from asyncio.windows_events import NULL
 from this import d
+from urllib import response
 from django.shortcuts import render
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from datas.models import TbGenre, TbGenreInfo, TbOtt, TbOttInfo, TbProgram
+from datas.models import TbGenre, TbGenreInfo, TbOtt, TbOttInfo, TbProgram, TbRating, TbUser
 from datas.serializers import TbGenreInfoSerializer
 
 import requests
+import random
 
 API_KEY = '3beacdbb8f7b35eb8c782851ddc5b403'
 
@@ -245,3 +247,32 @@ def ott_data(request):
             name = name
         )
     return Response()
+
+@api_view(['GET'])
+def user_create(request):
+    for i in range(500):
+        name = f'name{i}',
+        nick_name = f'nick_name{i}'
+        TbUser.objects.create(
+            name = name,
+            nick_name = nick_name
+        )
+    return Response()
+
+@api_view(['GET'])
+def rating_create(request):
+    lst = []
+    for num in range(1, 590):
+        lst.append(num)
+    for i in range(1, 500):
+        user = TbUser.objects.get(pk=i)
+        program_list = random.sample(lst, 50)
+        for program_number in program_list:
+            program = TbProgram.objects.get(pk=program_number)
+            score = random.uniform(0,5)
+            TbRating.objects.create(
+                score = score,
+                user_id = i,
+                program_id = program_number
+        )
+    return response()
