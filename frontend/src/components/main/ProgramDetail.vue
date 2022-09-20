@@ -35,8 +35,8 @@
         
   <b-tabs id="tabs" style="align-items:center">
     <b-tab title="REVIEW" active><Review/></b-tab>
-    <b-tab title="SCHEDULE"><p>SCHEDULE</p></b-tab>
-    <b-tab title="TALK"><p>TALK</p></b-tab>
+    <b-tab title="SCHEDULE"><Schedule/></b-tab>
+    <b-tab title="TALK"><OnAirTalk/></b-tab>
     <b-tab title="RELATED"><LikedProgram/></b-tab>
   </b-tabs>        
 </div>
@@ -49,6 +49,9 @@
   import SecondBar from "@/components/layout/SecondNavBar.vue";
   import LikedProgram from "@/components/like/LikedProgram.vue"
   import Review from "@/components/main/ProgramReview.vue"
+  import OnAirTalk from "@/components/main/OnAirTalk.vue"
+  import Schedule from "@/components/main/ProgramSchedule.vue"
+
 
 export default{
   name:"App",
@@ -56,7 +59,9 @@ export default{
     HeaderBar,
     SecondBar,
     LikedProgram,
-    Review
+    Review,
+    OnAirTalk,
+    Schedule
 },
 }
 </script>

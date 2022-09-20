@@ -32,7 +32,7 @@
             <li> -->
         <!-- <b-avatar class="avatar" size="3rem" variant="info" src="https://placekitten.com/300/300"></b-avatar> -->
         <article class="review_set">
-    <article class="day-forecast">
+    <article class="reviews">
         <h2>걷지말고뛰어라&nbsp;&nbsp;<svg width="61" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink">
             <path fill="url(#a)" d="M0 0h61v24H0z" />
@@ -46,7 +46,7 @@
         </svg></h2>
         <p>너무 재밌어요!</p>
     </article>
-    <article class="day-forecast">
+    <article class="reviews">
         <h2>뛰지말고누워라&nbsp;&nbsp;<svg width="61" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink">
             <path fill="url(#a)" d="M0 0h61v24H0z" />
@@ -60,7 +60,7 @@
         </svg></h2>
         <p>노잼..</p>
     </article>
-    <article class="day-forecast">
+    <article class="reviews">
         <h2>눕지마라&nbsp;&nbsp;<svg width="61" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink">
             <path fill="url(#a)" d="M0 0h61v24H0z" />
@@ -88,20 +88,20 @@
     </script>
     
 <style scoped>
-.day-forecast {
+.reviews {
     background: left/contain content-box border-box no-repeat
         url('@/assets/toystory.png') #141414;
         margin-bottom: 1.5rem;
 }
 
-.day-forecast > h2{
+.reviews > h2{
     padding-left: 4.5rem;
     font-weight: 600;
     font-size: 0.9rem;
     margin: 0;
 }
 
-.day-forecast > p {
+.reviews > p {
     padding-left: 4.5rem;
     font-size: 0.9rem;
     color:#84868D;

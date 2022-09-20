@@ -82,7 +82,7 @@ TV프로그램을 추천해줍니다.
     --bs-btn-focus-shadow-rgb: white;
   } */
   .logo{
-    padding-left: 3.7%;
+    padding-left: 70px;
     padding-top: 0.05%;
   }
   .kakao{
