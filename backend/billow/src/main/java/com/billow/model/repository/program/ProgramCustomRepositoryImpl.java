@@ -2,20 +2,18 @@ package com.billow.model.repository.program;
 
 import com.billow.domain.entity.program.Program;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 import static com.billow.domain.entity.program.QProgram.program;
 
+@RequiredArgsConstructor
 @Repository
 public class ProgramCustomRepositoryImpl implements ProgramCustomRepository {
 
     private final JPAQueryFactory jpaQueryFactory;
-
-    public ProgramCustomRepositoryImpl(JPAQueryFactory jpaQueryFactory) {
-        this.jpaQueryFactory = jpaQueryFactory;
-    }
 
     @Override
     public List<Program> findPopularProgram() {

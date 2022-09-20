@@ -38,7 +38,7 @@ public class ProgramController {
     @GetMapping("/random")
     public ResponseEntity<Object> randomProgram(@RequestHeader("Auth-access") String token) {
         log.info("사용자 초기 데이터 수집용 랜덤 프로그램 출력 API 호출");
-        Message response = new Message("succeeded");
+        List<ProgramResponse> response = programService.randomProgram();
         log.info("랜덤 프로그램 출력 성공");
         return ResponseEntity.ok()
                 .body(response);
