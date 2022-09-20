@@ -1,11 +1,11 @@
 <template>
     <header-bar />
-        <h3 style="color:#ffffff; margin-left:67px">중복 선택이 가능합니다!</h3>
+    <h2 style="color:white; margin-left:67px; font-size: 1.1vw; font-weight: 300;">중복 선택이 가능합니다!</h2>
         <div>
             <div class="left">
-                <h3 style="text-align:center; color: #ffffff;">누구와 있으신가요?</h3>
-                <div class="box">BOX1</div>
-                <div class="box">BOX2</div>
+              <h2 style="color:white; text-align:center;">누구와 있으신가요?</h2>
+                <div class="box">행복</div>
+                <div class="box">심심</div>
                 <img style="
                 border: 3px solid gold;
                 border-radius: 7px;
@@ -18,7 +18,7 @@
                 src="@/assets/gs.png" />
                 </div>
                 <div class="right">
-                    <h3 style="text-align:center; color: #ffffff;">기분이 어떠신가요?</h3>
+                  <h2 style="color:white; text-align:center;">기분이 어떠신가요?</h2>
             </div>
         </div>
 </template>
@@ -63,5 +63,10 @@ components:{
       text-align: center;
       background: #555;
       border-radius: 20px;
+  }
+  
+  h2{
+    font-weight: 500;
+    font-size: 1.4vw;
   }
       </style>
