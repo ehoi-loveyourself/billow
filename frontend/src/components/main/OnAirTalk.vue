@@ -70,7 +70,7 @@
     .reviews > p {
         margin-left: 3.5rem;
         font-size: 0.9rem;
-        color:#84868D;
+        color:#141414;
         background-color: #E6EDEB; border-radius: 0px 20px 20px 20px; max-width: 300px;
         width: fit-content;
         padding:0.4rem 0.7rem 0.4rem 0.7rem;
