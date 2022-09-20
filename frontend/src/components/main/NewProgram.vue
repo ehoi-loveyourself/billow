@@ -64,12 +64,12 @@
   background: none;
 }
 .img_1{
-  width:1760px;
-  height: 650px;
+  width:100%;
+  height:620px;
 }
 .img_2{
-  height: 650px;
-  width: 1760px;
+  height: 620px;
+  width: 100%;
   border-radius: 20px;
 }
 .splide__arrow svg {

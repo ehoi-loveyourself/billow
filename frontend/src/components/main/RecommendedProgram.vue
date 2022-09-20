@@ -169,9 +169,9 @@
   }
 
   img{
-    margin-bottom: 32px;
-    width:15.57%;
-    padding-right: 10px;
+    margin-bottom: 3%;
+    width:16.1%;
+    padding-right:0.5%;
   }
   </style>
 
@@ -183,9 +183,11 @@
     fill: white;
     height: 2em;
     width: 2em;
+    opacity:100%;
 }
 #carousel_recommend .splide__arrow{
   width:fit-content;
+  top:45%;
 }
 #carousel_recommend .splide__arrow--next{
     right:97px;
