@@ -11,29 +11,29 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/sql")
 public class SQLController {
-// 삭제 예정
+    // 삭제 예정
     @GetMapping("/user")
-    public ResponseEntity<Object> insertUser(){
+    public ResponseEntity<Object> insertUser() {
 
-        for (int i =1 ; i< 501; i++){
+        for (int i = 1; i < 501; i++) {
             String email = "";
-            for (int e = 1; e <=6; e++) {
+            for (int e = 1; e <= 6; e++) {
                 email += (char) ((Math.random() * 26) + 65);
             }
             int num = 0;
-            for (int e = 1; e <=6; e++) {
+            for (int e = 1; e <= 6; e++) {
                 num = (char) (Math.random() * 9999);
             }
-            int region = (int) ((Math.random() * 10)+1);
-            int tv = (int) ((Math.random() * 15)+1);
+            int region = (int) ((Math.random() * 10) + 1);
+            int tv = (int) ((Math.random() * 15) + 1);
             String[] gender = {"여", "남"};
-            int[] age = {0,10,20,30,40,50,60};
+            int[] age = {0, 10, 20, 30, 40, 50, 60};
             int age1 = (int) ((Math.random() * 7));
 
             int gender1 = (int) ((Math.random() * 2));
-            int profile = i%20 +1;
+            int profile = i % 20 + 1;
 
-            String d = "INSERT INTO tb_user VALUES (" + i+", "+age[age1]+", '"+ email+num +"@naver.com', '"+gender[gender1]+"', 'User_"+i+"', 'User_"+i+"'," + profile +","+region+", "+tv+");";
+            String d = "INSERT INTO tb_user VALUES (" + i + ", " + age[age1] + ", '" + email + num + "@naver.com', '" + gender[gender1] + "', 'User_" + i + "', 'User_" + i + "', " + profile + ", " + region + ", " + tv + ");";
             System.out.println(d);
         }
 
