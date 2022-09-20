@@ -82,7 +82,8 @@ TV프로그램을 추천해줍니다.
     --bs-btn-focus-shadow-rgb: white;
   } */
   .logo{
-    padding-left: 70px;
+    padding-left: 3.7%;
+    padding-top: 0.05%;
   }
   .kakao{
     background-color: #FFE812;
