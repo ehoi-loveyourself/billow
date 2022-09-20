@@ -1,26 +1,94 @@
 <template>
     <header-bar />
+    <br>
     <h2 style="color:white; margin-left:67px; font-size: 1.1vw; font-weight: 300;">중복 선택이 가능합니다!</h2>
+    <br><br>
         <div>
-            <div class="left">
+            <div class="left" style="border-right:1px solid #ffffff;">
               <h2 style="color:white; text-align:center;">누구와 있으신가요?</h2>
-                <div class="box">행복</div>
-                <div class="box">심심</div>
                 <img style="
-                border: 3px solid gold;
                 border-radius: 7px;
                 -moz-border-radius: 7px;
                 -khtml-border-radius: 7px;
                 -webkit-border-radius: 7px;
-                width: 170px;
-                height: 170px;
+                margin-top: 50px;
+                margin-left: 200px;
                 "
-                src="@/assets/gs.png" />
+                src="@/assets/situation/solo.jpg" />
+                <img style="
+                border-radius: 7px;
+                -moz-border-radius: 7px;
+                -khtml-border-radius: 7px;
+                -webkit-border-radius: 7px;
+                margin-top: 50px;
+                margin-left: 150px;
+                "
+                src="@/assets/situation/friend.jpg" />
+                <br><br>
+                <img style="
+                border-radius: 7px;
+                -moz-border-radius: 7px;
+                -khtml-border-radius: 7px;
+                -webkit-border-radius: 7px;
+                margin-left: 200px;
+                "
+                src="@/assets/situation/couple.jpg" />
+                <img style="
+                border-radius: 7px;
+                -moz-border-radius: 7px;
+                -khtml-border-radius: 7px;
+                -webkit-border-radius: 7px;
+                margin-left: 150px;
+                "
+                src="@/assets/situation/family.jpg" />
                 </div>
                 <div class="right">
                   <h2 style="color:white; text-align:center;">기분이 어떠신가요?</h2>
+                  <img style="
+                border-radius: 7px;
+                -moz-border-radius: 7px;
+                -khtml-border-radius: 7px;
+                -webkit-border-radius: 7px;
+                margin-top: 50px;
+                margin-left: 200px;
+                "
+                src="@/assets/situation/happy.jpg" />
+                <img style="
+                border-radius: 7px;
+                -moz-border-radius: 7px;
+                -khtml-border-radius: 7px;
+                -webkit-border-radius: 7px;
+                margin-top: 50px;
+                margin-left: 150px;
+                "
+                src="@/assets/situation/boring.jpg" />
+                <br><br>
+                <img style="
+                border-radius: 7px;
+                -moz-border-radius: 7px;
+                -khtml-border-radius: 7px;
+                -webkit-border-radius: 7px;
+                margin-left: 200px;
+                "
+                src="@/assets/situation/angry.jpg" />
+                <img style="
+                border-radius: 7px;
+                -moz-border-radius: 7px;
+                -khtml-border-radius: 7px;
+                -webkit-border-radius: 7px;
+                margin-left: 150px;
+                "
+                src="@/assets/situation/sad.jpg" />
             </div>
         </div>
+        <br>
+        <p style="text-align:center">
+          <a class="startButton" href="#" role="button" style="border-radius: 15px;">
+            <router-link :to="{ name: 'situationselect' }" class="nav-link" style="font-size:20px; padding:10px; color:black;">
+                NEXT
+            </router-link>
+          </a>
+        </p>
 </template>
   
 <script>
@@ -38,35 +106,35 @@ components:{
   div {
           width: 100%;
           height: 500px;
-          border: 1px solid #003458;
         }
         div.left {
           width: 50%;
           float: left;
           box-sizing: border-box;
-          background: #8977ad;
         }
         div.right {
           width: 50%;
           float: right;
           box-sizing: border-box;
-          background: #ece6cc;
         }
-        div.box {
-      float: left;
-      width: 200px;
-      height: 100px;
-      margin: 10px;
-      font-size: 30px;
-      color: #fff;
-      line-height: 100px;
-      text-align: center;
-      background: #555;
-      border-radius: 20px;
-  }
   
   h2{
     font-weight: 500;
     font-size: 1.4vw;
   }
+  img{
+    width:15%;
+  }
+  img:hover{
+    filter: brightness(0.5);
+  }
+  
+ .startButton{
+    background-color: #ffffff;
+    padding: 5px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+ }
       </style>
