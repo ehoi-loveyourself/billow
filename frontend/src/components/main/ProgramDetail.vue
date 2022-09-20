@@ -1,5 +1,12 @@
 <template>
-<header-bar />
+<b-row>
+          <b-col cols="8">
+      <header-bar/>
+    </b-col>
+    <b-col cols="4"> 
+      <SecondBar/>
+      </b-col>
+    </b-row>
 <div style="margin-top: 10px; padding-left: 70px; padding-right: 70px;">
     <br/><br/>
     <div class="container">
@@ -27,7 +34,7 @@
    <br/><br/><br/>
         
   <b-tabs id="tabs" style="align-items:center">
-    <b-tab title="REVIEW" active><p>REVIEW</p></b-tab>
+    <b-tab title="REVIEW" active><Review/></b-tab>
     <b-tab title="SCHEDULE"><p>SCHEDULE</p></b-tab>
     <b-tab title="TALK"><p>TALK</p></b-tab>
     <b-tab title="RELATED"><LikedProgram/></b-tab>
@@ -39,20 +46,23 @@
 
 <script>
   import HeaderBar from "@/components/layout/HeaderNavBar.vue";
+  import SecondBar from "@/components/layout/SecondNavBar.vue";
   import LikedProgram from "@/components/like/LikedProgram.vue"
+  import Review from "@/components/main/ProgramReview.vue"
 
 export default{
   name:"App",
   components:{
     HeaderBar,
+    SecondBar,
     LikedProgram,
-    LikedProgram
+    Review
 },
 }
 </script>
 
 <style scoped>
-.container{
+.container {
     color:white;
     margin:0;
     padding:0
