@@ -18,7 +18,7 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
 footer {
   text-align: center;
   position: absolute;
@@ -27,6 +27,11 @@ footer {
   height: 100px;
   font-size: smaller;
   color: #666665;
+}
+h6{
+  padding-top: 3px;
+  padding-bottom: 10px;
+  color:#a1a1a1;
 }
 .billowsvg {
   display: block;
