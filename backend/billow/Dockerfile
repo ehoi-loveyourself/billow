@@ -16,5 +16,5 @@ RUN ./gradlew bootJar
 FROM openjdk:11
 COPY --from=builder build/libs/billow-0.0.1-SNAPSHOT.jar billow.jar
 
-EXPOSE 8080
+EXPOSE 8009
 CMD ["java","-jar","/billow.jar"]
