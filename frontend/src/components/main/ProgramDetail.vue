@@ -26,7 +26,7 @@
    </section>
    <br/><br/><br/>
         
-  <b-tabs style="align-items:center">
+  <b-tabs id="tabs" style="align-items:center">
     <b-tab title="REVIEW" active><p>REVIEW</p></b-tab>
     <b-tab title="SCHEDULE"><p>SCHEDULE</p></b-tab>
     <b-tab title="TALK"><p>TALK</p></b-tab>
@@ -100,5 +100,16 @@ section{
     color:white;
     font-family: Noto Sans KR,-apple-system,BlinkMacSystemFont,Roboto,Segoe UI,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
     margin-top: 4px;
+}
+</style>
+
+<style>
+#tabs .nav-link{
+    color:#a1a1a1;
+    background:none;
+    border:none;
+}
+#tabs .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link{
+    color:#ffffff;
 }
 </style>
