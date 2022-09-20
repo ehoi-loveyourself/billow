@@ -36,9 +36,11 @@ public class RecommendController {
     }
 
     @PostMapping("/conditions")
-    public ResponseEntity<Object> addProgramIWatched(@RequestHeader("Auth-access") String token, @RequestBody ProgramIWatchedRequest programIWatchedRequest) {
+    public ResponseEntity<Object> addProgramIWatched(
+//            @RequestHeader("Auth-access") String token,
+            @RequestBody ProgramIWatchedRequest programIWatchedRequest) {
         log.info("특정 상황에 봤던 프로그램 추가 API 호출");
-        Message response = recommendService.addProgramIWatched(0L, programIWatchedRequest);
+        Message response = recommendService.addProgramIWatched(1L, programIWatchedRequest);
         log.info("특정 상황에 봤던 프로그램 추가 성공");
         return ResponseEntity.ok()
                 .body(response);
