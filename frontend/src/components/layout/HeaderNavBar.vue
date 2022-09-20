@@ -47,16 +47,14 @@ nav .navbar-nav a:hover {
 }
 .logo {
   padding-left:42px;
+  margin-left:0;
   padding-right:42px;
 }
 .navbar {
   font-size: large;
   color: #a1a1a1;
 }
-.navbar-expand-lg {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-}
+
 .nav-link{
   color: #a1a1a1;
 }

@@ -18,9 +18,9 @@
 
 <style scoped>
 img{
-    padding-right:10px;
-    margin-bottom: 10px;
+    padding-right:0.5%;
+    padding-bottom: 0.5%;
     margin-right: 0;
-    width:15.57%
+    width:16.1%
 }
 </style>
