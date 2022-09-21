@@ -2,7 +2,9 @@ package com.billow.controller.user;
 
 import com.billow.domain.dto.addtion.RatingRequest;
 import com.billow.domain.dto.addtion.RatingResponse;
+import com.billow.domain.dto.user.LoginResponse;
 import com.billow.model.service.user.UserService;
+import com.billow.util.JwtUtil;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,11 +25,13 @@ public class UserController {
     public ResponseEntity<Object> kakaoLogin(String code) {
         try {
             log.info("카카오 로그인 API 호출");
-            Message response = userService.kakaoLogin(code);
+            LoginResponse response = userService.kakaoLogin(code);
             log.info("카카오 로그인 API 성공");
-            return ResponseEntity.ok().body(response);
+            return ResponseEntity.ok()
+                    .body(response);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new Message("로그인에 실패하였습니다."));
+            return ResponseEntity.badRequest()
+                    .body(new Message("로그인에 실패하였습니다."));
         }
     }
 
