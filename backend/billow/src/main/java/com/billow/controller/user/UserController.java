@@ -1,14 +1,15 @@
 package com.billow.controller.user;
 
+import com.billow.domain.dto.user.AuthTokenResponse;
 import com.billow.domain.dto.addtion.RatingRequest;
 import com.billow.domain.dto.addtion.RatingResponse;
 import com.billow.domain.dto.user.LoginResponse;
 import com.billow.domain.dto.user.RefreshRequest;
 import com.billow.model.service.user.UserService;
-import com.billow.util.JwtUtil;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,12 +47,20 @@ public class UserController {
 
     @PostMapping("/refresh")
     public ResponseEntity<Object> refresh(@RequestBody RefreshRequest refreshRequest) {
-        log.info("액세스 토큰 재발급 요청 API 호출");
-
-        userService.refresh(refreshRequest.getRefreshToken());
-        log.info("");
-        return ResponseEntity.ok()
-                .body();
+        try {
+            log.info("액세스 토큰 재발급 요청 API 호출");
+            if (refreshRequest.getRefreshToken() == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(new Message("재로그인 하시기 바랍니다."));
+            }
+            AuthTokenResponse response = userService.refresh(refreshRequest.getEmail(), refreshRequest.getRefreshToken());
+            log.info("액세스 토큰 재발급 성공");
+            return ResponseEntity.ok()
+                    .body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(new Message("액세스 토큰 발급에 실패했습니다."));
+        }
     }
 
     @PutMapping

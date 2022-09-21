@@ -2,11 +2,13 @@ package com.billow.model.service.user;
 
 import com.billow.domain.dto.addtion.RatingRequest;
 import com.billow.domain.dto.addtion.RatingResponse;
+import com.billow.domain.dto.user.AuthTokenResponse;
 import com.billow.domain.dto.user.LoginResponse;
 import com.billow.domain.entity.addition.Rating;
 import com.billow.domain.entity.user.User;
 import com.billow.exception.BadRequestException;
 import com.billow.exception.NotFoundException;
+import com.billow.exception.WrongFormException;
 import com.billow.model.repository.addition.RatingRepository;
 import com.billow.model.repository.user.UserRepository;
 import com.billow.util.JwtUtil;
@@ -30,6 +32,7 @@ public class UserService {
     private static final String USER_NOT_FOUND = "해당 유저를 찾을 수 없습니다.";
     private static final String RATING_NOT_FOUND = "해당 평점을 찾을 수 없습니다.";
     private static final String BAD_REQUEST = "잘못된 요청입니다.";
+    private static final String TOKEN_NOT_VALID = "토큰 정보가 올바르지 않습니다.";
 
     private final UserRepository userRepository;
     private final RatingRepository ratingRepository;
@@ -66,16 +69,15 @@ public class UserService {
         }
     }
 
-    public String refresh(String refreshToken) {
-        // 리프레시 토큰이 없다면 다시 로그인 해달라고
-
-
-        // 리프레시 토큰이 유효한지 점검
-        JwtUtil.checkAndGetClaims(refreshToken);
-
+    public AuthTokenResponse refresh(String email, String refreshToken) {
+        User user = userRepository.findByEmail(email);
         // 데이터베이스에 있는 리프레시 토큰과 같은지 판단
-        // 다르다면 예외 처리
-        // 같으면 토큰 새로 발행해서 리턴
+        if (!user.getRefreshToken().equals(refreshToken)) {
+            throw new WrongFormException(TOKEN_NOT_VALID);
+        }
+        return AuthTokenResponse.builder()
+                .AuthToken(JwtUtil.createAuthToken(user.getEmail(), user.getName()))
+                .build();
     }
 
     public List<RatingResponse> selectRating(Long userId) {
