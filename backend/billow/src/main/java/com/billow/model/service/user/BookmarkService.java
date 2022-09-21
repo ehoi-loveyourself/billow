@@ -33,6 +33,7 @@ public class BookmarkService {
         return bookmarkRepository.findByUser_Id(userId)
                 .stream()
                 .map(bookmark -> ProgramResponse.builder()
+                        .id(bookmark.getProgram().getId())
                         .title(bookmark.getProgram().getTitle())
                         .genres(bookmark.getProgram().getGenreList()
                                 .stream()

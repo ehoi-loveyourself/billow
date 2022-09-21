@@ -37,6 +37,7 @@ public class ProgramService {
         return programRepository.findByTitleContaining(word)
                 .stream()
                 .map(program -> ProgramResponse.builder()
+                        .id(program.getId())
                         .title(program.getTitle())
                         .genres(program.getGenreList()
                                 .stream()
@@ -95,6 +96,7 @@ public class ProgramService {
                     .orElseThrow(() -> new NotFoundException(PROGRAM_NOT_FOUND));
 
             responses.add(ProgramResponse.builder()
+                    .id(program.getId())
                     .title(program.getTitle())
                     .genres(program.getGenreList()
                             .stream()

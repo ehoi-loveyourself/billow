@@ -78,6 +78,7 @@ public class RecommendService {
         return programRepository.findPopularProgram()
                 .stream()
                 .map(program -> ProgramResponse.builder()
+                        .id(program.getId())
                         .title(program.getTitle())
                         .genres(program.getGenreList()
                                 .stream()
