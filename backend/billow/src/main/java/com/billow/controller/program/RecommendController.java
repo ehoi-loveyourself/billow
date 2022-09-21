@@ -51,9 +51,11 @@ public class RecommendController {
 
     @GetMapping("/new")
     public ResponseEntity<Object> recommendNew() {
-        Message response = new Message("succeeded");
+        log.info("신규 프로그램 추천 API 호출");
+        List<ProgramResponse> responses = recommendService.recommendNew();
+        log.info("신규 프로그램 추천 성공");
         return ResponseEntity.ok()
-                .body(response);
+                .body(responses);
     }
 
     @GetMapping("/popular")
