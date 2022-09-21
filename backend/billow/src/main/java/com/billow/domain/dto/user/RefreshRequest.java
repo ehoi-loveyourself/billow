@@ -10,5 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class RefreshRequest {
 
+    private String email;
+
     private String refreshToken;
 }
