@@ -81,6 +81,12 @@ const routes = [
     name: 'situationcollectdata',
     component: () => import('@/components/situation/SituationCollectData.vue'),
   },
+
+  {
+    path: '/situationresult',
+    name: 'situationresult',
+    component: () => import('@/components/situation/SituationResult.vue'),
+  },
 ]
 
 const router = createRouter({

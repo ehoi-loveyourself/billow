@@ -8,6 +8,7 @@ import com.billow.domain.entity.condition.ConditionGenre;
 import com.billow.domain.entity.condition.ConditionProgram;
 import com.billow.domain.entity.condition.ConditionWithWhom;
 import com.billow.domain.entity.program.Cast;
+import com.billow.domain.entity.program.GenderAgeViewer;
 import com.billow.domain.entity.program.Program;
 import com.billow.domain.entity.user.User;
 import com.billow.exception.NotFoundException;
@@ -16,6 +17,7 @@ import com.billow.model.repository.condition.ConditionGenreRepository;
 import com.billow.model.repository.condition.ConditionProgramRepository;
 import com.billow.model.repository.condition.ConditionWithWhomRepository;
 import com.billow.model.repository.program.CastRepository;
+import com.billow.model.repository.program.GenderAgeViewerRepository;
 import com.billow.model.repository.program.ProgramRepository;
 import com.billow.model.repository.user.UserRepository;
 import com.billow.util.Message;
@@ -44,6 +46,7 @@ public class RecommendService {
     private final ConditionGenreRepository conditionGenreRepository;
     private final ConditionWithWhomRepository conditionWithWhomRepository;
     private final ConditionProgramRepository conditionProgramRepository;
+    private final GenderAgeViewerRepository genderAgeViewerRepository;
 
     public List<Program> recommendOnair() {
         List<Program> programList = programRepository.findAll();
@@ -52,7 +55,7 @@ public class RecommendService {
 
     public List<CastResponse> recommendActor(Long userId) {
         List<Rating> ratingList = ratingRepository.findByUser_Id(userId);
-        String actor= castRepository.findMaxCountByProgram_Id(ratingList);
+        String actor = castRepository.findMaxCountByProgram_Id(ratingList);
         List<Cast> castList = castRepository.findByActorName(userId, actor);
         return castList
                 .stream()
@@ -81,6 +84,7 @@ public class RecommendService {
         return programRepository.findPopularProgram()
                 .stream()
                 .map(program -> ProgramResponse.builder()
+                        .id(program.getId())
                         .title(program.getTitle())
                         .genres(program.getGenreList()
                                 .stream()
@@ -119,6 +123,7 @@ public class RecommendService {
         return new Message("사용자가 특정 상황에 봤던 프로그램을 추가하였습니다.");
     }
 
+<<<<<<< backend/billow/src/main/java/com/billow/model/service/program/RecommendService.java
     public List<ProgramResponse> recommendNew() {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH, -2);
@@ -127,7 +132,38 @@ public class RecommendService {
         List<Program> programList = programRepository.findByFirstAirDateAfterOrderByFirstAirDateDesc(date);
 
         return programList
-                .stream()
+        .stream()
+                .map(program -> ProgramResponse.builder()
+                        .id(program.getId())
+                        .title(program.getTitle())
+                        .genres(program.getGenreList()
+                                .stream()
+                                .map(genre -> genre.getGenreInfo().getName())
+                                .collect(Collectors.toList()))
+                        .age(program.getAge())
+                        .summary(program.getSummary())
+                        .broadcastingDay(program.getBroadcastingDay())
+                        .broadcastingEpisode(program.getBroadcastingEpisode())
+                        .broadcastingStation(program.getBroadcastingStation())
+                        .endFlag(program.isEndFlag())
+                        .firstAirDate(DateFormat.getDateInstance(DateFormat.LONG).format(program.getFirstAirDate()))
+                        .averageRating(program.getAverageRating())
+                        .bookmarkCnt(program.getBookmarkCnt())
+                        .posterImg(program.getPosterImg())
+                        .backdropPath(program.getBackdropPath())
+                        .build())
+                .collect(Collectors.toList());
+    }
+    
+    public List<ProgramResponse> recommendGenderAge(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
+
+        List<GenderAgeViewer> genderAgeViewerList = genderAgeViewerRepository.findTop5ByGenderAge(user.getAge(), user.getGender());
+        List<Program> programResponseList = programRepository.findGenderAgeRecommend(userId, user.getAge(), user.getGender(), genderAgeViewerList.get(0).getProgram().getId(), genderAgeViewerList.get(1).getProgram().getId(), genderAgeViewerList.get(2).getProgram().getId(), genderAgeViewerList.get(3).getProgram().getId(), genderAgeViewerList.get(4).getProgram().getId());
+
+        return programResponseList
+        .stream()
                 .map(program -> ProgramResponse.builder()
                         .id(program.getId())
                         .title(program.getTitle())

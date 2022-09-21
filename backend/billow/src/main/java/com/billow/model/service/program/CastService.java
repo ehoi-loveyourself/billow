@@ -18,7 +18,7 @@ public class CastService {
     }
 
 
-    public Optional<List<Cast>> findByProgram_Id(Long id) {
+    public List<Cast> findByProgram_Id(Long id) {
         return castRepository.findByProgram_Id(id);
     }
 }

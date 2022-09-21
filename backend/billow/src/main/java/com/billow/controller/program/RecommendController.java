@@ -4,7 +4,10 @@ import com.billow.domain.dto.program.CastResponse;
 import com.billow.domain.dto.program.ProgramIWatchedRequest;
 import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.domain.entity.program.Program;
+import com.billow.domain.entity.user.User;
+import com.billow.exception.NotFoundException;
 import com.billow.model.service.program.RecommendService;
+import com.billow.model.service.user.UserService;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -74,8 +77,12 @@ public class RecommendController {
     }
 
     @GetMapping("/gender-age")
-    public ResponseEntity<Object> recommendGenderAge() {
-        Message response = new Message("succeeded");
+    public ResponseEntity<Object> recommendGenderAge(
+            //            @RequestHeader("Auth-access") String token,
+    ) {
+        log.info("성연령별 프로그램 추천 API 호출");
+        List<ProgramResponse> response = recommendService.recommendGenderAge(0L);
+        log.info("성연령별 프로그램 추천 API 성공");
         return ResponseEntity.ok()
                 .body(response);
     }
