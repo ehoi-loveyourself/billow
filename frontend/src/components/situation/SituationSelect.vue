@@ -7,78 +7,58 @@
             <div class="left" style="border-right:1px solid #ffffff;">
               <h2 style="color:white; text-align:center;">누구와 있으신가요?</h2>
                 <img style="
-                border-radius: 7px;
-                -moz-border-radius: 7px;
-                -khtml-border-radius: 7px;
-                -webkit-border-radius: 7px;
                 margin-top: 50px;
-                margin-left: 200px;
+                margin-left: 169px;
+                width: 25%;
                 "
-                src="@/assets/situation/solo.jpg" />
+                src="@/assets/situation/alone.png" />
                 <img style="
-                border-radius: 7px;
-                -moz-border-radius: 7px;
-                -khtml-border-radius: 7px;
-                -webkit-border-radius: 7px;
                 margin-top: 50px;
-                margin-left: 150px;
+                margin-left: 50px;
+                width: 25%;
                 "
-                src="@/assets/situation/friend.jpg" />
+                src="@/assets/situation/friend.png" />
                 <br><br>
                 <img style="
-                border-radius: 7px;
-                -moz-border-radius: 7px;
-                -khtml-border-radius: 7px;
-                -webkit-border-radius: 7px;
-                margin-left: 200px;
+                margin-left: 169px;
+                margin-top: 15px;
+                width: 25%;
                 "
-                src="@/assets/situation/couple.jpg" />
+                src="@/assets/situation/couple.png" />
                 <img style="
-                border-radius: 7px;
-                -moz-border-radius: 7px;
-                -khtml-border-radius: 7px;
-                -webkit-border-radius: 7px;
-                margin-left: 150px;
+                margin-left: 50px;
+                margin-top: 15px;
+                width: 25%;
                 "
-                src="@/assets/situation/family.jpg" />
+                src="@/assets/situation/family.png" />
                 </div>
                 <div class="right">
                   <h2 style="color:white; text-align:center;">기분이 어떠신가요?</h2>
                   <img style="
-                border-radius: 7px;
-                -moz-border-radius: 7px;
-                -khtml-border-radius: 7px;
-                -webkit-border-radius: 7px;
                 margin-top: 50px;
-                margin-left: 200px;
+                margin-left: 169px;
+                width: 25%;
                 "
-                src="@/assets/situation/happy.jpg" />
+                src="@/assets/situation/happy.png" />
                 <img style="
-                border-radius: 7px;
-                -moz-border-radius: 7px;
-                -khtml-border-radius: 7px;
-                -webkit-border-radius: 7px;
                 margin-top: 50px;
-                margin-left: 150px;
+                margin-left: 50px;
+                width: 25%;
                 "
-                src="@/assets/situation/boring.jpg" />
+                src="@/assets/situation/boring.png" />
                 <br><br>
                 <img style="
-                border-radius: 7px;
-                -moz-border-radius: 7px;
-                -khtml-border-radius: 7px;
-                -webkit-border-radius: 7px;
-                margin-left: 200px;
+                margin-left: 169px;
+                margin-top: 15px;
+                width: 25%;
                 "
-                src="@/assets/situation/angry.jpg" />
+                src="@/assets/situation/angry.png" />
                 <img style="
-                border-radius: 7px;
-                -moz-border-radius: 7px;
-                -khtml-border-radius: 7px;
-                -webkit-border-radius: 7px;
-                margin-left: 150px;
+                margin-left: 50px;
+                margin-top: 15px;
+                width: 25%;
                 "
-                src="@/assets/situation/sad.jpg" />
+                src="@/assets/situation/sad.png" />
             </div>
         </div>
         <br>
@@ -89,6 +69,7 @@
             </router-link>
           </a>
         </p>
+        <br/><br/><br/><br/><br/>
 </template>
   
 <script>
@@ -105,7 +86,7 @@ components:{
   <style scoped>
   div {
           width: 100%;
-          height: 500px;
+          height: 550px;
         }
         div.left {
           width: 50%;
@@ -131,7 +112,7 @@ components:{
   
  .startButton{
     background-color: #ffffff;
-    padding: 5px 30px;
+    padding: 3px 30px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
