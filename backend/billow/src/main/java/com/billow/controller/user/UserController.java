@@ -68,7 +68,7 @@ public class UserController {
     public ResponseEntity<Object> logout(@RequestHeader("Auth-access") String token) {
         try {
             log.info("로그아웃 API 호출");
-            Message response = userService.logout(2L);
+            Message response = userService.logout(JwtUtil.getUserId(token));
             log.info("로그아웃 성공");
             return ResponseEntity.ok()
                     .body(response);
@@ -102,7 +102,7 @@ public class UserController {
     @GetMapping("/rating")
     public ResponseEntity<Object> selectRating(@RequestHeader("Auth-access") String token) {
         log.info("평점 조회 API 호출");
-        List<RatingResponse> response = userService.selectRating(0L);
+        List<RatingResponse> response = userService.selectRating(JwtUtil.getUserId(token));
         log.info("평점 조회 성공");
         return ResponseEntity.ok()
                 .body(response);
@@ -113,7 +113,7 @@ public class UserController {
                                                @PathVariable("ratingId") Long ratingId,
                                                @RequestBody RatingRequest ratingRequest) {
         log.info("평점 수정 API 호출");
-        Message response = userService.updateRating(0L, ratingId, ratingRequest);
+        Message response = userService.updateRating(JwtUtil.getUserId(token), ratingId, ratingRequest);
         log.info("평점 수정 성공");
         return ResponseEntity.ok()
                 .body(response);
@@ -122,7 +122,7 @@ public class UserController {
     @DeleteMapping("/rating/{ratingId}")
     public ResponseEntity<Object> deleteRating(@RequestHeader("Auth-access") String token, @PathVariable("ratingId") Long ratingId) {
         log.info("평점 삭제 API 호출");
-        Message response = userService.deleteRating(0L, ratingId);
+        Message response = userService.deleteRating(JwtUtil.getUserId(token), ratingId);
         return ResponseEntity.ok()
                 .body(response);
     }
