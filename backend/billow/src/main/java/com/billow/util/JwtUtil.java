@@ -1,7 +1,9 @@
 package com.billow.util;
 
-import com.billow.domain.entity.user.User;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
-import java.util.Map;
 
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -27,12 +28,8 @@ public class JwtUtil {
         return create(null, null, null, "refreshToken", EXPIRATION * 5);
     }
 
-    public static Map<String, Object> checkAndGetClaims(String jwt) {
-        Jws<Claims> claims = Jwts.parser()
-                .setSigningKey(SECRET.getBytes())
-                .parseClaimsJws(jwt);
-        log.info("claims: {}", claims);
-        return claims.getBody();
+    public static Long getUserId(String token) {
+        return ((Number) getAllClaims(token).get("id")).longValue();
     }
 
     private static String create(Long id, String email, String name, String subject, long expiration) {
@@ -53,4 +50,10 @@ public class JwtUtil {
         return jwt;
     }
 
+    private static Claims getAllClaims(String token) {
+        return Jwts.parser()
+                .setSigningKey(SECRET.getBytes(StandardCharsets.UTF_8))
+                .parseClaimsJws(token)
+                .getBody();
+    }
 }
