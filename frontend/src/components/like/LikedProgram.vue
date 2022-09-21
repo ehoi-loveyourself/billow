@@ -1,6 +1,5 @@
 <template>
 <div style="padding-left: 70px; margin-top: 10px;">
-    <br/>
   <img src="@/assets/runningman.png" alt="Image">
   <img src="@/assets/thatman.png" alt="Image">
   <img src="@/assets/nangman.png" alt="Image">
