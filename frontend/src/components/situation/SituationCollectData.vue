@@ -1,5 +1,8 @@
 <template>
     <header-bar />
+    <br>
+    <h2 style="color:white; margin-left:67px; font-size: 1.1vw; font-weight: 300;">#혼자 #심심 에 ㅇㅇ님은 어떤 프로그램을 보셨나요?</h2>
+    <LikedProgram/>
         <p style="text-align:center">
           <a class="startButton" href="#" role="button" style="border-radius: 15px;">
             <router-link :to="{ name: 'situationselect' }" class="nav-link" style="font-size:20px; padding:10px; color:black;">
@@ -11,11 +14,13 @@
   
 <script>
 import HeaderBar from "@/components/layout/HeaderNavBar.vue";
+import LikedProgram from "@/components/like/LikedProgram.vue"
 
 export default{
     name:"SituationSelect",
 components:{
-    HeaderBar
+    HeaderBar,
+    LikedProgram
 },
 }
 </script>
@@ -33,7 +38,7 @@ components:{
   }
  .startButton{
     background-color: #ffffff;
-    padding: 5px 30px;
+    padding: 3px 30px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
