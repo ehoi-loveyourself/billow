@@ -6,6 +6,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
+@Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tb_gender_age_viewer")
