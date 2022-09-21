@@ -2,7 +2,7 @@
     <header-bar />
     <br>
     <h2 style="color:white; margin-left:67px; font-size: 1.1vw; font-weight: 300;">#혼자 #심심</h2>
-    <h2 style="color:white; margin-left:67px; font-size: 1.1vw; font-weight: 300;">위와 같은 상황일 때 ㅇㅇ님은 어떤 프로그램을 보셨나요?</h2>
+    <h2 style="color:white; margin-left:67px; font-size: 1.1vw; font-weight: 300;">딱 맞는 프로그램을 추천해드릴게요.</h2>
     <div style="padding-left: 70px; margin-top: 10px;">
     <br/>
   <img src="@/assets/runningman.png" alt="Image">
@@ -16,8 +16,8 @@
 </div>
         <p style="text-align:center">
           <a class="startButton" href="#" role="button" style="border-radius: 15px;">
-            <router-link :to="{ name: 'situationresult' }" class="nav-link" style="font-size:20px; padding:10px; color:black;">
-                NEXT
+            <router-link :to="{ name: 'main' }" class="nav-link" style="font-size:20px; padding:10px; color:black;">
+                홈으로
             </router-link>
           </a>
         </p>
@@ -29,7 +29,7 @@ import HeaderBar from "@/components/layout/HeaderNavBar.vue";
 export default{
     name:"SituationSelect",
 components:{
-    HeaderBar
+    HeaderBar,
 },
 }
 </script>
@@ -44,11 +44,6 @@ components:{
     padding-bottom: 0.5%;
     margin-right: 0;
     width:16.1%
-  }
-  img:hover{
-    filter: brightness(0.6);
-    transition: all 0.5s linear;
-    transform: scale( 1.2 );
   }
  .startButton{
     background-color: #ffffff;
