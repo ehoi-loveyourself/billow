@@ -98,4 +98,8 @@ public class UserService {
 
         return new Message("회원님의 평점내역 삭제에 성공하였습니다.");
     }
+
+    public Optional<User> findById(Long userId) {
+        return userRepository.findById(userId);
+    }
 }

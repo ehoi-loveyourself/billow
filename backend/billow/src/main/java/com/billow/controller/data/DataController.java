@@ -146,8 +146,8 @@ public class DataController {
         System.out.println(programList);
         for (int i = 0; i < 50; i++) {
 //            for (Program program : programList) {
-            Optional<List<Cast>> castList = castService.findByProgram_Id(programList.get(i).getId());
-            if (castList.isPresent()) {
+            List<Cast> castList = castService.findByProgram_Id(programList.get(i).getId());
+            if (castList.size() == 0) {
                 Connection connection = Jsoup.connect("https://search.naver.com/search.naver?query=" + programList.get(i).getTitle() + "출연진");
                 Document document = connection.get();
 
@@ -156,7 +156,7 @@ public class DataController {
                     String imgUrl = castInfo.select("img").attr("abs:src");
                     String playName = castInfo.select(".title_box .name a").text();
                     String actorName = castInfo.select(".title_box .sub_text").text();
-                    if(actorName.equals("진행") || actorName.equals("출연")){
+                    if (actorName.equals("진행") || actorName.equals("출연") || actorName.equals("")) {
                         actorName = playName;
                     }
                     Cast cast = Cast.builder()
@@ -177,27 +177,33 @@ public class DataController {
     @GetMapping(value = "/programdetail")
     public ResponseEntity<Object> programDetail() throws IOException {
         log.info("프로그램 방영정보 데이터 수집 Scheduler 호출");
-        //TODO: 엔티티 정리 후에 확인 필요
+        //TODO: 완결, 연재중, 시청연령, 여신강림은 웹툰이 들어감..
         List<Program> programList = programService.findAll();
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 50; i++) {
 //        for (Program program : programList){
+            if (programList.get(i).getAge() != null) continue;
             Connection connection = Jsoup.connect("https://search.naver.com/search.naver?query=" + programList.get(i).getTitle());
             Document document = connection.get();
 
-            Elements subTitle = document.select(".sub_title span");
-            String age = subTitle.get(2).text();
-            programList.get(i).setAge(age);
-
+            Elements subTitle = document.select(".title_area").get(0).select(".sub_title span");
+            if (subTitle.size() > 1) {
+                String age = subTitle.get(2).text();
+                programList.get(i).setAge(age);
+            }
             Elements info = document.select(".info_group");
             if (subTitle.size() == 3) {
                 programList.get(i).setEndFlag(true);
                 Elements infoDetail = info.get(0).select("dd span");
-                String day = infoDetail.get(1).text();
-                programList.get(i).setBroadcastingDay(day);
-            } else {
-                String episode = info.get(0).select("dd .state").text();
-                programList.get(i).setBroadcastingEpisode(episode);
+                System.out.println(infoDetail);
+                if (infoDetail.size() > 1) {
+                    String day = infoDetail.get(1).text();
+                    programList.get(i).setBroadcastingDay(day);
+                }
             }
+            String episode = info.get(0).select("dd .state").text();
+            programList.get(i).setBroadcastingEpisode(episode);
+            programList.get(i).setBookmarkCnt(0);
+            programList.get(i).setRatingCnt(0L);
             programService.save(programList.get(i));
         }
         log.info("프로그램 방영정보 데이터 수집 Scheduler 성공");
