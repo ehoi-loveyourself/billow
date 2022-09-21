@@ -5,7 +5,7 @@
     <h2 style="color:white; margin-left:67px; font-size: 1.1vw; font-weight: 300;">위와 같은 상황일 때 ㅇㅇ님은 어떤 프로그램을 보셨나요?</h2>
     <div style="padding-left: 70px; margin-top: 10px;">
     <br/>
-  <img src="@/assets/runningman.png" alt="Image">
+  <img src="@/assets/runningman.png" alt="Image" @click="select()">
   <img src="@/assets/thatman.png" alt="Image">
   <img src="@/assets/nangman.png" alt="Image">
   <img src="@/assets/jugun.png" alt="Image">
@@ -31,6 +31,11 @@ export default{
 components:{
     HeaderBar
 },
+methods:{
+  select(){
+    alert("g");
+  }
+}
 }
 </script>
   
