@@ -77,6 +77,14 @@ public class UserService {
                 .build();
     }
 
+    public Message logout(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
+        user.deleteRefreshToken();
+        userRepository.save(user);
+        return new Message("로그아웃에 성공하였습니다.");
+    }
+
     public List<RatingResponse> selectRating(Long userId) {
         return ratingRepository.findByUser_Id(userId)
                 .stream()

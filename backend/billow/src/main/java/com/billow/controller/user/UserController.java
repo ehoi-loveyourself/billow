@@ -6,6 +6,7 @@ import com.billow.domain.dto.addtion.RatingResponse;
 import com.billow.domain.dto.user.LoginResponse;
 import com.billow.domain.dto.user.RefreshRequest;
 import com.billow.model.service.user.UserService;
+import com.billow.util.JwtUtil;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -60,6 +61,20 @@ public class UserController {
         } catch (Exception e) {
             return ResponseEntity.badRequest()
                     .body(new Message("액세스 토큰 발급에 실패했습니다."));
+        }
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Object> logout(@RequestHeader("Auth-access") String token) {
+        try {
+            log.info("로그아웃 API 호출");
+            Message response = userService.logout(2L);
+            log.info("로그아웃 성공");
+            return ResponseEntity.ok()
+                    .body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(new Message("로그아웃에 실패하였습니다."));
         }
     }
 
