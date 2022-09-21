@@ -24,6 +24,9 @@ import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -120,15 +123,16 @@ public class RecommendService {
         return new Message("사용자가 특정 상황에 봤던 프로그램을 추가하였습니다.");
     }
 
-    public List<ProgramResponse> recommendGenderAge(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
+<<<<<<< backend/billow/src/main/java/com/billow/model/service/program/RecommendService.java
+    public List<ProgramResponse> recommendNew() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, -2);
 
-        List<GenderAgeViewer> genderAgeViewerList = genderAgeViewerRepository.findTop5ByGenderAge(user.getAge(), user.getGender());
-        List<Program> programResponseList = programRepository.findGenderAgeRecommend(userId, user.getAge(), user.getGender(), genderAgeViewerList.get(0).getProgram().getId(), genderAgeViewerList.get(1).getProgram().getId(), genderAgeViewerList.get(2).getProgram().getId(), genderAgeViewerList.get(3).getProgram().getId(), genderAgeViewerList.get(4).getProgram().getId());
+        Date date = new Date(calendar.getTimeInMillis());
+        List<Program> programList = programRepository.findByFirstAirDateAfterOrderByFirstAirDateDesc(date);
 
-        return programResponseList
-                .stream()
+        return programList
+        .stream()
                 .map(program -> ProgramResponse.builder()
                         .id(program.getId())
                         .title(program.getTitle())
@@ -142,6 +146,38 @@ public class RecommendService {
                         .broadcastingEpisode(program.getBroadcastingEpisode())
                         .broadcastingStation(program.getBroadcastingStation())
                         .endFlag(program.isEndFlag())
+                        .firstAirDate(DateFormat.getDateInstance(DateFormat.LONG).format(program.getFirstAirDate()))
+                        .averageRating(program.getAverageRating())
+                        .bookmarkCnt(program.getBookmarkCnt())
+                        .posterImg(program.getPosterImg())
+                        .backdropPath(program.getBackdropPath())
+                        .build())
+                .collect(Collectors.toList());
+    }
+    
+    public List<ProgramResponse> recommendGenderAge(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
+
+        List<GenderAgeViewer> genderAgeViewerList = genderAgeViewerRepository.findTop5ByGenderAge(user.getAge(), user.getGender());
+        List<Program> programResponseList = programRepository.findGenderAgeRecommend(userId, user.getAge(), user.getGender(), genderAgeViewerList.get(0).getProgram().getId(), genderAgeViewerList.get(1).getProgram().getId(), genderAgeViewerList.get(2).getProgram().getId(), genderAgeViewerList.get(3).getProgram().getId(), genderAgeViewerList.get(4).getProgram().getId());
+
+        return programResponseList
+        .stream()
+                .map(program -> ProgramResponse.builder()
+                        .id(program.getId())
+                        .title(program.getTitle())
+                        .genres(program.getGenreList()
+                                .stream()
+                                .map(genre -> genre.getGenreInfo().getName())
+                                .collect(Collectors.toList()))
+                        .age(program.getAge())
+                        .summary(program.getSummary())
+                        .broadcastingDay(program.getBroadcastingDay())
+                        .broadcastingEpisode(program.getBroadcastingEpisode())
+                        .broadcastingStation(program.getBroadcastingStation())
+                        .endFlag(program.isEndFlag())
+                        .firstAirDate(DateFormat.getDateInstance(DateFormat.LONG).format(program.getFirstAirDate()))
                         .averageRating(program.getAverageRating())
                         .bookmarkCnt(program.getBookmarkCnt())
                         .posterImg(program.getPosterImg())
