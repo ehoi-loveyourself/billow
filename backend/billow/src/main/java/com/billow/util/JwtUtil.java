@@ -19,12 +19,12 @@ public class JwtUtil {
     private static final String SECRET = "ssafy second project B309 Billow";
     private static final long EXPIRATION = 1000 * 60 * 60 * 2;
 
-    public static String createAuthToken(String email, String name) {
-        return create(email, name, "Auth-access", EXPIRATION);
+    public static String createAuthToken(Long id, String email, String name) {
+        return create(id, email, name, "Auth-access", EXPIRATION);
     }
 
     public static String createRefreshToken() {
-        return create(null, null, "refreshToken", EXPIRATION * 5);
+        return create(null, null, null, "refreshToken", EXPIRATION * 5);
     }
 
     public static Map<String, Object> checkAndGetClaims(String jwt) {
@@ -35,11 +35,12 @@ public class JwtUtil {
         return claims.getBody();
     }
 
-    private static String create(String email, String name, String subject, long expirarion) {
+    private static String create(Long id, String email, String name, String subject, long expiration) {
         final JwtBuilder builder = Jwts.builder()
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
+                .setExpiration(new Date(System.currentTimeMillis() + expiration))
+                .claim("id", id)
                 .claim("email", email)
                 .claim("name", name)
                 .signWith(SignatureAlgorithm.HS256, SECRET.getBytes(StandardCharsets.UTF_8));

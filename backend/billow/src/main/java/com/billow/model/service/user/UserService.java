@@ -20,7 +20,6 @@ import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -53,9 +52,7 @@ public class UserService {
                         .build();
                 userRepository.save(user);
             }
-            //TODO: 토큰 발급 과정 추가
-            String authToken = JwtUtil.createAuthToken(user.getEmail(), user.getName());
-            // TODO: 리프레시 토큰 생성
+            String authToken = JwtUtil.createAuthToken(user.getId(), user.getEmail(), user.getName());
             String refreshToken = JwtUtil.createRefreshToken();
             saveRefreshToken(user.getEmail(), refreshToken);
 
@@ -76,7 +73,7 @@ public class UserService {
             throw new WrongFormException(TOKEN_NOT_VALID);
         }
         return AuthTokenResponse.builder()
-                .AuthToken(JwtUtil.createAuthToken(user.getEmail(), user.getName()))
+                .AuthToken(JwtUtil.createAuthToken(user.getId(), user.getEmail(), user.getName()))
                 .build();
     }
 
