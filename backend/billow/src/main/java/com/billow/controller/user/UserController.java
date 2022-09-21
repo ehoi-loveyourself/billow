@@ -3,6 +3,7 @@ package com.billow.controller.user;
 import com.billow.domain.dto.addtion.RatingRequest;
 import com.billow.domain.dto.addtion.RatingResponse;
 import com.billow.domain.dto.user.LoginResponse;
+import com.billow.domain.dto.user.RefreshRequest;
 import com.billow.model.service.user.UserService;
 import com.billow.util.JwtUtil;
 import com.billow.util.Message;
@@ -21,6 +22,14 @@ public class UserController {
 
     private final UserService userService;
 
+    @GetMapping
+    public ResponseEntity<Object> selectUser() {
+        Message response = new Message("sdsd");
+        Message response1 = new Message("sdsd");
+        return ResponseEntity.ok()
+                .body(response);
+    }
+
     @GetMapping("/oauth")
     public ResponseEntity<Object> kakaoLogin(String code) {
         try {
@@ -35,12 +44,14 @@ public class UserController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<Object> selectUser() {
-        Message response = new Message("sdsd");
-        Message response1 = new Message("sdsd");
+    @PostMapping("/refresh")
+    public ResponseEntity<Object> refresh(@RequestBody RefreshRequest refreshRequest) {
+        log.info("액세스 토큰 재발급 요청 API 호출");
+
+        userService.refresh(refreshRequest.getRefreshToken());
+        log.info("");
         return ResponseEntity.ok()
-                .body(response);
+                .body();
     }
 
     @PutMapping

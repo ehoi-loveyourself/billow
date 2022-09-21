@@ -1,24 +1,24 @@
 package com.billow.model.service.user;
 
-import com.billow.domain.entity.user.User;
-import com.billow.domain.entity.addition.Rating;
 import com.billow.domain.dto.addtion.RatingRequest;
 import com.billow.domain.dto.addtion.RatingResponse;
-import com.billow.model.repository.user.UserRepository;
-import com.billow.model.repository.addition.RatingRepository;
-import com.billow.exception.NotFoundException;
+import com.billow.domain.dto.user.LoginResponse;
+import com.billow.domain.entity.addition.Rating;
+import com.billow.domain.entity.user.User;
 import com.billow.exception.BadRequestException;
+import com.billow.exception.NotFoundException;
+import com.billow.model.repository.addition.RatingRepository;
+import com.billow.model.repository.user.UserRepository;
+import com.billow.util.JwtUtil;
 import com.billow.util.KakaoOAuth2;
 import com.billow.util.Message;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -35,26 +35,47 @@ public class UserService {
     private final RatingRepository ratingRepository;
     private final KakaoOAuth2 kakaoOAuth2;
 
-    public Message kakaoLogin(String code) throws ParseException {
+    public LoginResponse kakaoLogin(String code) throws ParseException {
         User kakaoUser = kakaoOAuth2.getUserInfo(code);
         log.info(kakaoUser.toString());
 
         if (kakaoUser.getEmail() == null) {
             throw new NotFoundException(EMAIL_NOT_FOUND);
         } else {
-            Optional<User> user = userRepository.findByEmail(kakaoUser.getEmail());
-            if (user.isPresent()) {
-                //로그인으로 진행
-            } else {
-                User singUpUser = User.builder()
+            User user = userRepository.findByEmail(kakaoUser.getEmail());
+            if (user == null) {
+                User.builder()
                         .name(kakaoUser.getNickName())
                         .email(kakaoUser.getEmail())
                         .build();
-                userRepository.save(singUpUser);
+                userRepository.save(user);
             }
             //TODO: 토큰 발급 과정 추가
-            return new Message("카카오 로그인 성공하였습니다.");
+            String authToken = JwtUtil.createAuthToken(user.getEmail(), user.getName());
+            // TODO: 리프레시 토큰 생성
+            String refreshToken = JwtUtil.createRefreshToken();
+            saveRefreshToken(user.getEmail(), refreshToken);
+
+            return LoginResponse.builder()
+                    .email(user.getEmail())
+                    .name(user.getName())
+                    .nickName(user.getNickName())
+                    .authToken(authToken)
+                    .refreshToken(refreshToken)
+                    .build();
         }
+    }
+
+    public String refresh(String refreshToken) {
+        // 리프레시 토큰이 없다면 다시 로그인 해달라고
+
+
+        // 리프레시 토큰이 유효한지 점검
+        JwtUtil.checkAndGetClaims(refreshToken);
+
+        // 데이터베이스에 있는 리프레시 토큰과 같은지 판단
+        // 다르다면 예외 처리
+        // 같으면 토큰 새로 발행해서 리턴
     }
 
     public List<RatingResponse> selectRating(Long userId) {
@@ -97,5 +118,11 @@ public class UserService {
         ratingRepository.delete(rating);
 
         return new Message("회원님의 평점내역 삭제에 성공하였습니다.");
+    }
+
+    private void saveRefreshToken(String email, String refreshToken) {
+        User user = userRepository.findByEmail(email);
+        user.saveRefreshToken(refreshToken);
+        userRepository.save(user);
     }
 }
