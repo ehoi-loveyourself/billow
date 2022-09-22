@@ -4,7 +4,7 @@
       <br> 
         <b-nav-item>
           <form action="" class="search-bar">
-	<input type="search" name="search" pattern=".*\S.*" required>
+	<input type="search" name="search" placeholder="프로그램명 검색" pattern=".*\S.*" required>
 	<button class="search-btn" type="submit">
 		<span>Search</span>
 	</button>
