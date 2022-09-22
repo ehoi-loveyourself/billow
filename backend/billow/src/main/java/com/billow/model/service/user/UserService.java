@@ -11,6 +11,7 @@ import com.billow.exception.NotFoundException;
 import com.billow.exception.WrongFormException;
 import com.billow.model.repository.addition.RatingRepository;
 import com.billow.model.repository.user.UserRepository;
+import com.billow.util.JwtTokenProvider;
 import com.billow.util.JwtUtil;
 import com.billow.util.KakaoOAuth2;
 import com.billow.util.Message;
@@ -19,7 +20,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -49,11 +52,12 @@ public class UserService {
                 User.builder()
                         .name(kakaoUser.getNickName())
                         .email(kakaoUser.getEmail())
+                        .roles(Collections.singletonList("ROLE_USER"))
                         .build();
                 userRepository.save(user);
             }
-            String authToken = JwtUtil.createAuthToken(user.getId(), user.getEmail(), user.getName());
-            String refreshToken = JwtUtil.createRefreshToken();
+            String authToken = JwtTokenProvider.createAuthToken(user.getId(), user.getEmail(), user.getName(), user.getRoles());
+            String refreshToken = JwtTokenProvider.createRefreshToken();
             saveRefreshToken(user.getEmail(), refreshToken);
 
             return LoginResponse.builder()
