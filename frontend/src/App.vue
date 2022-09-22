@@ -45,7 +45,7 @@ body {
   margin: 0;
   min-height: 100%;
   position: relative;
-  padding-bottom: 133px;
+  padding-bottom: 180px;
   background-color: #141414;
 }
 </style>

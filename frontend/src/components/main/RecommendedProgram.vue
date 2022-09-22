@@ -1,121 +1,205 @@
 <template>
-  <div style="padding-left:70px;">
+  <div>
 <h2 style="color:white">지금 방송 중인 프로그램(ON AIR)</h2>
-<!-- <div class="card" style="color:white"> -->
   <splide id="carousel_recommend" :options="options">
+    <splide-slide>   
+      <img src="@/assets/gs.png" alt="Image">
+    </splide-slide>
     <splide-slide>
-  <img src="@/assets/gs.png" alt="Image" />
-  <img src="@/assets/hyori.png" alt="Image"/>
+      <img src="@/assets/hyori.png" alt="Image">
+    </splide-slide>
+    <splide-slide>
   <img src="@/assets/song.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
   <img src="@/assets/sign.png" alt="Image"/>
-  <img src="@/assets/heart_to_heart.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
+    <img src="@/assets/heart_to_heart.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
   <img src="@/assets/alham.png" alt="Image"/>
   </splide-slide>
-        <splide-slide>
+  <splide-slide>
   <img src="@/assets/runningman.png" alt="Image">
+</splide-slide>
+<splide-slide>
   <img src="@/assets/thatman.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
   <img src="@/assets/nangman.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
   <img src="@/assets/jugun.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
   <img src="@/assets/image_2.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
   <img src="@/assets/laggi.png" alt="Image"/>
 </splide-slide>
   </splide>
-  <!-- <div class="container">
-    <h4><b>호버 했을 때 제목 등등</b></h4> 
-    <p>카드 형식 사용</p>
-  </div> -->
-<!-- </div> -->
 
-<h2 style="color:white">요즘 핫한 프로그램</h2>
-<splide id="carousel_recommend" :options="options">
-  <splide-slide>
-  <img src="@/assets/thatman.png" alt="Image"/>
-  <img src="@/assets/nangman.png" alt="Image"/>
-  <img src="@/assets/jugun.png" alt="Image"/>
-  <img src="@/assets/image_2.png" alt="Image"/>
-  <img src="@/assets/runningman.png" alt="Image"/>
+  <h2 style="color:white">요즘 핫한 프로그램</h2>
+  <splide id="carousel_recommend" :options="options">
+    <splide-slide>
   <img src="@/assets/laggi.png" alt="Image"/>
 </splide-slide>
-
-  <splide-slide>
-  <img src="@/assets/gs.png" alt="Image" />
-  <img src="@/assets/hyori.png" alt="Image"/>
-  <img src="@/assets/song.png" alt="Image"/>
+    <splide-slide>
+  <img src="@/assets/runningman.png" alt="Image">
+</splide-slide>
+<splide-slide>
+  <img src="@/assets/thatman.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
+  <img src="@/assets/nangman.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
+  <img src="@/assets/jugun.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
+  <img src="@/assets/image_2.png" alt="Image"/>
+</splide-slide>
+    <splide-slide>   
+      <img src="@/assets/gs.png" alt="Image">
+    </splide-slide>  
+    <splide-slide>
   <img src="@/assets/sign.png" alt="Image"/>
-  <img src="@/assets/heart_to_heart.png" alt="Image"/>
+</splide-slide>
+    <splide-slide>
+      <img src="@/assets/hyori.png" alt="Image">
+    </splide-slide>
+    <splide-slide>
+  <img src="@/assets/song.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
+    <img src="@/assets/heart_to_heart.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
   <img src="@/assets/alham.png" alt="Image"/>
   </splide-slide>
 </splide>
 
-  <h2 style="color:white">재현님에게 추천드려요!</h2>
+<h2 style="color:white">재현님에게 추천드려요!</h2>
   <splide id="carousel_recommend" :options="options">
     <splide-slide>
-      <img src="@/assets/alham.png" alt="Image"/>
-  <img src="@/assets/gs.png" alt="Image" />
-  <img src="@/assets/hyori.png" alt="Image"/>
-  <img src="@/assets/song.png" alt="Image"/>
-  <img src="@/assets/sign.png" alt="Image"/>
-  <img src="@/assets/heart_to_heart.png" alt="Image" />
-  </splide-slide>
-  <splide-slide>
   <img src="@/assets/nangman.png" alt="Image"/>
-  <img src="@/assets/thatman.png" alt="Image"/>
-  <img src="@/assets/jugun.png" alt="Image"/>
-  <img src="@/assets/image_2.png" alt="Image"/>
-  <img src="@/assets/runningman.png" alt="Image"/>
+</splide-slide>
+    <splide-slide>
   <img src="@/assets/laggi.png" alt="Image"/>
 </splide-slide>
-</splide>
-
-  <h2 style="color:white">20대 남자에게 인기 많은 프로그램</h2>
-  <splide id="carousel_recommend" :options="options">
-    <splide-slide>
+<splide-slide>
   <img src="@/assets/jugun.png" alt="Image"/>
-  <img src="@/assets/thatman.png" alt="Image"/>
-  <img src="@/assets/nangman.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
   <img src="@/assets/image_2.png" alt="Image"/>
-  <img src="@/assets/runningman.png" alt="Image"/>
-  <img src="@/assets/laggi.png" alt="Image"/>
-  </splide-slide>
-
-  <splide-slide>
-  <img src="@/assets/gs.png" alt="Image" />
-  <img src="@/assets/hyori.png" alt="Image"/>
-  <img src="@/assets/song.png" alt="Image"/>
+</splide-slide>
+    <splide-slide>   
+      <img src="@/assets/gs.png" alt="Image">
+    </splide-slide>  
+    <splide-slide>
   <img src="@/assets/sign.png" alt="Image"/>
-  <img src="@/assets/heart_to_heart.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
+  <img src="@/assets/runningman.png" alt="Image">
+</splide-slide>
+<splide-slide>
+  <img src="@/assets/thatman.png" alt="Image"/>
+</splide-slide>
+    <splide-slide>
+      <img src="@/assets/hyori.png" alt="Image">
+    </splide-slide>
+    <splide-slide>
+  <img src="@/assets/song.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
+    <img src="@/assets/heart_to_heart.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
   <img src="@/assets/alham.png" alt="Image"/>
   </splide-slide>
 </splide>
 
+<h2 style="color:white">20대 남자에게 인기 많은 프로그램</h2>
+  <splide id="carousel_recommend" :options="options">
+    <splide-slide>
+  <img src="@/assets/sign.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
+  <img src="@/assets/thatman.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
+  <img src="@/assets/nangman.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
+  <img src="@/assets/jugun.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
+  <img src="@/assets/image_2.png" alt="Image"/>
+</splide-slide>
+    <splide-slide>   
+      <img src="@/assets/gs.png" alt="Image">
+    </splide-slide>  
+    <splide-slide>
+      <img src="@/assets/hyori.png" alt="Image">
+    </splide-slide>
+    <splide-slide>
+  <img src="@/assets/song.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
+  <img src="@/assets/laggi.png" alt="Image"/>
+</splide-slide>
+    <splide-slide>
+  <img src="@/assets/runningman.png" alt="Image">
+</splide-slide>
+<splide-slide>
+    <img src="@/assets/heart_to_heart.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
+  <img src="@/assets/alham.png" alt="Image"/>
+  </splide-slide>
+</splide>
 
 <h2 style="color:white">혹시 안소희님에게 관심이 있으신가요?</h2>
-<splide id="carousel_recommend" :options="options">
-<!-- <div class="card" style="color:white"> -->
-  <splide-slide>
-    <img src="@/assets/heart_to_heart.png" alt="Image" />
-  <img src="@/assets/gs.png" alt="Image" />
-  <img src="@/assets/hyori.png" alt="Image"/>
-  <img src="@/assets/song.png" alt="Image"/>
+  <splide id="carousel_recommend" :options="options">
+    <splide-slide>
+    <img src="@/assets/heart_to_heart.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
+  <img src="@/assets/nangman.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
+  <img src="@/assets/jugun.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
+  <img src="@/assets/image_2.png" alt="Image"/>
+</splide-slide>
+    <splide-slide>   
+      <img src="@/assets/gs.png" alt="Image">
+    </splide-slide>  
+    <splide-slide>
   <img src="@/assets/sign.png" alt="Image"/>
+</splide-slide>
+    <splide-slide>
+      <img src="@/assets/hyori.png" alt="Image">
+    </splide-slide>
+    <splide-slide>
+  <img src="@/assets/song.png" alt="Image"/>
+</splide-slide>
+<splide-slide>
   <img src="@/assets/alham.png" alt="Image"/>
   </splide-slide>
-  <splide-slide>
-  <img src="@/assets/image_2.png" alt="Image"/>
-  <img src="@/assets/thatman.png" alt="Image"/>
-  <img src="@/assets/nangman.png" alt="Image"/>
-  <img src="@/assets/jugun.png" alt="Image"/>
-  <img src="@/assets/runningman.png" alt="Image"/>
+    <splide-slide>
   <img src="@/assets/laggi.png" alt="Image"/>
 </splide-slide>
-  <!-- <div class="container">
-    <h4><b>카드 형식</b></h4> 
-    <p>카드 형식 사용</p> 
-  </div> -->
-<!-- </div> -->
+    <splide-slide>
+  <img src="@/assets/runningman.png" alt="Image">
+</splide-slide>
+<splide-slide>
+  <img src="@/assets/thatman.png" alt="Image"/>
+</splide-slide>
 </splide>
 </div>
-  
 </template>
 
 <script>
@@ -131,14 +215,18 @@
     data() {
       return {
         options: {
-        type : 'fade',
-        rewind      : true,
-        perPage     : 1,
-        autoplay    : false,
+        type : 'loop',
+        rewind      : false,
+        perPage     : 7,
+        // perMove:6,
+        // pagination:false,
+        // autoplay    : false,
+        gap:7,
         pauseOnHover: false,
         arrows      : true,
         dots: false,
-        animatedDots: false,      
+        animatedDots: false,
+        padding: '2rem'
         },
       };
     },
@@ -146,33 +234,20 @@
   </script>
 
 <style scoped>
-  .card {
-    background-color: #a1a1a1;
-    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
-    transition: 0.3s;
-    width: 30%;
-    padding-left: 70px;
-  }
-  
-  .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  }
-  
-  .container {
-    padding: 2px 16px;
-  }
-
   h2{
     font-weight: 500;
     font-size: 1.4vw;
-    margin-bottom:10px;
+    margin-bottom:0.7%;
+    padding-left:70px;
   }
 
   img{
-    margin-bottom: 3%;
-    width:16.1%;
-    padding-right:0.5%;
-  }
+    margin-bottom: 20%;
+    /* width:16.1%; */
+    width:100%;
+    padding-right:0;
+    margin-right: 0;
+  } 
   </style>
 
 <style>
@@ -180,7 +255,7 @@
     display:none;
   }
   #carousel_recommend .splide__arrow svg {
-    fill: white;
+    fill: #ffffff;
     height: 2em;
     width: 2em;
     opacity:100%;
@@ -190,12 +265,15 @@
   top:45%;
 }
 #carousel_recommend .splide__arrow--next{
-    right:97px;
+    right:0.8%;
 }
 #carousel_recommend .splide__arrow--prev{
-    left:20px;
+    left:0.8%;
 }
 #carousel_recommend .splide__arrow{
   background: none;
+}
+#carousel_recommend .splide__slide {
+    margin:0;
 }
 </style>

@@ -133,3 +133,8 @@ public class UserService {
         userRepository.save(user);
     }
 }
+
+    public Optional<User> findById(Long userId) {
+        return userRepository.findById(userId);
+    }
+}

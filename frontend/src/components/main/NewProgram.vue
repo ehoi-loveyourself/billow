@@ -1,6 +1,5 @@
 <template>
-    <div id="mainslider" style="text-align:center; margin-top: 10px; padding-left: 70px; padding-right: 70px;">
-      <br/>
+    <div id="mainslider" style="text-align:center; margin-top: 10px; ">
         <splide id="carousel_new" :options="options">
         <splide-slide><a class="enterDetail" href="#">
           <router-link :to="{ name: 'detail' }" class="nav-link">
@@ -34,14 +33,16 @@
     data() {
       return {
         options: {
-        type : 'fade',
+        type : 'loop',
         rewind      : true,
         perPage     : 1,
         autoplay    : true,
         pauseOnHover: false,
         arrows      : true,
         dots: true,
-        animatedDots: true,      
+        animatedDots: true,
+        padding: '7rem',
+        gap : 0,      
         },
       };
     },
@@ -55,22 +56,26 @@
   
 <style>
 #carousel_new .splide__arrow--next{
-    right:5rem;
+    right:0.5em;
 }
 #carousel_new .splide__arrow--prev{
-    left:5rem;
+    left:0.5em;
 }
 #carousel_new .splide__arrow{
   background: none;
 }
 .img_1{
   width:100%;
-  height:620px;
+  padding-left:0.5%;
+  padding-right:0.5%;
+  height:640px;
 }
 .img_2{
-  height: 620px;
+  height: 640px;
   width: 100%;
-  border-radius: 20px;
+  padding-left:0.5%;
+  padding-right:0.5%;
+  border-radius:1.4pc;
 }
 .splide__arrow svg {
     fill: white;

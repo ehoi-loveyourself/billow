@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface CastRepository extends JpaRepository<Cast, Long>, CastCustomRepository {
 
-    Optional<List<Cast>> findByProgram_Id(Long id);
+    List<Cast> findByProgram_Id(Long id);
 }
