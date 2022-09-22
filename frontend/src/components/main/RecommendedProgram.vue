@@ -6,7 +6,10 @@
       <div class="box-wrap">
   <div class="box">
     <div class="img">
+      <a class="enterDetail" href="#">
+          <router-link :to="{ name: 'detail' }" class="nav-link">
       <img src="@/assets/hyori.png" alt="Hover Effect">
+      </router-link></a>
     </div>
     <div class="info">
       <h3>효리네 민박</h3>
@@ -249,6 +252,11 @@
         },
       };
     },
+    method:{
+    gotoPage(link) {
+      this.$router.push(link);
+    },
+  }
   }
   </script>
 
