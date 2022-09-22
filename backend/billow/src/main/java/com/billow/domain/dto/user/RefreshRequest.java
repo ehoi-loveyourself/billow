@@ -1,4 +1,4 @@
-package com.billow.domain.dto.program;
+package com.billow.domain.dto.user;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -8,11 +8,9 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ProgramIWatchedRequest {
+public class RefreshRequest {
 
-    String who;
+    private String email;
 
-    String genre;
-
-    Long programId;
+    private String refreshToken;
 }

@@ -2,6 +2,7 @@ package com.billow.domain.dto.program;
 
 import lombok.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -27,6 +28,8 @@ public class ProgramResponse {
     private String broadcastingStation;
 
     private boolean endFlag;
+
+    private String firstAirDate;
 
     private Float averageRating;
 

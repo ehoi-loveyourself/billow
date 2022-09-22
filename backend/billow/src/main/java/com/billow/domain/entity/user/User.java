@@ -68,4 +68,12 @@ public class User {
     public int hashCode() {
         return Objects.hash(this.getEmail());
     }
+
+    public void saveRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
+
+    public void deleteRefreshToken() {
+        this.refreshToken = null;
+    }
 }
