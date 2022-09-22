@@ -267,7 +267,7 @@
     line-height: 18px;
     height: 20px;
     padding: 1px 5px;
-    border-radius: 3px;
+    border: none;
     margin: 0px 10px 0px 0px;
     margin-bottom: 5px;
 }
@@ -299,7 +299,7 @@
   border: none;
   cursor: pointer;
   overflow: hidden;
-  box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+  /* box-shadow: 1px 1px 3px rgba(0,0,0,0.4); */
 }
 .box img {
   width: 100%;
