@@ -1,5 +1,6 @@
 package com.billow.model.service.program;
 
+import com.billow.domain.dto.organization.OrganizationResponse;
 import com.billow.domain.dto.program.CastResponse;
 import com.billow.domain.dto.program.ProgramIWatchedRequest;
 import com.billow.domain.dto.program.ProgramResponse;
@@ -7,6 +8,7 @@ import com.billow.domain.entity.addition.Rating;
 import com.billow.domain.entity.condition.ConditionGenre;
 import com.billow.domain.entity.condition.ConditionProgram;
 import com.billow.domain.entity.condition.ConditionWithWhom;
+import com.billow.domain.entity.organization.ProgramOrganization;
 import com.billow.domain.entity.program.Cast;
 import com.billow.domain.entity.program.GenderAgeViewer;
 import com.billow.domain.entity.program.Program;
@@ -16,6 +18,7 @@ import com.billow.model.repository.addition.RatingRepository;
 import com.billow.model.repository.condition.ConditionGenreRepository;
 import com.billow.model.repository.condition.ConditionProgramRepository;
 import com.billow.model.repository.condition.ConditionWithWhomRepository;
+import com.billow.model.repository.organization.ProgramOrganizationRepository;
 import com.billow.model.repository.program.CastRepository;
 import com.billow.model.repository.program.GenderAgeViewerRepository;
 import com.billow.model.repository.program.ProgramRepository;
@@ -25,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -47,10 +51,40 @@ public class RecommendService {
     private final ConditionWithWhomRepository conditionWithWhomRepository;
     private final ConditionProgramRepository conditionProgramRepository;
     private final GenderAgeViewerRepository genderAgeViewerRepository;
+    private final ProgramOrganizationRepository programOrganizationRepository;
 
-    public List<Program> recommendOnair() {
-        List<Program> programList = programRepository.findAll();
-        return null;
+    public List<OrganizationResponse> recommendOnair() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.HOUR, -2);
+        Date now = new Date();
+        Date date = new Date(calendar.getTimeInMillis());
+        List<ProgramOrganization> programOrganizationList = programOrganizationRepository.findByBroadcastingTimeBetween(date, now);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm");
+        return programOrganizationList
+                .stream()
+                .map(organization -> OrganizationResponse.builder()
+                        .id(organization.getProgram().getId())
+                        .title(organization.getProgram().getTitle())
+                        .genres(organization.getProgram().getGenreList()
+                                .stream()
+                                .map(genre -> genre.getGenreInfo().getName())
+                                .collect(Collectors.toList()))
+                        .age(organization.getProgram().getAge())
+                        .endFlag(organization.getProgram().isEndFlag())
+                        .firstAirDate(DateFormat.getDateInstance(DateFormat.LONG).format(organization.getProgram().getFirstAirDate()))
+                        .averageRating(organization.getProgram().getAverageRating())
+                        .bookmarkCnt(organization.getProgram().getBookmarkCnt())
+                        .posterImg(organization.getProgram().getPosterImg())
+                        .backdropPath(organization.getProgram().getBackdropPath())
+                        .programOrganizationId(organization.getId())
+                        .broadcastingDay(organization.getBroadcastingDay())
+                        .broadcastingTime(simpleDateFormat.format(organization.getBroadcastingTime()))
+                        .broadcastingEpisode(organization.getBroadcastingEpisode())
+                        .broadcastingAge(organization.getBroadcastingAge())
+                        .broadcastingRerun(organization.getBroadcastingRerun())
+                        .broadcastingStation(organization.getBroadcastingStation())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     public List<CastResponse> recommendActor(Long userId) {
@@ -60,8 +94,7 @@ public class RecommendService {
         return castList
                 .stream()
                 .map(cast -> CastResponse.builder()
-                        .programId(cast.getProgram().getId())
-                        .posterImg(cast.getProgram().getPosterImg())
+                        .id(cast.getProgram().getId())
                         .actorName(actor)
                         .title(cast.getProgram().getTitle())
                         .genres(cast.getProgram().getGenreList()
@@ -69,13 +102,16 @@ public class RecommendService {
                                 .map(genre -> genre.getGenreInfo().getName())
                                 .collect(Collectors.toList()))
                         .age(cast.getProgram().getAge())
-                        .averageRating(cast.getProgram().getAverageRating())
-                        .posterImg(cast.getProgram().getPosterImg())
-                        .genres(cast.getProgram().getGenreList()
-                                .stream()
-                                .map(genre -> genre.getGenreInfo().getName())
-                                .collect(Collectors.toList()))
                         .summary(cast.getProgram().getSummary())
+                        .broadcastingDay(cast.getProgram().getBroadcastingDay())
+                        .broadcastingEpisode(cast.getProgram().getBroadcastingEpisode())
+                        .broadcastingStation(cast.getProgram().getBroadcastingStation())
+                        .endFlag(cast.getProgram().isEndFlag())
+                        .firstAirDate(DateFormat.getDateInstance(DateFormat.LONG).format(cast.getProgram().getFirstAirDate()))
+                        .averageRating(cast.getProgram().getAverageRating())
+                        .bookmarkCnt(cast.getProgram().getBookmarkCnt())
+                        .posterImg(cast.getProgram().getPosterImg())
+                        .backdropPath(cast.getProgram().getBackdropPath())
                         .build())
                 .collect(Collectors.toList());
     }
@@ -96,6 +132,7 @@ public class RecommendService {
                         .broadcastingEpisode(program.getBroadcastingEpisode())
                         .broadcastingStation(program.getBroadcastingStation())
                         .endFlag(program.isEndFlag())
+                        .firstAirDate(DateFormat.getDateInstance(DateFormat.LONG).format(program.getFirstAirDate()))
                         .averageRating(program.getAverageRating())
                         .bookmarkCnt(program.getBookmarkCnt())
                         .posterImg(program.getPosterImg())

@@ -1,32 +1,24 @@
-package com.billow.domain.dto.program;
+package com.billow.domain.dto.organization;
 
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CastResponse {
+public class OrganizationResponse {
 
     Long id;
-
-    String actorName;
 
     private String title;
 
     private List<String> genres;
 
     private String age;
-
-    private String summary;
-
-    private String broadcastingDay;
-
-    private String broadcastingEpisode;
-
-    private String broadcastingStation;
 
     private boolean endFlag;
 
@@ -39,4 +31,18 @@ public class CastResponse {
     private String posterImg;
 
     private String backdropPath;
+
+    private Long programOrganizationId;
+
+    private String broadcastingDay;
+
+    private String broadcastingTime;
+
+    private String broadcastingEpisode;
+
+    private String broadcastingAge;
+
+    private String broadcastingRerun;
+
+    private String broadcastingStation;
 }

@@ -1,16 +1,15 @@
 package com.billow.domain.entity.organization;
 
 import com.billow.domain.entity.program.Program;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tb_program_organization")
 @Entity
@@ -26,7 +25,7 @@ public class ProgramOrganization {
     private String broadcastingDay;
 
     @NotNull
-    private String broadcastingTime;
+    private Date broadcastingTime;
 
     private String broadcastingEpisode;
 
@@ -44,7 +43,7 @@ public class ProgramOrganization {
     private Program program;
 
     @Builder
-    public ProgramOrganization(Long id, String broadcastingDay, String broadcastingTime, String broadcastingEpisode, String broadcastingAge, String broadcastingRerun, String broadcastingStation, Program program) {
+    public ProgramOrganization(Long id, String broadcastingDay, Date broadcastingTime, String broadcastingEpisode, String broadcastingAge, String broadcastingRerun, String broadcastingStation, Program program) {
         this.id = id;
         this.broadcastingDay = broadcastingDay;
         this.broadcastingTime = broadcastingTime;

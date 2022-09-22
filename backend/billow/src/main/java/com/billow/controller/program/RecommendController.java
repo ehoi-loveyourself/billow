@@ -1,5 +1,6 @@
 package com.billow.controller.program;
 
+import com.billow.domain.dto.organization.OrganizationResponse;
 import com.billow.domain.dto.program.CastResponse;
 import com.billow.domain.dto.program.ProgramIWatchedRequest;
 import com.billow.domain.dto.program.ProgramResponse;
@@ -78,10 +79,10 @@ public class RecommendController {
 
     @GetMapping("/gender-age")
     public ResponseEntity<Object> recommendGenderAge(
-            //            @RequestHeader("Auth-access") String token,
+            //@RequestHeader("Auth-access") String token,
     ) {
         log.info("성연령별 프로그램 추천 API 호출");
-        List<ProgramResponse> response = recommendService.recommendGenderAge(0L);
+        List<ProgramResponse> response = recommendService.recommendGenderAge(1L);
         log.info("성연령별 프로그램 추천 API 성공");
         return ResponseEntity.ok()
                 .body(response);
@@ -89,7 +90,9 @@ public class RecommendController {
 
     @GetMapping("/onair")
     public ResponseEntity<Object> recommendOnair() {
-        List<Program> response = recommendService.recommendOnair();
+        log.info("온에어 프로그램 추천 API 호출");
+        List<OrganizationResponse> response = recommendService.recommendOnair();
+        log.info("온에어 프로그램 추천 API 성공");
         return ResponseEntity.ok()
                 .body(response);
     }
