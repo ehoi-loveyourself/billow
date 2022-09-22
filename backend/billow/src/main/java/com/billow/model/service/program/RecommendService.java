@@ -123,7 +123,6 @@ public class RecommendService {
         return new Message("사용자가 특정 상황에 봤던 프로그램을 추가하였습니다.");
     }
 
-<<<<<<< backend/billow/src/main/java/com/billow/model/service/program/RecommendService.java
     public List<ProgramResponse> recommendNew() {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH, -2);

@@ -132,7 +132,6 @@ public class UserService {
         user.saveRefreshToken(refreshToken);
         userRepository.save(user);
     }
-}
 
     public Optional<User> findById(Long userId) {
         return userRepository.findById(userId);
