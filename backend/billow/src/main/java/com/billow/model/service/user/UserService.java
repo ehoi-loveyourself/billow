@@ -1,23 +1,24 @@
 package com.billow.model.service.user;
 
-import com.billow.domain.entity.user.User;
-import com.billow.domain.entity.addition.Rating;
 import com.billow.domain.dto.addtion.RatingRequest;
 import com.billow.domain.dto.addtion.RatingResponse;
-import com.billow.model.repository.user.UserRepository;
-import com.billow.model.repository.addition.RatingRepository;
-import com.billow.exception.NotFoundException;
+import com.billow.domain.dto.user.AuthTokenResponse;
+import com.billow.domain.dto.user.LoginResponse;
+import com.billow.domain.entity.addition.Rating;
+import com.billow.domain.entity.user.User;
 import com.billow.exception.BadRequestException;
+import com.billow.exception.NotFoundException;
+import com.billow.exception.WrongFormException;
+import com.billow.model.repository.addition.RatingRepository;
+import com.billow.model.repository.user.UserRepository;
+import com.billow.util.JwtUtil;
 import com.billow.util.KakaoOAuth2;
 import com.billow.util.Message;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,31 +31,58 @@ public class UserService {
     private static final String USER_NOT_FOUND = "해당 유저를 찾을 수 없습니다.";
     private static final String RATING_NOT_FOUND = "해당 평점을 찾을 수 없습니다.";
     private static final String BAD_REQUEST = "잘못된 요청입니다.";
+    private static final String TOKEN_NOT_VALID = "토큰 정보가 올바르지 않습니다.";
 
     private final UserRepository userRepository;
     private final RatingRepository ratingRepository;
     private final KakaoOAuth2 kakaoOAuth2;
 
-    public Message kakaoLogin(String code) throws ParseException {
+    public LoginResponse kakaoLogin(String code) throws ParseException {
         User kakaoUser = kakaoOAuth2.getUserInfo(code);
         log.info(kakaoUser.toString());
 
         if (kakaoUser.getEmail() == null) {
             throw new NotFoundException(EMAIL_NOT_FOUND);
         } else {
-            Optional<User> user = userRepository.findByEmail(kakaoUser.getEmail());
-            if (user.isPresent()) {
-                //로그인으로 진행
-            } else {
-                User singUpUser = User.builder()
+            User user = userRepository.findByEmail(kakaoUser.getEmail());
+            if (user == null) {
+                User.builder()
                         .name(kakaoUser.getNickName())
                         .email(kakaoUser.getEmail())
                         .build();
-                userRepository.save(singUpUser);
+                userRepository.save(user);
             }
-            //TODO: 토큰 발급 과정 추가
-            return new Message("카카오 로그인 성공하였습니다.");
+            String authToken = JwtUtil.createAuthToken(user.getId(), user.getEmail(), user.getName());
+            String refreshToken = JwtUtil.createRefreshToken();
+            saveRefreshToken(user.getEmail(), refreshToken);
+
+            return LoginResponse.builder()
+                    .email(user.getEmail())
+                    .name(user.getName())
+                    .nickName(user.getNickName())
+                    .authToken(authToken)
+                    .refreshToken(refreshToken)
+                    .build();
         }
+    }
+
+    public AuthTokenResponse refresh(String email, String refreshToken) {
+        User user = userRepository.findByEmail(email);
+        // 데이터베이스에 있는 리프레시 토큰과 같은지 판단
+        if (!user.getRefreshToken().equals(refreshToken)) {
+            throw new WrongFormException(TOKEN_NOT_VALID);
+        }
+        return AuthTokenResponse.builder()
+                .AuthToken(JwtUtil.createAuthToken(user.getId(), user.getEmail(), user.getName()))
+                .build();
+    }
+
+    public Message logout(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
+        user.deleteRefreshToken();
+        userRepository.save(user);
+        return new Message("로그아웃에 성공하였습니다.");
     }
 
     public List<RatingResponse> selectRating(Long userId) {
@@ -98,6 +126,13 @@ public class UserService {
 
         return new Message("회원님의 평점내역 삭제에 성공하였습니다.");
     }
+
+    private void saveRefreshToken(String email, String refreshToken) {
+        User user = userRepository.findByEmail(email);
+        user.saveRefreshToken(refreshToken);
+        userRepository.save(user);
+    }
+}
 
     public Optional<User> findById(Long userId) {
         return userRepository.findById(userId);
