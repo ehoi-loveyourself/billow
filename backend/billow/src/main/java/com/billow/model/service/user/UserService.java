@@ -20,6 +20,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -132,7 +133,6 @@ public class UserService {
         user.saveRefreshToken(refreshToken);
         userRepository.save(user);
     }
-}
 
     public Optional<User> findById(Long userId) {
         return userRepository.findById(userId);
