@@ -5,9 +5,11 @@ from django.shortcuts import render
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from datas import serializers
 
 from datas.models import TbGenre, TbGenreInfo, TbOtt, TbOttInfo, TbProgram, TbRating, TbUser
-from datas.serializers import TbGenreInfoSerializer
+from datas.serializers import RecommProgramSerializer, TbGenreInfoSerializer, ProgramSerializer
+from datas import recomm
 
 import requests
 import random
@@ -142,3 +144,30 @@ def rating_create(request):
                 program_id = program_number
         )
     return response()
+
+@api_view(['GET'])
+def user_recomm(request, user_id):
+    # user = request.user
+    # user_id = user.user_id
+    user_id = user_id
+    print(user_id)
+    indi_user_recomm = recomm.mf_algo_individual(user_id)
+
+    # indi_user_recomm = indi_user_recomm[indi_user_recomm['user_id']==user_id]
+
+    indi_user_recomm = indi_user_recomm.values.tolist()
+
+    print(indi_user_recomm)
+
+    indi_user_recomm_list = []
+    for program_id in indi_user_recomm:
+        program = TbProgram.objects.get(pk=program_id[0])
+        indi_user_recomm_list.append(program)
+
+    print(indi_user_recomm_list)
+    
+    # serializer = RecommProgramSerializer(indi_user_recomm_list, many = True)
+    serializer = ProgramSerializer(indi_user_recomm_list, many = True)
+
+
+    return Response(serializer.data)

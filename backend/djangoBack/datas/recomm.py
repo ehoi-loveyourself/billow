@@ -47,7 +47,7 @@ def predict_table():
     # print(user_list)
     for user in user_list:
         users.append(user[0])
-    print(users)
+    # print(users)
 
     df_user_program_ratings = df_rating.pivot(
         index = 'user_id',
@@ -71,7 +71,7 @@ def predict_table():
 
     return users, df_program, df_rating, df_svd_preds
 
-def recommend_programs(df_svd_preds, user_id, ori_programs_df, ori_ratings_df, num_recommendations=5):
+def recommend_programs(df_svd_preds, user_id, ori_programs_df, ori_ratings_df, num_recommendations=10):
 
     #현재는 index로 적용이 되어있으므로 user_id - 1을 해야함.
     user_row_number = user_id - 1 
@@ -99,7 +99,7 @@ def mf_algo():
     users, df_program, df_rating, df_svd_preds = predict_table()
     predict_result = pd.DataFrame()
     for i, user in enumerate(users):
-        print(i, user)
+        # print(i, user)
         user_result = recommend_programs(df_svd_preds, user, df_program, df_rating)
         user_result.insert(2, 'user_id', user)
         user_result = user_result[0:10]
@@ -137,4 +137,4 @@ def mf_algo_individual(userId):
     return indi_predict_result
 
 # mf_algo()
-mf_algo_individual(1)
+# mf_algo_individual(1)
