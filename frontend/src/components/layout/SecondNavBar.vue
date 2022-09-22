@@ -13,13 +13,7 @@
     </b-navbar>
   </template>
   <script>
-//   export default {
-//     methods: {
-//       gotoPage(link) {
-//         this.$router.push(link);
-//       },
-//     },
-//   };
+
   </script>
   
   <style scoped>
