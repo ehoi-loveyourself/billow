@@ -9,7 +9,6 @@
 		<span>Search</span>
 	</button>
 </form>
-          <!-- <img src="@/assets/search.png" alt="Image"/> -->
         </b-nav-item>
         &nbsp;&nbsp;
         <b-nav-item class="profile">
@@ -18,9 +17,10 @@
     </b-navbar-nav>
   </b-navbar>
 </template>
+
 <script>
 
-  </script>
+</script>
   
 <style scoped>
   nav .navbar-nav a.router-link-active {
@@ -199,5 +199,8 @@ body {
 	.search-btn {
 		background: #f1f1f1;
 	}
+}
+.navbar-expand-lg {
+    padding:8px 0px;
 }
 </style>

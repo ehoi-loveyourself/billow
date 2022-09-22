@@ -3,32 +3,6 @@ import HomeView from '../views/HomeView.vue';
 import AboutView from '../views/AboutView.vue';
 
 const routes = [
-  // {
-  //   path: '/',
-  //   name: 'home',
-  //   component: HomeView,
-  //   redirect: "/main",
-  //   children: [
-  //     {
-  //       path:'/main',
-  //       name:'about',
-  //       component: AboutView,
-  //       children:[
-  //         {
-  //           path: '/situation',
-  //           name: 'situation',
-  //           component: () => import('@/views/SituationView.vue'),
-  //         },
-  //         {
-  //           path: '/like',
-  //           name: 'like',
-  //           component: () => import('@/views/LikeView.vue'),
-  //         },
-  //       ]
-  //     },
-  //   ],
-  // },
-
   {
     path: '/',
     name: 'home',
