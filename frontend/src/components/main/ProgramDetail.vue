@@ -25,8 +25,8 @@
                         xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD0AAAAYCAYAAABJA/VsAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFhSURBVFhHY2RgYPgPxCMKMEHpEQWI9vSeCUpgTC0wkOYR5Wl7A24UTCkYaPOI8nRtgjiUhcomFwy0eQQ9jR56xIYmLjAYzMPraXkJNqwhR27sDBbz4FUWyIB4D0EQk8GOiNACgQcvfjE8fPEbTB+68JXhIBA/BLJBYDCbB/d0HNDAuRUyICbZILnjCcOiHe/B7MFsHjOQ3QASuHjnBzAEGIkKQWxgIdCw5gWvoLzBbR7c0yAAin5yDAYZmAIMRXQwWM1D8TQIkGowKPSKpzyH8jDBYDQPZ9sb1LohZDDIAS4F96A8/GAwmYezypKXYIWycANi1MDAYDIPp6cVgFUENcFgMg+rp7ElG1Bdhw5AFhOTtwabeVg9DWoIwADIMFBhoBpxk0EFiGHFPilgMJoHKshQcF2C+P/fB3TBNDZ5oKUE1SDjQWgehgBYEzZxdDxU1Y0OF40UMOrpkQJGoKcZGABqIX9owqCb9AAAAABJRU5ErkJggg==" />
                 </defs>
             </svg></span>&nbsp;&nbsp;<span>3.0</span></div>
-    <div class="box"><span class="box_design">15+</span><span class="box_design">금 오후7:00</span><span class="box_design">드라마</span><span class="box_design">tvN</span></div>
-    <div class="genre"><span>리얼리티</span></div>
+    <div class="box"><span class="box_design">15+</span><span class="box_design">금 오후7:00</span><span class="box_design">예능</span><span class="box_design">tvN</span></div>
+    <div class="genre"><span>#리얼리티</span></div>
     <div class="blabla">′이효리, 이상순 부부′ 두 사람이 제주도에서 부부 민박집을 운영하는 프로그램</div>
     <div class="talent">출연&nbsp;&nbsp;&nbsp;&nbsp;이효리, 이상순</div>
    </div>
