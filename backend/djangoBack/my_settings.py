@@ -8,4 +8,4 @@ DATABASES = {
         'PORT': '3306' # 포트 번호
     }   
 }
-SECRET_KEY = 'django-insecure-h9a#$_0rrkpqdc$=e2ed123*cdk$l&wm*yc%mwv210y=9p5tp+'
+SECRET_KEY = 'ssafy second project B309 Billow'
