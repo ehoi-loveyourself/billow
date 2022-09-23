@@ -47,6 +47,4 @@ public class Rating {
     public void updateRating(Float score) {
         this.score = score;
     }
-
-
 }

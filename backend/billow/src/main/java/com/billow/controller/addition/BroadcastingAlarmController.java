@@ -32,17 +32,23 @@ public class BroadcastingAlarmController {
                 .body(responses);
     }
 
-    @PostMapping
-    public ResponseEntity<Object> postAlarm(@RequestBody AlarmRequest alarmRequest) {
-        Message response = new Message("succeeded");
+    @PostMapping("/{programOrganizationId}")
+    public ResponseEntity<Object> postAlarm(@PathVariable("programOrganizationId") Long programOrganizationId
+//            @RequestHeader("Auth-access") String token
+    ) {
+        log.info("방영 알림 등록 API 호출");
+        Message responses = broadcastingAlarmService.postAlarm(1L, programOrganizationId);
+        log.info("방영 알림 등록 성공");
         return ResponseEntity.ok()
-                .body(response);
+                .body(responses);
     }
 
     @DeleteMapping("/{alarmId}")
     public ResponseEntity<Object> deleteAlarm(@PathVariable("alarmId") Long alarmId) {
-        Message response = new Message("succeeded");
+        log.info("방영 알림 삭제 API 호출");
+        Message responses = broadcastingAlarmService.deleteAlarm(alarmId);
+        log.info("방영 알림 삭제 성공");
         return ResponseEntity.ok()
-                .body(response);
+                .body(responses);
     }
 }

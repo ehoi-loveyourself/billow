@@ -23,6 +23,7 @@ import com.billow.model.repository.program.CastRepository;
 import com.billow.model.repository.program.GenderAgeViewerRepository;
 import com.billow.model.repository.program.ProgramRepository;
 import com.billow.model.repository.user.UserRepository;
+import com.billow.util.DateUtil;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -59,7 +60,7 @@ public class RecommendService {
         Date now = new Date();
         Date date = new Date(calendar.getTimeInMillis());
         List<ProgramOrganization> programOrganizationList = programOrganizationRepository.findByBroadcastingTimeBetween(date, now);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm");
+
         return programOrganizationList
                 .stream()
                 .map(organization -> OrganizationResponse.builder()
@@ -77,8 +78,8 @@ public class RecommendService {
                         .posterImg(organization.getProgram().getPosterImg())
                         .backdropPath(organization.getProgram().getBackdropPath())
                         .programOrganizationId(organization.getId())
-                        .broadcastingDay(organization.getBroadcastingDay())
-                        .broadcastingTime(simpleDateFormat.format(organization.getBroadcastingTime()))
+                        .broadcastingDay(DateUtil.toYYYY_MM_DD(organization.getBroadcastingTime()) + " " + organization.getBroadcastingDay())
+                        .broadcastingTime(DateUtil.toHH_mm(organization.getBroadcastingTime()))
                         .broadcastingEpisode(organization.getBroadcastingEpisode())
                         .broadcastingAge(organization.getBroadcastingAge())
                         .broadcastingRerun(organization.getBroadcastingRerun())
@@ -168,7 +169,7 @@ public class RecommendService {
         List<Program> programList = programRepository.findByFirstAirDateAfterOrderByFirstAirDateDesc(date);
 
         return programList
-        .stream()
+                .stream()
                 .map(program -> ProgramResponse.builder()
                         .id(program.getId())
                         .title(program.getTitle())
@@ -190,7 +191,7 @@ public class RecommendService {
                         .build())
                 .collect(Collectors.toList());
     }
-    
+
     public List<ProgramResponse> recommendGenderAge(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
@@ -199,7 +200,7 @@ public class RecommendService {
         List<Program> programResponseList = programRepository.findGenderAgeRecommend(userId, user.getAge(), user.getGender(), genderAgeViewerList.get(0).getProgram().getId(), genderAgeViewerList.get(1).getProgram().getId(), genderAgeViewerList.get(2).getProgram().getId(), genderAgeViewerList.get(3).getProgram().getId(), genderAgeViewerList.get(4).getProgram().getId());
 
         return programResponseList
-        .stream()
+                .stream()
                 .map(program -> ProgramResponse.builder()
                         .id(program.getId())
                         .title(program.getTitle())
