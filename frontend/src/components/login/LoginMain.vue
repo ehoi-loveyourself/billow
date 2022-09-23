@@ -8,7 +8,6 @@
   </div>
 <br />
 <div style="text-align:center;  color:white; font-size: 36px;">
-     
         <br/><br/><br/><br/>
         BILLOW는 여러분의 취향에 맞춰<br>
 TV프로그램을 추천해줍니다.
