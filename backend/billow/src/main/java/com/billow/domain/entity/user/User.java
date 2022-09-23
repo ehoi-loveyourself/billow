@@ -1,4 +1,3 @@
-
 package com.billow.domain.entity.user;
 
 import lombok.*;
@@ -44,6 +43,11 @@ public class User {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tv_carrier_id")
     private TvCarrier tvCarrier;
+
+    public User(String email, String name) {
+        this.email = email;
+        this.name = name;
+    }
 
     @Builder
     public User(Long id, String email, String name, String nickName, String gender, Integer age, String refreshToken, ProfileImg profileImg, Region region, TvCarrier tvCarrier) {
