@@ -22,8 +22,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,7 +71,7 @@ public class DataController {
     }
 
     @GetMapping(value = "/programorganization")
-    public ResponseEntity<Object> programorganization() throws IOException {
+    public ResponseEntity<Object> programorganization() throws IOException, ParseException {
         log.info("프로그램 편성표 데이터 수집 Scheduler 호출");
         //하루 전 데이터 삭제
         LocalDate today = LocalDate.now();
@@ -77,11 +80,12 @@ public class DataController {
         programOrganozationService.deleteByBroadcastingDayStartingWith(yesterDay);
 
         List<Program> programList = programService.findAll();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 50; i++) {
 //        for (Program program : programList) {
             Connection connection = Jsoup.connect("https://search.naver.com/search.naver?query=" + programList.get(i).getTitle() + "방송시간");
             Document document = connection.get();
             List<ProgramOrganization> programOrganizationList = programOrganozationService.findByProgram_Id(programList.get(i).getId());
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd HH:mm");
 
             Elements channel = document.select(".table_scroll_wrap>.table_top_area>.cm_table tr a");
             if (!channel.isEmpty()) {
@@ -93,14 +97,17 @@ public class DataController {
                         continue;
                     }
                     Elements broadcastingTimeRow = broadcastingDayRow.get(d).select(">td");
+
                     for (int c = 0; c < broadcastingTimeRow.size(); c++) {//c는 채널 인덱스와 같음
                         Elements broadcastingInfos = broadcastingTimeRow.get(c).select(".info");
                         if (!broadcastingInfos.isEmpty()) {
                             for (Element broadcastingInfo : broadcastingInfos) {
+                                String time = Calendar.getInstance().get(Calendar.YEAR) +"."+ broadcastingDay.get(d).text().substring(0, 5) + " " + broadcastingInfo.select(".time").text();
+                                String day = broadcastingDay.get(d).text().substring(7);
                                 ProgramOrganization programOrganization = ProgramOrganization.builder()
                                         .program(programList.get(i))
-                                        .broadcastingDay(broadcastingDay.get(d).text())
-                                        .broadcastingTime(broadcastingInfo.select(".time").text())
+                                        .broadcastingDay(day)
+                                        .broadcastingTime(formatter.parse(time))
                                         .broadcastingEpisode(broadcastingInfo.select(".number_text").text())
                                         .broadcastingAge(broadcastingInfo.select(".age_limit").text())
                                         .broadcastingRerun(broadcastingInfo.select(".blind").text())
@@ -120,10 +127,12 @@ public class DataController {
                         continue;
                     }
                     for (Element broadcastingInfo : broadcastingInfos) {
+                        String time = Calendar.getInstance().get(Calendar.YEAR) +"."+ broadcastingDay.substring(0, 5) + " " + broadcastingInfo.select(".time").text();
+                        String day = broadcastingDay.substring(7);
                         ProgramOrganization programOrganization = ProgramOrganization.builder()
                                 .program(programList.get(i))
-                                .broadcastingDay(broadcastingDayRow.get(d).select(".cm_date").text())
-                                .broadcastingTime(broadcastingInfo.select(".time").text())
+                                .broadcastingDay(day)
+                                .broadcastingTime(formatter.parse(time))
                                 .broadcastingEpisode(broadcastingInfo.select(".number_text").text())
                                 .broadcastingAge(broadcastingInfo.select(".age_limit").text())
                                 .broadcastingRerun(broadcastingInfo.select(".blind").text())

@@ -54,7 +54,7 @@ public class OganizationScheduler {
                         for (Element broadcastingInfo : broadcastingInfos) {
                             ProgramOrganization programOrganization = ProgramOrganization.builder()
                                     .broadcastingDay(broadcastingDay.get(d).text())
-                                    .broadcastingTime(broadcastingInfo.select(".time").text())
+//                                    .broadcastingTime(broadcastingInfo.select(".time").text())
                                     .broadcastingEpisode(broadcastingInfo.select(".number_text").text())
                                     .broadcastingAge(broadcastingInfo.select(".age_limit").text())
                                     .broadcastingRerun(broadcastingInfo.select(".blind").text())
@@ -75,7 +75,7 @@ public class OganizationScheduler {
                 for (Element broadcastingInfo : broadcastingInfos) {
                     ProgramOrganization programOrganization = ProgramOrganization.builder()
                             .broadcastingDay(broadcastingDayRow.get(d).select(".cm_date").text())
-                            .broadcastingTime(broadcastingInfo.select(".time").text())
+//                            .broadcastingTime(broadcastingInfo.select(".time").text())
                             .broadcastingEpisode(broadcastingInfo.select(".number_text").text())
                             .broadcastingAge(broadcastingInfo.select(".age_limit").text())
                             .broadcastingRerun(broadcastingInfo.select(".blind").text())
