@@ -47,10 +47,7 @@ public class UserService {
         } else {
             User user = userRepository.findByEmail(kakaoUser.getEmail());
             if (user == null) {
-                User.builder()
-                        .name(kakaoUser.getNickName())
-                        .email(kakaoUser.getEmail())
-                        .build();
+                user = new User(kakaoUser.getEmail(), kakaoUser.getNickName());
                 userRepository.save(user);
             }
             String authToken = JwtUtil.createAuthToken(user.getId(), user.getEmail(), user.getName());
