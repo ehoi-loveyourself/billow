@@ -36,12 +36,17 @@ public class UserController {
 
     @GetMapping("/oauth")
     public ResponseEntity<Object> kakaoLogin(String code, HttpServletResponse httpServletResponse) throws ParseException {
-        log.info("카카오 로그인 API 호출");
-        LoginResponse response = userService.kakaoLogin(code, httpServletResponse);
-        log.info("카카오 로그인 API 성공");
-        return ResponseEntity.ok()
-                .header("Auth-access", response.getAuthToken())
-                .body(response);
+        try {
+            log.info("카카오 로그인 API 호출");
+            LoginResponse response = userService.kakaoLogin(code, httpServletResponse);
+            log.info("카카오 로그인 API 성공");
+            return ResponseEntity.ok()
+                    .header("Auth-access", response.getAuthToken())
+                    .body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(new Message("카카오 로그인에 실패했습니다."));
+        }
     }
 
     @PostMapping("/refresh")
