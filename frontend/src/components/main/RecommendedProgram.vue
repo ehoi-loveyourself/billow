@@ -103,7 +103,7 @@
   </splide-slide>
 </splide>
 
-<h2 style="color:white">재현님에게 추천드려요!</h2>
+<h2 style="color:white">신규 프로그램을 추천드려요!</h2>
   <splide id="carousel_recommend" :options="options">
     <splide-slide>
   <img src="@/assets/nangman.png" alt="Image"/>

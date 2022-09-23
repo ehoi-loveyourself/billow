@@ -19,6 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,7 +40,7 @@ public class UserService {
     private final RatingRepository ratingRepository;
     private final KakaoOAuth2 kakaoOAuth2;
 
-    public LoginResponse kakaoLogin(String code) throws ParseException {
+    public LoginResponse kakaoLogin(String code, HttpServletResponse httpServletResponse) throws ParseException {
         User kakaoUser = kakaoOAuth2.getUserInfo(code);
         log.info(kakaoUser.toString());
 
@@ -47,14 +49,20 @@ public class UserService {
         } else {
             User user = userRepository.findByEmail(kakaoUser.getEmail());
             if (user == null) {
-                User.builder()
-                        .name(kakaoUser.getNickName())
-                        .email(kakaoUser.getEmail())
-                        .build();
+                user = new User(kakaoUser.getEmail(), kakaoUser.getNickName());
                 userRepository.save(user);
             }
             String authToken = JwtUtil.createAuthToken(user.getId(), user.getEmail(), user.getName());
             String refreshToken = JwtUtil.createRefreshToken();
+
+            Cookie refreshCookie = new Cookie("refreshToken", refreshToken);
+            refreshCookie.setMaxAge(60 * 60 * 24); // 하루
+            refreshCookie.setSecure(true);
+            refreshCookie.setHttpOnly(true);
+            refreshCookie.setPath("/");
+
+            httpServletResponse.addCookie(refreshCookie);
+
             saveRefreshToken(user.getEmail(), refreshToken);
 
             return LoginResponse.builder()
@@ -62,7 +70,6 @@ public class UserService {
                     .name(user.getName())
                     .nickName(user.getNickName())
                     .authToken(authToken)
-                    .refreshToken(refreshToken)
                     .build();
         }
     }
