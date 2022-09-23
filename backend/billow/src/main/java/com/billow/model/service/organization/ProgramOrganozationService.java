@@ -1,5 +1,6 @@
 package com.billow.model.service.organization;
 
+import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.domain.entity.organization.ProgramOrganization;
 import com.billow.model.repository.organization.ProgramOrganizationRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,5 +24,13 @@ public class ProgramOrganozationService {
 
     public List<ProgramOrganization> findByProgram_Id(Long id) {
         return programOrganizationRepository.findByProgram_Id(id);
+    }
+
+    public List<ProgramResponse> selectProgramOrganization(Long programId) {
+        System.out.println(programId);
+        List<ProgramOrganization> programOrganizationList = programOrganizationRepository.findByProgram_Id(programId);
+        System.out.println(programOrganizationList);
+        //TODO : OrganizationResponse추가
+        return null;
     }
 }
