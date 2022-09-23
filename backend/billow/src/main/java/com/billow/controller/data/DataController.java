@@ -115,7 +115,6 @@ public class DataController {
                                         .broadcastingStation(channel.get(c).text())
                                         .build();
                                 programOrganozationService.save(programOrganization);
-                                System.out.println(DateUtil.toDate(time));
                             }
                         }
                     }
@@ -141,7 +140,6 @@ public class DataController {
                                 .broadcastingStation(broadcastingInfo.select("a").text())
                                 .build();
                         programOrganozationService.save(programOrganization);
-                        System.out.println(DateUtil.toDate(time));
                     }
                 }
             }
