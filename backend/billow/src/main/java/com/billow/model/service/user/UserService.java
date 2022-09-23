@@ -4,12 +4,19 @@ import com.billow.domain.dto.addtion.RatingRequest;
 import com.billow.domain.dto.addtion.RatingResponse;
 import com.billow.domain.dto.user.AuthTokenResponse;
 import com.billow.domain.dto.user.LoginResponse;
+import com.billow.domain.dto.user.SignUpRequest;
 import com.billow.domain.entity.addition.Rating;
+import com.billow.domain.entity.user.ProfileImg;
+import com.billow.domain.entity.user.Region;
+import com.billow.domain.entity.user.TvCarrier;
 import com.billow.domain.entity.user.User;
 import com.billow.exception.BadRequestException;
 import com.billow.exception.NotFoundException;
 import com.billow.exception.WrongFormException;
 import com.billow.model.repository.addition.RatingRepository;
+import com.billow.model.repository.user.ProfileImgRepository;
+import com.billow.model.repository.user.RegionRepository;
+import com.billow.model.repository.user.TvCarrierRepository;
 import com.billow.model.repository.user.UserRepository;
 import com.billow.util.JwtUtil;
 import com.billow.util.KakaoOAuth2;
@@ -35,9 +42,13 @@ public class UserService {
     private static final String RATING_NOT_FOUND = "해당 평점을 찾을 수 없습니다.";
     private static final String BAD_REQUEST = "잘못된 요청입니다.";
     private static final String TOKEN_NOT_VALID = "토큰 정보가 올바르지 않습니다.";
+    private static final String PROFILE_IMG_NOT_FOUND = "프로필 이미지를 찾을 수 없습니다.";
 
     private final UserRepository userRepository;
     private final RatingRepository ratingRepository;
+    private final RegionRepository regionRepository;
+    private final TvCarrierRepository tvCarrierRepository;
+    private final ProfileImgRepository profileImgRepository;
     private final KakaoOAuth2 kakaoOAuth2;
 
     public LoginResponse kakaoLogin(String code, HttpServletResponse httpServletResponse) throws ParseException {
@@ -72,6 +83,32 @@ public class UserService {
                     .authToken(authToken)
                     .build();
         }
+    }
+
+    public Message signUp(SignUpRequest signUpRequest) {
+        User user = userRepository.findByEmail(signUpRequest.getEmail());
+        if (!user.getName().equals(signUpRequest.getName())) {
+            throw new BadRequestException(BAD_REQUEST);
+        }
+        // 지역을 찾아서 객체로 넣어줘야해
+        Region region = regionRepository.findByRegion(signUpRequest.getRegion());
+        // 통신사도 찾아서 객체로 넣어줘야 하고
+        TvCarrier tvCarrier = tvCarrierRepository.findByCompany(signUpRequest.getTvCarrier());
+        // 프로필 이미지도 번호를 찾아서
+        ProfileImg profileImg = profileImgRepository.findById(signUpRequest.getProfileImgId())
+                .orElseThrow(() -> new NotFoundException(PROFILE_IMG_NOT_FOUND));
+
+        user.signUp(
+                signUpRequest.getNickName(),
+                signUpRequest.getGender(),
+                signUpRequest.getAge(),
+                region,
+                tvCarrier,
+                profileImg,
+                signUpRequest.getMobile()
+        );
+        userRepository.save(user);
+        return new Message("회원가입이 성공하였습니다.");
     }
 
     public AuthTokenResponse refresh(String email, String refreshToken) {

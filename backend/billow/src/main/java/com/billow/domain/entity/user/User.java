@@ -32,6 +32,8 @@ public class User {
 
     private String refreshToken;
 
+    private String mobile;
+
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "profile_img_id")
     private ProfileImg profileImg;
@@ -79,5 +81,15 @@ public class User {
 
     public void deleteRefreshToken() {
         this.refreshToken = null;
+    }
+
+    public void signUp(String nickName, String gender, Integer age, Region region, TvCarrier tvCarrier, ProfileImg profileImg, String mobile) {
+        this.nickName = nickName;
+        this.gender = gender;
+        this.age = age;
+        this.region = region;
+        this.tvCarrier = tvCarrier;
+        this.profileImg = profileImg;
+        this.mobile = mobile;
     }
 }
