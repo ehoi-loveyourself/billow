@@ -116,8 +116,10 @@ def mf_algo():
     
     return predict_result
 
-def mf_algo_individual(userId):
-    user_id = userId
+def mf_algo_individual(request):
+    # user_id = request
+    user = request.user
+    user_id = user.user_id
     users, df_program, df_rating, df_svd_preds = predict_table()
     indi_predict_result = pd.DataFrame()
 

@@ -3,8 +3,11 @@ from this import d
 from urllib import response
 from django.shortcuts import render
 
-from rest_framework.decorators import api_view
+# from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from datas import serializers
 
 from datas.models import TbGenre, TbGenreInfo, TbOtt, TbOttInfo, TbProgram, TbRating, TbUser
@@ -13,6 +16,19 @@ from datas import recomm
 
 import requests
 import random
+
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework_jwt.utils import jwt_decode_handler
+
+def token_decode(request):
+    print(request)
+    print(request.user)
+    auth = JSONWebTokenAuthentication()    
+    jwt_value = auth.get_jwt_value(request)    
+    payload = jwt_decode_handler(jwt_value)    
+    
+    return payload
+
 
 API_KEY = '3beacdbb8f7b35eb8c782851ddc5b403'
 
@@ -127,12 +143,30 @@ def user_create(request):
         )
     return Response()
 
+# @api_view(['GET'])
+# def rating_create(request):
+#     lst = []
+#     for num in range(1, 590):
+#         lst.append(num)
+#     for i in range(1, 500):
+#         user = TbUser.objects.get(pk=i)
+#         program_list = random.sample(lst, 50)
+#         for program_number in program_list:
+#             program = TbProgram.objects.get(pk=program_number)
+#             score = random.uniform(0,5)
+#             TbRating.objects.create(
+#                 score = score,
+#                 user_id = i,
+#                 program_id = program_number
+#         )
+#     return response()
+
 @api_view(['GET'])
 def rating_create(request):
     lst = []
     for num in range(1, 590):
         lst.append(num)
-    for i in range(1, 500):
+    for i in range(1001, 1001):
         user = TbUser.objects.get(pk=i)
         program_list = random.sample(lst, 50)
         for program_number in program_list:
@@ -146,10 +180,16 @@ def rating_create(request):
     return response()
 
 @api_view(['GET'])
+@permission_classes((IsAuthenticated, ))
+@authentication_classes((JSONWebTokenAuthentication,))
 def user_recomm(request, user_id):
-    # user = request.user
-    # user_id = user.user_id
-    user_id = user_id
+# def user_recomm(request, user_id):
+
+    print(request)
+    print(request.user)
+    user = request.user
+    user_id = user.user_id
+    # user_id = user_id
     print(user_id)
     indi_user_recomm = recomm.mf_algo_individual(user_id)
 
