@@ -78,4 +78,14 @@ public class User {
     public void deleteRefreshToken() {
         this.refreshToken = null;
     }
+
+    public void signUp(String nickName, String gender, Integer age, Region region, TvCarrier tvCarrier, ProfileImg profileImg, String mobile) {
+        this.nickName = nickName;
+        this.gender = gender;
+        this.age = age;
+        this.region = region;
+        this.tvCarrier = tvCarrier;
+        this.profileImg = profileImg;
+        this.mobile = mobile;
+    }
 }

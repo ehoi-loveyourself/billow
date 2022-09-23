@@ -5,6 +5,7 @@ import com.billow.domain.dto.addtion.RatingRequest;
 import com.billow.domain.dto.addtion.RatingResponse;
 import com.billow.domain.dto.user.LoginResponse;
 import com.billow.domain.dto.user.RefreshRequest;
+import com.billow.domain.dto.user.SignUpRequest;
 import com.billow.model.service.user.UserService;
 import com.billow.util.JwtUtil;
 import com.billow.util.Message;
@@ -43,6 +44,20 @@ public class UserController {
         } catch (Exception e) {
             return ResponseEntity.badRequest()
                     .body(new Message("로그인에 실패하였습니다."));
+        }
+    }
+
+    @PostMapping("/signup")
+    public ResponseEntity<Object> signUp(@RequestBody SignUpRequest signUpRequest) {
+        try {
+            log.info("회원가입 API 호출");
+            Message response = userService.signUp(signUpRequest);
+            log.info("회원가입 성공");
+            return ResponseEntity.ok()
+                    .body(response);
+        } catch (Exception e){
+            return ResponseEntity.badRequest()
+                    .body(new Message("해당 정보를 모두 빠짐없이 작성해주시기 바랍니다."));
         }
     }
 
