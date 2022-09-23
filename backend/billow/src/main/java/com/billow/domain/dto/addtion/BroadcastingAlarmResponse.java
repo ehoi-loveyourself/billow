@@ -17,29 +17,13 @@ public class BroadcastingAlarmResponse {
 
     private List<String> genres;
 
-    private String age;
-
-    private String summary;
-
-    private String broadcastingDay;
-
-    private String broadcastingEpisode;
-
-    private String broadcastingStation;
-
-    private boolean endFlag;
-
-    private String firstAirDate;
-
-    private Float averageRating;
-
-    private Integer bookmarkCnt;
-
     private String posterImg;
-
-    private String backdropPath;
 
     private Long broadcastingAlarmId;
 
-    private Date dateTime;
+    private String alarmDay;
+
+    private String alarmTime;
+
+    private String alarmStation;
 }

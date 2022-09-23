@@ -1,5 +1,7 @@
 package com.billow.controller.orgranization;
 
+import com.billow.domain.dto.organization.OrganizationListResponse;
+import com.billow.domain.dto.organization.OrganizationResponse;
 import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.model.repository.organization.ProgramOrganizationRepository;
 import com.billow.model.service.organization.ProgramOrganozationService;
@@ -26,7 +28,7 @@ public class OrganizationController {
     @GetMapping("/{programId}")
     public ResponseEntity<Object> selectProgramOrganization(@PathVariable("programId") Long programId) {
         log.info("편성표 조회 API 호출");
-        List<ProgramResponse> responses = programOrganozationService.selectProgramOrganization(programId);
+        List<OrganizationListResponse> responses = programOrganozationService.selectProgramOrganization(programId);
         log.info("편성표 조회 API 성공");
         return ResponseEntity.ok()
                 .body(responses);

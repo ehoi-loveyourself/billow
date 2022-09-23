@@ -39,4 +39,5 @@ out/
 .vscode/
 
 application-api-key.properties
+application.properties
 #path/to/serviceAccountKey.json

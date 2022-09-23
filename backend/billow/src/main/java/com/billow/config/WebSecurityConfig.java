@@ -18,11 +18,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig {
 
-    //    @Override
+//        @Override
 //    public void configure(WebSecurity web) throws Exception {
-////        web.ignoring()
-////                .antMatchers("/user/**")
-////        ;
+//        web.ignoring()
+//                .antMatchers("/user/**")
+//        ;
 //    }
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {

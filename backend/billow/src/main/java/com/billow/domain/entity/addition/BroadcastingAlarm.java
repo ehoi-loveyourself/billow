@@ -1,5 +1,6 @@
 package com.billow.domain.entity.addition;
 
+import com.billow.domain.entity.organization.ProgramOrganization;
 import com.billow.domain.entity.program.Program;
 import com.billow.domain.entity.user.User;
 import lombok.AccessLevel;
@@ -25,9 +26,6 @@ public class BroadcastingAlarm {
     private Long id;
 
     @NotNull
-    private Date dateTime;
-
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -35,15 +33,14 @@ public class BroadcastingAlarm {
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "program_id")
+    @JoinColumn(name = "program_organization_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Program program;
+    private ProgramOrganization programOrganization;
 
     @Builder
-    public BroadcastingAlarm(Long id, Date dateTime, User user, Program program) {
+    public BroadcastingAlarm(Long id, User user, ProgramOrganization programOrganization) {
         this.id = id;
-        this.dateTime = dateTime;
         this.user = user;
-        this.program = program;
+        this.programOrganization = programOrganization;
     }
 }

@@ -1,12 +1,17 @@
 package com.billow.model.service.organization;
 
-import com.billow.domain.dto.program.ProgramResponse;
+import com.billow.domain.dto.organization.OrganizationListResponse;
+import com.billow.domain.dto.organization.OrganizationResponse;
 import com.billow.domain.entity.organization.ProgramOrganization;
 import com.billow.model.repository.organization.ProgramOrganizationRepository;
+import com.billow.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -26,11 +31,30 @@ public class ProgramOrganozationService {
         return programOrganizationRepository.findByProgram_Id(id);
     }
 
-    public List<ProgramResponse> selectProgramOrganization(Long programId) {
-        System.out.println(programId);
-        List<ProgramOrganization> programOrganizationList = programOrganizationRepository.findByProgram_Id(programId);
-        System.out.println(programOrganizationList);
-        //TODO : OrganizationResponse추가
-        return null;
+    public List<OrganizationListResponse> selectProgramOrganization(Long programId) {
+        LocalDate date = LocalDate.now();
+        List<OrganizationListResponse> list = new ArrayList<>();
+        for (int day = 0; day < 7; day++) {
+            List<ProgramOrganization> programOrganizationList = programOrganizationRepository.findByProgram_IdAndBroadcastingTime(programId, date.plusDays(day));
+            if (programOrganizationList.size() == 0) continue;
+
+            List<OrganizationResponse> organizationResponseList = programOrganizationList
+                    .stream()
+                    .map(organization -> OrganizationResponse.builder()
+                            .programOrganizationId(organization.getId())
+                            .broadcastingDay(DateUtil.toYYYY_MM_DD(organization.getBroadcastingTime()) + " " + organization.getBroadcastingDay())
+                            .broadcastingTime(DateUtil.toHH_mm(organization.getBroadcastingTime()))
+                            .broadcastingEpisode(organization.getBroadcastingEpisode())
+                            .broadcastingAge(organization.getBroadcastingAge())
+                            .broadcastingRerun(organization.getBroadcastingRerun())
+                            .broadcastingStation(organization.getBroadcastingStation())
+                            .build())
+                    .collect(Collectors.toList());
+            list.add(OrganizationListResponse.builder()
+                    .day(DateUtil.toYYYY_MM_DD(programOrganizationList.get(0).getBroadcastingTime()) + " " + programOrganizationList.get(0).getBroadcastingDay())
+                    .organizationResponseList(organizationResponseList)
+                    .build());
+        }
+        return list;
     }
 }
