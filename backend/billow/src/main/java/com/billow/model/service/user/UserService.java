@@ -5,6 +5,7 @@ import com.billow.domain.dto.addtion.RatingResponse;
 import com.billow.domain.dto.user.AuthTokenResponse;
 import com.billow.domain.dto.user.LoginResponse;
 import com.billow.domain.dto.user.SignUpRequest;
+import com.billow.domain.dto.user.UserResponse;
 import com.billow.domain.entity.addition.Rating;
 import com.billow.domain.entity.user.ProfileImg;
 import com.billow.domain.entity.user.Region;
@@ -43,6 +44,8 @@ public class UserService {
     private static final String BAD_REQUEST = "잘못된 요청입니다.";
     private static final String TOKEN_NOT_VALID = "토큰 정보가 올바르지 않습니다.";
     private static final String PROFILE_IMG_NOT_FOUND = "프로필 이미지를 찾을 수 없습니다.";
+    private static final String PROFILE_IMG_ABSOLUTE_PATH = "img/profile_img/";
+
 
     private final UserRepository userRepository;
     private final RatingRepository ratingRepository;
@@ -50,6 +53,27 @@ public class UserService {
     private final TvCarrierRepository tvCarrierRepository;
     private final ProfileImgRepository profileImgRepository;
     private final KakaoOAuth2 kakaoOAuth2;
+
+    public UserResponse selectUser(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
+
+        String profileImgUrl = PROFILE_IMG_ABSOLUTE_PATH + user.getProfileImg().getImgName();
+        // url 설정 이렇게 하면 되나요..?
+        // "img/profile_img/1.png" 이런 식으로 반환하는데 뭔가 아닌 거 같은데요.. 핳
+
+        return UserResponse.builder()
+                .email(user.getEmail())
+                .name(user.getName())
+                .nickName(user.getNickName())
+                .gender(user.getGender())
+                .age(user.getAge())
+                .region(user.getRegion().getRegion())
+                .tvCarrier(user.getTvCarrier().getCompany())
+                .profileImgUrl(profileImgUrl)
+                .mobile(user.getMobile())
+                .build();
+    }
 
     public LoginResponse kakaoLogin(String code, HttpServletResponse httpServletResponse) throws ParseException {
         User kakaoUser = kakaoOAuth2.getUserInfo(code);

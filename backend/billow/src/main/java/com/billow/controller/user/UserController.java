@@ -2,10 +2,7 @@ package com.billow.controller.user;
 
 import com.billow.domain.dto.addtion.RatingRequest;
 import com.billow.domain.dto.addtion.RatingResponse;
-import com.billow.domain.dto.user.AuthTokenResponse;
-import com.billow.domain.dto.user.LoginResponse;
-import com.billow.domain.dto.user.RefreshRequest;
-import com.billow.domain.dto.user.SignUpRequest;
+import com.billow.domain.dto.user.*;
 import com.billow.model.service.user.UserService;
 import com.billow.util.JwtUtil;
 import com.billow.util.Message;
@@ -28,9 +25,10 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<Object> selectUser() {
-        Message response = new Message("sdsd");
-        Message response1 = new Message("sdsd");
+    public ResponseEntity<Object> selectUser(@RequestHeader("Auth-access") String token) {
+        log.info("회원정보 조회 API 호출");
+        UserResponse response = userService.selectUser(JwtUtil.getUserId(token));
+        log.info("회원정보 조회 성공");
         return ResponseEntity.ok()
                 .body(response);
     }
@@ -52,16 +50,16 @@ public class UserController {
 
     @PostMapping("/signup")
     public ResponseEntity<Object> signUp(@RequestBody SignUpRequest signUpRequest) {
-        try {
+//        try {
             log.info("회원가입 API 호출");
             Message response = userService.signUp(signUpRequest);
             log.info("회원가입 성공");
             return ResponseEntity.ok()
                     .body(response);
-        } catch (Exception e){
-            return ResponseEntity.badRequest()
-                    .body(new Message("해당 정보를 모두 빠짐없이 작성해주시기 바랍니다."));
-        }
+//        } catch (Exception e){
+//            return ResponseEntity.badRequest()
+//                    .body(new Message("해당 정보를 모두 빠짐없이 작성해주시기 바랍니다."));
+//        }
     }
 
     @PostMapping("/refresh")
