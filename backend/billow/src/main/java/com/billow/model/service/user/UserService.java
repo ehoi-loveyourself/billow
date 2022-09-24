@@ -2,10 +2,7 @@ package com.billow.model.service.user;
 
 import com.billow.domain.dto.addtion.RatingRequest;
 import com.billow.domain.dto.addtion.RatingResponse;
-import com.billow.domain.dto.user.AuthTokenResponse;
-import com.billow.domain.dto.user.LoginResponse;
-import com.billow.domain.dto.user.SignUpRequest;
-import com.billow.domain.dto.user.UserResponse;
+import com.billow.domain.dto.user.*;
 import com.billow.domain.entity.addition.Rating;
 import com.billow.domain.entity.user.ProfileImg;
 import com.billow.domain.entity.user.Region;
@@ -122,7 +119,7 @@ public class UserService {
         ProfileImg profileImg = profileImgRepository.findById(signUpRequest.getProfileImgId())
                 .orElseThrow(() -> new NotFoundException(PROFILE_IMG_NOT_FOUND));
 
-        user.signUp(
+        user.postProfile(
                 signUpRequest.getNickName(),
                 signUpRequest.getGender(),
                 signUpRequest.getAge(),
@@ -152,6 +149,27 @@ public class UserService {
         user.deleteRefreshToken();
         userRepository.save(user);
         return new Message("로그아웃에 성공하였습니다.");
+    }
+
+    public Message updateUser(Long userId, UserUpdateRequest userUpdateRequest) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
+        Region region = regionRepository.findByRegion(userUpdateRequest.getRegion());
+        TvCarrier tvCarrier = tvCarrierRepository.findByCompany(userUpdateRequest.getTvCarrier());
+        ProfileImg profileImg = profileImgRepository.findById(userUpdateRequest.getProfileImgId())
+                .orElseThrow(() -> new NotFoundException(PROFILE_IMG_NOT_FOUND));
+
+        user.postProfile(
+                userUpdateRequest.getNickName(),
+                userUpdateRequest.getGender(),
+                userUpdateRequest.getAge(),
+                region,
+                tvCarrier,
+                profileImg,
+                userUpdateRequest.getMobile()
+        );
+        userRepository.save(user);
+        return new Message("회원정보 수정에 성공하였습니다.");
     }
 
     public List<RatingResponse> selectRating(Long userId) {

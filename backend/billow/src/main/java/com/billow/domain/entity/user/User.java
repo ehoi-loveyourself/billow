@@ -83,7 +83,7 @@ public class User {
         this.refreshToken = null;
     }
 
-    public void signUp(String nickName, String gender, Integer age, Region region, TvCarrier tvCarrier, ProfileImg profileImg, String mobile) {
+    public void postProfile(String nickName, String gender, Integer age, Region region, TvCarrier tvCarrier, ProfileImg profileImg, String mobile) {
         this.nickName = nickName;
         this.gender = gender;
         this.age = age;

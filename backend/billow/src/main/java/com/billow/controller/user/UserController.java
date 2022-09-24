@@ -95,8 +95,10 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<Object> updateUser() {
-        Message response = new Message("succeeded");
+    public ResponseEntity<Object> updateUser(@RequestHeader("Auth-access") String token, @RequestBody UserUpdateRequest userUpdateRequest) {
+        log.info("회원정보 수정 API 호출");
+        Message response = userService.updateUser(JwtUtil.getUserId(token), userUpdateRequest);
+        log.info("회원정보 수정 성공");
         return ResponseEntity.ok()
                 .body(response);
     }
