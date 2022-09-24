@@ -26,11 +26,16 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<Object> selectUser(@RequestHeader("Auth-access") String token) {
-        log.info("회원정보 조회 API 호출");
-        UserResponse response = userService.selectUser(JwtUtil.getUserId(token));
-        log.info("회원정보 조회 성공");
-        return ResponseEntity.ok()
-                .body(response);
+        try {
+            log.info("회원정보 조회 API 호출");
+            UserResponse response = userService.selectUser(JwtUtil.getUserId(token));
+            log.info("회원정보 조회 성공");
+            return ResponseEntity.ok()
+                    .body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(new Message("회원정보 조회에 실패하였습니다."));
+        }
     }
 
     @GetMapping("/oauth")
@@ -50,16 +55,16 @@ public class UserController {
 
     @PostMapping("/signup")
     public ResponseEntity<Object> signUp(@RequestBody SignUpRequest signUpRequest) {
-//        try {
+        try {
             log.info("회원가입 API 호출");
             Message response = userService.signUp(signUpRequest);
             log.info("회원가입 성공");
             return ResponseEntity.ok()
                     .body(response);
-//        } catch (Exception e){
-//            return ResponseEntity.badRequest()
-//                    .body(new Message("해당 정보를 모두 빠짐없이 작성해주시기 바랍니다."));
-//        }
+        } catch (Exception e){
+            return ResponseEntity.badRequest()
+                    .body(new Message("해당 정보를 모두 빠짐없이 작성해주시기 바랍니다."));
+        }
     }
 
     @PostMapping("/refresh")
@@ -96,11 +101,16 @@ public class UserController {
 
     @PutMapping
     public ResponseEntity<Object> updateUser(@RequestHeader("Auth-access") String token, @RequestBody UserUpdateRequest userUpdateRequest) {
-        log.info("회원정보 수정 API 호출");
-        Message response = userService.updateUser(JwtUtil.getUserId(token), userUpdateRequest);
-        log.info("회원정보 수정 성공");
-        return ResponseEntity.ok()
-                .body(response);
+        try {
+            log.info("회원정보 수정 API 호출");
+            Message response = userService.updateUser(JwtUtil.getUserId(token), userUpdateRequest);
+            log.info("회원정보 수정 성공");
+            return ResponseEntity.ok()
+                    .body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(new Message("회원정보 수정에 실패했습니다."));
+        }
     }
 
     @PutMapping("/profile")
