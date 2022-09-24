@@ -121,10 +121,17 @@ public class UserController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Object> deleteUser() {
-        Message response = new Message("succeeded");
-        return ResponseEntity.ok()
-                .body(response);
+    public ResponseEntity<Object> deleteUser(@RequestHeader("Auth-access") String token) {
+        try {
+            log.info("회원 탈퇴 API 호출");
+            Message response = userService.deleteUser(JwtUtil.getUserId(token));
+            log.info("회원 탈퇴 성공");
+            return ResponseEntity.ok()
+                    .body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(new Message("회원 탈퇴에 실패했습니다."));
+        }
     }
 
     @GetMapping("/rating")
