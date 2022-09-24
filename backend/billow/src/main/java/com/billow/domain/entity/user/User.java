@@ -34,7 +34,7 @@ public class User {
 
     private String mobile;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profile_img_id")
     private ProfileImg profileImg;
 
