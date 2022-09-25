@@ -7,7 +7,7 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+# from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from datas import serializers
 
 from datas.models import TbGenre, TbGenreInfo, TbOtt, TbOttInfo, TbProgram, TbRating, TbUser
@@ -17,17 +17,17 @@ from datas import recomm
 import requests
 import random
 
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
-from rest_framework_jwt.utils import jwt_decode_handler
+# from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+# from rest_framework_jwt.utils import jwt_decode_handler
 
-def token_decode(request):
-    print(request)
-    print(request.user)
-    auth = JSONWebTokenAuthentication()    
-    jwt_value = auth.get_jwt_value(request)    
-    payload = jwt_decode_handler(jwt_value)    
+# def token_decode(request):
+#     print(request)
+#     print(request.user)
+#     auth = JSONWebTokenAuthentication()    
+#     jwt_value = auth.get_jwt_value(request)    
+#     payload = jwt_decode_handler(jwt_value)    
     
-    return payload
+#     return payload
 
 
 API_KEY = '3beacdbb8f7b35eb8c782851ddc5b403'
@@ -180,16 +180,16 @@ def rating_create(request):
     return response()
 
 @api_view(['GET'])
-@permission_classes((IsAuthenticated, ))
-@authentication_classes((JSONWebTokenAuthentication,))
+# @permission_classes((IsAuthenticated, ))
+# @authentication_classes((JSONWebTokenAuthentication,))
 def user_recomm(request, user_id):
 # def user_recomm(request, user_id):
 
-    print(request)
-    print(request.user)
-    user = request.user
-    user_id = user.user_id
-    # user_id = user_id
+    # print(request)
+    # print(request.user)
+    # user = request.user
+    # user_id = user.user_id
+    user_id = user_id
     print(user_id)
     indi_user_recomm = recomm.mf_algo_individual(user_id)
 
