@@ -171,3 +171,32 @@ def user_recomm(request, user_id):
 
 
     return Response(serializer.data)
+
+@api_view(['GET'])
+def condition_recomm(request, user_id, program_id):
+    # 매개변수로 받은 아이들 확인
+    user_id = user_id
+    print(user_id)
+    
+    program_id = program_id
+    print(program_id)
+    
+    # 프로그램 제목으로 검색해서 나온 결과 받기
+    indi_condition_program = recomm.mf_algo_condition(program_id)
+    
+    # 값을 리스트로 받기
+    indi_condition_program = indi_condition_program.values.tolist()
+    
+    # 확인해보자
+    print(indi_condition_program)
+    
+    indi_condition_program_list = []
+    for program_id in indi_condition_program_list:
+        program = TbProgram.objects.get(pk=program_id[0])
+        indi_condition_program_list.append(program)
+    
+    print(indi_condition_program_list)
+    
+    serializer = ProgramSerializer(indi_condition_program_list, many = True)
+    
+    return Response(serializer.data)
