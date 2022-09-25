@@ -7,6 +7,12 @@ import com.billow.model.repository.organization.ProgramOrganizationRepository;
 import com.billow.model.service.organization.ProgramOrganozationService;
 import com.billow.util.JwtUtil;
 import com.billow.util.Message;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +25,16 @@ import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
+@Api(tags = {"Organization API"})
 @RestController
 @RequestMapping("/organization")
 public class OrganizationController {
 
     private final ProgramOrganozationService programOrganozationService;
 
+    @ApiOperation(value = "편성표 조회", response = Object.class)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "편성표 조회 성공")})
     @GetMapping("/{programId}")
     public ResponseEntity<Object> selectProgramOrganization(@PathVariable("programId") Long programId) {
         log.info("편성표 조회 API 호출");

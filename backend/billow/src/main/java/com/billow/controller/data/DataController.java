@@ -10,6 +10,8 @@ import com.billow.model.service.program.CastService;
 import com.billow.model.service.program.ProgramService;
 import com.billow.util.DateUtil;
 import com.billow.util.Message;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Connection;
@@ -34,6 +36,7 @@ import java.util.TimeZone;
 
 @Slf4j
 @RequiredArgsConstructor
+@Api(tags = {"Data API"})
 @RestController
 @RequestMapping("/data")
 public class DataController {
@@ -45,6 +48,7 @@ public class DataController {
     private final CastService castService;
     private final ProgramService programService;
 
+    @ApiOperation(value = "kdrama 데이터 수집", response = Object.class)
     @GetMapping(value = "/kdrama")
     public ResponseEntity<Object> kdramaData() {
         log.info("kdrama 데이터 수집 API 호출");
@@ -54,6 +58,7 @@ public class DataController {
                 .body(message);
     }
 
+    @ApiOperation(value = "kpop 데이터 수집", response = Object.class)
     @GetMapping(value = "/kpop")
     public ResponseEntity<Object> kpopData() {
         log.info("kpop 데이터 수집 API 호출");
@@ -63,6 +68,7 @@ public class DataController {
                 .body(message);
     }
 
+    @ApiOperation(value = "성연령별 데이터 프로그램 매핑", response = Object.class)
     @GetMapping(value = "/insert")
     public ResponseEntity<Object> insertProgramId() {
         log.info("성연령별 데이터 프로그램 매핑 API 호출");
@@ -72,6 +78,7 @@ public class DataController {
                 .body(message);
     }
 
+    @ApiOperation(value = "프로그램 편성표 데이터 수집", response = Object.class)
     @GetMapping(value = "/programorganization")
     public ResponseEntity<Object> programorganization() throws IOException, ParseException {
         log.info("프로그램 편성표 데이터 수집 Scheduler 호출");
@@ -149,6 +156,7 @@ public class DataController {
                 .body(new Message("succeeded"));
     }
 
+    @ApiOperation(value = "출연진 데이터 수집", response = Object.class)
     @GetMapping(value = "/cast")
     public ResponseEntity<Object> cast() throws IOException {
         log.info("출연진 데이터 수집 Scheduler 실행");
@@ -184,6 +192,7 @@ public class DataController {
                 .body(new Message("succeeded"));
     }
 
+    @ApiOperation(value = "프로그램 방영정보 데이터 수집", response = Object.class)
     @GetMapping(value = "/programdetail")
     public ResponseEntity<Object> programDetail() throws IOException {
         log.info("프로그램 방영정보 데이터 수집 Scheduler 호출");
@@ -204,7 +213,6 @@ public class DataController {
             if (subTitle.size() == 3) {
                 programList.get(i).setEndFlag(true);
                 Elements infoDetail = info.get(0).select("dd span");
-                System.out.println(infoDetail);
                 if (infoDetail.size() > 1) {
                     String day = infoDetail.get(1).text();
                     programList.get(i).setBroadcastingDay(day);
