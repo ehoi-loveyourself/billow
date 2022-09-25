@@ -27,7 +27,7 @@ public class ReviewController {
 
     @ApiOperation(value = "리뷰 조회", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "방영 알림 삭제 성공")})
+            @ApiResponse(responseCode = "200", description = "리뷰 조회 성공")})
     @GetMapping("/{programId}")
     public ResponseEntity<Object> selectReview(@PathVariable("programId") Long programId) {
         log.info("리뷰 조회 API 호출");
