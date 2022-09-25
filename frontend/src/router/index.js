@@ -39,6 +39,38 @@ const routes = [
               },
     ]
   },
+
+
+  // {
+  //   path: '/',
+  //   name: 'home',
+  //   component: HomeView,
+  // },
+  // {
+  //   path:'/',
+  //   name:'loginmain',
+  //   component:()=>import("@/components/login/LoginMain.vue"),
+  // },
+  // {
+  //   path: '/about',
+  //   name: 'about',
+  //   component: AboutView,
+  // },
+  // {
+  //   path: '/situation',
+  //   name: 'situation',
+  //   component: () => import('@/views/SituationView.vue'),
+  // },
+  // {
+  //   path: '/like',
+  //   name: 'like',
+  //   component: () => import('@/views/LikeView.vue'),
+  // },
+  // {
+  //   path: '/main',
+  //   name: 'main',
+  //   component: () => import('@/views/MainView.vue'),
+  // },
   {
     path: '/detail',
     name: 'detail',
@@ -60,6 +92,16 @@ const routes = [
     path: '/situationresult',
     name: 'situationresult',
     component: () => import('@/components/situation/SituationResult.vue'),
+  },
+  {
+    path: '/userinfocollect',
+    name: 'userinfocollect',
+    component: () => import('@/components/collect/UserInfoCollect.vue'),
+  },
+  {
+    path: '/userratingprogram',
+    name: 'userratingprogram',
+    component: () => import('@/components/collect/UserRatingProgram.vue'),
   },
 ]
 

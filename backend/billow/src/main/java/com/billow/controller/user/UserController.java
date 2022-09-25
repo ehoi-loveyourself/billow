@@ -6,6 +6,10 @@ import com.billow.domain.dto.user.*;
 import com.billow.model.service.user.UserService;
 import com.billow.util.JwtUtil;
 import com.billow.util.Message;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.parser.ParseException;
@@ -18,12 +22,16 @@ import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
+@Api(tags = {"User API"})
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
 
+    @ApiOperation(value = "회원 조회", response = Object.class)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "회원 조회 성공")})
     @GetMapping
     public ResponseEntity<Object> selectUser(@RequestHeader("Auth-access") String token) {
         try {
@@ -38,6 +46,9 @@ public class UserController {
         }
     }
 
+    @ApiOperation(value = "소셜 로그인", response = Object.class)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "소셜 로그인 성공")})
     @GetMapping("/oauth")
     public ResponseEntity<Object> kakaoLogin(String code, HttpServletResponse httpServletResponse) throws ParseException {
         try {
@@ -53,6 +64,9 @@ public class UserController {
         }
     }
 
+    @ApiOperation(value = "닉네임 중복검사", response = Object.class)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "닉네임 사용가능")})
     @GetMapping("/validation/nickname")
     public ResponseEntity<Object> validateNickname(@RequestParam String nickname) {
         try {
@@ -67,6 +81,10 @@ public class UserController {
         }
     }
 
+
+    @ApiOperation(value = "회원가입", response = Object.class)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "회원가입 성공")})
     @PostMapping("/signup")
     public ResponseEntity<Object> signUp(@RequestBody SignUpRequest signUpRequest) {
         try {
@@ -81,6 +99,10 @@ public class UserController {
         }
     }
 
+
+    @ApiOperation(value = "액세스 토큰 재발급", response = Object.class)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "액세스 토큰 재발급 성공")})
     @PostMapping("/refresh")
     public ResponseEntity<Object> refresh(@RequestBody RefreshRequest refreshRequest) {
         try {
@@ -99,6 +121,9 @@ public class UserController {
         }
     }
 
+    @ApiOperation(value = "로그아웃", response = Object.class)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "로그아웃 성공")})
     @PostMapping("/logout")
     public ResponseEntity<Object> logout(@RequestHeader("Auth-access") String token) {
         try {
@@ -113,6 +138,9 @@ public class UserController {
         }
     }
 
+    @ApiOperation(value = "회원 수정", response = Object.class)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "회원 수정 성공")})
     @PutMapping
     public ResponseEntity<Object> updateUser(@RequestHeader("Auth-access") String token, @RequestBody UserUpdateRequest userUpdateRequest) {
         try {
@@ -127,6 +155,9 @@ public class UserController {
         }
     }
 
+    @ApiOperation(value = "프로필 수정", response = Object.class)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "프로필 수정 성공")})
     @PutMapping("/profile")
     public ResponseEntity<Object> updateUserProfile() {
         Message response = new Message("succeeded");
@@ -134,6 +165,9 @@ public class UserController {
                 .body(response);
     }
 
+    @ApiOperation(value = "회원 삭제", response = Object.class)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "회원 삭제 성공")})
     @DeleteMapping
     public ResponseEntity<Object> deleteUser(@RequestHeader("Auth-access") String token) {
         try {
@@ -148,6 +182,9 @@ public class UserController {
         }
     }
 
+    @ApiOperation(value = "평점 조회", response = Object.class)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "평점 조회 성공")})
     @GetMapping("/rating")
     public ResponseEntity<Object> selectRating(@RequestHeader("Auth-access") String token) {
         log.info("평점 조회 API 호출");
@@ -157,6 +194,9 @@ public class UserController {
                 .body(response);
     }
 
+    @ApiOperation(value = "평점 수정", response = Object.class)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "평점 수정 성공")})
     @PutMapping("/rating/{ratingId}")
     public ResponseEntity<Object> updateRating(@RequestHeader("Auth-access") String token,
                                                @PathVariable("ratingId") Long ratingId,
@@ -168,6 +208,9 @@ public class UserController {
                 .body(response);
     }
 
+    @ApiOperation(value = "평점 삭제", response = Object.class)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "평점 삭제 성공")})
     @DeleteMapping("/rating/{ratingId}")
     public ResponseEntity<Object> deleteRating(@RequestHeader("Auth-access") String token, @PathVariable("ratingId") Long ratingId) {
         log.info("평점 삭제 API 호출");
