@@ -1,7 +1,7 @@
 <template>
     <header-bar />
     <br>
-    <h2 style="color:white; margin-left:67px; font-size: 1.1vw; font-weight: 300;">중복 선택이 가능합니다!</h2>
+    <h2 style="color:white; margin-left:70px; font-size: 1.1vw; font-weight: 300;">중복 선택이 가능합니다!</h2>
     <br><br>
         <div>
             <div class="left" style="border-right:1px solid #ffffff;">
