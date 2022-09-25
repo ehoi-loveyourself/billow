@@ -34,7 +34,7 @@ public class User {
 
     private String mobile;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profile_img_id")
     private ProfileImg profileImg;
 
@@ -83,7 +83,7 @@ public class User {
         this.refreshToken = null;
     }
 
-    public void signUp(String nickName, String gender, Integer age, Region region, TvCarrier tvCarrier, ProfileImg profileImg, String mobile) {
+    public void postProfile(String nickName, String gender, Integer age, Region region, TvCarrier tvCarrier, ProfileImg profileImg, String mobile) {
         this.nickName = nickName;
         this.gender = gender;
         this.age = age;

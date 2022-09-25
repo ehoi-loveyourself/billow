@@ -2,15 +2,14 @@ package com.billow.model.service.user;
 
 import com.billow.domain.dto.addtion.RatingRequest;
 import com.billow.domain.dto.addtion.RatingResponse;
-import com.billow.domain.dto.user.AuthTokenResponse;
-import com.billow.domain.dto.user.LoginResponse;
-import com.billow.domain.dto.user.SignUpRequest;
+import com.billow.domain.dto.user.*;
 import com.billow.domain.entity.addition.Rating;
 import com.billow.domain.entity.user.ProfileImg;
 import com.billow.domain.entity.user.Region;
 import com.billow.domain.entity.user.TvCarrier;
 import com.billow.domain.entity.user.User;
 import com.billow.exception.BadRequestException;
+import com.billow.exception.DuplicationException;
 import com.billow.exception.NotFoundException;
 import com.billow.exception.WrongFormException;
 import com.billow.model.repository.addition.RatingRepository;
@@ -38,11 +37,14 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private static final String EMAIL_NOT_FOUND = "이메일 수집에 동의해주세요.";
+    private static final String NICKNAME_DUPLICATED = "이미 등록된 닉네임입니다.";
     private static final String USER_NOT_FOUND = "해당 유저를 찾을 수 없습니다.";
     private static final String RATING_NOT_FOUND = "해당 평점을 찾을 수 없습니다.";
     private static final String BAD_REQUEST = "잘못된 요청입니다.";
     private static final String TOKEN_NOT_VALID = "토큰 정보가 올바르지 않습니다.";
     private static final String PROFILE_IMG_NOT_FOUND = "프로필 이미지를 찾을 수 없습니다.";
+    private static final String PROFILE_IMG_ABSOLUTE_PATH = "img/profile_img/";
+
 
     private final UserRepository userRepository;
     private final RatingRepository ratingRepository;
@@ -50,6 +52,27 @@ public class UserService {
     private final TvCarrierRepository tvCarrierRepository;
     private final ProfileImgRepository profileImgRepository;
     private final KakaoOAuth2 kakaoOAuth2;
+
+    public UserResponse selectUser(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
+
+        String profileImgUrl = PROFILE_IMG_ABSOLUTE_PATH + user.getProfileImg().getImgName();
+        // url 설정 이렇게 하면 되나요..?
+        // "img/profile_img/1.png" 이런 식으로 반환하는데 뭔가 아닌 거 같은데요.. 핳
+
+        return UserResponse.builder()
+                .email(user.getEmail())
+                .name(user.getName())
+                .nickName(user.getNickName())
+                .gender(user.getGender())
+                .age(user.getAge())
+                .region(user.getRegion().getRegion())
+                .tvCarrier(user.getTvCarrier().getCompany())
+                .profileImgUrl(profileImgUrl)
+                .mobile(user.getMobile())
+                .build();
+    }
 
     public LoginResponse kakaoLogin(String code, HttpServletResponse httpServletResponse) throws ParseException {
         User kakaoUser = kakaoOAuth2.getUserInfo(code);
@@ -85,6 +108,13 @@ public class UserService {
         }
     }
 
+    public Message validateNickname(String nickname) {
+        if (userRepository.existsByNickName(nickname)) {
+            throw new DuplicationException(NICKNAME_DUPLICATED);
+        }
+        return new Message("사용 가능한 닉네임입니다.");
+   }
+
     public Message signUp(SignUpRequest signUpRequest) {
         User user = userRepository.findByEmail(signUpRequest.getEmail());
         if (!user.getName().equals(signUpRequest.getName())) {
@@ -98,7 +128,7 @@ public class UserService {
         ProfileImg profileImg = profileImgRepository.findById(signUpRequest.getProfileImgId())
                 .orElseThrow(() -> new NotFoundException(PROFILE_IMG_NOT_FOUND));
 
-        user.signUp(
+        user.postProfile(
                 signUpRequest.getNickName(),
                 signUpRequest.getGender(),
                 signUpRequest.getAge(),
@@ -128,6 +158,34 @@ public class UserService {
         user.deleteRefreshToken();
         userRepository.save(user);
         return new Message("로그아웃에 성공하였습니다.");
+    }
+
+    public Message updateUser(Long userId, UserUpdateRequest userUpdateRequest) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
+        Region region = regionRepository.findByRegion(userUpdateRequest.getRegion());
+        TvCarrier tvCarrier = tvCarrierRepository.findByCompany(userUpdateRequest.getTvCarrier());
+        ProfileImg profileImg = profileImgRepository.findById(userUpdateRequest.getProfileImgId())
+                .orElseThrow(() -> new NotFoundException(PROFILE_IMG_NOT_FOUND));
+
+        user.postProfile(
+                userUpdateRequest.getNickName(),
+                userUpdateRequest.getGender(),
+                userUpdateRequest.getAge(),
+                region,
+                tvCarrier,
+                profileImg,
+                userUpdateRequest.getMobile()
+        );
+        userRepository.save(user);
+        return new Message("회원정보 수정에 성공하였습니다.");
+    }
+
+    public Message deleteUser(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
+        userRepository.delete(user);
+        return new Message("회원 탈퇴에 성공했습니다.");
     }
 
     public List<RatingResponse> selectRating(Long userId) {
