@@ -9,6 +9,7 @@ import com.billow.domain.entity.user.Region;
 import com.billow.domain.entity.user.TvCarrier;
 import com.billow.domain.entity.user.User;
 import com.billow.exception.BadRequestException;
+import com.billow.exception.DuplicationException;
 import com.billow.exception.NotFoundException;
 import com.billow.exception.WrongFormException;
 import com.billow.model.repository.addition.RatingRepository;
@@ -36,6 +37,7 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private static final String EMAIL_NOT_FOUND = "이메일 수집에 동의해주세요.";
+    private static final String NICKNAME_DUPLICATED = "이미 등록된 닉네임입니다.";
     private static final String USER_NOT_FOUND = "해당 유저를 찾을 수 없습니다.";
     private static final String RATING_NOT_FOUND = "해당 평점을 찾을 수 없습니다.";
     private static final String BAD_REQUEST = "잘못된 요청입니다.";
@@ -105,6 +107,13 @@ public class UserService {
                     .build();
         }
     }
+
+    public Message validateNickname(String nickname) {
+        if (userRepository.existsByNickName(nickname)) {
+            throw new DuplicationException(NICKNAME_DUPLICATED);
+        }
+        return new Message("사용 가능한 닉네임입니다.");
+   }
 
     public Message signUp(SignUpRequest signUpRequest) {
         User user = userRepository.findByEmail(signUpRequest.getEmail());

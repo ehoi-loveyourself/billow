@@ -53,6 +53,20 @@ public class UserController {
         }
     }
 
+    @GetMapping("/validation/nickname")
+    public ResponseEntity<Object> validateNickname(@RequestParam String nickname) {
+        try {
+            log.info("닉네임 중복검사 API 호출");
+            Message response = userService.validateNickname(nickname);
+            log.info("닉네임 중복검사 성공");
+            return ResponseEntity.ok()
+                    .body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(new Message("이미 등록된 닉네임입니다."));
+        }
+    }
+
     @PostMapping("/signup")
     public ResponseEntity<Object> signUp(@RequestBody SignUpRequest signUpRequest) {
         try {
