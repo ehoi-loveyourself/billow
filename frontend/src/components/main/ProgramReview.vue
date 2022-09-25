@@ -15,7 +15,6 @@
         </svg>
     </div>
     <b-row style="margin-top: 20px;">
-        <!-- <b-col cols="1"><div></div></b-col> -->
       <b-col cols="11">
         <b-form-input v-model="message" placeholder="리뷰를 작성해주세요." required style="border-color: #A48282;">
         </b-form-input>
@@ -28,9 +27,6 @@
     </b-row>
     <br/>
     <section>
-        <!-- <ul>
-            <li> -->
-        <!-- <b-avatar class="avatar" size="3rem" variant="info" src="https://placekitten.com/300/300"></b-avatar> -->
         <article class="review_set">
     <article class="reviews">
         <h2>걷지말고뛰어라&nbsp;&nbsp;<svg width="61" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -75,9 +71,6 @@
         <p>재밌네요</p>
     </article>
 </article>
-
-<!-- </li>
-</ul> -->
     </section>
   <br/>
 </div>

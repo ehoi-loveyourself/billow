@@ -1,6 +1,6 @@
 <template>
     <div id="mainslider" style="text-align:center; margin-top: 10px; ">
-        <splide id="carousel_new" :options="options">
+        <splide id="carousel_user_recommend" :options="options">
         <splide-slide><a class="enterDetail" href="#">
           <router-link :to="{ name: 'detail' }" class="nav-link">
         <img class="img_1" src="@/assets/image_180.png" alt="main1"></router-link>
@@ -55,13 +55,13 @@
 </script>
   
 <style>
-#carousel_new .splide__arrow--next{
+#carousel_user_recommend .splide__arrow--next{
     right:0.5em;
 }
-#carousel_new .splide__arrow--prev{
+#carousel_user_recommend .splide__arrow--prev{
     left:0.5em;
 }
-#carousel_new .splide__arrow{
+#carousel_user_recommend .splide__arrow{
   background: none;
 }
 .img_1{

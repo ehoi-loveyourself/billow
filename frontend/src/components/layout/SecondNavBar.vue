@@ -4,8 +4,8 @@
       <br> 
         <b-nav-item>
           <form action="" class="search-bar">
-	<input type="search" name="search" placeholder="프로그램명 검색" pattern=".*\S.*" required>
-	<button class="search-btn" type="submit">
+	<input v-model="searchValue" class="form-control" type="text" name="search" placeholder="프로그램명 검색" pattern=".*\S.*" required @keyup.enter="onSubmit" aria-label="Recipient's username">
+	<button class="search-btn" type="submit" @click="apply">
 		<span>Search</span>
 	</button>
 </form>
@@ -19,7 +19,18 @@
 </template>
 
 <script>
-
+export default {
+  data() {
+    return {
+      searchValue: '',
+    }
+  },
+  methods: {
+    onSubmit() {
+      this.$store.dispatch('fetchApi/getProgram', { title: this.searchValue })
+    },
+  },
+}
 </script>
   
 <style scoped>
