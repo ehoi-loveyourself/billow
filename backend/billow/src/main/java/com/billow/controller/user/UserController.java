@@ -2,10 +2,7 @@ package com.billow.controller.user;
 
 import com.billow.domain.dto.addtion.RatingRequest;
 import com.billow.domain.dto.addtion.RatingResponse;
-import com.billow.domain.dto.user.AuthTokenResponse;
-import com.billow.domain.dto.user.LoginResponse;
-import com.billow.domain.dto.user.RefreshRequest;
-import com.billow.domain.dto.user.SignUpRequest;
+import com.billow.domain.dto.user.*;
 import com.billow.model.service.user.UserService;
 import com.billow.util.JwtUtil;
 import com.billow.util.Message;
@@ -36,11 +33,17 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "회원 조회 성공")})
     @GetMapping
-    public ResponseEntity<Object> selectUser() {
-        Message response = new Message("sdsd");
-        Message response1 = new Message("sdsd");
-        return ResponseEntity.ok()
-                .body(response);
+    public ResponseEntity<Object> selectUser(@RequestHeader("Auth-access") String token) {
+        try {
+            log.info("회원정보 조회 API 호출");
+            UserResponse response = userService.selectUser(JwtUtil.getUserId(token));
+            log.info("회원정보 조회 성공");
+            return ResponseEntity.ok()
+                    .body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(new Message("회원정보 조회에 실패하였습니다."));
+        }
     }
 
     @ApiOperation(value = "소셜 로그인", response = Object.class)
@@ -60,6 +63,24 @@ public class UserController {
                     .body(new Message("카카오 로그인에 실패했습니다."));
         }
     }
+
+    @ApiOperation(value = "닉네임 중복검사", response = Object.class)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "닉네임 사용가능")})
+    @GetMapping("/validation/nickname")
+    public ResponseEntity<Object> validateNickname(@RequestParam String nickname) {
+        try {
+            log.info("닉네임 중복검사 API 호출");
+            Message response = userService.validateNickname(nickname);
+            log.info("닉네임 중복검사 성공");
+            return ResponseEntity.ok()
+                    .body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(new Message("이미 등록된 닉네임입니다."));
+        }
+    }
+
 
     @ApiOperation(value = "회원가입", response = Object.class)
     @ApiResponses(value = {
@@ -121,10 +142,17 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "회원 수정 성공")})
     @PutMapping
-    public ResponseEntity<Object> updateUser() {
-        Message response = new Message("succeeded");
-        return ResponseEntity.ok()
-                .body(response);
+    public ResponseEntity<Object> updateUser(@RequestHeader("Auth-access") String token, @RequestBody UserUpdateRequest userUpdateRequest) {
+        try {
+            log.info("회원정보 수정 API 호출");
+            Message response = userService.updateUser(JwtUtil.getUserId(token), userUpdateRequest);
+            log.info("회원정보 수정 성공");
+            return ResponseEntity.ok()
+                    .body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(new Message("회원정보 수정에 실패했습니다."));
+        }
     }
 
     @ApiOperation(value = "프로필 수정", response = Object.class)
@@ -141,10 +169,17 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "회원 삭제 성공")})
     @DeleteMapping
-    public ResponseEntity<Object> deleteUser() {
-        Message response = new Message("succeeded");
-        return ResponseEntity.ok()
-                .body(response);
+    public ResponseEntity<Object> deleteUser(@RequestHeader("Auth-access") String token) {
+        try {
+            log.info("회원 탈퇴 API 호출");
+            Message response = userService.deleteUser(JwtUtil.getUserId(token));
+            log.info("회원 탈퇴 성공");
+            return ResponseEntity.ok()
+                    .body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(new Message("회원 탈퇴에 실패했습니다."));
+        }
     }
 
     @ApiOperation(value = "평점 조회", response = Object.class)
