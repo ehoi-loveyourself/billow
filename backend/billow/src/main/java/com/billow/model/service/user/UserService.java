@@ -44,6 +44,7 @@ public class UserService {
     private static final String TOKEN_NOT_VALID = "토큰 정보가 올바르지 않습니다.";
     private static final String PROFILE_IMG_NOT_FOUND = "프로필 이미지를 찾을 수 없습니다.";
     private static final String PROFILE_IMG_ABSOLUTE_PATH = "img/profile_img/";
+    private static final String NO_RATING = "남기신 평점이 없습니다!";
 
 
     private final UserRepository userRepository;
@@ -189,6 +190,12 @@ public class UserService {
     }
 
     public List<RatingResponse> selectRating(Long userId) {
+        userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
+        List<Rating> list = ratingRepository.findByUser_Id(userId);
+        if (list.size() == 0) {
+            throw new NotFoundException(NO_RATING);
+        }
         return ratingRepository.findByUser_Id(userId)
                 .stream()
                 .map(rating -> RatingResponse.builder()
@@ -209,10 +216,6 @@ public class UserService {
         rating.updateRating(ratingRequest.getScore());
         ratingRepository.save(rating);
 
-        /*
-         * 질문 !
-         * 연관관계 매핑에서 cascade
-         */
         return new Message("회원님의 평점내역 수정에 성공하였습니다.");
     }
 
