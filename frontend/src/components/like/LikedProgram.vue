@@ -22,4 +22,7 @@ img{
     margin-right: 0;
     width:16.1%
 }
+img:hover{
+    filter: brightness(0.5);
+  }
 </style>

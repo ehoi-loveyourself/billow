@@ -21,6 +21,12 @@ TV프로그램을 추천해줍니다.
   카카오로 시작하기
   </router-link>
 </a>
+<div class="memos">
+      <button class="btn btn-primary" @click="add()">추가하기</button>
+      <ul>
+    <li v-for="(d, idx) in state.data" :key="idx">{{d}}</li>
+      </ul>
+    </div>
 </div>
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     
@@ -35,9 +41,37 @@ TV프로그램을 추천해줍니다.
 //     },
 //   }
 //  }
-export default{
-    name:"LoginMain",
-}
+    import { reactive } from '@vue/reactivity'
+    import axios from 'axios'
+      export default{
+        name:"LoginMain",
+        setup(){
+          const state = reactive({
+            data : [
+            "내용 1",
+            "내용 2",
+            "내용 3"        
+          ]
+          });
+    
+          const add= ()=>{ // 지금 안됨.
+            // state.data.push("추가한 내용");
+            axios.post("/api/recommend/new").then((res) => {
+              console.log(res.data);
+            
+          });
+        }
+    
+          axios.get("/api/recommend/new").then((res) => { // 데이터 가져오는 거.
+            console.log(res);
+            console.log(res.data);
+            state.data = res.data;
+          });
+    
+          return {state, add}
+        }
+    
+      };
 </script>
   
 <style scoped>
@@ -96,4 +130,3 @@ export default{
   font-size: 16px;
   }
   </style>
-  

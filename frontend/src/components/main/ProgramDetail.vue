@@ -28,7 +28,7 @@
     <div class="box"><span class="box_design">15+</span><span class="box_design">금 오후7:00</span><span class="box_design">예능</span><span class="box_design">tvN</span></div>
     <div class="genre"><span>#리얼리티</span></div>
     <div class="blabla">′이효리, 이상순 부부′ 두 사람이 제주도에서 부부 민박집을 운영하는 프로그램</div>
-    <div class="talent">출연&nbsp;&nbsp;&nbsp;&nbsp;이효리, 이상순</div>
+    <div class="talent"><span class="talent_label">출연</span>&nbsp;&nbsp;&nbsp;&nbsp;이효리, 이상순</div>
    </div>
    </section>
    <br/><br/><br/>
@@ -106,7 +106,7 @@ section{
     margin: 0px 10px 0px 0px;
 }
 .genre{
-    color:#FFFFFF;
+    color:#a1a1a1;
     font-size: 17px;
     font-family: Noto Sans KR,-apple-system,BlinkMacSystemFont,Roboto,Segoe UI,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
     margin-top: 8px;
@@ -115,6 +115,9 @@ section{
     color:white;
     font-family: Noto Sans KR,-apple-system,BlinkMacSystemFont,Roboto,Segoe UI,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
     margin-top: 4px;
+}
+.talent_label{
+    color:#a2a2a2;
 }
 </style>
 
