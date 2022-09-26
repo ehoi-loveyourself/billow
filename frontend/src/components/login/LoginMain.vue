@@ -47,11 +47,7 @@ TV프로그램을 추천해줍니다.
         name:"LoginMain",
         setup(){
           const state = reactive({
-            data : [
-            "내용 1",
-            "내용 2",
-            "내용 3"        
-          ]
+            data : [],
           });
     
           const add= ()=>{ // 지금 안됨.
@@ -65,7 +61,13 @@ TV프로그램을 추천해줍니다.
           axios.get("/api/recommend/new").then((res) => { // 데이터 가져오는 거.
             console.log(res);
             console.log(res.data);
-            state.data = res.data;
+            console.log(res.data[0]);
+            console.log(res.data[0].title);
+            console.log(res.data[0].backdropPath);
+            console.log(res.data[0].posterImg);
+            state.data[0] = res.data[0].title;
+            state.data[1] = res.data[0].backdropPath;
+            state.data[2] = res.data[0].posterImg;
           });
     
           return {state, add}
