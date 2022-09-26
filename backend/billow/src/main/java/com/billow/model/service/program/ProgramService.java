@@ -11,13 +11,16 @@ import com.billow.model.repository.program.ProgramRepository;
 import com.billow.model.repository.user.UserRepository;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class ProgramService {
@@ -85,7 +88,9 @@ public class ProgramService {
         return new Message("프로그램 평점 등록에 성공하였습니다.");
     }
 
-    public List<ProgramResponse> randomProgram() {
+    public List<ProgramResponse> randomProgram(Long userId) {
+        userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
         int programCnt = (int) programRepository.count();
 
         Random r = new Random();
@@ -94,9 +99,12 @@ public class ProgramService {
             random[i] = r.nextInt(programCnt);
         }
 
+        log.info("프로그램 총 개수 : {}", programCnt);
+        log.info("랜덤 프로그램 id : {}", Arrays.toString(random));
+
         List<ProgramResponse> responses = new ArrayList<>();
         for (int i = 0; i < random.length; i++) {
-            Program program = programRepository.findById((long) random[i])
+            Program program = programRepository.findById(Long.valueOf(random[i]))
                     .orElseThrow(() -> new NotFoundException(PROGRAM_NOT_FOUND));
 
             responses.add(ProgramResponse.builder()
@@ -114,6 +122,7 @@ public class ProgramService {
                     .endFlag(program.isEndFlag())
                     .averageRating(program.getAverageRating())
                     .bookmarkCnt(program.getBookmarkCnt())
+                    .ratingCnt(program.getRatingCnt())
                     .posterImg(program.getPosterImg())
                     .backdropPath(program.getBackdropPath())
                     .build());
