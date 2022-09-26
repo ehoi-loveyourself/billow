@@ -26,6 +26,9 @@ public class BroadcastingAlarm {
     private Long id;
 
     @NotNull
+    private String groupId;
+
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -38,8 +41,9 @@ public class BroadcastingAlarm {
     private ProgramOrganization programOrganization;
 
     @Builder
-    public BroadcastingAlarm(Long id, User user, ProgramOrganization programOrganization) {
+    public BroadcastingAlarm(Long id, String groupId, User user, ProgramOrganization programOrganization) {
         this.id = id;
+        this.groupId = groupId;
         this.user = user;
         this.programOrganization = programOrganization;
     }
