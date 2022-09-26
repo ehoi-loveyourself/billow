@@ -1,36 +1,37 @@
 from copyreg import pickle
-import pandas as pd
-import numpy as np
-import MySQLdb
 from contextlib import redirect_stderr
 from sklearn.decomposition import TruncatedSVD
 from scipy.sparse.linalg import svds
 
-# import matplotlib.pyplot as plt
-# import seaborn as sns
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
+import MySQLdb
 import warnings
 import requests
 import pickle
 warnings.filterwarnings("ignore")
 # from datas.models import TbProgram #TbUser
 
+# 1 DB 커넥션 따로
+CONN = MySQLdb.connect(
+    host = 'localhost',
+    user = 'B309',
+    password = 'B309Billow',
+    db = 'billow'
+)
 
 def query_MySQL(query):
-    # DB 연결
-
-    conn = MySQLdb.connect(
-        host = 'localhost',
-        user = 'B309',
-        password = 'B309Billow',
-        db = 'billow'
-    )
+    # 2. 쿼리 로그 찍기
+    print(query)
 
     global query_result
+    query_result = pd.read_sql(query, CONN)
+    # 3. result 로그 찍기
+    print(query_result)
 
-    query_result = pd.read_sql(query, conn)
-
-    conn.close()
-
+    # conn.close()
     # print('-------------------')
 
     return query_result
@@ -138,3 +139,42 @@ def mf_algo_individual(userId):
 
 # mf_algo()
 # mf_algo_individual(1)
+
+# 상황 추천 알고리즘을 위한 pivot_table
+def condition_pivot_table(programId):
+    program_data = query_MySQL('SELECT program_id, title from tb_program')
+    rating_data = query_MySQL('SELECT score, program_id, user_id from tb_rating')
+
+    user_program_data = pd.merge(rating_data, program_data, on = 'program_id')
+    print(user_program_data)
+
+    # pivot 테이블을 만들자! value에는 score값을, column에는 program_id를, index에는 user id를 넣자
+    user_program_rating = user_program_data.pivot_table('score', index = 'user_id', columns = 'program_id').fillna(0)
+
+    # 이제 사용자-프로그램 기준의 데이터를 프로그램-사용자 기준으로 만들어서 특정 '프로그램'과 비슷한 프로그램을 추천해주는 로직을 구현합시다!
+    program_user_rating = user_program_rating.T
+
+    SVD = TruncatedSVD(n_components=12)
+    matrix = SVD.fit_transform(program_user_rating)
+    matrix.shape
+
+    matrix[0]
+
+    # 이제 이렇게 나온 데이터를 활용해서 피어슨 상관계수(corr)를 구합니다.
+    corr = np.corrcoef(matrix)
+    corr.shape
+
+    corr2 = corr[:200, :200]
+    corr2.shape
+
+    plt.figure(figsize=(16, 10))
+    sns.heatmap(corr2)
+
+    program_id = user_program_rating.columns
+    program_id_list = list(program_id)
+    coffey_hands = program_id_list.index(programId)
+
+    corr_coffey_hands = corr[coffey_hands]
+    return list(program_id[(corr_coffey_hands >= 0.9)])[:50]
+
+condition_pivot_table(1)
