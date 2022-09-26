@@ -15,21 +15,30 @@ warnings.filterwarnings("ignore")
 # from datas.models import TbProgram #TbUser
 
 
+
+CONN = MySQLdb.connect(
+    host = 'localhost',
+    user = 'B309',
+    password = 'B309Billow',
+    db = 'billow'
+)
+
 def query_MySQL(query):
     # DB 연결
 
-    conn = MySQLdb.connect(
-        host = 'localhost',
-        user = 'B309',
-        password = 'B309Billow',
-        db = 'billow'
-    )
+    # conn = MySQLdb.connect(
+    #     host = 'localhost',
+    #     user = 'B309',
+    #     password = 'B309Billow',
+    #     db = 'billow'
+    # )
+
 
     global query_result
 
-    query_result = pd.read_sql(query, conn)
+    query_result = pd.read_sql(query, CONN)
 
-    conn.close()
+    # conn.close()
 
     # print('-------------------')
 

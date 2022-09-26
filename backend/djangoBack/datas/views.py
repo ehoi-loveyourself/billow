@@ -11,7 +11,7 @@ from rest_framework.permissions import IsAuthenticated
 from datas import serializers
 
 from datas.models import TbGenre, TbGenreInfo, TbOtt, TbOttInfo, TbProgram, TbRating, TbUser
-from datas.serializers import RecommProgramSerializer, TbGenreInfoSerializer, ProgramSerializer
+from datas.serializers import TbGenreInfoSerializer, ProgramSerializer
 from datas import recomm
 
 import requests
@@ -205,9 +205,13 @@ def user_recomm(request, user_id):
         indi_user_recomm_list.append(program)
 
     print(indi_user_recomm_list)
+    # recomm_program = {}
+    # for recomm in indi_user_recomm_list:
+
     
     # serializer = RecommProgramSerializer(indi_user_recomm_list, many = True)
-    serializer = ProgramSerializer(indi_user_recomm_list, many = True)
-
+    serializer = ProgramSerializer(data = indi_user_recomm_list, many = True)
+    if serializer.is_valid():
+        pass
 
     return Response(serializer.data)

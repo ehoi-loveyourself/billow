@@ -266,6 +266,8 @@ class TbProgram(models.Model):
     summary = models.CharField(max_length=1000, blank=True, null=True)
     title = models.CharField(max_length=255, blank=True, null=True)
 
+    # genres = models.ManyToManyField(TbGenreInfo)
+
     class Meta:
         managed = False
         db_table = 'tb_program'
