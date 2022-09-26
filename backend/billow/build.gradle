@@ -54,6 +54,9 @@ dependencies {
 			"javax.persistence:javax.persistence-api",
 			"javax.annotation:javax.annotation-api",
 			'com.querydsl:querydsl-apt:5.0.0:jpa')
+
+	//WebClient
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 }
 // QueryDSL
 sourceSets {
