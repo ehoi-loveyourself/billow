@@ -36,6 +36,8 @@ public class CastResponse {
 
     private Integer bookmarkCnt;
 
+    private Long ratingCnt;
+
     private String posterImg;
 
     private String backdropPath;
