@@ -22,7 +22,6 @@ public class ProgramCustomRepositoryImpl implements ProgramCustomRepository {
         return jpaQueryFactory.selectFrom(program)
                 .where(program.ratingCnt.goe(5).and(program.bookmarkCnt.goe(5)))
                 .orderBy(program.averageRating.desc())
-                .limit(10)
                 .fetch();
     }
 
