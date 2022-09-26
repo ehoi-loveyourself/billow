@@ -24,6 +24,7 @@ public class ProgramService {
 
     private static final String USER_NOT_FOUND = "해당 유저를 찾을 수 없습니다.";
     private static final String PROGRAM_NOT_FOUND = "해당 프로그램을 찾을 수 없습니다.";
+    private static final String NO_SEARCH = "검색 내용이 없습니다.";
 
     private final ProgramRepository programRepository;
     private final UserRepository userRepository;
@@ -34,7 +35,11 @@ public class ProgramService {
     }
 
     public List<ProgramResponse> searchProgram(String word) {
-        return programRepository.findByTitleContaining(word)
+        List<Program> list = programRepository.findByTitleContaining(word);
+        if (list.size() == 0) {
+            throw new NotFoundException(NO_SEARCH);
+        }
+        return list
                 .stream()
                 .map(program -> ProgramResponse.builder()
                         .id(program.getId())
@@ -50,6 +55,8 @@ public class ProgramService {
                         .broadcastingStation(program.getBroadcastingStation())
                         .endFlag(program.isEndFlag())
                         .averageRating(program.getAverageRating())
+                        .bookmarkCnt(program.getBookmarkCnt())
+                        .ratingCnt(program.getRatingCnt())
                         .posterImg(program.getPosterImg())
                         .backdropPath(program.getBackdropPath())
                         .build())
