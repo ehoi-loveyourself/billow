@@ -15,10 +15,10 @@ BILLOW가 회원님이 좋아할만한 프로그램을 추천해줄거예요.</h
             프로필
         </b-col>
         <b-col cols="10" style="padding-left:1%">
-            <b-avatar class="avatar" variant="info" src="https://placekitten.com/300/300" size="4rem"></b-avatar>
-            <b-avatar class="avatar" variant="info" src="https://placekitten.com/300/400" size="4rem"></b-avatar>
-            <b-avatar class="avatar" variant="info" src="https://placekitten.com/300/500" size="4rem"></b-avatar>
-            <b-avatar class="avatar" variant="info" src="https://placekitten.com/300/600" size="4rem"></b-avatar>
+            <b-avatar class="avatar" variant="info" src="http://localhost:8009/api/profile/initial/1" size="4rem"></b-avatar>
+            <b-avatar class="avatar" variant="info" src="http://localhost:8009/api/profile/initial/2" size="4rem"></b-avatar>
+            <b-avatar class="avatar" variant="info" src="http://localhost:8009/api/profile/initial/3" size="4rem"></b-avatar>
+            <b-avatar class="avatar" variant="info" src="http://localhost:8009/api/profile/3" size="4rem"></b-avatar>
             <b-avatar class="avatar" variant="info" src="https://placekitten.com/300/700" size="4rem"></b-avatar>
             <b-avatar class="avatar" variant="info" src="https://placekitten.com/300/800" size="4rem"></b-avatar>
             <b-avatar class="avatar" variant="info" src="https://placekitten.com/300/900" size="4rem"></b-avatar>
