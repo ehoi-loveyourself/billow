@@ -86,9 +86,6 @@ public class ProgramService {
     }
 
     public List<ProgramResponse> randomProgram() {
-        // 프로그램 전체 개수를 알아온다
-        // 50개의 난수를 생성한다
-        // 생성된 난수를 가지고 프로그램을 찾아서 response dto를 만들어서 리턴한다.
         int programCnt = (int) programRepository.count();
 
         Random r = new Random();
