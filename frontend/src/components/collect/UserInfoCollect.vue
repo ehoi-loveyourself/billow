@@ -48,7 +48,7 @@ BILLOW가 회원님이 좋아할만한 프로그램을 추천해줄거예요.</h
 연령대
 </b-col>
 <b-col cols="10" style="padding-left:1%">
-    <b-form-select v-model="selected" :options="options_age" style="width:20%"></b-form-select>
+    <b-form-select v-model="selected_age" :options="options_age" style="width:20%"></b-form-select>
 </b-col>
        </b-row>
        <b-row style="margin-bottom:2%">        
@@ -64,7 +64,7 @@ BILLOW가 회원님이 좋아할만한 프로그램을 추천해줄거예요.</h
 지역
 </b-col>
 <b-col cols="10" style="padding-left:1%">
-    <b-form-select v-model="selected" :options="options_region" style="width:20%"></b-form-select>
+    <b-form-select v-model="selected_region" :options="options_region" style="width:20%"></b-form-select>
 </b-col>
        </b-row>
        <b-row style="margin-bottom:2%">        
@@ -72,7 +72,7 @@ BILLOW가 회원님이 좋아할만한 프로그램을 추천해줄거예요.</h
 통신사
 </b-col>
 <b-col cols="10" style="padding-left:1%">
-    <b-form-select v-model="selected" :options="options_tv_carrier" style="width:20%"></b-form-select>
+    <b-form-select v-model="selected_tv_carrier" :options="options_tv_carrier" style="width:20%"></b-form-select>
 </b-col>
        </b-row>
     </section>
@@ -93,7 +93,9 @@ export default{
       return {
         text: '',
         selected_gender:'',
-        selected: null,
+        selected_age: null,
+        selected_region: null,
+        selected_tv_carrier: null,
         options_age: [
           { value: null, text: '연령대를 선택하세요' },
           { value: 'a', text: '20대' },
