@@ -39,11 +39,9 @@ public class BroadcastingAlarmController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "방영 알림 등록 성공")})
     @PostMapping("/{programOrganizationId}")
-    public ResponseEntity<Object> postAlarm(@PathVariable("programOrganizationId") Long programOrganizationId
-//            , @RequestHeader("Auth-access") String token
-    ) {
+    public ResponseEntity<Object> postAlarm(@PathVariable("programOrganizationId") Long programOrganizationId, @RequestHeader("Auth-access") String token) {
         log.info("방영 알림 등록 API 호출");
-        Message responses = broadcastingAlarmService.postAlarm(1L, programOrganizationId);
+        Message responses = broadcastingAlarmService.postAlarm(JwtUtil.getUserId(token), programOrganizationId);
         log.info("방영 알림 등록 성공");
         return ResponseEntity.ok()
                 .body(responses);

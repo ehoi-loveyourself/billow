@@ -42,9 +42,11 @@ public class ProgramController {
             @ApiResponse(responseCode = "200", description = "프로그램 조회 성공")})
     @GetMapping("/{programId}")
     public ResponseEntity<Object> selectProgram(@PathVariable("programId") Long programId) {
-        Message response = new Message("succeeded");
+        log.info("프로그램 조회 API 호출");
+        ProgramResponse responses = programService.selectProgram(programId);
+        log.info("프로그램 조회 성공");
         return ResponseEntity.ok()
-                .body(response);
+                .body(responses);
     }
 
     @ApiOperation(value = "사용자 초기 데이터 수집용 랜덤 프로그램 출력", response = Object.class)
