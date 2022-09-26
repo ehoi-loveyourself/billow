@@ -31,4 +31,22 @@ public class DateUtil {
             return null;
         }
     }
+
+    public static String toAlarmDate(Date broadcastingTime) {
+        if (broadcastingTime != null) {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmm");
+            return formatter.format(broadcastingTime);
+        } else {
+            return null;
+        }
+    }
+
+    public static String toAlarmString(Date broadcastingTime) {
+        if (broadcastingTime != null) {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
+            return formatter.format(broadcastingTime);
+        } else {
+            return null;
+        }
+    }
 }
