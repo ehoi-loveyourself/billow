@@ -36,11 +36,12 @@ public class MessageService {
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("to", toNumber);
         params.put("from", fromNumber);
-        params.put("type", "SMS");
+        params.put("type", "LMS");
         params.put("text", "[Billow]\n알림 예약하신 [" + programOrganization.getProgram().getTitle() + "] 방영 15분전입니다.\n" +
                 "방영시간: " + DateUtil.toAlarmString(programOrganization.getBroadcastingTime()) + " " + programOrganization.getBroadcastingDay() + "\n" +
                 "방영채널: " + programOrganization.getBroadcastingStation());
-        params.put("datetime", dateTime); // 예약전송시 날짜 설정
+        params.put("datetime", dateTime);
+        System.out.println(params);
         try {
             JSONObject result = (JSONObject) coolsms.send(params);
             System.out.println(result.toString());
