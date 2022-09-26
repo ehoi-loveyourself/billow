@@ -1,10 +1,10 @@
 <template>
   <div class="memos">
-        <button class="btn btn-primary" @click="add()">추가하기</button>
-        <ul>
-          <li v-for="(d, idx) in state.data" :key="idx">{{ d }}</li>
-        </ul>
-      </div>
+    <button class="btn btn-primary" @click="add()">추가하기</button>
+    <ul>
+      <li v-for="(d, idx) in state.data" :key="idx">{{ d }}</li>
+    </ul>
+  </div>
   <div>
     <h2 style="color: white">지금 방송 중인 프로그램(ON AIR)</h2>
     <splide id="carousel_recommend" :options="options">
@@ -241,6 +241,53 @@
         <img src="@/assets/thatman.png" alt="Image" />
       </splide-slide>
     </splide>
+
+    <h2 style="color: white">여기서 부터 테스트입니다.</h2>
+    <splide id="carousel_recommend" :options="options">
+      <splide-slide v-for="(d, idx) in state.data" :key="idx">
+        <img :src="state.data[idx]" alt="Image"/>
+      </splide-slide>
+      <splide-slide>
+        <img src="@/assets/nangman.png" alt="Image" />
+      </splide-slide>
+      <splide-slide>
+        <img src="@/assets/jugun.png" alt="Image" />
+      </splide-slide>
+      <splide-slide>
+        <img src="@/assets/image_2.png" alt="Image" />
+      </splide-slide>
+      <splide-slide>
+        <img src="@/assets/gs.png" alt="Image" />
+      </splide-slide>
+      <splide-slide>
+        <img src="@/assets/sign.png" alt="Image" />
+      </splide-slide>
+      <splide-slide>
+        <img src="@/assets/hyori.png" alt="Image" />
+      </splide-slide>
+      <splide-slide>
+        <img src="@/assets/song.png" alt="Image" />
+      </splide-slide>
+      <splide-slide>
+        <img src="@/assets/alham.png" alt="Image" />
+      </splide-slide>
+      <splide-slide>
+        <img src="@/assets/laggi.png" alt="Image" />
+      </splide-slide>
+      <splide-slide>
+        <img src="@/assets/runningman.png" alt="Image" />
+      </splide-slide>
+      <splide-slide>
+        <img src="@/assets/thatman.png" alt="Image" />
+      </splide-slide>
+    </splide>
+    <!-- <img :src="state.data" alt="Image" />
+    <img
+      :src="state.data"
+      alt="Image"
+      v-for="(d, idx) in state.data"
+      :key="idx"
+    /> -->
   </div>
 </template>
 
@@ -271,15 +318,16 @@ export default {
 
     axios.get("/api/recommend/new").then((res) => {
       // 데이터 가져오는 거.
-      console.log(res);
       console.log(res.data);
-      console.log(res.data[0]);
-      console.log(res.data[0].title);
-      console.log(res.data[0].backdropPath);
       console.log(res.data[0].posterImg);
-      state.data[0] = res.data[0].title;
-      state.data[1] = res.data[0].backdropPath;
-      state.data[2] = res.data[0].posterImg;
+
+      var index;
+
+      for (index = 0; index < res.data.length; index++) {
+        console.log("데이터 받아오나?");
+        state.data[index] = res.data[index].posterImg;
+        console.log(res.data[index].posterImg);
+      }
     });
 
     return { state, add };
