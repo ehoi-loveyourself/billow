@@ -45,4 +45,11 @@ public class ControllerAdvice {
         log.info(runtimeException.getMessage());
         return new Message(runtimeException.getMessage());
     }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(Exception.class)
+    public Message Exception(RuntimeException runtimeException) {
+        log.info(runtimeException.getMessage());
+        return new Message(runtimeException.getMessage());
+    }
 }

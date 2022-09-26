@@ -5,4 +5,5 @@ COPY requirements.txt ./
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 COPY . .
-CMD ["gunicorn", "djangoBack.wsgi", "--bind", "127.0.0.1:8000"]
+EXPOSE 8000
+CMD ["gunicorn", "djangoBack.wsgi", "--bind", "0.0.0.0:8000"]
