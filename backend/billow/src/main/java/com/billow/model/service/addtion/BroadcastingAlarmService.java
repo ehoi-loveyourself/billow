@@ -59,8 +59,7 @@ public class BroadcastingAlarmService {
         ProgramOrganization programOrganization = programOrganizationRepository.findById(programOrganizationId)
                 .orElseThrow(() -> new NotFoundException(PROGRAM_ORGANIZATION_NOT_FOUND));
 
-        //TODO : user 핸드폰 번호 파라미터 추가
-        String groupId = messageService.sendMessage("01024622287", programOrganization);
+        String groupId = messageService.sendMessage(user.getMobile(), programOrganization);
         BroadcastingAlarm broadcastingAlarm = BroadcastingAlarm.builder()
                 .groupId(groupId)
                 .programOrganization(programOrganization)

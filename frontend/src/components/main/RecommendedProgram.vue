@@ -413,21 +413,6 @@ img {
   width: 100%;
   transition: all 0.3s ease-in-out;
 }
-/* .box:before {
-  content: '';
-  background: #fff;
-  width: 0px; height: 1px;
-  position: absolute; right: 20px; top: 20px;
-  transition: all 0.35s ease;
-}
-.box:after {
-  content: '';
-  background: #fff;
-  width: 1px; height: 0px;
-  position: absolute; right: 20px; top: 20px;
-  transition: all 0.35s ease;
-} */
-
 .box .info {
   position: absolute;
   left: 5px;

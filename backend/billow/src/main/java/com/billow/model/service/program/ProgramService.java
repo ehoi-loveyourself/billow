@@ -13,6 +13,7 @@ import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -115,5 +116,31 @@ public class ProgramService {
                     .build());
         }
         return responses;
+    }
+
+    public ProgramResponse selectProgram(Long programId) {
+        Program program
+                = programRepository.findById(programId)
+                .orElseThrow(() -> new NotFoundException(PROGRAM_NOT_FOUND));
+
+        return ProgramResponse.builder()
+                .id(program.getId())
+                .title(program.getTitle())
+                .genres(program.getGenreList()
+                        .stream()
+                        .map(genre -> genre.getGenreInfo().getName())
+                        .collect(Collectors.toList()))
+                .age(program.getAge())
+                .summary(program.getSummary())
+                .broadcastingDay(program.getBroadcastingDay())
+                .broadcastingEpisode(program.getBroadcastingEpisode())
+                .broadcastingStation(program.getBroadcastingStation())
+                .endFlag(program.isEndFlag())
+                .firstAirDate(DateFormat.getDateInstance(DateFormat.LONG).format(program.getFirstAirDate()))
+                .averageRating(program.getAverageRating())
+                .bookmarkCnt(program.getBookmarkCnt())
+                .posterImg(program.getPosterImg())
+                .backdropPath(program.getBackdropPath())
+                .build();
     }
 }
