@@ -1,8 +1,8 @@
-FROM python:3.9.5
+FROM python:3.10.1
 WORKDIR /var/jenkins_home/workspace/billow/backend/djangoBack
 COPY requirements.txt ./
 
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 COPY . .
-CMD ["gunicorn", "testproject.wsgi", "--bind", "0.0.0.0:8080"]
+CMD ["gunicorn", "djangoBack.wsgi", "--bind", "127.0.0.1:8080"]
