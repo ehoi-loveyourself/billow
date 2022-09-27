@@ -178,4 +178,4 @@ def mf_condition_recomm(programId):
     print(list(program_id[(corr_coffey_hands >= 0.9)])[:50])
     return list(program_id[(corr_coffey_hands >= 0.9)])[:50]
 
-mf_condition_recomm(392)
+# mf_condition_recomm(392)
