@@ -53,7 +53,7 @@ public class ProgramController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "랜덤 프로그램 출력 성공")})
     @GetMapping("/random")
-    public ResponseEntity<Object> randomProgram(@RequestHeader("Auth-access") String token) {
+    public ResponseEntity<Object> randomProgram() {
         log.info("사용자 초기 데이터 수집용 랜덤 프로그램 출력 API 호출");
         List<ProgramResponse> response = programService.randomProgram();
         log.info("랜덤 프로그램 출력 성공");
