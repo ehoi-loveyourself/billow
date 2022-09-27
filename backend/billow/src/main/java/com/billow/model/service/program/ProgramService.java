@@ -1,6 +1,7 @@
 package com.billow.model.service.program;
 
 import com.billow.domain.dto.addtion.RatingRequest;
+import com.billow.domain.dto.program.OttResponse;
 import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.domain.entity.addition.Rating;
 import com.billow.domain.entity.program.Program;
@@ -63,6 +64,14 @@ public class ProgramService {
                         .ratingCnt(program.getRatingCnt())
                         .posterImg(program.getPosterImg())
                         .backdropPath(program.getBackdropPath())
+                        .otts(program.getOttList()
+                                .stream()
+                                .map(ott -> OttResponse.builder()
+                                        .name(ott.getOttInfo().getName())
+                                        .url(ott.getOttInfo().getUrl())
+                                        .imgUrl(ott.getOttInfo().getImgUrl())
+                                        .build())
+                                .collect(Collectors.toList()))
                         .build())
                 .collect(Collectors.toList());
     }
@@ -126,6 +135,14 @@ public class ProgramService {
                     .ratingCnt(program.getRatingCnt())
                     .posterImg(program.getPosterImg())
                     .backdropPath(program.getBackdropPath())
+                    .otts(program.getOttList()
+                            .stream()
+                            .map(ott -> OttResponse.builder()
+                                    .name(ott.getOttInfo().getName())
+                                    .url(ott.getOttInfo().getUrl())
+                                    .imgUrl(ott.getOttInfo().getImgUrl())
+                                    .build())
+                            .collect(Collectors.toList()))
                     .build());
         }
         return responses;
@@ -154,6 +171,14 @@ public class ProgramService {
                 .bookmarkCnt(program.getBookmarkCnt())
                 .posterImg(program.getPosterImg())
                 .backdropPath(program.getBackdropPath())
+                .otts(program.getOttList()
+                        .stream()
+                        .map(ott -> OttResponse.builder()
+                                .name(ott.getOttInfo().getName())
+                                .url(ott.getOttInfo().getUrl())
+                                .imgUrl(ott.getOttInfo().getImgUrl())
+                                .build())
+                        .collect(Collectors.toList()))
                 .build();
     }
 }
