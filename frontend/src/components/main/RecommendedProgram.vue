@@ -340,6 +340,7 @@ img {
   margin-bottom: 20%;
   /* width:16.1%; */
   width: 100%;
+  height:20vw;
   padding-right: 0;
   margin-right: 0;
 }
