@@ -17,7 +17,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/user-recommend")
+@RequestMapping("/mf")
 public class WebClientController {
 
     public final WebClient webClient;
