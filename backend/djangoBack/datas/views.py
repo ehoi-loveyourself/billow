@@ -1,34 +1,15 @@
-from asyncio.windows_events import NULL
-from this import d
 from urllib import response
 from django.shortcuts import render
 
-# from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes, authentication_classes
-from rest_framework.permissions import IsAuthenticated
-# from rest_framework_jwt.authentication import JSONWebTokenAuthentication
-from datas import serializers
+from rest_framework.decorators import api_view
 
 from datas.models import TbGenre, TbGenreInfo, TbOtt, TbOttInfo, TbProgram, TbRating, TbUser
-from datas.serializers import TbGenreInfoSerializer, ProgramSerializer
+from datas.serializers import ProgramSerializer
 from datas import recomm
 
 import requests
 import random
-
-# from rest_framework_jwt.authentication import JSONWebTokenAuthentication
-# from rest_framework_jwt.utils import jwt_decode_handler
-
-# def token_decode(request):
-#     print(request)
-#     print(request.user)
-#     auth = JSONWebTokenAuthentication()    
-#     jwt_value = auth.get_jwt_value(request)    
-#     payload = jwt_decode_handler(jwt_value)    
-    
-#     return payload
-
 
 API_KEY = '3beacdbb8f7b35eb8c782851ddc5b403'
 
@@ -96,7 +77,7 @@ def all_program_data(request):
                         first_air_date = first_air_date
                     )
                     for program_genre in data.get('genres'):
-                        if program_genre == NULL:
+                        if program_genre == None:
                             break
                         genre = TbGenreInfo.objects.get(pk=program_genre.get('id'))
                         TbGenre.objects.create(
@@ -108,7 +89,7 @@ def all_program_data(request):
                         ott_list = kr_ott.get('flatrate')
                         if ott_list != None:
                             for ott_detail in ott_list:
-                                if ott_detail == NULL:
+                                if ott_detail == None:
                                     break
                                 ott = TbOttInfo.objects.get(pk=ott_detail.get('provider_id'))
                                 TbOtt.objects.create(
@@ -143,24 +124,6 @@ def user_create(request):
         )
     return Response()
 
-# @api_view(['GET'])
-# def rating_create(request):
-#     lst = []
-#     for num in range(1, 590):
-#         lst.append(num)
-#     for i in range(1, 500):
-#         user = TbUser.objects.get(pk=i)
-#         program_list = random.sample(lst, 50)
-#         for program_number in program_list:
-#             program = TbProgram.objects.get(pk=program_number)
-#             score = random.uniform(0,5)
-#             TbRating.objects.create(
-#                 score = score,
-#                 user_id = i,
-#                 program_id = program_number
-#         )
-#     return response()
-
 @api_view(['GET'])
 def rating_create(request):
     lst = []
@@ -180,36 +143,19 @@ def rating_create(request):
     return response()
 
 @api_view(['GET'])
-# @permission_classes((IsAuthenticated, ))
-# @authentication_classes((JSONWebTokenAuthentication,))
 def user_recomm(request, user_id):
-# def user_recomm(request, user_id):
 
-    # print(request)
-    # print(request.user)
-    # user = request.user
-    # user_id = user.user_id
     user_id = user_id
     print(user_id)
     indi_user_recomm = recomm.mf_algo_individual(user_id)
 
-    # indi_user_recomm = indi_user_recomm[indi_user_recomm['user_id']==user_id]
-
     indi_user_recomm = indi_user_recomm.values.tolist()
-
-    print(indi_user_recomm)
 
     indi_user_recomm_list = []
     for program_id in indi_user_recomm:
         program = TbProgram.objects.get(pk=program_id[0])
         indi_user_recomm_list.append(program)
 
-    print(indi_user_recomm_list)
-    # recomm_program = {}
-    # for recomm in indi_user_recomm_list:
-
-    
-    # serializer = RecommProgramSerializer(indi_user_recomm_list, many = True)
     serializer = ProgramSerializer(data = indi_user_recomm_list, many = True)
     if serializer.is_valid():
         pass

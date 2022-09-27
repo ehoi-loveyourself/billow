@@ -1,6 +1,4 @@
 from dataclasses import field, fields
-import imp
-from unittest import mock
 from rest_framework import serializers
 from .models import TbGenre, TbGenreInfo, TbOttInfo, TbProgram
 
@@ -23,8 +21,6 @@ class ProgramSerializer(serializers.ModelSerializer):
             model = TbGenre
             fields = '__all__'
     
-    
-    # genres = GenreSerializer(many=True, read_only=True)
     genres = TbGenreInfoSerializer(many=True, read_only=True)
     otts = OttSerializer(many=True, read_only=True)
     id = serializers.SerializerMethodField()
@@ -77,7 +73,6 @@ class ProgramSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TbProgram
-        # fields = '__all__'
         fields = (
             "id",
             "genres",
@@ -96,17 +91,3 @@ class ProgramSerializer(serializers.ModelSerializer):
             "genres",
             "otts"
         )
-
-# class RecommProgramSerializer(serializers.ModelSerializer):
-
-#     class Meta:
-#         model = TbProgram
-#         fields = ('program_id', 'title')
-
-# class AllProgramSerializer(serializers.ModelSerializer):
-#     genres = GenreSerializer(many=True, read_only=True)
-#     otts = OttSerializer(many=True, read_only=True)
-
-#     class Meta:
-#         model = Program
-#         fields = '__all__'

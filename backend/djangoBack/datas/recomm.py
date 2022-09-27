@@ -5,14 +5,10 @@ import MySQLdb
 from contextlib import redirect_stderr
 from sklearn.decomposition import TruncatedSVD
 from scipy.sparse.linalg import svds
-
-# import matplotlib.pyplot as plt
-# import seaborn as sns
 import warnings
 import requests
 import pickle
 warnings.filterwarnings("ignore")
-# from datas.models import TbProgram #TbUser
 
 
 
@@ -26,21 +22,9 @@ CONN = MySQLdb.connect(
 def query_MySQL(query):
     # DB 연결
 
-    # conn = MySQLdb.connect(
-    #     host = 'localhost',
-    #     user = 'B309',
-    #     password = 'B309Billow',
-    #     db = 'billow'
-    # )
-
-
     global query_result
 
     query_result = pd.read_sql(query, CONN)
-
-    # conn.close()
-
-    # print('-------------------')
 
     return query_result
     
@@ -49,14 +33,10 @@ def predict_table():
     df_rating = query_MySQL('SELECT score, program_id, user_id from tb_rating')
     user_list = query_MySQL('SELECT * From tb_user')
 
-    # print(user_list)
-
     user_list = user_list.values.tolist()
     users = []
-    # print(user_list)
     for user in user_list:
         users.append(user[0])
-    # print(users)
 
     df_user_program_ratings = df_rating.pivot(
         index = 'user_id',
@@ -102,18 +82,16 @@ def recommend_programs(df_svd_preds, user_id, ori_programs_df, ori_ratings_df, n
     recommendations = recommendations.rename(columns = {user_row_number: 'Predictions'}).sort_values('Predictions', ascending = False).iloc[:num_recommendations, :]
                         
 
-    return recommendations #user_history, recommendations
+    return recommendations
 
 def mf_algo():
     users, df_program, df_rating, df_svd_preds = predict_table()
     predict_result = pd.DataFrame()
     for i, user in enumerate(users):
-        # print(i, user)
+
         user_result = recommend_programs(df_svd_preds, user, df_program, df_rating)
         user_result.insert(2, 'user_id', user)
         user_result = user_result[0:10]
-
-        # print(user_result)
 
         predict_result = pd.concat([predict_result, user_result])
 
@@ -127,8 +105,6 @@ def mf_algo():
 
 def mf_algo_individual(request):
     user_id = request
-    # user = request.user
-    # user_id = user.user_id
     users, df_program, df_rating, df_svd_preds = predict_table()
     indi_predict_result = pd.DataFrame()
 
@@ -146,6 +122,3 @@ def mf_algo_individual(request):
         data = pickle.load(f)
 
     return indi_predict_result
-
-# mf_algo()
-# mf_algo_individual(1)
