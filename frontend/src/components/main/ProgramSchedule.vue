@@ -53,7 +53,7 @@
     </div>
 
     <b-modal size="sm" hide-footer id="modal-1" centered no-stacking title="알림 설정" style="text-align: center;">
-      <div class="alarm"><img src="@/assets/alarm_md.png"/><span class="alarm-info">15분 전에 알림을 드립니다.</span></div>
+      <div><img src="@/assets/alarm_md.png"/><span class="alarm-info">15분 전에 알림을 드립니다.</span></div>
       <b-button @click="Submit" style="background-color:blue" data-bs-dismiss="modal" aria-label="Close">좋아요!</b-button>
     </b-modal>
 </template>
@@ -87,8 +87,5 @@
 .time{
   color:#a1a1a1;
   font-size:1.1vw;
-}
-.alarm{
-  /* padding-bottom: 3%; */
 }
 </style>
