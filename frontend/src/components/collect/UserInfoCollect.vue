@@ -15,12 +15,12 @@ BILLOW가 회원님이 좋아할만한 프로그램을 추천해줄거예요.</h
             프로필
         </b-col>
         <b-col cols="10" style="padding-left:1%">
-            <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/initial/1" size="4rem"></b-avatar>
-            <b-avatar class="avatar" variant="info" src="http://localhost:8009/api/profile/initial/2" size="4rem"></b-avatar>
+            <b-avatar class="avatar" variant="info" src="https://billow-profile.s3.ap-northeast-2.amazonaws.com/profile/11.png" size="4rem"></b-avatar>
+            <b-avatar class="avatar" variant="info" src="https://billow-profile.s3.ap-northeast-2.amazonaws.com/profile/11.png" size="4rem"></b-avatar>
             <b-avatar class="avatar" variant="info" src="http://localhost:8009/api/profile/initial/3" size="4rem"></b-avatar>
-            <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/1" size="4rem"></b-avatar>
-            <b-avatar class="avatar" variant="info" src="https://placekitten.com/300/700" size="4rem"></b-avatar>
-            <b-avatar class="avatar" variant="info" src="https://placekitten.com/300/800" size="4rem"></b-avatar>
+            <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/initial/1" size="4rem"></b-avatar>
+            <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/initial/11" size="4rem"></b-avatar>
+            <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/initial/14" size="4rem"></b-avatar>
             <b-avatar class="avatar" variant="info" src="https://placekitten.com/300/900" size="4rem"></b-avatar>
             <b-avatar class="avatar" variant="info" src="https://placekitten.com/300/200" size="4rem"></b-avatar>
             <b-avatar class="avatar" variant="info" src="https://placekitten.com/300/100" size="4rem"></b-avatar>

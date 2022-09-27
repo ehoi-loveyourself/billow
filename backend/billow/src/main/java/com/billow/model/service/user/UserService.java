@@ -63,7 +63,6 @@ public class UserService {
     public UserResponse selectUser(Long userId) throws IOException {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
-        String profileImgUrl = PROFILE_IMG_ABSOLUTE_PATH + user.getProfileImg().getImgName();
         return UserResponse.builder()
                 .email(user.getEmail())
                 .name(user.getName())
@@ -73,6 +72,7 @@ public class UserService {
                 .region(user.getRegion().getRegion())
                 .tvCarrier(user.getTvCarrier().getCompany())
                 .mobile(user.getMobile())
+                .profileImgUrl(user.getProfileImg().getUrl())
                 .build();
     }
 

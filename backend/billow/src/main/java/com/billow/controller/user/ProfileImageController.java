@@ -33,31 +33,32 @@ public class ProfileImageController {
 
     private final ProfileImageService profileImageService;
 
-    @ApiOperation(value = "프로필 조회", response = Object.class)
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "프로필 조회 성공")})
-    @GetMapping("/{userId}")
-    public ResponseEntity<Resource> selectProfile(@PathVariable("userId") Long userId) {
-        try {
-            log.info("프로필 조회 API 호출");
-            ResponseEntity<Resource> resource = profileImageService.selectProfile(1L);
-            log.info("프로필 조회 성공");
-            return resource;
-        } catch (Exception e) {
-            throw new BadRequestException(PROFILE_ERROR);
-        }
-    }
-
+//    @ApiOperation(value = "프로필 조회", response = Object.class)
+//    @ApiResponses(value = {
+//            @ApiResponse(responseCode = "200", description = "프로필 조회 성공")})
+//    @GetMapping("/{userId}")
+//    public ResponseEntity<Resource> selectProfile(@PathVariable("userId") Long userId) {
+//        try {
+//            log.info("프로필 조회 API 호출");
+//            ResponseEntity<Resource> resource = profileImageService.selectProfile(1L);
+//            log.info("프로필 조회 성공");
+//            return resource;
+//        } catch (Exception e) {
+//            throw new BadRequestException(PROFILE_ERROR);
+//        }
+//    }
+//
     @ApiOperation(value = "초기 프로필 조회", response = Object.class)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "초기 프로필 조회 성공")})
     @GetMapping("/initial/{profileId}")
-    public ResponseEntity<Resource> initialSelectProfile(@PathVariable("profileId") Long profileId) {
+    public ResponseEntity<String> initialSelectProfile(@PathVariable("profileId") Long profileId) {
         try {
             log.info("초기 프로필 조회 API 호출");
-            ResponseEntity<Resource> resource = profileImageService.initialSelectProfile(profileId);
+            String resource = profileImageService.initialSelectProfile(profileId);
             log.info("초기 프로필 조회 성공");
-            return resource;
+            return ResponseEntity.ok()
+                    .body(resource);
         } catch (Exception e) {
             throw new BadRequestException(PROFILE_ERROR);
         }

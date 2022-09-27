@@ -52,6 +52,9 @@ public class Program {
     @OneToMany(mappedBy = "program", cascade = CascadeType.ALL)
     private List<Genre> genreList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "program", cascade = CascadeType.ALL)
+    private List<Ott> ottList = new ArrayList<>();
+
     @Builder
     public Program(Long id, Integer programNum, String title, String age, String summary, String broadcastingDay, String broadcastingEpisode, String broadcastingStation,
                    boolean endFlag, Float averageRating, Long ratingCnt, String posterImg, String backdropPath, List<Genre> genreList, Date firstAirDate) {

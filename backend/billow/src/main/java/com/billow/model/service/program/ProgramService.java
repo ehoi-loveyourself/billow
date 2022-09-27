@@ -150,7 +150,7 @@ public class ProgramService {
                 .broadcastingStation(program.getBroadcastingStation())
                 .endFlag(program.isEndFlag())
                 .firstAirDate(DateFormat.getDateInstance(DateFormat.LONG).format(program.getFirstAirDate()))
-                .averageRating(program.getAverageRating())
+                .averageRating(Float.valueOf(String.format("%.1f", program.getAverageRating())))
                 .bookmarkCnt(program.getBookmarkCnt())
                 .posterImg(program.getPosterImg())
                 .backdropPath(program.getBackdropPath())
