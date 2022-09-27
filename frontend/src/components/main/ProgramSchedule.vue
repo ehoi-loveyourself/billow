@@ -70,7 +70,7 @@
     font-family: "Watcha Sans", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Nanum Gothic", "Malgun Gothic", sans-serif;
     font-size: 0.9vw;
     font-weight: 600;
-    vertical-align: top;
+    vertical-align: middle;
     /* line-height: 18px; */
     /* padding: 1px 5px; */
     border-radius: 3px;
@@ -80,7 +80,7 @@
 }
 .box{
   padding-top:0;
-    padding-bottom:0;
+  padding-bottom:0;
 }
 .time{
   color:#a1a1a1;

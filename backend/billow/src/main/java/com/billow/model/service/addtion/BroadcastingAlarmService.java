@@ -1,35 +1,19 @@
 package com.billow.model.service.addtion;
 
 import com.billow.domain.dto.addtion.BroadcastingAlarmResponse;
-import com.billow.domain.dto.addtion.ReviewRequest;
-import com.billow.domain.dto.addtion.ReviewResponse;
-import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.domain.entity.addition.BroadcastingAlarm;
-import com.billow.domain.entity.addition.Rating;
-import com.billow.domain.entity.addition.Review;
 import com.billow.domain.entity.organization.ProgramOrganization;
-import com.billow.domain.entity.program.Program;
 import com.billow.domain.entity.user.User;
-import com.billow.exception.BadRequestException;
 import com.billow.exception.NotFoundException;
 import com.billow.model.repository.addition.BroadcastingAlarmRepository;
-import com.billow.model.repository.addition.ReviewRepository;
-import com.billow.model.repository.program.ProgramRepository;
+import com.billow.model.repository.organization.ProgramOrganizationRepository;
 import com.billow.model.repository.user.UserRepository;
 import com.billow.util.DateUtil;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.TextStyle;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -37,8 +21,13 @@ import java.util.stream.Collectors;
 public class BroadcastingAlarmService {
 
     private static final String ALARM_NOT_FOUND = "등록되지 않은 알람입니다.";
+    private static final String USER_NOT_FOUND = "사용자를 찾을 수 없습니다.";
+    private static final String PROGRAM_ORGANIZATION_NOT_FOUND = "편성표 정보를 찾을 수 없습니다.";
 
     private final BroadcastingAlarmRepository broadcastingAlarmRepository;
+    private final ProgramOrganizationRepository programOrganizationRepository;
+    private final UserRepository userRepository;
+    private final MessageService messageService;
 
     public List<BroadcastingAlarmResponse> selectAlarm(Long userId) {
         List<BroadcastingAlarm> broadcastingAlarmList = broadcastingAlarmRepository.findByUser_Id(userId);
@@ -65,9 +54,14 @@ public class BroadcastingAlarmService {
         if (!findBroadcastingAlarm.isEmpty()) {
             return new Message("이미 등록된 알림입니다.");
         }
-        ProgramOrganization programOrganization = ProgramOrganization.builder().id(programOrganizationId).build();
-        User user = User.builder().id(userId).build();
+        User user =userRepository.findById(userId)
+                        .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
+        ProgramOrganization programOrganization = programOrganizationRepository.findById(programOrganizationId)
+                .orElseThrow(() -> new NotFoundException(PROGRAM_ORGANIZATION_NOT_FOUND));
+
+        String groupId = messageService.sendMessage(user.getMobile(), programOrganization);
         BroadcastingAlarm broadcastingAlarm = BroadcastingAlarm.builder()
+                .groupId(groupId)
                 .programOrganization(programOrganization)
                 .user(user)
                 .build();
@@ -78,6 +72,7 @@ public class BroadcastingAlarmService {
     public Message deleteAlarm(Long alarmId) {
         BroadcastingAlarm findBroadcastingAlarm = broadcastingAlarmRepository.findById(alarmId)
                 .orElseThrow(() -> new NotFoundException(ALARM_NOT_FOUND));
+        messageService.cancleMessage(findBroadcastingAlarm.getGroupId());
         broadcastingAlarmRepository.delete(findBroadcastingAlarm);
         return new Message("방영 알림 삭제에 성공하였습니다.");
     }

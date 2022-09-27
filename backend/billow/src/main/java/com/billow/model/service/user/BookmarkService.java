@@ -1,10 +1,11 @@
 package com.billow.model.service.user;
 
-import com.billow.domain.dto.program.ProgramResponse;
+import com.billow.domain.dto.user.BookmarkResponse;
 import com.billow.domain.entity.program.Program;
 import com.billow.domain.entity.user.Bookmark;
 import com.billow.domain.entity.user.User;
 import com.billow.exception.BadRequestException;
+import com.billow.exception.DuplicationException;
 import com.billow.exception.NotFoundException;
 import com.billow.model.repository.program.ProgramRepository;
 import com.billow.model.repository.user.BookmarkRepository;
@@ -24,16 +25,23 @@ public class BookmarkService {
     private static final String USER_NOT_FOUND = "해당 유저를 찾을 수 없습니다.";
     private static final String BOOKMARK_NOT_FOUND = "해당 즐겨찾기를 찾을 수 없습니다.";
     private static final String BAD_REQUEST = "잘못된 요청입니다.";
+    private static final String BOOKMARK_ALREADY_REGISTERED = "이미 즐겨찾기에 담겼습니다.";
+    private static final String BOOKMARK_ZERO = "담긴 즐겨찾기가 없습니다.";
 
     private final BookmarkRepository bookmarkRepository;
     private final ProgramRepository programRepository;
     private final UserRepository userRepository;
 
-    public List<ProgramResponse> selectBookmark(Long userId) {
+    public List<BookmarkResponse> selectBookmark(Long userId) {
+        List<Bookmark> list = bookmarkRepository.findByUser_Id(userId);
+        if (list.size() == 0) {
+            throw new NotFoundException(BOOKMARK_ZERO);
+        }
         return bookmarkRepository.findByUser_Id(userId)
                 .stream()
-                .map(bookmark -> ProgramResponse.builder()
-                        .id(bookmark.getProgram().getId())
+                .map(bookmark -> BookmarkResponse.builder()
+                        .bookmarkId(bookmark.getId())
+                        .programId(bookmark.getProgram().getId())
                         .title(bookmark.getProgram().getTitle())
                         .genres(bookmark.getProgram().getGenreList()
                                 .stream()
@@ -46,6 +54,8 @@ public class BookmarkService {
                         .broadcastingStation(bookmark.getProgram().getBroadcastingStation())
                         .endFlag(bookmark.getProgram().isEndFlag())
                         .averageRating(bookmark.getProgram().getAverageRating())
+                        .bookmarkCnt(bookmark.getProgram().getBookmarkCnt())
+                        .ratingCnt(bookmark.getProgram().getRatingCnt())
                         .posterImg(bookmark.getProgram().getPosterImg())
                         .backdropPath(bookmark.getProgram().getBackdropPath())
                         .build())
@@ -57,6 +67,15 @@ public class BookmarkService {
                 .orElseThrow(() -> new NotFoundException(PROGRAM_NOT_FOUND));
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
+        // 이미 담겨있다면 예외 처리하기
+        // 유저의 북마크를 보고 이미 담겨 있다면 예외 처리하기
+        List<Bookmark> bookmarks = bookmarkRepository.findByUser_Id(userId);
+        for (Bookmark b : bookmarks) {
+            if (b.getProgram() == program) {
+                throw new DuplicationException(BOOKMARK_ALREADY_REGISTERED);
+            }
+        }
+
         Bookmark bookmark = Bookmark.builder()
                 .user(user)
                 .program(program)
