@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/user-recommend")
@@ -22,8 +24,8 @@ public class DjangoRecommandController {
     public final webClientService webClientService;
 
     @GetMapping("/{userId}")
-    public ResponseEntity<ProgramResponse> userRecommend(@PathVariable("userId") Long userId) {
-        ResponseEntity<ProgramResponse> programRecommend =  webClientService.callDjangoApi(userId);
+    public List<ProgramResponse> userRecommend(@PathVariable("userId") Long userId) {
+        List<ProgramResponse> programRecommend =  webClientService.callDjangoApi(userId);
         System.out.println(programRecommend);
         return (programRecommend);
 //        return webClient.get()
