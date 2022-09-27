@@ -177,4 +177,4 @@ def condition_pivot_table(programId):
     corr_coffey_hands = corr[coffey_hands]
     return list(program_id[(corr_coffey_hands >= 0.9)])[:50]
 
-condition_pivot_table(1)
+# condition_pivot_table(1)
