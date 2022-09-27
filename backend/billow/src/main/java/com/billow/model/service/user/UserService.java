@@ -12,12 +12,14 @@ import com.billow.exception.BadRequestException;
 import com.billow.exception.DuplicationException;
 import com.billow.exception.NotFoundException;
 import com.billow.exception.WrongFormException;
+import com.billow.jwt.CustomUserDetailsService;
+import com.billow.jwt.JwtTokenProvider;
+import com.billow.jwt.JwtUtil;
 import com.billow.model.repository.addition.RatingRepository;
 import com.billow.model.repository.user.ProfileImgRepository;
 import com.billow.model.repository.user.RegionRepository;
 import com.billow.model.repository.user.TvCarrierRepository;
 import com.billow.model.repository.user.UserRepository;
-import com.billow.jwt.JwtUtil;
 import com.billow.util.KakaoOAuth2;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
@@ -52,6 +54,8 @@ public class UserService {
     private final TvCarrierRepository tvCarrierRepository;
     private final ProfileImgRepository profileImgRepository;
     private final KakaoOAuth2 kakaoOAuth2;
+    private final CustomUserDetailsService customUserDetailsService;
+    private final JwtTokenProvider jwtTokenProvider;
 
     public UserResponse selectUser(Long userId) {
         User user = userRepository.findById(userId)
@@ -86,6 +90,16 @@ public class UserService {
                 user = new User(kakaoUser.getEmail(), kakaoUser.getNickName());
                 userRepository.save(user);
             }
+//
+//            UserDetails userDetails = customUserDetailsService.loadUserByUsername(kakaoUser.getEmail());
+//
+//            Authentication authentication = new UsernamePasswordAuthenticationToken(
+//                    userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities()
+//            );
+//
+//            String refreshToken2 = jwtTokenProvider.createRefreshToken(authentication);
+//            String authToken2 = jwtTokenProvider.createAccessToken(authentication);
+
             String authToken = JwtUtil.createAuthToken(user.getId(), user.getEmail(), user.getName());
             String refreshToken = JwtUtil.createRefreshToken();
 
@@ -113,7 +127,7 @@ public class UserService {
             throw new DuplicationException(NICKNAME_DUPLICATED);
         }
         return new Message("사용 가능한 닉네임입니다.");
-   }
+    }
 
     public Message signUp(SignUpRequest signUpRequest) {
         User user = userRepository.findByEmail(signUpRequest.getEmail());

@@ -4,6 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 @ToString
@@ -34,6 +37,8 @@ public class User {
 
     private String mobile;
 
+    private String roles;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profile_img_id")
     private ProfileImg profileImg;
@@ -46,9 +51,33 @@ public class User {
     @JoinColumn(name = "tv_carrier_id")
     private TvCarrier tvCarrier;
 
+    public List<String> getRoleList() {
+        if (roles.length() > 0) {
+            return Arrays.asList(roles.split(","));
+        }
+        return new ArrayList<>();
+    }
+
     public User(String email, String name) {
         this.email = email;
         this.name = name;
+    }
+
+    @Builder
+    public User(Long id, String email, String name, String nickName, String gender, Integer age, String refreshToken, String mobile,
+                ProfileImg profileImg, Region region, TvCarrier tvCarrier) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+        this.nickName = nickName;
+        this.gender = gender;
+        this.age = age;
+        this.refreshToken = refreshToken;
+        this.mobile = mobile;
+        this.roles = "ROLE_USER";
+        this.profileImg = profileImg;
+        this.region = region;
+        this.tvCarrier = tvCarrier;
     }
 
     @Builder
