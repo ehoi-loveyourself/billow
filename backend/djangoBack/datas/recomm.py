@@ -130,11 +130,11 @@ def mf_algo_individual(request):
     indi_predict_result = pd.concat([indi_predict_result, indi_user_result])
     print(indi_predict_result)
 
-    with open('indi_predict_result', 'wb') as f:
-        pickle.dump(indi_predict_result, f, pickle.HIGHEST_PROTOCOL)
+    # with open('indi_predict_result', 'wb') as f:
+    #     pickle.dump(indi_predict_result, f, pickle.HIGHEST_PROTOCOL)
     
-    with open('indi_predict_result', 'rb') as f:
-        data = pickle.load(f)
+    # with open('indi_predict_result', 'rb') as f:
+    #     data = pickle.load(f)
 
     return indi_predict_result
 
