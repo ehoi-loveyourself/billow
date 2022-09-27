@@ -62,10 +62,10 @@ public class ProfileImageService {
         ProfileImg profileImg = profileImgRepository.findById(user.getProfileImg().getId())
                 .orElseThrow(() -> new NotFoundException(IMAGE_NOT_FOUND));
 
-        Resource resource = new FileSystemResource("billow/backend/billow/"+profileImg.getSaveFolder() + File.separator + profileImg.getImgName());
+        Resource resource = new FileSystemResource("/home/ubuntu/"+profileImg.getSaveFolder() + File.separator + profileImg.getImgName());
         System.out.println(resource);
         HttpHeaders header = new HttpHeaders();
-        Path p = Paths.get("billow/backend/billow/" + profileImg.getSaveFolder() + "/" + profileImg.getImgName());
+        Path p = Paths.get("/home/ubuntu/" + profileImg.getSaveFolder() + "/" + profileImg.getImgName());
         header.add("Content-Type", Files.probeContentType(p));
         return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
     }
@@ -74,10 +74,10 @@ public class ProfileImageService {
         ProfileImg profileImg = profileImgRepository.findById(profileId)
                 .orElseThrow(() -> new NotFoundException(IMAGE_NOT_FOUND));
 
-        Resource resource = new FileSystemResource(profileImg.getSaveFolder() + File.separator + profileImg.getImgName());
+        Resource resource = new FileSystemResource("/home/ubuntu/"+profileImg.getSaveFolder() + File.separator + profileImg.getImgName());
         System.out.println(resource);
         HttpHeaders header = new HttpHeaders();
-        Path p = Paths.get("billow/backend/billow/" + profileImg.getSaveFolder() + "/" + profileImg.getImgName());
+        Path p = Paths.get("/home/ubuntu/" + profileImg.getSaveFolder() + "/" + profileImg.getImgName());
         header.add("Content-Type", Files.probeContentType(p));
         return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
     }
