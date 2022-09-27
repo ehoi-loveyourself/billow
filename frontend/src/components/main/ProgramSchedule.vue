@@ -20,7 +20,7 @@
             <tbody>
               <b-tr style="padding: 5;">
                 <b-td>10:59 137회<br/>
-<span class="time">12:47 </span>490회&nbsp;<span class="box"><span class="box_design">재</span></span>&nbsp;<img src="@/assets/alarm.png" v-b-modal.modal-1 style="cursor:pointer;"/><br/>
+<span class="time">12:47 </span><span style="font-size:0.9vw">490회</span>&nbsp;<span class="box"><span class="box_design">재</span></span>&nbsp;<img src="@/assets/alarm.png" v-b-modal.modal-1 style="cursor:pointer;"/><br/>
 14:31 470회<br/>
 17:30 661회</b-td>
                 <b-td>10:59 137회<br/>
@@ -68,7 +68,7 @@
     background: rgb(46, 47, 49);
     color: rgb(255, 255, 255);
     font-family: "Watcha Sans", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Nanum Gothic", "Malgun Gothic", sans-serif;
-    font-size: 0.9vw;
+    font-size: 0.7vw;
     font-weight: 600;
     vertical-align: middle;
     /* line-height: 18px; */
@@ -84,9 +84,10 @@
 }
 .time{
   color:#a1a1a1;
+  font-size:0.9vw
 }
 .alarm-info{
-  font-size:1.1vw;
+  font-size:1vw;
   font-weight:400;
 }
 .alarm{

@@ -1,10 +1,4 @@
 <template>
-  <div class="memos">
-    <button class="btn btn-primary" @click="add()">추가하기</button>
-    <ul>
-      <li v-for="(d, idx) in state.data" :key="idx">{{ d }}</li>
-    </ul>
-  </div>
   <div>
     <h2 style="color: white">지금 방송 중인 프로그램(ON AIR)</h2>
     <splide id="carousel_recommend" :options="options">
@@ -82,83 +76,46 @@
       </splide-slide>
     </splide>
 
+    <h2 style="color: white">마우스 호버 시 프로그램 정보 테스트</h2>
+    <splide id="carousel_recommend" :options="options">
+      <splide-slide v-for="(d, idx) in state.newProgramPosterImg" :key="idx">
+        <div class="box-wrap">
+          <div class="box">
+            <div class="img">
+              <a class="enterDetail" href="#">
+                <router-link :to="{ name: 'detail' }" class="nav-link">
+                  <img
+                    :src="state.newProgramPosterImg[idx]"
+                    alt="Hover Effect"
+                  />
+                </router-link>
+              </a>
+            </div>
+            <div class="info">
+              <h3>{{ state.newProgramTitle[idx] }}</h3>
+              <div class="detailbox">
+                <span class="detailbox_design">15+</span
+                ><span class="detailbox_design">금 오후7:00</span
+                ><span class="detailbox_design">예능</span
+                ><span class="detailbox_design">tvN</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </splide-slide>
+    </splide>
+
     <h2 style="color: white">요즘 핫한 프로그램</h2>
     <splide id="carousel_recommend" :options="options">
-      <splide-slide>
-        <img src="@/assets/laggi.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/runningman.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/thatman.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/nangman.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/jugun.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/image_2.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/gs.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/sign.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/hyori.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/song.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/heart_to_heart.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/alham.png" alt="Image" />
+      <splide-slide v-for="(d, idx) in state.hotProgramPosterImg" :key="idx">
+        <img :src="state.hotProgramPosterImg[idx]" alt="Image" />
       </splide-slide>
     </splide>
 
     <h2 style="color: white">신규 프로그램을 추천드려요!</h2>
     <splide id="carousel_recommend" :options="options">
-      <splide-slide>
-        <img src="@/assets/nangman.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/laggi.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/jugun.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/image_2.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/gs.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/sign.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/runningman.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/thatman.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/hyori.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/song.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/heart_to_heart.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/alham.png" alt="Image" />
+      <splide-slide v-for="(d, idx) in state.newProgramPosterImg" :key="idx">
+        <img :src="state.newProgramPosterImg[idx]" alt="Image" />
       </splide-slide>
     </splide>
 
@@ -242,52 +199,19 @@
       </splide-slide>
     </splide>
 
-    <h2 style="color: white">여기서 부터 테스트입니다.</h2>
+    <!-- <h2 style="color: white">테스트 1</h2>
     <splide id="carousel_recommend" :options="options">
       <splide-slide v-for="(d, idx) in state.data" :key="idx">
-        <img :src="state.data[idx]" alt="Image"/>
+        <img :src="state.data[idx]" alt="Image" />
       </splide-slide>
-      <splide-slide>
-        <img src="@/assets/nangman.png" alt="Image" />
+    </splide> -->
+
+    <!-- <h2 style="color: white">테스트 2</h2>
+    <splide id="carousel_recommend" :options="options">
+      <splide-slide v-for="(d, idx) in state.newProgramPosterImg" :key="idx">
+        <img :src="state.newProgramPosterImg[idx]" alt="Image" />
       </splide-slide>
-      <splide-slide>
-        <img src="@/assets/jugun.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/image_2.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/gs.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/sign.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/hyori.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/song.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/alham.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/laggi.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/runningman.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/thatman.png" alt="Image" />
-      </splide-slide>
-    </splide>
-    <!-- <img :src="state.data" alt="Image" />
-    <img
-      :src="state.data"
-      alt="Image"
-      v-for="(d, idx) in state.data"
-      :key="idx"
-    /> -->
+    </splide> -->
   </div>
 </template>
 
@@ -306,31 +230,57 @@ export default {
   setup() {
     const state = reactive({
       data: [],
+      hotProgramPosterImg: [],
+      newProgramPosterImg: [],
+      newProgramTitle: [],
     });
 
-    const add = () => {
-      // 지금 안됨.
-      // state.data.push("추가한 내용");
-      axios.post("/api/recommend/new").then((res) => {
-        console.log(res.data);
-      });
-    };
+    // const add = () => {
+    //   // 지금 안됨.
+    //   // state.data.push("추가한 내용");
+    //   axios.post("/api/recommend/new").then((res) => {});
+    //   console.log(res.data);
+    // };
 
-    axios.get("/api/recommend/new").then((res) => {
-      // 데이터 가져오는 거.
+    // axios.get("/api/recommend/new").then((res) => {
+    //   // 데이터 가져오는 거.
+    //   console.log(res.data);
+
+    //   var index;
+
+    //   for (index = 0; index < res.data.length; index++) {
+    //     state.data[index] = res.data[index].posterImg;
+    //   }
+    // });
+
+    axios.get("/api/recommend/popular").then((res) => {
+      // 인기 프로그램 추천 데이터 GET
       console.log(res.data);
-      console.log(res.data[0].posterImg);
 
       var index;
 
       for (index = 0; index < res.data.length; index++) {
-        console.log("데이터 받아오나?");
-        state.data[index] = res.data[index].posterImg;
-        console.log(res.data[index].posterImg);
+        state.hotProgramPosterImg[index] = res.data[index].posterImg;
       }
     });
 
-    return { state, add };
+    axios.get("/api/recommend/new").then((res) => {
+      // 신규 프로그램 추천 데이터 GET
+      console.log(res.data);
+      console.log(res.data[0].title);
+
+      var index;
+
+      for (index = 0; index < res.data.length; index++) {
+        state.newProgramPosterImg[index] = res.data[index].posterImg;
+      }
+
+      for (index = 0; index < res.data.length; index++) {
+        state.newProgramTitle[index] = res.data[index].title;
+      }
+    });
+
+    return { state };
   },
 
   data() {
