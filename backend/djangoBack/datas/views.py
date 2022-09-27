@@ -172,11 +172,8 @@ def user_recomm(request, user_id):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def condition_recomm(request, user_id, program_id):
-    # 매개변수로 받은 아이들 확인
-    user_id = user_id
-    print(user_id)
-    
+def condition_recomm(request, program_id):
+    # 매개변수로 받은 아이들 확인   
     program_id = program_id
     print(program_id)
     

@@ -8,5 +8,6 @@ urlpatterns = [
     path('ott_data/', views.ott_data),
     path('user/', views.user_create),
     path('rating/', views.rating_create),
-    path('<int:user_id>/', views.user_recomm)
+    path('<int:user_id>/', views.user_recomm),
+    path('<int:program_id>/', views.condition_recomm),
 ]
