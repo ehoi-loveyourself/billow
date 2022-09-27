@@ -1,4 +1,3 @@
-# from asyncio.windows_events import NULL
 from this import d
 from urllib import response
 from django.shortcuts import render
@@ -30,76 +29,76 @@ def genre_data(request):
         )
     return Response()
 
-# @api_view(['GET'])
-# def all_program_data(request):
-#     BASE_URL = 'https://api.themoviedb.org/3/tv/popular?api_key=3beacdbb8f7b35eb8c782851ddc5b403&language=ko-kr&page='
-#     i = 0
-#     while True:
-#         i += 1
-#         res = requests.get(BASE_URL+str(i))
-#         program_page_list = res.json()['results']
-#         for program_data in program_page_list:
-#             program_id=program_data['id']
-#             program_country = program_data['original_language']
-#             if program_country == 'ko':
-#                 program_detail = f'https://api.themoviedb.org/3/tv/{program_id}?api_key=3beacdbb8f7b35eb8c782851ddc5b403&language=ko-kr'
-#                 program_ott = f'https://api.themoviedb.org/3/tv/{program_id}/watch/providers?api_key=3beacdbb8f7b35eb8c782851ddc5b403'
-#                 detail_res = requests.get(program_detail)
-#                 ott_res = requests.get(program_ott)
-#                 data = detail_res.json()
-#                 ott_data = ott_res.json()['results']
-#                 original_language = data.get('original_language')   
-#                 if original_language == 'ko':
-#                     title = data.get('name')
-#                     summary = data.get('overview')
-#                     networks = data.get('networks')
-#                     poster_img = data.get('poster_path')
-#                     backdrop_path = data.get('backdrop_path')
-#                     first_air_date = data.get('first_air_date')
-#                     for network in networks:
-#                         broadcasting_station = network.get('name')
-#                         break
-#                     average_rating = data.get('vote_average')
-#                     try:
-#                         if not summary:
-#                             continue
-#                         if not poster_img:
-#                             continue
-#                         if not backdrop_path:
-#                             continue
-#                     except:
-#                         continue
-#                     program = TbProgram.objects.create(
-#                         program_num = program_id,
-#                         title = title,
-#                         summary = summary,
-#                         broadcasting_station = broadcasting_station,
-#                         average_rating = average_rating,
-#                         poster_img = 'https://image.tmdb.org/t/p/original' + poster_img,
-#                         backdrop_path = 'https://image.tmdb.org/t/p/original' + backdrop_path,
-#                         first_air_date = first_air_date
-#                     )
-#                     for program_genre in data.get('genres'):
-#                         if program_genre == NULL:
-#                             break
-#                         genre = TbGenreInfo.objects.get(pk=program_genre.get('id'))
-#                         TbGenre.objects.create(
-#                             program_id = program.program_id,
-#                             genre_info = genre
-#                         )
-#                     kr_ott = ott_data.get('KR')
-#                     if kr_ott != None:
-#                         ott_list = kr_ott.get('flatrate')
-#                         if ott_list != None:
-#                             for ott_detail in ott_list:
-#                                 if ott_detail == NULL:
-#                                     break
-#                                 ott = TbOttInfo.objects.get(pk=ott_detail.get('provider_id'))
-#                                 TbOtt.objects.create(
-#                                     ott_info = ott,
-#                                     program_id = program.program_id
-#                                 )
-#     return Response()
+@api_view(['GET'])
+def all_program_data(request):
+    BASE_URL = 'https://api.themoviedb.org/3/tv/popular?api_key=3beacdbb8f7b35eb8c782851ddc5b403&language=ko-kr&page='
+    i = 0
+    while True:
+        i += 1
+        res = requests.get(BASE_URL+str(i))
+        program_page_list = res.json()['results']
+        for program_data in program_page_list:
+            program_id=program_data['id']
+            program_country = program_data['original_language']
+            if program_country == 'ko':
+                program_detail = f'https://api.themoviedb.org/3/tv/{program_id}?api_key=3beacdbb8f7b35eb8c782851ddc5b403&language=ko-kr'
+                program_ott = f'https://api.themoviedb.org/3/tv/{program_id}/watch/providers?api_key=3beacdbb8f7b35eb8c782851ddc5b403'
+                detail_res = requests.get(program_detail)
+                ott_res = requests.get(program_ott)
+                data = detail_res.json()
+                ott_data = ott_res.json()['results']
+                original_language = data.get('original_language')   
+                if original_language == 'ko':
+                    title = data.get('name')
+                    summary = data.get('overview')
+                    networks = data.get('networks')
+                    poster_img = data.get('poster_path')
+                    backdrop_path = data.get('backdrop_path')
+                    first_air_date = data.get('first_air_date')
+                    for network in networks:
+                        broadcasting_station = network.get('name')
+                        break
+                    average_rating = data.get('vote_average')
+                    try:
+                        if not summary:
+                            continue
+                        if not poster_img:
+                            continue
+                        if not backdrop_path:
+                            continue
+                    except:
+                        continue
+                    program = TbProgram.objects.create(
+                        program_num = program_id,
+                        title = title,
+                        summary = summary,
+                        broadcasting_station = broadcasting_station,
+                        average_rating = average_rating,
+                        poster_img = 'https://image.tmdb.org/t/p/original' + poster_img,
+                        backdrop_path = 'https://image.tmdb.org/t/p/original' + backdrop_path,
+                        first_air_date = first_air_date
+                    )
+                    for program_genre in data.get('genres'):
+                        if program_genre != None:
+                            break
+                        genre = TbGenreInfo.objects.get(pk=program_genre.get('id'))
+                        TbGenre.objects.create(
+                            program_id = program.program_id,
+                            genre_info = genre
+                        )
+                    kr_ott = ott_data.get('KR')
+                    if kr_ott != None:
+                        ott_list = kr_ott.get('flatrate')
+                        if ott_list != None:
+                            for ott_detail in ott_list:
+                                if ott_detail != None:
+                                    break
+                                ott = TbOttInfo.objects.get(pk=ott_detail.get('provider_id'))
+                                TbOtt.objects.create(
+                                    ott_info = ott,
+                                    program_id = program.program_id
+                                )
+    return Response()
 
 @api_view(['GET'])
 def ott_data(request):
@@ -181,8 +180,8 @@ def condition_recomm(request, user_id, program_id):
     program_id = program_id
     print(program_id)
     
-    # 프로그램 제목으로 검색해서 나온 결과 받기
-    indi_condition_program = recomm.mf_algo_condition(program_id)
+    # 프로그램 아이디로 검색해서 나온 결과 받기
+    indi_condition_program = recomm.mf_condition_recomm(program_id)
     
     # 값을 리스트로 받기
     indi_condition_program = indi_condition_program.values.tolist()
@@ -191,7 +190,7 @@ def condition_recomm(request, user_id, program_id):
     print(indi_condition_program)
     
     indi_condition_program_list = []
-    for program_id in indi_condition_program_list:
+    for program_id in indi_condition_program:
         program = TbProgram.objects.get(pk=program_id[0])
         indi_condition_program_list.append(program)
     

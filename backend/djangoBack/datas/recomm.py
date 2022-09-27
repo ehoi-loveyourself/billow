@@ -141,7 +141,7 @@ def mf_algo_individual(userId):
 # mf_algo_individual(1)
 
 # 상황 추천 알고리즘을 위한 pivot_table
-def condition_pivot_table(programId):
+def mf_condition_recomm(programId):
     program_data = query_MySQL('SELECT program_id, title from tb_program')
     rating_data = query_MySQL('SELECT score, program_id, user_id from tb_rating')
 
@@ -175,6 +175,7 @@ def condition_pivot_table(programId):
     coffey_hands = program_id_list.index(programId)
 
     corr_coffey_hands = corr[coffey_hands]
+    print(list(program_id[(corr_coffey_hands >= 0.9)])[:50])
     return list(program_id[(corr_coffey_hands >= 0.9)])[:50]
 
-# condition_pivot_table(1)
+mf_condition_recomm(392)
