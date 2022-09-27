@@ -24,7 +24,7 @@ public class WebClientController {
 
     public final webClientService webClientService;
 
-    @GetMapping("/{userId}")
+    @GetMapping("/user-recommend/{userId}")
     public ResponseEntity<Object> userRecommend(@PathVariable("userId") Long userId) {
         log.info("사용자 평점 기반 프로그램 추천 API 호출");
         List<ProgramResponse> responses =  webClientService.userProgramRecommand(userId);
