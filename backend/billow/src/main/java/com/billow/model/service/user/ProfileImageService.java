@@ -64,7 +64,7 @@ public class ProfileImageService {
 
         Resource resource = new FileSystemResource(profileImg.getSaveFolder() + File.separator + profileImg.getImgName());
         HttpHeaders header = new HttpHeaders();
-        Path p = Paths.get(profileImg.getSaveFolder() + "/" + profileImg.getImgName());
+        Path p = Paths.get("billow/backend/billow/" + profileImg.getSaveFolder() + "/" + profileImg.getImgName());
         header.add("Content-Type", Files.probeContentType(p));
         return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
     }
@@ -75,7 +75,7 @@ public class ProfileImageService {
 
         Resource resource = new FileSystemResource(profileImg.getSaveFolder() + File.separator + profileImg.getImgName());
         HttpHeaders header = new HttpHeaders();
-        Path p = Paths.get(profileImg.getSaveFolder() + "/" + profileImg.getImgName());
+        Path p = Paths.get("billow/backend/billow/" + profileImg.getSaveFolder() + "/" + profileImg.getImgName());
         header.add("Content-Type", Files.probeContentType(p));
         return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
     }
