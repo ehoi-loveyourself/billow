@@ -29,7 +29,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -111,6 +110,7 @@ public class RecommendService {
                         .firstAirDate(DateFormat.getDateInstance(DateFormat.LONG).format(cast.getProgram().getFirstAirDate()))
                         .averageRating(cast.getProgram().getAverageRating())
                         .bookmarkCnt(cast.getProgram().getBookmarkCnt())
+                        .ratingCnt(cast.getProgram().getRatingCnt())
                         .posterImg(cast.getProgram().getPosterImg())
                         .backdropPath(cast.getProgram().getBackdropPath())
                         .build())
@@ -136,6 +136,7 @@ public class RecommendService {
                         .firstAirDate(DateFormat.getDateInstance(DateFormat.LONG).format(program.getFirstAirDate()))
                         .averageRating(program.getAverageRating())
                         .bookmarkCnt(program.getBookmarkCnt())
+                        .ratingCnt(program.getRatingCnt())
                         .posterImg(program.getPosterImg())
                         .backdropPath(program.getBackdropPath())
                         .build())
@@ -185,6 +186,7 @@ public class RecommendService {
                         .endFlag(program.isEndFlag())
                         .firstAirDate(DateFormat.getDateInstance(DateFormat.LONG).format(program.getFirstAirDate()))
                         .averageRating(program.getAverageRating())
+                        .ratingCnt(program.getRatingCnt())
                         .bookmarkCnt(program.getBookmarkCnt())
                         .posterImg(program.getPosterImg())
                         .backdropPath(program.getBackdropPath())
@@ -216,6 +218,7 @@ public class RecommendService {
                         .endFlag(program.isEndFlag())
                         .firstAirDate(DateFormat.getDateInstance(DateFormat.LONG).format(program.getFirstAirDate()))
                         .averageRating(program.getAverageRating())
+                        .ratingCnt(program.getRatingCnt())
                         .bookmarkCnt(program.getBookmarkCnt())
                         .posterImg(program.getPosterImg())
                         .backdropPath(program.getBackdropPath())
