@@ -22,11 +22,17 @@ import com.billow.util.KakaoOAuth2;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
 import org.json.simple.parser.ParseException;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -53,14 +59,10 @@ public class UserService {
     private final ProfileImgRepository profileImgRepository;
     private final KakaoOAuth2 kakaoOAuth2;
 
-    public UserResponse selectUser(Long userId) {
+    public UserResponse selectUser(Long userId) throws IOException {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
-
         String profileImgUrl = PROFILE_IMG_ABSOLUTE_PATH + user.getProfileImg().getImgName();
-        // url 설정 이렇게 하면 되나요..?
-        // "img/profile_img/1.png" 이런 식으로 반환하는데 뭔가 아닌 거 같은데요.. 핳
-
         return UserResponse.builder()
                 .email(user.getEmail())
                 .name(user.getName())
@@ -69,7 +71,6 @@ public class UserService {
                 .age(user.getAge())
                 .region(user.getRegion().getRegion())
                 .tvCarrier(user.getTvCarrier().getCompany())
-                .profileImgUrl(profileImgUrl)
                 .mobile(user.getMobile())
                 .build();
     }
