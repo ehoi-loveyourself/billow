@@ -198,7 +198,7 @@
         <img src="@/assets/thatman.png" alt="Image" />
       </splide-slide>
     </splide>
-
+    
     <!-- <h2 style="color: white">테스트 1</h2>
     <splide id="carousel_recommend" :options="options">
       <splide-slide v-for="(d, idx) in state.data" :key="idx">
@@ -252,7 +252,7 @@ export default {
     //     state.data[index] = res.data[index].posterImg;
     //   }
     // });
-
+    
     axios.get("/api/recommend/popular").then((res) => {
       // 인기 프로그램 추천 데이터 GET
       console.log(res.data);
