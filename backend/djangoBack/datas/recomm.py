@@ -175,6 +175,7 @@ def condition_pivot_table(programId):
     coffey_hands = program_id_list.index(programId)
 
     corr_coffey_hands = corr[coffey_hands]
+    print(list(program_id[(corr_coffey_hands >= 0.9)])[:50])
     return list(program_id[(corr_coffey_hands >= 0.9)])[:50]
 
 condition_pivot_table(1)

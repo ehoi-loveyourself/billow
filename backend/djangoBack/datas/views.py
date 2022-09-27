@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 from this import d
 from urllib import response
 from django.shortcuts import render
@@ -80,7 +79,7 @@ def all_program_data(request):
                         first_air_date = first_air_date
                     )
                     for program_genre in data.get('genres'):
-                        if program_genre == NULL:
+                        if program_genre != None:
                             break
                         genre = TbGenreInfo.objects.get(pk=program_genre.get('id'))
                         TbGenre.objects.create(
@@ -92,7 +91,7 @@ def all_program_data(request):
                         ott_list = kr_ott.get('flatrate')
                         if ott_list != None:
                             for ott_detail in ott_list:
-                                if ott_detail == NULL:
+                                if ott_detail != None:
                                     break
                                 ott = TbOttInfo.objects.get(pk=ott_detail.get('provider_id'))
                                 TbOtt.objects.create(
