@@ -23,9 +23,13 @@ import com.billow.model.repository.program.CastRepository;
 import com.billow.model.repository.program.GenderAgeViewerRepository;
 import com.billow.model.repository.program.ProgramRepository;
 import com.billow.model.repository.user.UserRepository;
+import com.billow.model.service.webClient.webClientService;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -52,6 +56,11 @@ public class RecommendService {
     private final ConditionProgramRepository conditionProgramRepository;
     private final GenderAgeViewerRepository genderAgeViewerRepository;
     private final ProgramOrganizationRepository programOrganizationRepository;
+
+    private final WebClient webClient;
+
+    private final webClientService webClientService;
+
 
     public List<OrganizationResponse> recommendOnair() {
         Calendar calendar = Calendar.getInstance();
@@ -221,4 +230,15 @@ public class RecommendService {
                         .build())
                 .collect(Collectors.toList());
     }
+
+
+//    public List<ProgramResponse> recommendIndivisual(Long userId) {
+//        User user = userRepository.findById(userId)
+//                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
+//
+//        ResponseEntity<ProgramResponse> programs = webClientService.callDjangoApi(userId);
+//
+//        for (ProgramResponse program : programs) {
+//
+//    }
 }

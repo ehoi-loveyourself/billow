@@ -2,7 +2,9 @@ package com.billow.controller.program;
 
 import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.domain.entity.program.Program;
+import com.billow.model.service.webClient.webClientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +19,17 @@ public class DjangoRecommandController {
 
     public final WebClient webClient;
 
+    public final webClientService webClientService;
+
     @GetMapping("/{userId}")
-    public Flux<ProgramResponse> userRecommend(@PathVariable("userId") Long userId) {
-        return webClient.get()
-                .uri("db/" + userId + "/")
-                .retrieve()
-                .bodyToFlux(ProgramResponse.class);
+    public ResponseEntity<ProgramResponse> userRecommend(@PathVariable("userId") Long userId) {
+        ResponseEntity<ProgramResponse> programRecommend =  webClientService.callDjangoApi(userId);
+        System.out.println(programRecommend);
+        return (programRecommend);
+//        return webClient.get()
+//                .uri("db/" + userId + "/")
+//                .retrieve()
+//                .bodyToFlux(ProgramResponse.class);
+
         }
 }
