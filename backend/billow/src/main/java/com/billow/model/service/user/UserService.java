@@ -17,7 +17,7 @@ import com.billow.model.repository.user.ProfileImgRepository;
 import com.billow.model.repository.user.RegionRepository;
 import com.billow.model.repository.user.TvCarrierRepository;
 import com.billow.model.repository.user.UserRepository;
-import com.billow.util.JwtUtil;
+import com.billow.jwt.JwtUtil;
 import com.billow.util.KakaoOAuth2;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;

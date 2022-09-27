@@ -2,7 +2,7 @@ package com.billow.controller.addition;
 
 import com.billow.domain.dto.addtion.BroadcastingAlarmResponse;
 import com.billow.model.service.addtion.BroadcastingAlarmService;
-import com.billow.util.JwtUtil;
+import com.billow.jwt.JwtUtil;
 import com.billow.util.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

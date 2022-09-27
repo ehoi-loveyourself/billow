@@ -4,7 +4,7 @@ import com.billow.domain.dto.addtion.RatingRequest;
 import com.billow.domain.dto.addtion.RatingResponse;
 import com.billow.domain.dto.user.*;
 import com.billow.model.service.user.UserService;
-import com.billow.util.JwtUtil;
+import com.billow.jwt.JwtUtil;
 import com.billow.util.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

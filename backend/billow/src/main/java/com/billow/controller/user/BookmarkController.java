@@ -2,7 +2,7 @@ package com.billow.controller.user;
 
 import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.model.service.user.BookmarkService;
-import com.billow.util.JwtUtil;
+import com.billow.jwt.JwtUtil;
 import com.billow.util.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

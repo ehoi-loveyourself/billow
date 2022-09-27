@@ -3,7 +3,7 @@ package com.billow.controller.program;
 import com.billow.domain.dto.addtion.RatingRequest;
 import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.model.service.program.ProgramService;
-import com.billow.util.JwtUtil;
+import com.billow.jwt.JwtUtil;
 import com.billow.util.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

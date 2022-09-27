@@ -1,4 +1,4 @@
-package com.billow.util;
+package com.billow.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
