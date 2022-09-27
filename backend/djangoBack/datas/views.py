@@ -1,4 +1,3 @@
-# from asyncio.windows_events import NULL
 from this import d
 from urllib import response
 from django.shortcuts import render
@@ -80,7 +79,7 @@ def all_program_data(request):
                         first_air_date = first_air_date
                     )
                     for program_genre in data.get('genres'):
-                        if not program_genre: # == NULL:
+                        if program_genre != None:
                             break
                         genre = TbGenreInfo.objects.get(pk=program_genre.get('id'))
                         TbGenre.objects.create(
@@ -92,7 +91,7 @@ def all_program_data(request):
                         ott_list = kr_ott.get('flatrate')
                         if ott_list != None:
                             for ott_detail in ott_list:
-                                if not ott_detail: # == NULL:
+                                if ott_detail != None:
                                     break
                                 ott = TbOttInfo.objects.get(pk=ott_detail.get('provider_id'))
                                 TbOtt.objects.create(
@@ -170,4 +169,30 @@ def user_recomm(request, user_id):
     serializer = ProgramSerializer(indi_user_recomm_list, many = True)
 
 
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def condition_recomm(request, program_id):
+    # 매개변수로 받은 아이들 확인   
+    program_id = program_id
+    print(program_id)
+    
+    # 프로그램 아이디로 검색해서 나온 결과 받기
+    indi_condition_program = recomm.mf_condition_recomm(program_id)
+    
+    # 값을 리스트로 받기
+    indi_condition_program = indi_condition_program.values.tolist()
+    
+    # 확인해보자
+    print(indi_condition_program)
+    
+    indi_condition_program_list = []
+    for program_id in indi_condition_program:
+        program = TbProgram.objects.get(pk=program_id[0])
+        indi_condition_program_list.append(program)
+    
+    print(indi_condition_program_list)
+    
+    serializer = ProgramSerializer(indi_condition_program_list, many = True)
+    
     return Response(serializer.data)

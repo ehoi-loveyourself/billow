@@ -1,4 +1,4 @@
-package com.billow.domain.dto.program;
+package com.billow.domain.dto.user;
 
 import lombok.*;
 
@@ -8,11 +8,11 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CastResponse {
+public class BookmarkResponse {
 
-    Long id;
+    private Long bookmarkId;
 
-    String actorName;
+    private Long programId;
 
     private String title;
 
