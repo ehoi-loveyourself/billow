@@ -1,5 +1,5 @@
 <template>
-<div style="padding-left: 70px; margin-top: 10px;">
+<div style="margin-top: 10px;">
     <br/>
     <div style="text-align:center">
         지금은 9월 26일 월요일 11시 55분 입니다.
@@ -20,7 +20,7 @@
             <tbody>
               <b-tr style="padding: 5;">
                 <b-td>10:59 137회<br/>
-<span class="time">12:47 </span><span style="font-size:0.9vw">490회</span>&nbsp;<span class="box"><span class="box_design">재</span></span>&nbsp;<img src="@/assets/alarm.png" v-b-modal.modal-1 style="cursor:pointer;"/><br/>
+<span class="time">12:47 </span>490회&nbsp;<span class="box"><span class="box_design">재</span></span>&nbsp;<img src="@/assets/alarm.png" v-b-modal.modal-1 style="cursor:pointer;"/><br/>
 14:31 470회<br/>
 17:30 661회</b-td>
                 <b-td>10:59 137회<br/>
@@ -74,23 +74,21 @@
     /* line-height: 18px; */
     /* padding: 1px 5px; */
     border-radius: 3px;
-    padding-left: 2%;
-    padding-right: 2%;
+    padding-left: 1%;
+    padding-right: 1%;
 
 }
 .box{
   padding-top:0;
   padding-bottom:0;
+  margin-left: 0;
+  margin-right: 0;
 }
 .time{
   color:#a1a1a1;
-  font-size:0.9vw
-}
-.alarm-info{
-  font-size:1vw;
-  font-weight:400;
+  font-size:1.1vw;
 }
 .alarm{
-  padding-bottom: 3%;
+  /* padding-bottom: 3%; */
 }
 </style>

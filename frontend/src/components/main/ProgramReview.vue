@@ -1,8 +1,8 @@
 <template>
-  <div style="padding-left: 70px; margin-top: 10px">
+  <div style="margin-top: 10px">
     <br />
     <b-row style="margin-top: 20px">
-      <b-col cols="2">
+      <!-- <b-col cols="2">
         <span class="inner">
           <span>
             <span v-for="index in 5" :key="index" @click="check(index)">
@@ -15,8 +15,8 @@
             </span>
           </span>
         </span>
-      </b-col>
-      <b-col cols="9">
+      </b-col> -->
+      <b-col cols="11">
         <b-form-input
           v-model="message"
           placeholder="리뷰를 작성해주세요."
