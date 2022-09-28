@@ -18,21 +18,16 @@ import com.billow.model.repository.user.RegionRepository;
 import com.billow.model.repository.user.TvCarrierRepository;
 import com.billow.model.repository.user.UserRepository;
 import com.billow.util.JwtUtil;
-import com.billow.util.KakaoOAuth2;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.IOUtils;
 import org.json.simple.parser.ParseException;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -57,7 +52,6 @@ public class UserService {
     private final RegionRepository regionRepository;
     private final TvCarrierRepository tvCarrierRepository;
     private final ProfileImgRepository profileImgRepository;
-    private final KakaoOAuth2 kakaoOAuth2;
 
     public UserResponse selectUser(Long userId) throws IOException {
         User user = userRepository.findById(userId)
@@ -75,16 +69,13 @@ public class UserService {
                 .build();
     }
 
-    public LoginResponse kakaoLogin(String code, HttpServletResponse httpServletResponse) throws ParseException {
-        User kakaoUser = kakaoOAuth2.getUserInfo(code);
-        log.info(kakaoUser.toString());
-
-        if (kakaoUser.getEmail() == null) {
+    public LoginResponse kakaoLogin(SignUpRequest signUpRequest, HttpServletResponse httpServletResponse) throws ParseException {
+        if (signUpRequest.getEmail() == null) {
             throw new NotFoundException(EMAIL_NOT_FOUND);
         } else {
-            User user = userRepository.findByEmail(kakaoUser.getEmail());
+            User user = userRepository.findByEmail(signUpRequest.getEmail());
             if (user == null) {
-                user = new User(kakaoUser.getEmail(), kakaoUser.getNickName());
+                user = new User(signUpRequest.getEmail(), signUpRequest.getName());
                 userRepository.save(user);
             }
             String authToken = JwtUtil.createAuthToken(user.getId(), user.getEmail(), user.getName());
