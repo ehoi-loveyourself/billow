@@ -17,10 +17,17 @@
         프로필
       </b-col>
       <b-col cols="10" style="padding-left:1%">
-        <b-avatar class="avatar" variant="info" src="http://localhost:8009/api/profile/initial/3" size="4rem"></b-avatar>
-        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/initial/1" size="4rem"></b-avatar>
-        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/initial/11" size="4rem"></b-avatar>
-        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/initial/14" size="4rem"></b-avatar>
+        <b-avatar class="avatar" variant="info" src="http://localhost:8009/api/profile/3" size="4rem"></b-avatar>
+        <b-avatar class="avatar" variant="info" src="http://localhost:8009/api/profile/7" size="4rem"></b-avatar>
+        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/11" size="4rem"></b-avatar>
+        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/14" size="4rem"></b-avatar>
+        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/1" size="4rem"></b-avatar>
+        <b-avatar class="avatar" variant="info" src="https://placekitten.com/300/800" size="4rem"></b-avatar>
+        <b-avatar class="avatar" variant="info" src="https://placekitten.com/300/900" size="4rem"></b-avatar>
+        <b-avatar class="avatar" variant="info" src="http://localhost:8009/api/profile/3" size="4rem"></b-avatar>
+        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/1" size="4rem"></b-avatar>
+        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/11" size="4rem"></b-avatar>
+        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/14" size="4rem"></b-avatar>
         <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/1" size="4rem"></b-avatar>
         <b-avatar class="avatar" variant="info" src="https://placekitten.com/300/800" size="4rem"></b-avatar>
         <b-avatar class="avatar" variant="info" src="https://placekitten.com/300/900" size="4rem"></b-avatar>
