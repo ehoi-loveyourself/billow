@@ -1,15 +1,12 @@
 package com.billow.controller.program;
 
 import com.billow.domain.dto.program.ProgramResponse;
-import com.billow.domain.entity.program.Program;
 import com.billow.model.service.webClient.webClientService;
+import com.billow.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
@@ -27,9 +24,18 @@ public class WebClientController {
     @GetMapping("/user-recommend/{userId}")
     public ResponseEntity<Object> userRecommend(@PathVariable("userId") Long userId) {
         log.info("사용자 평점 기반 프로그램 추천 API 호출");
-        List<ProgramResponse> responses =  webClientService.userProgramRecommand(userId);
+        List<ProgramResponse> responses = webClientService.userProgramRecommend(userId);
         log.info("추천리스트 호출 성공");
         return (ResponseEntity.ok()
                 .body(responses));
-        }
+    }
+
+    @GetMapping("/condition-recommend/{programId}")
+    public ResponseEntity<Object> conditionRecommend(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId) {
+        log.info("상황별 프로그램 추천 API 호출");
+        List<ProgramResponse> responses = webClientService.conditionRecommend(JwtUtil.getUserId(token), programId);
+        log.info("상황별 프로그램 추천 성공");
+        return ResponseEntity.ok()
+                .body(responses);
+    }
 }
