@@ -10,7 +10,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrganizationListResponse {
 
-   private String day;
+    private String day;
 
-   private List<OrganizationResponse> organizationResponseList;
+    private List<OrganizationResponse> organizationResponseList;
 }

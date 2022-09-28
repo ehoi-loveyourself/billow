@@ -93,7 +93,7 @@ public class UserController {
             log.info("회원가입 성공");
             return ResponseEntity.ok()
                     .body(response);
-        } catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.badRequest()
                     .body(new Message("해당 정보를 모두 빠짐없이 작성해주시기 바랍니다."));
         }
