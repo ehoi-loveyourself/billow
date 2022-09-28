@@ -18,7 +18,7 @@
       </b-col> -->
       <b-col cols="11">
         <b-form-input
-          v-model="message"
+          v-model="review"
           placeholder="리뷰를 작성해주세요."
           required
           style="border-color: #a48282"
@@ -26,7 +26,7 @@
         </b-form-input>
       </b-col>
       <b-col cols="1">
-        <b-button size="md" type="submit">
+        <b-button size="md" type="submit" @click="reviewRegist()">
           <span>등록</span>
         </b-button>
       </b-col>
@@ -77,7 +77,7 @@ import { reactive } from "@vue/reactivity";
 import axios from "axios";
 
 export default {
-  name: "Star",
+  name: "ProgramReview",
   setup() {
     const state = reactive({
       data: [],
@@ -109,11 +109,27 @@ export default {
   data() {
     return {
       score: 0,
+      review: "",
     };
   },
   methods: {
     check(index) {
       this.score = index + 1;
+    },
+    reviewRegist() { // post 사용 가능한 코드입니다. review 등록버튼 클릭 이벤트.
+      alert("post 테스트");
+      axios
+        .post("/api/review/269", { // /review/프로그램아이디
+          content: this.review,
+        })
+        .then((response) => {
+          console.warn(response);
+          console.log(content);
+          console.log(this.review);
+        })
+        .catch((ex) => {
+          console.warn("ERROR!!!!! : ", ex);
+        });
     },
   },
 };
