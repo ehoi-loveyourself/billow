@@ -29,11 +29,12 @@ public class SQLController {
             String[] gender = {"여", "남"};
             int[] age = {0, 10, 20, 30, 40, 50, 60};
             int age1 = (int) ((Math.random() * 7));
+            int mobile = (char) (Math.random() * 99999999)+10000001;
 
             int gender1 = (int) ((Math.random() * 2));
             int profile = i % 20 + 1;
 
-            String d = "INSERT INTO tb_user VALUES (" + i + ", " + age[age1] + ", '" + email + num + "@naver.com', '" + gender[gender1] + "', 'User_" + i + "', 'User_" + i + "', null, " + profile + ", " + region + ", " + tv + ");";
+            String d = "INSERT INTO tb_user VALUES (" + i + ", " + age[age1] + ", '" + email + num + "@naver.com', '" + gender[gender1] + "', '" + "000" + mobile + "', 'User_" + i + "', 'User_" + i + "', null, " + profile + ", " + region + ", " + tv + ");";
             System.out.println(d);
         }
 

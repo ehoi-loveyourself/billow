@@ -2,6 +2,8 @@ package com.billow.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class DateUtil {
@@ -9,6 +11,15 @@ public class DateUtil {
         if (date != null) {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
             return formatter.format(date);
+        } else {
+            return null;
+        }
+    }
+
+    public static String toYYYY_MM_DD(LocalDate date) {
+        if (date != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+            return date.format(formatter);
         } else {
             return null;
         }

@@ -2,12 +2,10 @@ package com.billow.model.service.program;
 
 import com.billow.domain.dto.organization.OrganizationResponse;
 import com.billow.domain.dto.program.CastResponse;
+import com.billow.domain.dto.program.OttResponse;
 import com.billow.domain.dto.program.ProgramIWatchedRequest;
 import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.domain.entity.addition.Rating;
-import com.billow.domain.entity.condition.ConditionGenre;
-import com.billow.domain.entity.condition.ConditionProgram;
-import com.billow.domain.entity.condition.ConditionWithWhom;
 import com.billow.domain.entity.organization.ProgramOrganization;
 import com.billow.domain.entity.program.Cast;
 import com.billow.domain.entity.program.GenderAgeViewer;
@@ -15,9 +13,6 @@ import com.billow.domain.entity.program.Program;
 import com.billow.domain.entity.user.User;
 import com.billow.exception.NotFoundException;
 import com.billow.model.repository.addition.RatingRepository;
-import com.billow.model.repository.condition.ConditionGenreRepository;
-import com.billow.model.repository.condition.ConditionProgramRepository;
-import com.billow.model.repository.condition.ConditionWithWhomRepository;
 import com.billow.model.repository.organization.ProgramOrganizationRepository;
 import com.billow.model.repository.program.CastRepository;
 import com.billow.model.repository.program.GenderAgeViewerRepository;
@@ -47,9 +42,6 @@ public class RecommendService {
     private final RatingRepository ratingRepository;
     private final CastRepository castRepository;
     private final UserRepository userRepository;
-    private final ConditionGenreRepository conditionGenreRepository;
-    private final ConditionWithWhomRepository conditionWithWhomRepository;
-    private final ConditionProgramRepository conditionProgramRepository;
     private final GenderAgeViewerRepository genderAgeViewerRepository;
     private final ProgramOrganizationRepository programOrganizationRepository;
 
@@ -72,7 +64,7 @@ public class RecommendService {
                         .age(organization.getProgram().getAge())
                         .endFlag(organization.getProgram().isEndFlag())
                         .firstAirDate(DateFormat.getDateInstance(DateFormat.LONG).format(organization.getProgram().getFirstAirDate()))
-                        .averageRating(organization.getProgram().getAverageRating())
+                        .averageRating(Float.valueOf(String.format("%.1f", organization.getProgram().getAverageRating())))
                         .bookmarkCnt(organization.getProgram().getBookmarkCnt())
                         .posterImg(organization.getProgram().getPosterImg())
                         .backdropPath(organization.getProgram().getBackdropPath())
@@ -83,6 +75,14 @@ public class RecommendService {
                         .broadcastingAge(organization.getBroadcastingAge())
                         .broadcastingRerun(organization.getBroadcastingRerun())
                         .broadcastingStation(organization.getBroadcastingStation())
+                        .otts(organization.getProgram().getOttList()
+                                .stream()
+                                .map(ott -> OttResponse.builder()
+                                        .name(ott.getOttInfo().getName())
+                                        .url(ott.getOttInfo().getUrl())
+                                        .imgUrl(ott.getOttInfo().getImgUrl())
+                                        .build())
+                                .collect(Collectors.toList()))
                         .build())
                 .collect(Collectors.toList());
     }
@@ -108,11 +108,19 @@ public class RecommendService {
                         .broadcastingStation(cast.getProgram().getBroadcastingStation())
                         .endFlag(cast.getProgram().isEndFlag())
                         .firstAirDate(DateFormat.getDateInstance(DateFormat.LONG).format(cast.getProgram().getFirstAirDate()))
-                        .averageRating(cast.getProgram().getAverageRating())
+                        .averageRating(Float.valueOf(String.format("%.1f", cast.getProgram().getAverageRating())))
                         .bookmarkCnt(cast.getProgram().getBookmarkCnt())
                         .ratingCnt(cast.getProgram().getRatingCnt())
                         .posterImg(cast.getProgram().getPosterImg())
                         .backdropPath(cast.getProgram().getBackdropPath())
+                        .otts(cast.getProgram().getOttList()
+                                .stream()
+                                .map(ott -> OttResponse.builder()
+                                        .name(ott.getOttInfo().getName())
+                                        .url(ott.getOttInfo().getUrl())
+                                        .imgUrl(ott.getOttInfo().getImgUrl())
+                                        .build())
+                                .collect(Collectors.toList()))
                         .build())
                 .collect(Collectors.toList());
     }
@@ -134,32 +142,21 @@ public class RecommendService {
                         .broadcastingStation(program.getBroadcastingStation())
                         .endFlag(program.isEndFlag())
                         .firstAirDate(DateFormat.getDateInstance(DateFormat.LONG).format(program.getFirstAirDate()))
-                        .averageRating(program.getAverageRating())
+                        .averageRating(Float.valueOf(String.format("%.1f", program.getAverageRating())))
                         .bookmarkCnt(program.getBookmarkCnt())
                         .ratingCnt(program.getRatingCnt())
                         .posterImg(program.getPosterImg())
                         .backdropPath(program.getBackdropPath())
+                        .otts(program.getOttList()
+                                .stream()
+                                .map(ott -> OttResponse.builder()
+                                        .name(ott.getOttInfo().getName())
+                                        .url(ott.getOttInfo().getUrl())
+                                        .imgUrl(ott.getOttInfo().getImgUrl())
+                                        .build())
+                                .collect(Collectors.toList()))
                         .build())
                 .collect(Collectors.toList());
-    }
-
-    public Message addProgramIWatched(Long userId, ProgramIWatchedRequest programIWatchedRequest) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
-        Program program = programRepository.findById(programIWatchedRequest.getProgramId())
-                .orElseThrow(() -> new NotFoundException(PROGRAM_NOT_FOUND));
-        ConditionGenre conditionGenre = conditionGenreRepository.findByGenre(programIWatchedRequest.getGenre());
-        ConditionWithWhom conditionWithWhom = conditionWithWhomRepository.findByWho(programIWatchedRequest.getWho());
-
-        ConditionProgram conditionProgram = ConditionProgram.builder()
-                .user(user)
-                .program(program)
-                .conditionGenre(conditionGenre)
-                .conditionWithWhom(conditionWithWhom)
-                .build();
-        conditionProgramRepository.save(conditionProgram);
-
-        return new Message("사용자가 특정 상황에 봤던 프로그램을 추가하였습니다.");
     }
 
     public List<ProgramResponse> recommendNew() {
@@ -185,11 +182,19 @@ public class RecommendService {
                         .broadcastingStation(program.getBroadcastingStation())
                         .endFlag(program.isEndFlag())
                         .firstAirDate(DateFormat.getDateInstance(DateFormat.LONG).format(program.getFirstAirDate()))
-                        .averageRating(program.getAverageRating())
+                        .averageRating(Float.valueOf(String.format("%.1f", program.getAverageRating())))
                         .ratingCnt(program.getRatingCnt())
                         .bookmarkCnt(program.getBookmarkCnt())
                         .posterImg(program.getPosterImg())
                         .backdropPath(program.getBackdropPath())
+                        .otts(program.getOttList()
+                                .stream()
+                                .map(ott -> OttResponse.builder()
+                                        .name(ott.getOttInfo().getName())
+                                        .url(ott.getOttInfo().getUrl())
+                                        .imgUrl(ott.getOttInfo().getImgUrl())
+                                        .build())
+                                .collect(Collectors.toList()))
                         .build())
                 .collect(Collectors.toList());
     }
@@ -217,11 +222,19 @@ public class RecommendService {
                         .broadcastingStation(program.getBroadcastingStation())
                         .endFlag(program.isEndFlag())
                         .firstAirDate(DateFormat.getDateInstance(DateFormat.LONG).format(program.getFirstAirDate()))
-                        .averageRating(program.getAverageRating())
+                        .averageRating(Float.valueOf(String.format("%.1f", program.getAverageRating())))
                         .ratingCnt(program.getRatingCnt())
                         .bookmarkCnt(program.getBookmarkCnt())
                         .posterImg(program.getPosterImg())
                         .backdropPath(program.getBackdropPath())
+                        .otts(program.getOttList()
+                                .stream()
+                                .map(ott -> OttResponse.builder()
+                                        .name(ott.getOttInfo().getName())
+                                        .url(ott.getOttInfo().getUrl())
+                                        .imgUrl(ott.getOttInfo().getImgUrl())
+                                        .build())
+                                .collect(Collectors.toList()))
                         .build())
                 .collect(Collectors.toList());
     }

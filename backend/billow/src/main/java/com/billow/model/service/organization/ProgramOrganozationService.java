@@ -8,9 +8,12 @@ import com.billow.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -36,7 +39,13 @@ public class ProgramOrganozationService {
         List<OrganizationListResponse> list = new ArrayList<>();
         for (int day = 0; day < 7; day++) {
             List<ProgramOrganization> programOrganizationList = programOrganizationRepository.findByProgram_IdAndBroadcastingTime(programId, date.plusDays(day));
-            if (programOrganizationList.size() == 0) continue;
+            if (programOrganizationList.size() == 0) {
+                DayOfWeek dayOfWeek = date.plusDays(day).getDayOfWeek();
+                list.add(OrganizationListResponse.builder()
+                        .day(DateUtil.toYYYY_MM_DD(date.plusDays(day)) + " (" + dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.KOREAN) + ")")
+                        .build());
+                continue;
+            }
 
             List<OrganizationResponse> organizationResponseList = programOrganizationList
                     .stream()

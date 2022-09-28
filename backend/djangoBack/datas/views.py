@@ -1,13 +1,11 @@
-from this import d
 from urllib import response
 from django.shortcuts import render
 
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from datas import serializers
+from rest_framework.decorators import api_view
 
 from datas.models import TbGenre, TbGenreInfo, TbOtt, TbOttInfo, TbProgram, TbRating, TbUser
-from datas.serializers import RecommProgramSerializer, TbGenreInfoSerializer, ProgramSerializer
+from datas.serializers import ProgramSerializer
 from datas import recomm
 
 import requests
@@ -79,7 +77,7 @@ def all_program_data(request):
                         first_air_date = first_air_date
                     )
                     for program_genre in data.get('genres'):
-                        if program_genre != None:
+                        if program_genre == None:
                             break
                         genre = TbGenreInfo.objects.get(pk=program_genre.get('id'))
                         TbGenre.objects.create(
@@ -91,7 +89,7 @@ def all_program_data(request):
                         ott_list = kr_ott.get('flatrate')
                         if ott_list != None:
                             for ott_detail in ott_list:
-                                if ott_detail != None:
+                                if ott_detail == None:
                                     break
                                 ott = TbOttInfo.objects.get(pk=ott_detail.get('provider_id'))
                                 TbOtt.objects.create(
@@ -131,7 +129,7 @@ def rating_create(request):
     lst = []
     for num in range(1, 590):
         lst.append(num)
-    for i in range(1, 500):
+    for i in range(1001, 1001):
         user = TbUser.objects.get(pk=i)
         program_list = random.sample(lst, 50)
         for program_number in program_list:
@@ -146,28 +144,21 @@ def rating_create(request):
 
 @api_view(['GET'])
 def user_recomm(request, user_id):
-    # user = request.user
-    # user_id = user.user_id
+
     user_id = user_id
     print(user_id)
     indi_user_recomm = recomm.mf_algo_individual(user_id)
 
-    # indi_user_recomm = indi_user_recomm[indi_user_recomm['user_id']==user_id]
-
     indi_user_recomm = indi_user_recomm.values.tolist()
-
-    print(indi_user_recomm)
 
     indi_user_recomm_list = []
     for program_id in indi_user_recomm:
         program = TbProgram.objects.get(pk=program_id[0])
         indi_user_recomm_list.append(program)
 
-    print(indi_user_recomm_list)
-    
-    # serializer = RecommProgramSerializer(indi_user_recomm_list, many = True)
-    serializer = ProgramSerializer(indi_user_recomm_list, many = True)
-
+    serializer = ProgramSerializer(data = indi_user_recomm_list, many = True)
+    if serializer.is_valid():
+        pass
 
     return Response(serializer.data)
 
