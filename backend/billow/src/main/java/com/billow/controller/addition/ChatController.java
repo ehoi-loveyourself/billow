@@ -1,6 +1,9 @@
 package com.billow.controller.addition;
 
 import com.billow.domain.dto.addtion.ChatRequest;
+import com.billow.domain.dto.addtion.ChatResponse;
+import com.billow.model.service.addtion.ChatService;
+import com.billow.util.JwtUtil;
 import com.billow.util.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RequiredArgsConstructor
 @Api(tags = {"Chat API"})
@@ -18,22 +23,29 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/chat")
 public class ChatController {
 
+    private final ChatService chatService;
+
     @ApiOperation(value = "온에어 톡 조회", response = Object.class)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "온에어 톡 조회 성공")})
     @GetMapping("/{programId}")
     public ResponseEntity<Object> selectChat(@PathVariable("programId") Long programId) {
-        Message response = new Message("succeeded");
+        List<ChatResponse> responses = chatService.selectChat(programId);
         return ResponseEntity.ok()
-                .body(response);
+                .body(responses);
     }
 
     @ApiOperation(value = "메시지 전송", response = Object.class)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "메시지 전송 성공")})
-    @PostMapping("/{programId}")
-    public ResponseEntity<Object> sendMessage(@PathVariable("programId") Long programId, @RequestBody ChatRequest chatRequest) {
-        Message response = new Message("succeeded");
+    @PostMapping("/{programId}/{userId}")
+//    public ResponseEntity<Object> sendMessage(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId, @RequestBody ChatRequest chatRequest) {
+//        log.info("메시지 등록 API 호출");
+//        Message response = chatService.sendMessage(JwtUtil.getUserId(token), programId, chatRequest);
+    public ResponseEntity<Object> sendMessage(@PathVariable("programId") Long programId, @PathVariable("userId") Long userId, @RequestBody ChatRequest chatRequest) {
+        log.info("메시지 등록 API 호출");
+        Message response = chatService.sendMessage(userId, programId, chatRequest);
+        log.info("메시지 전송 성공");
         return ResponseEntity.ok()
                 .body(response);
     }
