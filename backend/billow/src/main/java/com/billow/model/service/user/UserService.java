@@ -12,7 +12,6 @@ import com.billow.exception.BadRequestException;
 import com.billow.exception.DuplicationException;
 import com.billow.exception.NotFoundException;
 import com.billow.exception.WrongFormException;
-import com.billow.jwt.CustomUserDetailsService;
 import com.billow.jwt.JwtTokenProvider;
 import com.billow.jwt.JwtUtil;
 import com.billow.model.repository.addition.RatingRepository;
@@ -24,17 +23,12 @@ import com.billow.util.KakaoOAuth2;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.IOUtils;
 import org.json.simple.parser.ParseException;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -60,7 +54,7 @@ public class UserService {
     private final TvCarrierRepository tvCarrierRepository;
     private final ProfileImgRepository profileImgRepository;
     private final KakaoOAuth2 kakaoOAuth2;
-    private final CustomUserDetailsService customUserDetailsService;
+    //    private final CustomUserDetailsService customUserDetailsService;
     private final JwtTokenProvider jwtTokenProvider;
 
     public UserResponse selectUser(Long userId) throws IOException {
@@ -91,7 +85,7 @@ public class UserService {
                 user = new User(kakaoUser.getEmail(), kakaoUser.getNickName());
                 userRepository.save(user);
             }
-//
+
 //            UserDetails userDetails = customUserDetailsService.loadUserByUsername(kakaoUser.getEmail());
 //
 //            Authentication authentication = new UsernamePasswordAuthenticationToken(
@@ -101,8 +95,8 @@ public class UserService {
 //            String refreshToken2 = jwtTokenProvider.createRefreshToken(authentication);
 //            String authToken2 = jwtTokenProvider.createAccessToken(authentication);
 
-            String authToken = JwtUtil.createAuthToken(user.getId(), user.getEmail(), user.getName());
-            String refreshToken = JwtUtil.createRefreshToken();
+            String authToken = JwtTokenProvider.createAuthToken(user.getId(), user.getEmail(), user.getName());
+            String refreshToken = JwtTokenProvider.createRefreshToken();
 
             Cookie refreshCookie = new Cookie("refreshToken", refreshToken);
             refreshCookie.setMaxAge(60 * 60 * 24); // 하루
