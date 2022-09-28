@@ -49,11 +49,11 @@ public class UserController {
     @ApiOperation(value = "소셜 로그인", response = Object.class)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "소셜 로그인 성공")})
-    @GetMapping("/oauth")
-    public ResponseEntity<Object> kakaoLogin(String code, HttpServletResponse httpServletResponse) throws ParseException {
+    @PostMapping("/oauth")
+    public ResponseEntity<Object> kakaoLogin(@RequestBody SignUpRequest signUpRequest, HttpServletResponse httpServletResponse) throws ParseException {
         try {
             log.info("카카오 로그인 API 호출");
-            LoginResponse response = userService.kakaoLogin(code, httpServletResponse);
+            LoginResponse response = userService.kakaoLogin(signUpRequest, httpServletResponse);
             log.info("카카오 로그인 API 성공");
             return ResponseEntity.ok()
                     .header("Auth-access", response.getAuthToken())
@@ -98,7 +98,6 @@ public class UserController {
                     .body(new Message("해당 정보를 모두 빠짐없이 작성해주시기 바랍니다."));
         }
     }
-
 
     @ApiOperation(value = "액세스 토큰 재발급", response = Object.class)
     @ApiResponses(value = {
