@@ -53,7 +53,7 @@ public class UserService {
     private final TvCarrierRepository tvCarrierRepository;
     private final ProfileImgRepository profileImgRepository;
 
-    public UserResponse selectUser(Long userId) throws IOException {
+    public UserResponse selectUser(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
         return UserResponse.builder()

@@ -27,7 +27,9 @@ public class OrganizationController {
 
     @ApiOperation(value = "편성표 조회", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "편성표 조회 성공")})
+            @ApiResponse(responseCode = "200", description = "편성표 조회 성공"),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @GetMapping("/{programId}")
     public ResponseEntity<Object> selectProgramOrganization(@PathVariable("programId") Long programId) {
         log.info("편성표 조회 API 호출");
