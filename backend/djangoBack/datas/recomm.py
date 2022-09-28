@@ -12,9 +12,16 @@ import warnings
 import requests
 import pickle
 warnings.filterwarnings("ignore")
-# from datas.models import TbProgram #TbUser
 
 # 1 DB 커넥션 따로
+CONN = MySQLdb.connect(
+    host = 'localhost',
+    user = 'B309',
+    password = 'B309Billow',
+    db = 'billow'
+)
+
+
 CONN = MySQLdb.connect(
     host = 'localhost',
     user = 'B309',
@@ -41,14 +48,10 @@ def predict_table():
     df_rating = query_MySQL('SELECT score, program_id, user_id from tb_rating')
     user_list = query_MySQL('SELECT * From tb_user')
 
-    # print(user_list)
-
     user_list = user_list.values.tolist()
     users = []
-    # print(user_list)
     for user in user_list:
         users.append(user[0])
-    # print(users)
 
     df_user_program_ratings = df_rating.pivot(
         index = 'user_id',
@@ -94,18 +97,16 @@ def recommend_programs(df_svd_preds, user_id, ori_programs_df, ori_ratings_df, n
     recommendations = recommendations.rename(columns = {user_row_number: 'Predictions'}).sort_values('Predictions', ascending = False).iloc[:num_recommendations, :]
                         
 
-    return recommendations #user_history, recommendations
+    return recommendations
 
 def mf_algo():
     users, df_program, df_rating, df_svd_preds = predict_table()
     predict_result = pd.DataFrame()
     for i, user in enumerate(users):
-        # print(i, user)
+
         user_result = recommend_programs(df_svd_preds, user, df_program, df_rating)
         user_result.insert(2, 'user_id', user)
         user_result = user_result[0:10]
-
-        # print(user_result)
 
         predict_result = pd.concat([predict_result, user_result])
 
@@ -117,8 +118,8 @@ def mf_algo():
     
     return predict_result
 
-def mf_algo_individual(userId):
-    user_id = userId
+def mf_algo_individual(request):
+    user_id = request
     users, df_program, df_rating, df_svd_preds = predict_table()
     indi_predict_result = pd.DataFrame()
 
@@ -129,11 +130,11 @@ def mf_algo_individual(userId):
     indi_predict_result = pd.concat([indi_predict_result, indi_user_result])
     print(indi_predict_result)
 
-    with open('indi_predict_result', 'wb') as f:
-        pickle.dump(indi_predict_result, f, pickle.HIGHEST_PROTOCOL)
+    # with open('indi_predict_result', 'wb') as f:
+    #     pickle.dump(indi_predict_result, f, pickle.HIGHEST_PROTOCOL)
     
-    with open('indi_predict_result', 'rb') as f:
-        data = pickle.load(f)
+    # with open('indi_predict_result', 'rb') as f:
+    #     data = pickle.load(f)
 
     return indi_predict_result
 

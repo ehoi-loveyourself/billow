@@ -1,5 +1,5 @@
 <template>
-<div style="padding-left: 70px; margin-top: 10px;">
+<div style="margin-top: 10px;">
     <br/>
     <div>
     3개의 TALK
