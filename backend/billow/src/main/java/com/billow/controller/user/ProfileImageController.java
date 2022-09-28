@@ -10,10 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -26,33 +23,18 @@ public class ProfileImageController {
 
     private final ProfileImageService profileImageService;
 
-//    @ApiOperation(value = "프로필 조회", response = Object.class)
-//    @ApiResponses(value = {
-//            @ApiResponse(responseCode = "200", description = "프로필 조회 성공")})
-//    @GetMapping("/{userId}")
-//    public ResponseEntity<Resource> selectProfile(@PathVariable("userId") Long userId) {
-//        try {
-//            log.info("프로필 조회 API 호출");
-//            ResponseEntity<Resource> resource = profileImageService.selectProfile(1L);
-//            log.info("프로필 조회 성공");
-//            return resource;
-//        } catch (Exception e) {
-//            throw new BadRequestException(PROFILE_ERROR);
-//        }
-//    }
-//
     @ApiOperation(value = "초기 프로필 조회", response = Object.class)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "초기 프로필 조회 성공")})
-    @GetMapping("/initial/{profileId}")
-    public ResponseEntity<String> initialSelectProfile(@PathVariable("profileId") Long profileId) {
+    @GetMapping("/{profileId}")
+    public  ResponseEntity<Resource> initialSelectProfile(@PathVariable("profileId") Long profileId) {
         try {
             log.info("초기 프로필 조회 API 호출");
-            String resource = profileImageService.initialSelectProfile(profileId);
+            ResponseEntity<Resource> resource = profileImageService.initialSelectProfile(profileId);
             log.info("초기 프로필 조회 성공");
-            return ResponseEntity.ok()
-                    .body(resource);
+            return resource;
         } catch (Exception e) {
+            e.printStackTrace();
             throw new BadRequestException(PROFILE_ERROR);
         }
     }
