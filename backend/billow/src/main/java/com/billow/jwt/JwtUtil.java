@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
-import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
@@ -44,15 +43,23 @@ public class JwtUtil implements InitializingBean {
         return ((Number) getAllClaims(token).get("id")).longValue();
     }
 
-    public static boolean validateToken(String token) {
+//    public static boolean validateToken(String token) {
+//        try {
+//            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+//            return true;
+//        } catch (ExpiredJwtException e){
+//            // 만료된 경우에는 refresh token을 확인하기 위해
+//            throw new UnauthorizedException(EXPIRED_TOKEN);
+//        } catch (JwtException | IllegalArgumentException e) {
+//            throw e;
+//        }
+//    }
+
+    public static void validateToken(String token) {
         try {
-            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
-            return true;
-        } catch (ExpiredJwtException e){
-            // 만료된 경우에는 refresh token을 확인하기 위해
+            getAllClaims(token);
+        } catch (ExpiredJwtException e) {
             throw new UnauthorizedException(EXPIRED_TOKEN);
-        } catch (JwtException | IllegalArgumentException e) {
-            throw e;
         }
     }
 
@@ -64,7 +71,8 @@ public class JwtUtil implements InitializingBean {
                 .claim("id", id)
                 .claim("email", email)
                 .claim("name", name)
-                .signWith(SignatureAlgorithm.HS256, SECRET.getBytes(StandardCharsets.UTF_8));
+                .signWith(SignatureAlgorithm.HS256, key);
+//                .signWith(SignatureAlgorithm.HS256, SECRET.getBytes(StandardCharsets.UTF_8));
         final String jwt = builder.compact();
         if (email == null) {
             log.info("리프레시 토큰 발행: {}", jwt);
@@ -76,7 +84,8 @@ public class JwtUtil implements InitializingBean {
 
     private static Claims getAllClaims(String token) {
         return Jwts.parser()
-                .setSigningKey(SECRET.getBytes(StandardCharsets.UTF_8))
+//                .setSigningKey(SECRET.getBytes(StandardCharsets.UTF_8))
+                .setSigningKey(key)
                 .parseClaimsJws(token)
                 .getBody();
     }
