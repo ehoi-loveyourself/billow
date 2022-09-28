@@ -1,8 +1,8 @@
 package com.billow.controller.program;
 
 import com.billow.domain.dto.program.ProgramResponse;
+import com.billow.jwt.JwtUtil;
 import com.billow.model.service.webClient.webClientService;
-import com.billow.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
