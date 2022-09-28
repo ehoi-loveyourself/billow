@@ -1,36 +1,44 @@
 from copyreg import pickle
-import pandas as pd
-import numpy as np
-import MySQLdb
 from contextlib import redirect_stderr
 from sklearn.decomposition import TruncatedSVD
 from scipy.sparse.linalg import svds
 
-# import matplotlib.pyplot as plt
-# import seaborn as sns
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
+import MySQLdb
 import warnings
 import requests
 import pickle
 warnings.filterwarnings("ignore")
-# from datas.models import TbProgram #TbUser
 
+# 1 DB 커넥션 따로
+CONN = MySQLdb.connect(
+    host = 'localhost',
+    user = 'B309',
+    password = 'B309Billow',
+    db = 'billow'
+)
+
+
+CONN = MySQLdb.connect(
+    host = 'localhost',
+    user = 'B309',
+    password = 'B309Billow',
+    db = 'billow'
+)
 
 def query_MySQL(query):
-    # DB 연결
-
-    conn = MySQLdb.connect(
-        host = 'localhost',
-        user = 'B309',
-        password = 'B309Billow',
-        db = 'billow'
-    )
+    # 2. 쿼리 로그 찍기
+    print(query)
 
     global query_result
+    query_result = pd.read_sql(query, CONN)
+    # 3. result 로그 찍기
+    print(query_result)
 
-    query_result = pd.read_sql(query, conn)
-
-    conn.close()
-
+    # conn.close()
     # print('-------------------')
 
     return query_result
@@ -40,14 +48,10 @@ def predict_table():
     df_rating = query_MySQL('SELECT score, program_id, user_id from tb_rating')
     user_list = query_MySQL('SELECT * From tb_user')
 
-    # print(user_list)
-
     user_list = user_list.values.tolist()
     users = []
-    # print(user_list)
     for user in user_list:
         users.append(user[0])
-    # print(users)
 
     df_user_program_ratings = df_rating.pivot(
         index = 'user_id',
@@ -93,18 +97,16 @@ def recommend_programs(df_svd_preds, user_id, ori_programs_df, ori_ratings_df, n
     recommendations = recommendations.rename(columns = {user_row_number: 'Predictions'}).sort_values('Predictions', ascending = False).iloc[:num_recommendations, :]
                         
 
-    return recommendations #user_history, recommendations
+    return recommendations
 
 def mf_algo():
     users, df_program, df_rating, df_svd_preds = predict_table()
     predict_result = pd.DataFrame()
     for i, user in enumerate(users):
-        # print(i, user)
+
         user_result = recommend_programs(df_svd_preds, user, df_program, df_rating)
         user_result.insert(2, 'user_id', user)
         user_result = user_result[0:10]
-
-        # print(user_result)
 
         predict_result = pd.concat([predict_result, user_result])
 
@@ -116,8 +118,8 @@ def mf_algo():
     
     return predict_result
 
-def mf_algo_individual(userId):
-    user_id = userId
+def mf_algo_individual(request):
+    user_id = request
     users, df_program, df_rating, df_svd_preds = predict_table()
     indi_predict_result = pd.DataFrame()
 
@@ -128,13 +130,53 @@ def mf_algo_individual(userId):
     indi_predict_result = pd.concat([indi_predict_result, indi_user_result])
     print(indi_predict_result)
 
-    with open('indi_predict_result', 'wb') as f:
-        pickle.dump(indi_predict_result, f, pickle.HIGHEST_PROTOCOL)
+    # with open('indi_predict_result', 'wb') as f:
+    #     pickle.dump(indi_predict_result, f, pickle.HIGHEST_PROTOCOL)
     
-    with open('indi_predict_result', 'rb') as f:
-        data = pickle.load(f)
+    # with open('indi_predict_result', 'rb') as f:
+    #     data = pickle.load(f)
 
     return indi_predict_result
 
 # mf_algo()
 # mf_algo_individual(1)
+
+# 상황 추천 알고리즘을 위한 pivot_table
+def mf_condition_recomm(programId):
+    program_data = query_MySQL('SELECT program_id, title from tb_program')
+    rating_data = query_MySQL('SELECT score, program_id, user_id from tb_rating')
+
+    user_program_data = pd.merge(rating_data, program_data, on = 'program_id')
+    print(user_program_data)
+
+    # pivot 테이블을 만들자! value에는 score값을, column에는 program_id를, index에는 user id를 넣자
+    user_program_rating = user_program_data.pivot_table('score', index = 'user_id', columns = 'program_id').fillna(0)
+
+    # 이제 사용자-프로그램 기준의 데이터를 프로그램-사용자 기준으로 만들어서 특정 '프로그램'과 비슷한 프로그램을 추천해주는 로직을 구현합시다!
+    program_user_rating = user_program_rating.T
+
+    SVD = TruncatedSVD(n_components=12)
+    matrix = SVD.fit_transform(program_user_rating)
+    matrix.shape
+
+    matrix[0]
+
+    # 이제 이렇게 나온 데이터를 활용해서 피어슨 상관계수(corr)를 구합니다.
+    corr = np.corrcoef(matrix)
+    corr.shape
+
+    corr2 = corr[:200, :200]
+    corr2.shape
+
+    plt.figure(figsize=(16, 10))
+    sns.heatmap(corr2)
+
+    program_id = user_program_rating.columns
+    program_id_list = list(program_id)
+    coffey_hands = program_id_list.index(programId)
+
+    corr_coffey_hands = corr[coffey_hands]
+    print(list(program_id[(corr_coffey_hands >= 0.9)])[:50])
+    return list(program_id[(corr_coffey_hands >= 0.9)])[:50]
+
+# mf_condition_recomm(392)

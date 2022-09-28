@@ -1,7 +1,6 @@
 package com.billow.domain.entity.addition;
 
 import com.billow.domain.entity.organization.ProgramOrganization;
-import com.billow.domain.entity.program.Program;
 import com.billow.domain.entity.user.User;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -12,7 +11,6 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -24,6 +22,9 @@ public class BroadcastingAlarm {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "broadcasting_alarm_id")
     private Long id;
+
+    @NotNull
+    private String groupId;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
@@ -38,8 +39,9 @@ public class BroadcastingAlarm {
     private ProgramOrganization programOrganization;
 
     @Builder
-    public BroadcastingAlarm(Long id, User user, ProgramOrganization programOrganization) {
+    public BroadcastingAlarm(Long id, String groupId, User user, ProgramOrganization programOrganization) {
         this.id = id;
+        this.groupId = groupId;
         this.user = user;
         this.programOrganization = programOrganization;
     }

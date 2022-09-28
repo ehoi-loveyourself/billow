@@ -48,12 +48,17 @@ dependencies {
 
 	implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
 
+	implementation group: 'net.nurigo', name: 'javaSDK', version: '2.2'
+
 	// QueryDSL
 	implementation 'com.querydsl:querydsl-jpa:5.0.0'
 	annotationProcessor(
 			"javax.persistence:javax.persistence-api",
 			"javax.annotation:javax.annotation-api",
 			'com.querydsl:querydsl-apt:5.0.0:jpa')
+
+	//WebClient
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 }
 // QueryDSL
 sourceSets {

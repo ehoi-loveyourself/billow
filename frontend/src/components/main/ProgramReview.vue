@@ -1,102 +1,175 @@
 <template>
-<div style="padding-left: 70px; margin-top: 10px;">
-    <br/>
-    <div style="text-align:center">
-    <svg width="61" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-            <path fill="url(#a)" d="M0 0h61v24H0z" />
-            <defs>
-                <pattern id="a" patternContentUnits="objectBoundingBox" width="1" height="1">
-                    <use xlink:href="#b" transform="scale(.0164 .04167)" />
-                </pattern>
-                <image id="b" width="61" height="24"
-                    xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD0AAAAYCAYAAABJA/VsAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFhSURBVFhHY2RgYPgPxCMKMEHpEQWI9vSeCUpgTC0wkOYR5Wl7A24UTCkYaPOI8nRtgjiUhcomFwy0eQQ9jR56xIYmLjAYzMPraXkJNqwhR27sDBbz4FUWyIB4D0EQk8GOiNACgQcvfjE8fPEbTB+68JXhIBA/BLJBYDCbB/d0HNDAuRUyICbZILnjCcOiHe/B7MFsHjOQ3QASuHjnBzAEGIkKQWxgIdCw5gWvoLzBbR7c0yAAin5yDAYZmAIMRXQwWM1D8TQIkGowKPSKpzyH8jDBYDQPZ9sb1LohZDDIAS4F96A8/GAwmYezypKXYIWycANi1MDAYDIPp6cVgFUENcFgMg+rp7ElG1Bdhw5AFhOTtwabeVg9DWoIwADIMFBhoBpxk0EFiGHFPilgMJoHKshQcF2C+P/fB3TBNDZ5oKUE1SDjQWgehgBYEzZxdDxU1Y0OF40UMOrpkQJGoKcZGABqIX9owqCb9AAAAABJRU5ErkJggg==" />
-            </defs>
-        </svg>
-    </div>
-    <b-row style="margin-top: 20px;">
+  <div style="margin-top: 10px">
+    <br />
+    <b-row style="margin-top: 20px">
+      <!-- <b-col cols="2">
+        <span class="inner">
+          <span>
+            <span v-for="index in 5" :key="index" @click="check(index)">
+              <span v-if="index < score"
+                ><img src="@/assets/blue_star_big.png"
+              /></span>
+              <span v-if="index >= score"
+                ><img src="@/assets/grey_star_big.png"
+              /></span>
+            </span>
+          </span>
+        </span>
+      </b-col> -->
       <b-col cols="11">
-        <b-form-input v-model="message" placeholder="리뷰를 작성해주세요." required style="border-color: #A48282;">
+        <b-form-input
+          v-model="review"
+          placeholder="리뷰를 작성해주세요."
+          required
+          style="border-color: #a48282"
+        >
         </b-form-input>
       </b-col>
       <b-col cols="1">
-        <b-button size="md" type="submit">
+        <b-button size="md" type="submit" @click="reviewRegist()">
           <span>등록</span>
         </b-button>
       </b-col>
     </b-row>
-    <br/>
+    <br />
     <section>
-        <article class="review_set">
-    <article class="reviews">
-        <h2>걷지말고뛰어라&nbsp;&nbsp;<svg width="61" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-            <path fill="url(#a)" d="M0 0h61v24H0z" />
-            <defs>
-                <pattern id="a" patternContentUnits="objectBoundingBox" width="1" height="1">
-                    <use xlink:href="#b" transform="scale(.0164 .04167)" />
-                </pattern>
-                <image id="b" width="61" height="24"
-                    xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD0AAAAYCAYAAABJA/VsAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFhSURBVFhHY2RgYPgPxCMKMEHpEQWI9vSeCUpgTC0wkOYR5Wl7A24UTCkYaPOI8nRtgjiUhcomFwy0eQQ9jR56xIYmLjAYzMPraXkJNqwhR27sDBbz4FUWyIB4D0EQk8GOiNACgQcvfjE8fPEbTB+68JXhIBA/BLJBYDCbB/d0HNDAuRUyICbZILnjCcOiHe/B7MFsHjOQ3QASuHjnBzAEGIkKQWxgIdCw5gWvoLzBbR7c0yAAin5yDAYZmAIMRXQwWM1D8TQIkGowKPSKpzyH8jDBYDQPZ9sb1LohZDDIAS4F96A8/GAwmYezypKXYIWycANi1MDAYDIPp6cVgFUENcFgMg+rp7ElG1Bdhw5AFhOTtwabeVg9DWoIwADIMFBhoBpxk0EFiGHFPilgMJoHKshQcF2C+P/fB3TBNDZ5oKUE1SDjQWgehgBYEzZxdDxU1Y0OF40UMOrpkQJGoKcZGABqIX9owqCb9AAAAABJRU5ErkJggg==" />
-            </defs>
-        </svg></h2>
-        <p>너무 재밌어요!</p>
-    </article>
-    <article class="reviews">
-        <h2>뛰지말고누워라&nbsp;&nbsp;<svg width="61" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-            <path fill="url(#a)" d="M0 0h61v24H0z" />
-            <defs>
-                <pattern id="a" patternContentUnits="objectBoundingBox" width="1" height="1">
-                    <use xlink:href="#b" transform="scale(.0164 .04167)" />
-                </pattern>
-                <image id="b" width="61" height="24"
-                    xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD0AAAAYCAYAAABJA/VsAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFhSURBVFhHY2RgYPgPxCMKMEHpEQWI9vSeCUpgTC0wkOYR5Wl7A24UTCkYaPOI8nRtgjiUhcomFwy0eQQ9jR56xIYmLjAYzMPraXkJNqwhR27sDBbz4FUWyIB4D0EQk8GOiNACgQcvfjE8fPEbTB+68JXhIBA/BLJBYDCbB/d0HNDAuRUyICbZILnjCcOiHe/B7MFsHjOQ3QASuHjnBzAEGIkKQWxgIdCw5gWvoLzBbR7c0yAAin5yDAYZmAIMRXQwWM1D8TQIkGowKPSKpzyH8jDBYDQPZ9sb1LohZDDIAS4F96A8/GAwmYezypKXYIWycANi1MDAYDIPp6cVgFUENcFgMg+rp7ElG1Bdhw5AFhOTtwabeVg9DWoIwADIMFBhoBpxk0EFiGHFPilgMJoHKshQcF2C+P/fB3TBNDZ5oKUE1SDjQWgehgBYEzZxdDxU1Y0OF40UMOrpkQJGoKcZGABqIX9owqCb9AAAAABJRU5ErkJggg==" />
-            </defs>
-        </svg></h2>
-        <p>노잼..</p>
-    </article>
-    <article class="reviews">
-        <h2>눕지마라&nbsp;&nbsp;<svg width="61" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-            <path fill="url(#a)" d="M0 0h61v24H0z" />
-            <defs>
-                <pattern id="a" patternContentUnits="objectBoundingBox" width="1" height="1">
-                    <use xlink:href="#b" transform="scale(.0164 .04167)" />
-                </pattern>
-                <image id="b" width="61" height="24"
-                    xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD0AAAAYCAYAAABJA/VsAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFhSURBVFhHY2RgYPgPxCMKMEHpEQWI9vSeCUpgTC0wkOYR5Wl7A24UTCkYaPOI8nRtgjiUhcomFwy0eQQ9jR56xIYmLjAYzMPraXkJNqwhR27sDBbz4FUWyIB4D0EQk8GOiNACgQcvfjE8fPEbTB+68JXhIBA/BLJBYDCbB/d0HNDAuRUyICbZILnjCcOiHe/B7MFsHjOQ3QASuHjnBzAEGIkKQWxgIdCw5gWvoLzBbR7c0yAAin5yDAYZmAIMRXQwWM1D8TQIkGowKPSKpzyH8jDBYDQPZ9sb1LohZDDIAS4F96A8/GAwmYezypKXYIWycANi1MDAYDIPp6cVgFUENcFgMg+rp7ElG1Bdhw5AFhOTtwabeVg9DWoIwADIMFBhoBpxk0EFiGHFPilgMJoHKshQcF2C+P/fB3TBNDZ5oKUE1SDjQWgehgBYEzZxdDxU1Y0OF40UMOrpkQJGoKcZGABqIX9owqCb9AAAAABJRU5ErkJggg==" />
-            </defs>
-        </svg></h2>
-        <p>재밌네요</p>
-    </article>
-</article>
+      <article class="review_set">
+        <article class="reviews">
+          <h2>
+            걷지말고뛰어라&nbsp;&nbsp;
+            <span class="wrap-star">
+              <span class="star-rating">
+                <span style="width: 100%"></span>
+              </span>
+            </span>
+          </h2>
+          <p>너무 재밌어요!</p>
+        </article>
+        <article class="reviews">
+          <h2>
+            뛰지말고누워라&nbsp;&nbsp;<span class="wrap-star">
+              <span class="star-rating">
+                <span style="width: 40%"></span>
+              </span>
+            </span>
+          </h2>
+          <p>노잼..</p>
+        </article>
+        <article class="reviews">
+          <h2>
+            눕지마라&nbsp;&nbsp;
+            <span class="wrap-star">
+              <span class="star-rating">
+                <span style="width: 80%"></span>
+              </span>
+            </span>
+          </h2>
+          <p>재밌네요</p>
+        </article>
+      </article>
     </section>
-  <br/>
-</div>
+    <br />
+  </div>
 </template>
     
 <script>
+import { reactive } from "@vue/reactivity";
+import axios from "axios";
 
-    </script>
+export default {
+  name: "ProgramReview",
+  setup() {
+    const state = reactive({
+      data: [],
+    });
+
+    // const add = () => {
+    //   // 지금 안됨.
+    //   // state.data.push("추가한 내용");
+    //   axios.post("/api/recommend/new").then((res) => {
+    //     console.log(res.data);
+    //   });
+    // };
+
+    axios.get("/api/recommend/new").then((res) => {
+      // 데이터 가져오는 거.
+      console.log(res);
+      console.log(res.data);
+      console.log(res.data[0]);
+      console.log(res.data[0].title);
+      console.log(res.data[0].backdropPath);
+      console.log(res.data[0].posterImg);
+      state.data[0] = res.data[0].title;
+      state.data[1] = res.data[0].backdropPath;
+      state.data[2] = res.data[0].posterImg;
+    });
+
+    return { state };
+  },
+  data() {
+    return {
+      score: 0,
+      review: "",
+    };
+  },
+  methods: {
+    check(index) {
+      this.score = index + 1;
+    },
+    reviewRegist() { // post 사용 가능한 코드입니다. review 등록버튼 클릭 이벤트.
+      alert("post 테스트");
+      axios
+        .post("/api/review/269", { // /review/프로그램아이디
+          content: this.review,
+        })
+        .then((response) => {
+          console.warn(response);
+          console.log(content);
+          console.log(this.review);
+        })
+        .catch((ex) => {
+          console.warn("ERROR!!!!! : ", ex);
+        });
+    },
+  },
+};
+</script>
     
 <style scoped>
 .reviews {
-    background: left/contain content-box border-box no-repeat
-        url('@/assets/toystory.png') #141414;
-        margin-bottom: 1.5rem;
+  background: left/contain content-box border-box no-repeat
+    url("@/assets/toystory.png") #141414;
+  margin-bottom: 1.5rem;
 }
 
-.reviews > h2{
-    padding-left: 4.5rem;
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin: 0;
+.reviews > h2 {
+  padding-left: 4.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin: 0;
 }
 
 .reviews > p {
-    padding-left: 4.5rem;
-    font-size: 0.9rem;
-    color:#84868D;
+  padding-left: 4.5rem;
+  font-size: 0.9rem;
+  color: #84868d;
 }
-    </style>
+
+.star-rating {
+  width: 100px;
+}
+
+.star-rating,
+.star-rating span {
+  display: inline-block;
+  height: 18px;
+  overflow: hidden;
+  background: url(@/assets/star_1.png) no-repeat;
+}
+
+.star-rating span {
+  background-position: left bottom;
+  line-height: 0;
+  vertical-align: top;
+}
+</style>

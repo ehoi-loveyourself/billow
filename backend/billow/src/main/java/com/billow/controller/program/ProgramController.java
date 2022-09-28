@@ -1,9 +1,11 @@
 package com.billow.controller.program;
 
 import com.billow.domain.dto.addtion.RatingRequest;
+import com.billow.domain.dto.program.CastResponse;
 import com.billow.domain.dto.program.ProgramResponse;
+import com.billow.model.service.program.CastService;
 import com.billow.model.service.program.ProgramService;
-import com.billow.util.JwtUtil;
+import com.billow.jwt.JwtUtil;
 import com.billow.util.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,6 +26,7 @@ import java.util.List;
 public class ProgramController {
 
     private final ProgramService programService;
+    private final CastService castService;
 
     @ApiOperation(value = "프로그램 검색", response = Object.class)
     @ApiResponses(value = {
@@ -42,16 +45,18 @@ public class ProgramController {
             @ApiResponse(responseCode = "200", description = "프로그램 조회 성공")})
     @GetMapping("/{programId}")
     public ResponseEntity<Object> selectProgram(@PathVariable("programId") Long programId) {
-        Message response = new Message("succeeded");
+        log.info("프로그램 조회 API 호출");
+        ProgramResponse responses = programService.selectProgram(programId);
+        log.info("프로그램 조회 성공");
         return ResponseEntity.ok()
-                .body(response);
+                .body(responses);
     }
 
     @ApiOperation(value = "사용자 초기 데이터 수집용 랜덤 프로그램 출력", response = Object.class)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "랜덤 프로그램 출력 성공")})
     @GetMapping("/random")
-    public ResponseEntity<Object> randomProgram(@RequestHeader("Auth-access") String token) {
+    public ResponseEntity<Object> randomProgram() {
         log.info("사용자 초기 데이터 수집용 랜덤 프로그램 출력 API 호출");
         List<ProgramResponse> response = programService.randomProgram();
         log.info("랜덤 프로그램 출력 성공");
@@ -67,6 +72,18 @@ public class ProgramController {
         log.info("프로그램 평점 등록 API 호출");
         Message response = programService.postProgramRating(JwtUtil.getUserId(token), programId, ratingRequest);
         log.info("프로그램 평점 등록 성공");
+        return ResponseEntity.ok()
+                .body(response);
+    }
+
+    @ApiOperation(value = "프로그램 출연진 조회", response = Object.class)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "프로그램 출연진 조회 성공")})
+    @GetMapping("/cast/{programId}")
+    public ResponseEntity<Object> selectCast(@PathVariable("programId") Long programId) {
+        log.info("프로그램 출연진 조회 API 호출");
+        List<CastResponse> response = castService.selectCast(programId);
+        log.info("프로그램 출연진 조회 성공");
         return ResponseEntity.ok()
                 .body(response);
     }

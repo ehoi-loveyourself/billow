@@ -1,6 +1,7 @@
 package com.billow.util;
 
 import com.billow.exception.*;
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -44,5 +45,19 @@ public class ControllerAdvice {
     public Message InternalServerErrorException(RuntimeException runtimeException) {
         log.info(runtimeException.getMessage());
         return new Message(runtimeException.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(Exception.class)
+    public Message Exception(RuntimeException runtimeException) {
+        log.info(runtimeException.getMessage());
+        return new Message(runtimeException.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler({ExpiredJwtException.class, UnauthorizedException.class})
+    public Message UnauthorizedException(RuntimeException runtimeException) {
+        log.info(runtimeException.getMessage());
+        return new Message((runtimeException.getMessage()));
     }
 }

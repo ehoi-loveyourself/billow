@@ -4,7 +4,9 @@ import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -29,11 +31,12 @@ public class SQLController {
             String[] gender = {"여", "남"};
             int[] age = {0, 10, 20, 30, 40, 50, 60};
             int age1 = (int) ((Math.random() * 7));
+            int mobile = (char) (Math.random() * 99999999)+10000001;
 
             int gender1 = (int) ((Math.random() * 2));
             int profile = i % 20 + 1;
 
-            String d = "INSERT INTO tb_user VALUES (" + i + ", " + age[age1] + ", '" + email + num + "@naver.com', '" + gender[gender1] + "', 'User_" + i + "', 'User_" + i + "', null, " + profile + ", " + region + ", " + tv + ");";
+            String d = "INSERT INTO tb_user VALUES (" + i + ", " + age[age1] + ", '" + email + num + "@naver.com', '" + gender[gender1] + "', '" + "000" + mobile + "', 'User_" + i + "', 'User_" + i + "', null, " + profile + ", " + region + ", " + tv + ");";
             System.out.println(d);
         }
 

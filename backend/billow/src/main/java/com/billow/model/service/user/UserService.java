@@ -12,12 +12,13 @@ import com.billow.exception.BadRequestException;
 import com.billow.exception.DuplicationException;
 import com.billow.exception.NotFoundException;
 import com.billow.exception.WrongFormException;
+import com.billow.jwt.JwtTokenProvider;
+import com.billow.jwt.JwtUtil;
 import com.billow.model.repository.addition.RatingRepository;
 import com.billow.model.repository.user.ProfileImgRepository;
 import com.billow.model.repository.user.RegionRepository;
 import com.billow.model.repository.user.TvCarrierRepository;
 import com.billow.model.repository.user.UserRepository;
-import com.billow.util.JwtUtil;
 import com.billow.util.KakaoOAuth2;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -43,7 +45,7 @@ public class UserService {
     private static final String BAD_REQUEST = "잘못된 요청입니다.";
     private static final String TOKEN_NOT_VALID = "토큰 정보가 올바르지 않습니다.";
     private static final String PROFILE_IMG_NOT_FOUND = "프로필 이미지를 찾을 수 없습니다.";
-    private static final String PROFILE_IMG_ABSOLUTE_PATH = "img/profile_img/";
+    private static final String NO_RATING = "남기신 평점이 없습니다!";
 
 
     private final UserRepository userRepository;
@@ -52,15 +54,12 @@ public class UserService {
     private final TvCarrierRepository tvCarrierRepository;
     private final ProfileImgRepository profileImgRepository;
     private final KakaoOAuth2 kakaoOAuth2;
+    //    private final CustomUserDetailsService customUserDetailsService;
+    private final JwtTokenProvider jwtTokenProvider;
 
-    public UserResponse selectUser(Long userId) {
+    public UserResponse selectUser(Long userId) throws IOException {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
-
-        String profileImgUrl = PROFILE_IMG_ABSOLUTE_PATH + user.getProfileImg().getImgName();
-        // url 설정 이렇게 하면 되나요..?
-        // "img/profile_img/1.png" 이런 식으로 반환하는데 뭔가 아닌 거 같은데요.. 핳
-
         return UserResponse.builder()
                 .email(user.getEmail())
                 .name(user.getName())
@@ -69,8 +68,8 @@ public class UserService {
                 .age(user.getAge())
                 .region(user.getRegion().getRegion())
                 .tvCarrier(user.getTvCarrier().getCompany())
-                .profileImgUrl(profileImgUrl)
                 .mobile(user.getMobile())
+                .profileImgUrl(user.getProfileImg().getUrl())
                 .build();
     }
 
@@ -86,8 +85,18 @@ public class UserService {
                 user = new User(kakaoUser.getEmail(), kakaoUser.getNickName());
                 userRepository.save(user);
             }
-            String authToken = JwtUtil.createAuthToken(user.getId(), user.getEmail(), user.getName());
-            String refreshToken = JwtUtil.createRefreshToken();
+
+//            UserDetails userDetails = customUserDetailsService.loadUserByUsername(kakaoUser.getEmail());
+//
+//            Authentication authentication = new UsernamePasswordAuthenticationToken(
+//                    userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities()
+//            );
+//
+//            String refreshToken2 = jwtTokenProvider.createRefreshToken(authentication);
+//            String authToken2 = jwtTokenProvider.createAccessToken(authentication);
+
+            String authToken = JwtTokenProvider.createAuthToken(user.getId(), user.getEmail(), user.getName());
+            String refreshToken = JwtTokenProvider.createRefreshToken();
 
             Cookie refreshCookie = new Cookie("refreshToken", refreshToken);
             refreshCookie.setMaxAge(60 * 60 * 24); // 하루
@@ -113,7 +122,7 @@ public class UserService {
             throw new DuplicationException(NICKNAME_DUPLICATED);
         }
         return new Message("사용 가능한 닉네임입니다.");
-   }
+    }
 
     public Message signUp(SignUpRequest signUpRequest) {
         User user = userRepository.findByEmail(signUpRequest.getEmail());
@@ -189,6 +198,12 @@ public class UserService {
     }
 
     public List<RatingResponse> selectRating(Long userId) {
+        userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
+        List<Rating> list = ratingRepository.findByUser_Id(userId);
+        if (list.size() == 0) {
+            throw new NotFoundException(NO_RATING);
+        }
         return ratingRepository.findByUser_Id(userId)
                 .stream()
                 .map(rating -> RatingResponse.builder()
@@ -209,10 +224,6 @@ public class UserService {
         rating.updateRating(ratingRequest.getScore());
         ratingRepository.save(rating);
 
-        /*
-         * 질문 !
-         * 연관관계 매핑에서 cascade
-         */
         return new Message("회원님의 평점내역 수정에 성공하였습니다.");
     }
 

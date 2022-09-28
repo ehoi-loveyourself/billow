@@ -2,14 +2,9 @@ package com.billow.controller.program;
 
 import com.billow.domain.dto.organization.OrganizationResponse;
 import com.billow.domain.dto.program.CastResponse;
-import com.billow.domain.dto.program.ProgramIWatchedRequest;
 import com.billow.domain.dto.program.ProgramResponse;
-import com.billow.domain.entity.program.Program;
-import com.billow.domain.entity.user.User;
-import com.billow.exception.NotFoundException;
 import com.billow.model.service.program.RecommendService;
-import com.billow.model.service.user.UserService;
-import com.billow.util.JwtUtil;
+import com.billow.jwt.JwtUtil;
 import com.billow.util.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -18,7 +13,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -47,18 +45,6 @@ public class RecommendController {
     @GetMapping("/conditions")
     public ResponseEntity<Object> recommendConditions() {
         Message response = new Message("succeeded");
-        return ResponseEntity.ok()
-                .body(response);
-    }
-
-    @ApiOperation(value = "특정 상황에 봤던 프로그램 추가", response = Object.class)
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "특정 상황에 봤던 프로그램 추가 성공")})
-    @PostMapping("/conditions")
-    public ResponseEntity<Object> addProgramIWatched(@RequestHeader("Auth-access") String token, @RequestBody ProgramIWatchedRequest programIWatchedRequest) {
-        log.info("특정 상황에 봤던 프로그램 추가 API 호출");
-        Message response = recommendService.addProgramIWatched(JwtUtil.getUserId(token), programIWatchedRequest);
-        log.info("특정 상황에 봤던 프로그램 추가 성공");
         return ResponseEntity.ok()
                 .body(response);
     }
@@ -103,9 +89,11 @@ public class RecommendController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "성연령별 프로그램 추천 성공")})
     @GetMapping("/gender-age")
-    public ResponseEntity<Object> recommendGenderAge(@RequestHeader("Auth-access") String token) {
+    public ResponseEntity<Object> recommendGenderAge(
+            //@RequestHeader("Auth-access") String token
+    ) {
         log.info("성연령별 프로그램 추천 API 호출");
-        List<ProgramResponse> response = recommendService.recommendGenderAge(JwtUtil.getUserId(token));
+        List<ProgramResponse> response = recommendService.recommendGenderAge(1L);
         log.info("성연령별 프로그램 추천 API 성공");
         return ResponseEntity.ok()
                 .body(response);

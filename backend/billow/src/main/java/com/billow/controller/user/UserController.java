@@ -3,8 +3,8 @@ package com.billow.controller.user;
 import com.billow.domain.dto.addtion.RatingRequest;
 import com.billow.domain.dto.addtion.RatingResponse;
 import com.billow.domain.dto.user.*;
+import com.billow.jwt.JwtUtil;
 import com.billow.model.service.user.UserService;
-import com.billow.util.JwtUtil;
 import com.billow.util.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -33,17 +34,12 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "회원 조회 성공")})
     @GetMapping
-    public ResponseEntity<Object> selectUser(@RequestHeader("Auth-access") String token) {
-        try {
+    public ResponseEntity<Object> selectUser(@RequestHeader("Auth-access") String token) throws IOException {
             log.info("회원정보 조회 API 호출");
             UserResponse response = userService.selectUser(JwtUtil.getUserId(token));
             log.info("회원정보 조회 성공");
             return ResponseEntity.ok()
                     .body(response);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest()
-                    .body(new Message("회원정보 조회에 실패하였습니다."));
-        }
     }
 
     @ApiOperation(value = "소셜 로그인", response = Object.class)
@@ -51,17 +47,12 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "소셜 로그인 성공")})
     @GetMapping("/oauth")
     public ResponseEntity<Object> kakaoLogin(String code, HttpServletResponse httpServletResponse) throws ParseException {
-        try {
             log.info("카카오 로그인 API 호출");
             LoginResponse response = userService.kakaoLogin(code, httpServletResponse);
             log.info("카카오 로그인 API 성공");
             return ResponseEntity.ok()
                     .header("Auth-access", response.getAuthToken())
                     .body(response);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest()
-                    .body(new Message("카카오 로그인에 실패했습니다."));
-        }
     }
 
     @ApiOperation(value = "닉네임 중복검사", response = Object.class)
@@ -69,16 +60,11 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "닉네임 사용가능")})
     @GetMapping("/validation/nickname")
     public ResponseEntity<Object> validateNickname(@RequestParam String nickname) {
-        try {
             log.info("닉네임 중복검사 API 호출");
             Message response = userService.validateNickname(nickname);
             log.info("닉네임 중복검사 성공");
             return ResponseEntity.ok()
                     .body(response);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest()
-                    .body(new Message("이미 등록된 닉네임입니다."));
-        }
     }
 
 
@@ -87,16 +73,11 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "회원가입 성공")})
     @PostMapping("/signup")
     public ResponseEntity<Object> signUp(@RequestBody SignUpRequest signUpRequest) {
-        try {
             log.info("회원가입 API 호출");
             Message response = userService.signUp(signUpRequest);
             log.info("회원가입 성공");
             return ResponseEntity.ok()
                     .body(response);
-        } catch (Exception e){
-            return ResponseEntity.badRequest()
-                    .body(new Message("해당 정보를 모두 빠짐없이 작성해주시기 바랍니다."));
-        }
     }
 
 
@@ -105,7 +86,6 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "액세스 토큰 재발급 성공")})
     @PostMapping("/refresh")
     public ResponseEntity<Object> refresh(@RequestBody RefreshRequest refreshRequest) {
-        try {
             log.info("액세스 토큰 재발급 요청 API 호출");
             if (refreshRequest.getRefreshToken() == null) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
@@ -115,10 +95,6 @@ public class UserController {
             log.info("액세스 토큰 재발급 성공");
             return ResponseEntity.ok()
                     .body(response);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest()
-                    .body(new Message("액세스 토큰 발급에 실패했습니다."));
-        }
     }
 
     @ApiOperation(value = "로그아웃", response = Object.class)
@@ -126,16 +102,11 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "로그아웃 성공")})
     @PostMapping("/logout")
     public ResponseEntity<Object> logout(@RequestHeader("Auth-access") String token) {
-        try {
             log.info("로그아웃 API 호출");
             Message response = userService.logout(JwtUtil.getUserId(token));
             log.info("로그아웃 성공");
             return ResponseEntity.ok()
                     .body(response);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest()
-                    .body(new Message("로그아웃에 실패하였습니다."));
-        }
     }
 
     @ApiOperation(value = "회원 수정", response = Object.class)
@@ -143,43 +114,24 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "회원 수정 성공")})
     @PutMapping
     public ResponseEntity<Object> updateUser(@RequestHeader("Auth-access") String token, @RequestBody UserUpdateRequest userUpdateRequest) {
-        try {
             log.info("회원정보 수정 API 호출");
             Message response = userService.updateUser(JwtUtil.getUserId(token), userUpdateRequest);
             log.info("회원정보 수정 성공");
             return ResponseEntity.ok()
                     .body(response);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest()
-                    .body(new Message("회원정보 수정에 실패했습니다."));
-        }
     }
 
-    @ApiOperation(value = "프로필 수정", response = Object.class)
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "프로필 수정 성공")})
-    @PutMapping("/profile")
-    public ResponseEntity<Object> updateUserProfile() {
-        Message response = new Message("succeeded");
-        return ResponseEntity.ok()
-                .body(response);
-    }
 
     @ApiOperation(value = "회원 삭제", response = Object.class)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "회원 삭제 성공")})
     @DeleteMapping
     public ResponseEntity<Object> deleteUser(@RequestHeader("Auth-access") String token) {
-        try {
             log.info("회원 탈퇴 API 호출");
             Message response = userService.deleteUser(JwtUtil.getUserId(token));
             log.info("회원 탈퇴 성공");
             return ResponseEntity.ok()
                     .body(response);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest()
-                    .body(new Message("회원 탈퇴에 실패했습니다."));
-        }
     }
 
     @ApiOperation(value = "평점 조회", response = Object.class)
