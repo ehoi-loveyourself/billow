@@ -13,7 +13,8 @@ import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -54,8 +55,8 @@ public class BroadcastingAlarmService {
         if (!findBroadcastingAlarm.isEmpty()) {
             return new Message("이미 등록된 알림입니다.");
         }
-        User user =userRepository.findById(userId)
-                        .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
         ProgramOrganization programOrganization = programOrganizationRepository.findById(programOrganizationId)
                 .orElseThrow(() -> new NotFoundException(PROGRAM_ORGANIZATION_NOT_FOUND));
 

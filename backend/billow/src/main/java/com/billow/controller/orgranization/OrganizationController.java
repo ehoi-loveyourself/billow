@@ -1,16 +1,9 @@
 package com.billow.controller.orgranization;
 
 import com.billow.domain.dto.organization.OrganizationListResponse;
-import com.billow.domain.dto.organization.OrganizationResponse;
-import com.billow.domain.dto.program.ProgramResponse;
-import com.billow.model.repository.organization.ProgramOrganizationRepository;
 import com.billow.model.service.organization.ProgramOrganozationService;
-import com.billow.util.JwtUtil;
-import com.billow.util.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;

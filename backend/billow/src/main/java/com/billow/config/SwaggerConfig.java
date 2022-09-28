@@ -15,8 +15,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 @Configuration
 public class SwaggerConfig {
 
-    private String version = "V1";
-    private String title = "Billow Spring Boot Rest API " + version;
+    private static final String VERSION = "V1";
+    private static final String TITLE = "Billow Spring Boot Rest API " + VERSION;
 
     @Bean
     public Docket restAPI() {
@@ -30,9 +30,9 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title(title)
+                .title(TITLE)
                 .description("Billow의 swagger api 입니다.")
-                .version(version)
+                .version(VERSION)
                 .build();
     }
 }

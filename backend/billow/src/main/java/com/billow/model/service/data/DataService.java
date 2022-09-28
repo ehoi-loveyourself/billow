@@ -61,10 +61,10 @@ public class DataService {
 
     public Message insertProgramId() {
         List<Program> programList = programRepository.findAll();
-        for (Program program : programList){
+        for (Program program : programList) {
             String programTitle = program.getTitle().replaceAll(" ", "");
             GenderAgeViewer genderAgeViewer = genderAgeViewerRepository.findByProgramTitle(programTitle);
-            if(genderAgeViewer != null){
+            if (genderAgeViewer != null) {
                 genderAgeViewer.setProgram(program);
                 genderAgeViewerRepository.save(genderAgeViewer);
                 System.out.println(programTitle);

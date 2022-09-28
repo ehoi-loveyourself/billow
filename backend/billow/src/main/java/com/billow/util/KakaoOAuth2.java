@@ -1,6 +1,7 @@
 package com.billow.util;
 
 import com.billow.domain.entity.user.User;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-import org.json.simple.JSONObject;
 
 @Component
 public class KakaoOAuth2 {
