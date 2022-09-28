@@ -51,18 +51,6 @@ public class RecommendController {
                 .body(response);
     }
 
-    @ApiOperation(value = "특정 상황에 봤던 프로그램 추가", response = Object.class)
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "특정 상황에 봤던 프로그램 추가 성공")})
-    @PostMapping("/conditions")
-    public ResponseEntity<Object> addProgramIWatched(@RequestHeader("Auth-access") String token, @RequestBody ProgramIWatchedRequest programIWatchedRequest) {
-        log.info("특정 상황에 봤던 프로그램 추가 API 호출");
-        Message response = recommendService.addProgramIWatched(JwtUtil.getUserId(token), programIWatchedRequest);
-        log.info("특정 상황에 봤던 프로그램 추가 성공");
-        return ResponseEntity.ok()
-                .body(response);
-    }
-
     @ApiOperation(value = "신규 프로그램 추천", response = Object.class)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "신규 프로그램 추천 성공")})
