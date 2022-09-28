@@ -27,7 +27,9 @@ public class ReviewController {
 
     @ApiOperation(value = "리뷰 조회", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "리뷰 조회 성공")})
+            @ApiResponse(responseCode = "200", description = "리뷰 조회 성공"),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @GetMapping("/{programId}")
     public ResponseEntity<Object> selectReview(@PathVariable("programId") Long programId) {
         log.info("리뷰 조회 API 호출");
@@ -39,7 +41,11 @@ public class ReviewController {
 
     @ApiOperation(value = "리뷰 등록", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "리뷰 등록 성공")})
+            @ApiResponse(responseCode = "200", description = "리뷰 등록 성공"),
+            @ApiResponse(responseCode = "404", description = "해당 유저를 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "404", description = "해당 프로그램을 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @PostMapping("/{programId}")
     public ResponseEntity<Object> postReview(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId, @RequestBody ReviewRequest reviewRequest) {
         log.info("리뷰 등록 API 호출");
@@ -51,7 +57,12 @@ public class ReviewController {
 
     @ApiOperation(value = "리뷰 수정", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "리뷰 수정 성공")})
+            @ApiResponse(responseCode = "200", description = "리뷰 수정 성공"),
+            @ApiResponse(responseCode = "404", description = "해당 유저를 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "404", description = "해당 리뷰를 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "400", description = "잘못된 접근입니다."),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @PutMapping("/{reviewId}")
     public ResponseEntity<Object> updateReview(@RequestHeader("Auth-access") String token, @PathVariable("reviewId") Long reviewId, @RequestBody ReviewRequest reviewRequest) {
         log.info("리뷰 수정 API 호출");
@@ -63,7 +74,12 @@ public class ReviewController {
 
     @ApiOperation(value = "리뷰 삭제", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "리뷰 삭제 성공")})
+            @ApiResponse(responseCode = "200", description = "리뷰 삭제 성공"),
+            @ApiResponse(responseCode = "404", description = "해당 유저를 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "404", description = "해당 리뷰를 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "400", description = "잘못된 접근입니다."),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @DeleteMapping("/{reviewId}")
     public ResponseEntity<Object> deleteReview(@RequestHeader("Auth-access") String token, @PathVariable("reviewId") Long reviewId) {
         log.info("리뷰 삭제 API 호출");
