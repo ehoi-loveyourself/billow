@@ -52,13 +52,12 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
     @GetMapping("/oauth")
-    public ResponseEntity<Object> kakaoLogin(String code, HttpServletResponse httpServletResponse) throws ParseException {
+    public ResponseEntity<Object> kakaoLogin(@RequestBody SignUpRequest signUpRequest, HttpServletResponse httpServletResponse) throws ParseException {
         log.info("카카오 로그인 API 호출");
         LoginResponse response = userService.kakaoLogin(code, httpServletResponse);
         log.info("카카오 로그인 API 성공");
         return ResponseEntity.ok()
                 .header("Auth-access", response.getAuthToken())
-                .body(response);
     }
 
     @ApiOperation(value = "닉네임 중복검사", response = Object.class)
@@ -92,7 +91,6 @@ public class UserController {
         return ResponseEntity.ok()
                 .body(response);
     }
-
 
     @ApiOperation(value = "액세스 토큰 재발급", response = Object.class)
     @ApiResponses(value = {
