@@ -59,7 +59,7 @@ public class UserService {
     private final ProfileImgRepository profileImgRepository;
     private final KakaoOAuth2 kakaoOAuth2;
 
-    public UserResponse selectUser(Long userId) throws IOException {
+    public UserResponse selectUser(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
         return UserResponse.builder()

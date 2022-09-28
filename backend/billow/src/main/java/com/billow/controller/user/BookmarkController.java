@@ -26,7 +26,10 @@ public class BookmarkController {
 
     @ApiOperation(value = "즐겨찾기 조회", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "즐겨찾기 조회 성공")})
+            @ApiResponse(responseCode = "200", description = "즐겨찾기 조회 성공"),
+            @ApiResponse(responseCode = "404", description = "담긴 즐겨찾기가 없습니다."),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @GetMapping
     public ResponseEntity<Object> selectBookmark(@RequestHeader("Auth-access") String token) {
         log.info("즐겨찾기 조회 API 호출");
@@ -38,7 +41,12 @@ public class BookmarkController {
 
     @ApiOperation(value = "즐겨찾기 등록", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "즐겨찾기 등록 성공")})
+            @ApiResponse(responseCode = "200", description = "즐겨찾기 등록 성공"),
+            @ApiResponse(responseCode = "404", description = "해당 프로그램을 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "404", description = "해당 유저를 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "409", description = "이미 즐겨찾기에 담겼습니다."),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @PostMapping("/{programId}")
     public ResponseEntity<Object> postBookmark(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId) {
         log.info("즐겨찾기 등록 API 호출");
@@ -50,7 +58,12 @@ public class BookmarkController {
 
     @ApiOperation(value = "즐겨찾기 삭제", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "즐겨찾기 삭제 성공")})
+            @ApiResponse(responseCode = "200", description = "즐겨찾기 삭제 성공"),
+            @ApiResponse(responseCode = "404", description = "해당 즐겨찾기를 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "404", description = "해당 유저를 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "400", description = "잘못된 요청입니다."),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @DeleteMapping("/{bookmarkId}")
     public ResponseEntity<Object> deleteBookmark(@RequestHeader("Auth-access") String token, @PathVariable("bookmarkId") Long bookmarkId) {
         log.info("즐겨찾기 삭제 API 호출");

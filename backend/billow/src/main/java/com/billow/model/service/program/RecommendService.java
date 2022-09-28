@@ -32,11 +32,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class RecommendService {
-
-    private static final String RATING_NOT_FOUND = "사용자의 평점을 찾을 수 없습니다.";
-    private static final String ACTOR_NOT_FOUND = "출연진을 찾을 수 없습니다.";
     private static final String USER_NOT_FOUND = "해당 유저를 찾을 수 없습니다.";
-    private static final String PROGRAM_NOT_FOUND = "해당 프로그램을 찾을 수 없습니다.";
 
     private final ProgramRepository programRepository;
     private final RatingRepository ratingRepository;

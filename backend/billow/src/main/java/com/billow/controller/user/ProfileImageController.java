@@ -25,7 +25,10 @@ public class ProfileImageController {
 
     @ApiOperation(value = "초기 프로필 조회", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "초기 프로필 조회 성공")})
+            @ApiResponse(responseCode = "200", description = "초기 프로필 조회 성공"),
+            @ApiResponse(responseCode = "404", description = "해당 프로필 이미지를 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @GetMapping("/{profileId}")
     public  ResponseEntity<Resource> initialSelectProfile(@PathVariable("profileId") Long profileId) {
         try {
