@@ -5,6 +5,7 @@ import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -48,11 +49,11 @@ public class ControllerAdvice {
         return new Message(runtimeException.getMessage());
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler(Exception.class)
-    public Message Exception(RuntimeException runtimeException) {
-        log.info(runtimeException.getMessage());
-        return new Message(runtimeException.getMessage());
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({RuntimeException.class, Exception.class})
+    public Message commonException(Exception e) {
+        log.info(e.getMessage());
+        return new Message("오류가 발생했습니다.");
     }
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
