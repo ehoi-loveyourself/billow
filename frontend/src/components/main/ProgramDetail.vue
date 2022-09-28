@@ -20,7 +20,7 @@
                     <span style="width:76%"></span>
                 </span>
             </span>
-                        </span>&nbsp;&nbsp;<span>3.8</span></div>
+                        </span>&nbsp;&nbsp;<span>7.6</span></div>
                     <div class="box"><span class="box_design">15+</span><span class="box_design">금 오후7:00</span><span
                             class="box_design">예능</span><span class="box_design">tvN</span></div>
                     <div class="genre"><span>#리얼리티</span></div>

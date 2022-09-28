@@ -1,4 +1,4 @@
-package com.billow.domain.dto.program;
+package com.billow.domain.dto.user;
 
 import lombok.*;
 
@@ -8,9 +8,11 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ProgramResponse {
+public class BookmarkResponse {
 
-    private Long id;
+    private Long bookmarkId;
+
+    private Long programId;
 
     private String title;
 
@@ -39,6 +41,4 @@ public class ProgramResponse {
     private String posterImg;
 
     private String backdropPath;
-
-    private List<OttResponse> otts;
 }

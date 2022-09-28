@@ -18,14 +18,11 @@ public class ProfileImg {
     @Column(name = "profile_img_id")
     private Long id;
 
-    private String saveFolder;
-
-    private String imgName;
+    private String url;
 
     @Builder
-    public ProfileImg(Long id, String saveFolder, String imgName) {
+    public ProfileImg(Long id, String url) {
         this.id = id;
-        this.saveFolder = saveFolder;
-        this.imgName = imgName;
+        this.url = url;
     }
 }

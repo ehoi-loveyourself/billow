@@ -12,8 +12,6 @@ public class CastResponse {
 
     Long id;
 
-    String actorName;
-
     private String title;
 
     private List<String> genres;
@@ -36,7 +34,17 @@ public class CastResponse {
 
     private Integer bookmarkCnt;
 
+    private Long ratingCnt;
+
     private String posterImg;
 
     private String backdropPath;
+
+    private String actorName;
+
+    private String playName;
+
+    private String castImageUrl;
+
+    private List<OttResponse> otts;
 }

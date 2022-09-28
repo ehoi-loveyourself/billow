@@ -1,6 +1,6 @@
 package com.billow.controller.user;
 
-import com.billow.domain.dto.program.ProgramResponse;
+import com.billow.domain.dto.user.BookmarkResponse;
 import com.billow.model.service.user.BookmarkService;
 import com.billow.jwt.JwtUtil;
 import com.billow.util.Message;
@@ -30,7 +30,7 @@ public class BookmarkController {
     @GetMapping
     public ResponseEntity<Object> selectBookmark(@RequestHeader("Auth-access") String token) {
         log.info("즐겨찾기 조회 API 호출");
-        List<ProgramResponse> responses = bookmarkService.selectBookmark(JwtUtil.getUserId(token));
+        List<BookmarkResponse> responses = bookmarkService.selectBookmark(JwtUtil.getUserId(token));
         log.info("즐겨찾기 조회 성공");
         return ResponseEntity.ok()
                 .body(responses);

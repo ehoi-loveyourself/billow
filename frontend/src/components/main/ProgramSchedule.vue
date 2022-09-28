@@ -1,5 +1,5 @@
 <template>
-<div style="padding-left: 70px; margin-top: 10px;">
+<div style="margin-top: 10px;">
     <br/>
     <div style="text-align:center">
         지금은 9월 26일 월요일 11시 55분 입니다.
@@ -53,7 +53,7 @@
     </div>
 
     <b-modal size="sm" hide-footer id="modal-1" centered no-stacking title="알림 설정" style="text-align: center;">
-      <div class="alarm"><img src="@/assets/alarm_md.png"/><span class="alarm-info">15분 전에 알림을 드립니다.</span></div>
+      <div><img src="@/assets/alarm_md.png"/><span class="alarm-info">15분 전에 알림을 드립니다.</span></div>
       <b-button @click="Submit" style="background-color:blue" data-bs-dismiss="modal" aria-label="Close">좋아요!</b-button>
     </b-modal>
 </template>
@@ -68,28 +68,24 @@
     background: rgb(46, 47, 49);
     color: rgb(255, 255, 255);
     font-family: "Watcha Sans", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Nanum Gothic", "Malgun Gothic", sans-serif;
-    font-size: 0.9vw;
+    font-size: 0.7vw;
     font-weight: 600;
     vertical-align: middle;
     /* line-height: 18px; */
     /* padding: 1px 5px; */
     border-radius: 3px;
-    padding-left: 2%;
-    padding-right: 2%;
+    padding-left: 1%;
+    padding-right: 1%;
 
 }
 .box{
   padding-top:0;
   padding-bottom:0;
+  margin-left: 0;
+  margin-right: 0;
 }
 .time{
   color:#a1a1a1;
-}
-.alarm-info{
   font-size:1.1vw;
-  font-weight:400;
-}
-.alarm{
-  padding-bottom: 3%;
 }
 </style>
