@@ -75,7 +75,6 @@
 <script>
 import HeaderBar from "@/components/layout/HeaderNavBar.vue";
 import SecondBar from "@/components/layout/SecondNavBar.vue";
-import LikedProgram from "@/components/like/LikedProgram.vue"
 import Review from "@/components/main/ProgramReview.vue"
 import OnAirTalk from "@/components/main/OnAirTalk.vue"
 import Schedule from "@/components/main/ProgramSchedule.vue"
@@ -103,7 +102,6 @@ export default {
     components: {
         HeaderBar,
         SecondBar,
-        LikedProgram,
         Review,
         OnAirTalk,
         Schedule
