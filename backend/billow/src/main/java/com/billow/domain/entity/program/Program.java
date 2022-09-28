@@ -26,7 +26,7 @@ public class Program {
 
     private String age;
 
-    @Column(length = 1000)
+    @Column(length = 10000)
     private String summary;
 
     private String broadcastingDay;
