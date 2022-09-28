@@ -76,7 +76,7 @@
       </splide-slide>
     </splide>
 
-    <h2 style="color: white">마우스 호버 시 프로그램 정보 테스트</h2>
+    <!-- <h2 style="color: white">마우스 호버 시 프로그램 정보 테스트</h2>
     <splide id="carousel_recommend" :options="options">
       <splide-slide v-for="(d, idx) in state.newProgramPosterImg" :key="idx">
         <div class="box-wrap">
@@ -94,10 +94,72 @@
             <div class="info">
               <h3>{{ state.newProgramTitle[idx] }}</h3>
               <div class="detailbox">
-                <span class="detailbox_design">15+</span
-                ><span class="detailbox_design">금 오후7:00</span
-                ><span class="detailbox_design">예능</span
-                ><span class="detailbox_design">tvN</span>
+                <span
+                  class="detailbox_design"
+                  v-if="state.newProgramAge[idx]"
+                  >{{ state.newProgramAge[idx] }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="state.newProgramBroadcastingDay[idx]"
+                  >{{ state.newProgramBroadcastingDay[idx] }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="state.newProgramGenres[idx][0]"
+                  >{{ state.newProgramGenres[idx][0] }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="state.newProgramBroadcastingStation[idx]"
+                  >{{ state.newProgramBroadcastingStation[idx] }}</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </splide-slide>
+    </splide> -->
+
+    <!-- <h2 style="color: white">요즘 핫한 프로그램</h2>
+    <splide id="carousel_recommend" :options="options">
+      <splide-slide v-for="(d, idx) in state.hotProgramPosterImg" :key="idx">
+        <img :src="state.hotProgramPosterImg[idx]" alt="Image" />
+      </splide-slide>
+    </splide> -->
+
+    <h2 style="color: white">요즘 핫한 프로그램</h2>
+    <splide id="carousel_recommend" :options="options">
+      <splide-slide v-for="(d, idx) in state.hotProgramPosterImg" :key="idx">
+        <div class="box-wrap">
+          <div class="box">
+            <div class="img">
+              <a class="enterDetail" href="#">
+                <router-link :to="{ name: 'detail' }" class="nav-link">
+                  <img
+                    :src="state.hotProgramPosterImg[idx]"
+                    alt="Hover Effect"
+                  />
+                </router-link>
+              </a>
+            </div>
+            <div class="info">
+              <h3>{{ state.hotProgramTitle[idx] }}</h3>
+              <div class="detailbox">
+                <span
+                  class="detailbox_design"
+                  v-if="state.hotProgramAge[idx]"
+                  >{{ state.hotProgramAge[idx] }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="state.hotProgramBroadcastingDay[idx]"
+                  >{{ state.hotProgramBroadcastingDay[idx] }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="state.hotProgramGenres[idx][0]"
+                  >{{ state.hotProgramGenres[idx][0] }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="state.hotProgramBroadcastingStation[idx]"
+                  >{{ state.hotProgramBroadcastingStation[idx] }}</span
+                >
               </div>
             </div>
           </div>
@@ -105,17 +167,52 @@
       </splide-slide>
     </splide>
 
-    <h2 style="color: white">요즘 핫한 프로그램</h2>
+    <!-- <h2 style="color: white">신규 프로그램을 추천드려요!</h2>
     <splide id="carousel_recommend" :options="options">
-      <splide-slide v-for="(d, idx) in state.hotProgramPosterImg" :key="idx">
-        <img :src="state.hotProgramPosterImg[idx]" alt="Image" />
+      <splide-slide v-for="(d, idx) in state.newProgramPosterImg" :key="idx">
+        <img :src="state.newProgramPosterImg[idx]" alt="Image" />
       </splide-slide>
-    </splide>
+    </splide> -->
 
     <h2 style="color: white">신규 프로그램을 추천드려요!</h2>
     <splide id="carousel_recommend" :options="options">
       <splide-slide v-for="(d, idx) in state.newProgramPosterImg" :key="idx">
-        <img :src="state.newProgramPosterImg[idx]" alt="Image" />
+        <div class="box-wrap">
+          <div class="box">
+            <div class="img">
+              <a class="enterDetail" href="#">
+                <router-link :to="{ name: 'detail' }" class="nav-link">
+                  <img
+                    :src="state.newProgramPosterImg[idx]"
+                    alt="Hover Effect"
+                  />
+                </router-link>
+              </a>
+            </div>
+            <div class="info">
+              <h3>{{ state.newProgramTitle[idx] }}</h3>
+              <div class="detailbox">
+                <span
+                  class="detailbox_design"
+                  v-if="state.newProgramAge[idx]"
+                  >{{ state.newProgramAge[idx] }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="state.newProgramBroadcastingDay[idx]"
+                  >{{ state.newProgramBroadcastingDay[idx] }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="state.newProgramGenres[idx][0]"
+                  >{{ state.newProgramGenres[idx][0] }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="state.newProgramBroadcastingStation[idx]"
+                  >{{ state.newProgramBroadcastingStation[idx] }}</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
       </splide-slide>
     </splide>
 
@@ -198,7 +295,7 @@
         <img src="@/assets/thatman.png" alt="Image" />
       </splide-slide>
     </splide>
-    
+
     <!-- <h2 style="color: white">테스트 1</h2>
     <splide id="carousel_recommend" :options="options">
       <splide-slide v-for="(d, idx) in state.data" :key="idx">
@@ -231,8 +328,18 @@ export default {
     const state = reactive({
       data: [],
       hotProgramPosterImg: [],
+      hotProgramTitle: [],
+      hotProgramAge: [],
+      hotProgramBroadcastingDay: [],
+      hotProgramGenres: [],
+      hotProgramBroadcastingStation: [],
+
       newProgramPosterImg: [],
       newProgramTitle: [],
+      newProgramAge: [],
+      newProgramBroadcastingDay: [],
+      newProgramGenres: [],
+      newProgramBroadcastingStation: [],
     });
 
     // const add = () => {
@@ -252,7 +359,7 @@ export default {
     //     state.data[index] = res.data[index].posterImg;
     //   }
     // });
-    
+
     axios.get("/api/recommend/popular").then((res) => {
       // 인기 프로그램 추천 데이터 GET
       console.log(res.data);
@@ -261,6 +368,28 @@ export default {
 
       for (index = 0; index < res.data.length; index++) {
         state.hotProgramPosterImg[index] = res.data[index].posterImg;
+      }
+
+      for (index = 0; index < res.data.length; index++) {
+        state.hotProgramTitle[index] = res.data[index].title;
+      }
+
+      for (index = 0; index < res.data.length; index++) {
+        state.hotProgramAge[index] = res.data[index].age;
+      }
+
+      for (index = 0; index < res.data.length; index++) {
+        state.hotProgramBroadcastingDay[index] =
+          res.data[index].broadcastingDay;
+      }
+
+      for (index = 0; index < res.data.length; index++) {
+        state.hotProgramBroadcastingStation[index] =
+          res.data[index].broadcastingStation;
+      }
+
+      for (index = 0; index < res.data.length; index++) {
+        state.hotProgramGenres[index] = res.data[index].genres;
       }
     });
 
@@ -277,6 +406,24 @@ export default {
 
       for (index = 0; index < res.data.length; index++) {
         state.newProgramTitle[index] = res.data[index].title;
+      }
+
+      for (index = 0; index < res.data.length; index++) {
+        state.newProgramAge[index] = res.data[index].age;
+      }
+
+      for (index = 0; index < res.data.length; index++) {
+        state.newProgramBroadcastingDay[index] =
+          res.data[index].broadcastingDay;
+      }
+
+      for (index = 0; index < res.data.length; index++) {
+        state.newProgramBroadcastingStation[index] =
+          res.data[index].broadcastingStation;
+      }
+
+      for (index = 0; index < res.data.length; index++) {
+        state.newProgramGenres[index] = res.data[index].genres;
       }
     });
 
@@ -340,7 +487,7 @@ img {
   margin-bottom: 20%;
   /* width:16.1%; */
   width: 100%;
-  height:20vw;
+  height: 20vw;
   padding-right: 0;
   margin-right: 0;
 }
