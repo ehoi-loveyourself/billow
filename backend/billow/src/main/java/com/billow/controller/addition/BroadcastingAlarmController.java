@@ -26,7 +26,8 @@ public class BroadcastingAlarmController {
 
     @ApiOperation(value = "방영 알림 조회", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "방영 알림 조회 성공")})@GetMapping
+            @ApiResponse(responseCode = "200", description = "방영 알림 조회 성공")})
+    @GetMapping
     public ResponseEntity<Object> selectAlarm(@RequestHeader("Auth-access") String token) {
         log.info("방영 알림 조회 API 호출");
         List<BroadcastingAlarmResponse> responses = broadcastingAlarmService.selectAlarm(JwtUtil.getUserId(token));

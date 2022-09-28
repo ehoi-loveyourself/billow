@@ -1,7 +1,6 @@
 package com.billow.domain.entity.addition;
 
 import com.billow.domain.entity.organization.ProgramOrganization;
-import com.billow.domain.entity.program.Program;
 import com.billow.domain.entity.user.User;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -12,7 +11,6 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

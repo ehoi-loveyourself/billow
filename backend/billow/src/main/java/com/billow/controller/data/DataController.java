@@ -3,7 +3,6 @@ package com.billow.controller.data;
 import com.billow.domain.entity.organization.ProgramOrganization;
 import com.billow.domain.entity.program.Cast;
 import com.billow.domain.entity.program.Program;
-import com.billow.exception.NotFoundException;
 import com.billow.model.service.data.DataService;
 import com.billow.model.service.organization.ProgramOrganozationService;
 import com.billow.model.service.program.CastService;
@@ -26,13 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Optional;
-import java.util.TimeZone;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -40,8 +36,6 @@ import java.util.TimeZone;
 @RestController
 @RequestMapping("/data")
 public class DataController {
-
-    private static final String PROGRAM_NOT_FOUND = "프로그램이 존재하지 않습니다.";
 
     private final DataService dataService;
     private final ProgramOrganozationService programOrganozationService;
@@ -151,7 +145,7 @@ public class DataController {
                 }
             }
         }
-        log.info("프로그램 편성표 데이터 수집 Scheduer 성공");
+        log.info("프로그램 편성표 데이터 수집 Scheduler 성공");
         return ResponseEntity.ok()
                 .body(new Message("succeeded"));
     }

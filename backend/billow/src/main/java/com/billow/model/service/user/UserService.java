@@ -49,7 +49,6 @@ public class UserService {
     private static final String BAD_REQUEST = "잘못된 요청입니다.";
     private static final String TOKEN_NOT_VALID = "토큰 정보가 올바르지 않습니다.";
     private static final String PROFILE_IMG_NOT_FOUND = "프로필 이미지를 찾을 수 없습니다.";
-    private static final String PROFILE_IMG_ABSOLUTE_PATH = "img/profile_img/";
     private static final String NO_RATING = "남기신 평점이 없습니다!";
 
 
