@@ -52,9 +52,11 @@ public class Program {
     @OneToMany(mappedBy = "program", cascade = CascadeType.ALL)
     private List<Genre> genreList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "program", cascade = CascadeType.ALL)
+    private List<Ott> ottList = new ArrayList<>();
+
     @Builder
-    public Program(Long id, Integer programNum, String title, String age, String summary, String broadcastingDay, String broadcastingEpisode, String broadcastingStation,
-                   boolean endFlag, Float averageRating, Long ratingCnt, String posterImg, String backdropPath, List<Genre> genreList, Date firstAirDate) {
+    public Program(Long id, Integer programNum, String title, String age, String summary, String broadcastingDay, String broadcastingEpisode, String broadcastingStation, boolean endFlag, Float averageRating, Long ratingCnt, Integer bookmarkCnt, String posterImg, String backdropPath, Date firstAirDate, List<Genre> genreList, List<Ott> ottList) {
         this.id = id;
         this.programNum = programNum;
         this.title = title;
@@ -69,8 +71,9 @@ public class Program {
         this.bookmarkCnt = bookmarkCnt;
         this.posterImg = posterImg;
         this.backdropPath = backdropPath;
-        this.genreList = genreList;
         this.firstAirDate = firstAirDate;
+        this.genreList = genreList;
+        this.ottList = ottList;
     }
 
     public void updateAverageRatingByPost(Float score) {

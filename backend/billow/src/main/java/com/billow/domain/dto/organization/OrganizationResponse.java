@@ -1,9 +1,8 @@
 package com.billow.domain.dto.organization;
 
+import com.billow.domain.dto.program.OttResponse;
 import lombok.*;
 
-import javax.validation.constraints.NotNull;
-import java.util.Date;
 import java.util.List;
 
 @ToString
@@ -46,4 +45,6 @@ public class OrganizationResponse {
     private String broadcastingRerun;
 
     private String broadcastingStation;
+
+    private List<OttResponse> otts;
 }

@@ -45,4 +45,6 @@ public class CastResponse {
     private String playName;
 
     private String castImageUrl;
+
+    private List<OttResponse> otts;
 }

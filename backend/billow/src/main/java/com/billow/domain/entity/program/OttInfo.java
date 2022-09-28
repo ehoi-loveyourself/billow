@@ -2,11 +2,13 @@ package com.billow.domain.entity.program;
 
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tb_ott_info")
 @Entity
@@ -24,17 +26,13 @@ public class OttInfo {
     private String url;
 
     @NotNull
-    private String saveFolder;
-
-    @NotNull
-    private String saveName;
+    private String imgUrl;
 
     @Builder
-    public OttInfo(Long id, String name, String url, String saveFolder, String saveName) {
+    public OttInfo(Long id, String name, String url, String imgUrl) {
         this.id = id;
         this.name = name;
         this.url = url;
-        this.saveFolder = saveFolder;
-        this.saveName = saveName;
+        this.imgUrl = imgUrl;
     }
 }
