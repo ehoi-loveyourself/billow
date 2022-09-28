@@ -8,5 +8,5 @@ import java.util.List;
 public interface CastCustomRepository {
     List<Cast> findByActorName(Long userId, String actorName);
 
-    String findMaxCountByProgram_Id(List<Rating> ratingList);
+    List<String> findActorName(Long userId);
 }

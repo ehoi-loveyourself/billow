@@ -87,11 +87,9 @@ public class RecommendController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "성연령별 프로그램 추천 성공")})
     @GetMapping("/gender-age")
-    public ResponseEntity<Object> recommendGenderAge(
-            //@RequestHeader("Auth-access") String token
-    ) {
+    public ResponseEntity<Object> recommendGenderAge(@RequestHeader("Auth-access") String token) {
         log.info("성연령별 프로그램 추천 API 호출");
-        List<ProgramResponse> response = recommendService.recommendGenderAge(1L);
+        List<ProgramResponse> response = recommendService.recommendGenderAge(JwtUtil.getUserId(token));
         log.info("성연령별 프로그램 추천 API 성공");
         return ResponseEntity.ok()
                 .body(response);
