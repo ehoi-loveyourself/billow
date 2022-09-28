@@ -23,6 +23,8 @@ class TbBroadcastingAlarm(models.Model):
     date_time = models.CharField(max_length=255)
     program = models.ForeignKey('TbProgram', models.DO_NOTHING)
     user = models.ForeignKey('TbUser', models.DO_NOTHING)
+    group_id = models.CharField(max_length=255)
+    program_organization = models.ForeignKey('TbProgramOrganization', models.DO_NOTHING)
 
     class Meta:
         managed = False
@@ -263,10 +265,8 @@ class TbProgram(models.Model):
     poster_img = models.CharField(max_length=255, blank=True, null=True)
     program_num = models.IntegerField(blank=True, null=True)
     rating_cnt = models.BigIntegerField(blank=True, null=True)
-    summary = models.CharField(max_length=1000, blank=True, null=True)
+    summary = models.CharField(max_length=10000, blank=True, null=True)
     title = models.CharField(max_length=255, blank=True, null=True)
-
-    # genres = models.ManyToManyField(TbGenreInfo)
 
     class Meta:
         managed = False
@@ -340,6 +340,7 @@ class TbUser(models.Model):
     profile_img = models.ForeignKey(TbProfileImg, models.DO_NOTHING, blank=True, null=True)
     region = models.ForeignKey(TbRegion, models.DO_NOTHING, blank=True, null=True)
     tv_carrier = models.ForeignKey(TbTvCarrier, models.DO_NOTHING, blank=True, null=True)
+    mobile = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         managed = False
