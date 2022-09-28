@@ -2,6 +2,7 @@ package com.billow.model.service.program;
 
 import com.billow.domain.dto.organization.OrganizationResponse;
 import com.billow.domain.dto.program.CastResponse;
+import com.billow.domain.dto.program.OttResponse;
 import com.billow.domain.dto.program.ProgramIWatchedRequest;
 import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.domain.entity.addition.Rating;
@@ -83,6 +84,14 @@ public class RecommendService {
                         .broadcastingAge(organization.getBroadcastingAge())
                         .broadcastingRerun(organization.getBroadcastingRerun())
                         .broadcastingStation(organization.getBroadcastingStation())
+                        .otts(organization.getProgram().getOttList()
+                                .stream()
+                                .map(ott -> OttResponse.builder()
+                                        .name(ott.getOttInfo().getName())
+                                        .url(ott.getOttInfo().getUrl())
+                                        .imgUrl(ott.getOttInfo().getImgUrl())
+                                        .build())
+                                .collect(Collectors.toList()))
                         .build())
                 .collect(Collectors.toList());
     }
@@ -113,6 +122,14 @@ public class RecommendService {
                         .ratingCnt(cast.getProgram().getRatingCnt())
                         .posterImg(cast.getProgram().getPosterImg())
                         .backdropPath(cast.getProgram().getBackdropPath())
+                        .otts(cast.getProgram().getOttList()
+                                .stream()
+                                .map(ott -> OttResponse.builder()
+                                        .name(ott.getOttInfo().getName())
+                                        .url(ott.getOttInfo().getUrl())
+                                        .imgUrl(ott.getOttInfo().getImgUrl())
+                                        .build())
+                                .collect(Collectors.toList()))
                         .build())
                 .collect(Collectors.toList());
     }
@@ -139,6 +156,14 @@ public class RecommendService {
                         .ratingCnt(program.getRatingCnt())
                         .posterImg(program.getPosterImg())
                         .backdropPath(program.getBackdropPath())
+                        .otts(program.getOttList()
+                                .stream()
+                                .map(ott -> OttResponse.builder()
+                                        .name(ott.getOttInfo().getName())
+                                        .url(ott.getOttInfo().getUrl())
+                                        .imgUrl(ott.getOttInfo().getImgUrl())
+                                        .build())
+                                .collect(Collectors.toList()))
                         .build())
                 .collect(Collectors.toList());
     }
@@ -190,6 +215,14 @@ public class RecommendService {
                         .bookmarkCnt(program.getBookmarkCnt())
                         .posterImg(program.getPosterImg())
                         .backdropPath(program.getBackdropPath())
+                        .otts(program.getOttList()
+                                .stream()
+                                .map(ott -> OttResponse.builder()
+                                        .name(ott.getOttInfo().getName())
+                                        .url(ott.getOttInfo().getUrl())
+                                        .imgUrl(ott.getOttInfo().getImgUrl())
+                                        .build())
+                                .collect(Collectors.toList()))
                         .build())
                 .collect(Collectors.toList());
     }
@@ -222,6 +255,14 @@ public class RecommendService {
                         .bookmarkCnt(program.getBookmarkCnt())
                         .posterImg(program.getPosterImg())
                         .backdropPath(program.getBackdropPath())
+                        .otts(program.getOttList()
+                                .stream()
+                                .map(ott -> OttResponse.builder()
+                                        .name(ott.getOttInfo().getName())
+                                        .url(ott.getOttInfo().getUrl())
+                                        .imgUrl(ott.getOttInfo().getImgUrl())
+                                        .build())
+                                .collect(Collectors.toList()))
                         .build())
                 .collect(Collectors.toList());
     }

@@ -41,4 +41,6 @@ public class CastResponse {
     private String posterImg;
 
     private String backdropPath;
+
+    private List<OttResponse> otts;
 }

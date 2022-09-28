@@ -2,7 +2,6 @@ package com.billow.domain.dto.program;
 
 import lombok.*;
 
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -40,4 +39,6 @@ public class ProgramResponse {
     private String posterImg;
 
     private String backdropPath;
+
+    private List<OttResponse> otts;
 }
