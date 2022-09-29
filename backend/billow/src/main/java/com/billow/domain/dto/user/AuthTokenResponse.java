@@ -8,5 +8,5 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AuthTokenResponse {
 
-    private String AuthToken;
+    private String authToken;
 }
