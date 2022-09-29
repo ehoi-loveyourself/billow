@@ -69,7 +69,6 @@ public class UserController {
                     .body(response);
     }
 
-
     @ApiOperation(value = "회원가입", response = Object.class)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "회원가입 성공")})
@@ -81,7 +80,6 @@ public class UserController {
             return ResponseEntity.ok()
                     .body(response);
     }
-
 
     @ApiOperation(value = "액세스 토큰 재발급", response = Object.class)
     @ApiResponses(value = {
@@ -122,7 +120,6 @@ public class UserController {
             return ResponseEntity.ok()
                     .body(response);
     }
-
 
     @ApiOperation(value = "회원 삭제", response = Object.class)
     @ApiResponses(value = {

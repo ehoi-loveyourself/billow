@@ -8,12 +8,8 @@ import com.billow.domain.entity.user.ProfileImg;
 import com.billow.domain.entity.user.Region;
 import com.billow.domain.entity.user.TvCarrier;
 import com.billow.domain.entity.user.User;
-import com.billow.exception.BadRequestException;
-import com.billow.exception.DuplicationException;
-import com.billow.exception.NotFoundException;
-import com.billow.exception.WrongFormException;
+import com.billow.exception.*;
 import com.billow.jwt.JwtTokenProvider;
-import com.billow.jwt.JwtUtil;
 import com.billow.model.repository.addition.RatingRepository;
 import com.billow.model.repository.user.ProfileImgRepository;
 import com.billow.model.repository.user.RegionRepository;
@@ -46,6 +42,7 @@ public class UserService {
     private static final String TOKEN_NOT_VALID = "토큰 정보가 올바르지 않습니다.";
     private static final String PROFILE_IMG_NOT_FOUND = "프로필 이미지를 찾을 수 없습니다.";
     private static final String NO_RATING = "남기신 평점이 없습니다!";
+    private static final String RE_LOGIN = "다시 로그인 해주세요";
 
 
     private final UserRepository userRepository;
@@ -54,7 +51,6 @@ public class UserService {
     private final TvCarrierRepository tvCarrierRepository;
     private final ProfileImgRepository profileImgRepository;
     private final KakaoOAuth2 kakaoOAuth2;
-    //    private final CustomUserDetailsService customUserDetailsService;
     private final JwtTokenProvider jwtTokenProvider;
 
     public UserResponse selectUser(Long userId) throws IOException {
