@@ -30,7 +30,6 @@
                 ><span class="station"
                   >{{ organization.broadcastingStation }}&nbsp;</span
                 >
-
                 <span class="episode" v-if="organization.broadcastingEpisode">{{
                   organization.broadcastingEpisode
                 }}</span>
@@ -65,7 +64,7 @@
       >
     </div>
     <b-button
-      @click="Submit"
+      @click="registAlarm"
       style="background-color: blue"
       data-bs-dismiss="modal"
       aria-label="Close"
@@ -81,7 +80,11 @@ export default {
   computed: {
     ...mapState(["programSchedule"]),
   },
-  methods: {},
+  methods: {
+    registAlarm() {
+      alert("emdf");
+    },
+  },
 };
 </script>
 
