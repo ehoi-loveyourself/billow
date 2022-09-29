@@ -39,6 +39,7 @@ public class ProgramCustomRepositoryImpl implements ProgramCustomRepository {
                 ))
                 .groupBy(rating.program.id)
                 .orderBy(rating.score.sum().desc())
+                .limit(30)
                 .fetch();
     }
 }
