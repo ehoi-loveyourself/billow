@@ -139,13 +139,20 @@ public class UserService {
 
     public AuthTokenResponse refresh(String email, String refreshToken) {
         User user = userRepository.findByEmail(email);
+        if (refreshToken == null) {
+            throw new WrongAccessException(RE_LOGIN);
+        }
         // 데이터베이스에 있는 리프레시 토큰과 같은지 판단
         if (!user.getRefreshToken().equals(refreshToken)) {
             throw new WrongFormException(TOKEN_NOT_VALID);
         }
-        return AuthTokenResponse.builder()
-                .AuthToken(JwtUtil.createAuthToken(user.getId(), user.getEmail(), user.getName()))
-                .build();
+        // 리프레시 토큰도 만료되었는지 판단
+        if (JwtTokenProvider.validateRefreshToken(refreshToken)) {
+            return AuthTokenResponse.builder()
+                    .authToken(JwtTokenProvider.createAuthToken(user.getId(), user.getEmail(), user.getName()))
+                    .build();
+        }
+        throw new WrongAccessException(RE_LOGIN);
     }
 
     public Message logout(Long userId) {
