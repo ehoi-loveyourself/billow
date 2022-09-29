@@ -37,6 +37,7 @@ public class ReviewService {
                 .stream()
                 .map(review -> ReviewResponse.builder()
                         .userNickName(review.getUser().getNickName())
+                        .userProfile(review.getUser().getProfileImg().getUrl())
                         .content(review.getContent())
                         .regDateTime(review.getDateTime())
                         .build())
