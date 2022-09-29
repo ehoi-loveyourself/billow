@@ -78,10 +78,18 @@ import SecondBar from "@/components/layout/SecondNavBar.vue";
 import Review from "@/components/main/ProgramReview.vue"
 import OnAirTalk from "@/components/main/OnAirTalk.vue"
 import Schedule from "@/components/main/ProgramSchedule.vue"
+import { reactive } from "@vue/reactivity";
+import axios from "axios";
 
 export default {
     // name: "App",
     name: "Star",
+    // props: {
+    //     programId: {
+    //             type: Number,
+    //             default : 0
+    //         },
+    //     },
     data() {
         return {
             isFavorite: false,
@@ -106,6 +114,17 @@ export default {
         OnAirTalk,
         Schedule
     },
+    // setup() {
+    //     const state = reactive({
+    //   program : {},
+    // });
+    //     axios.get(`/api/program/${programId}`).then((res) => {
+    //   // 프로그램 상세 정보 데이터 GET
+    //     console.log(res.data);
+    //     state.program = res.data;
+    // });
+    // return {state};
+    // }
 }
 </script>
 
