@@ -51,7 +51,7 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "이메일 수집에 동의해주세요."),
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
-    @GetMapping("/oauth")
+    @PostMapping("/oauth")
     public ResponseEntity<Object> kakaoLogin(@RequestBody SignUpRequest signUpRequest, HttpServletResponse httpServletResponse) throws ParseException {
         log.info("카카오 로그인 API 호출");
         LoginResponse response = userService.kakaoLogin(signUpRequest, httpServletResponse);
