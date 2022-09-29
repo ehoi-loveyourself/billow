@@ -24,7 +24,18 @@
     </div>
     <br />
     <div style="text-align: center">
-      <a @click="onKakao()" class="kakao" href="#" role="button" style="border-radius: 15px; font-size: 20px; padding: 20px; color: black">
+      <a
+        @click="onKakao()"
+        class="kakao"
+        href="#"
+        role="button"
+        style="
+          border-radius: 15px;
+          font-size: 20px;
+          padding: 20px;
+          color: black;
+        "
+      >
         카카오로 시작하기
         <!-- <router-link
           :to="{ name: 'userinfocollect' }"
@@ -69,7 +80,7 @@
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
   </div>
 </template>
-  
+
 <script>
 import { reactive } from "@vue/reactivity";
 import axios from "axios";
@@ -129,7 +140,7 @@ export default {
               email: kakao_account.email,
             })
             .then((response) => {
-              alert("post 테스트");
+              // alert("post 테스트");
               console.warn(response);
               // console.log(response.name);
               // console.log(email);
@@ -138,16 +149,16 @@ export default {
               // alert(response.data.name);
               // alert(response.data.email);
               // alert(response.data.nickname);
-              alert(response.data.authToken);
+              // alert(response.data.authToken);
               localStorage.setItem(
                 "authToken",
                 JSON.stringify(response.data.authToken)
               );
-              if(response.data.nickname == null){
-                alert("회원정보가 없어 회원가입 페이지로 이동합니다.");
+              if (response.data.nickname == null) {
+                // alert("회원정보가 없어 회원가입 페이지로 이동합니다.");
                 this.$router.push("/userinfocollect");
-              } else{
-                alert("메인화면으로 이동합니다.");
+              } else {
+                // alert("메인화면으로 이동합니다.");
                 this.$router.push("/main");
               }
               // localStorage.clear();
@@ -167,7 +178,7 @@ export default {
   },
 };
 </script>
-  
+
 <style scoped>
 .jumbotron {
   background: url("@/assets/before_login.svg") no-repeat center center fixed;

@@ -7,7 +7,11 @@
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
-                <router-link :to="{ name: 'detail' }" class="nav-link">
+                <router-link
+                  :to="{ name: 'detail' }"
+                  @click="moveProgramDetail(state.onairProgram[idx].id)"
+                  class="nav-link"
+                >
                   <img
                     :src="state.onairProgram[idx].posterImg"
                     alt="Hover Effect"
@@ -46,55 +50,6 @@
       </splide-slide>
     </splide>
 
-    <!-- <h2 style="color: white">마우스 호버 시 프로그램 정보 테스트</h2>
-    <splide id="carousel_recommend" :options="options">
-      <splide-slide v-for="(d, idx) in state.newProgramPosterImg" :key="idx">
-        <div class="box-wrap">
-          <div class="box">
-            <div class="img">
-              <a class="enterDetail" href="#">
-                <router-link :to="{ name: 'detail' }" class="nav-link">
-                  <img
-                    :src="state.newProgramPosterImg[idx]"
-                    alt="Hover Effect"
-                  />
-                </router-link>
-              </a>
-            </div>
-            <div class="info">
-              <h3>{{ state.newProgramTitle[idx] }}</h3>
-              <div class="detailbox">
-                <span
-                  class="detailbox_design"
-                  v-if="state.newProgramAge[idx]"
-                  >{{ state.newProgramAge[idx] }}</span
-                ><span
-                  class="detailbox_design"
-                  v-if="state.newProgramBroadcastingDay[idx]"
-                  >{{ state.newProgramBroadcastingDay[idx] }}</span
-                ><span
-                  class="detailbox_design"
-                  v-if="state.newProgramGenres[idx][0]"
-                  >{{ state.newProgramGenres[idx][0] }}</span
-                ><span
-                  class="detailbox_design"
-                  v-if="state.newProgramBroadcastingStation[idx]"
-                  >{{ state.newProgramBroadcastingStation[idx] }}</span
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </splide-slide>
-    </splide> -->
-
-    <!-- <h2 style="color: white">요즘 핫한 프로그램</h2>
-    <splide id="carousel_recommend" :options="options">
-      <splide-slide v-for="(d, idx) in state.hotProgramPosterImg" :key="idx">
-        <img :src="state.hotProgramPosterImg[idx]" alt="Image" />
-      </splide-slide>
-    </splide> -->
-
     <h2 style="color: white">요즘 핫한 프로그램</h2>
     <splide id="carousel_recommend" :options="options">
       <splide-slide v-for="(d, idx) in state.hotProgram" :key="idx">
@@ -102,7 +57,11 @@
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
-                <router-link :to="{ name: 'detail' }" class="nav-link">
+                <router-link
+                  :to="{ name: 'detail' }"
+                  @click="moveProgramDetail(state.hotProgram[idx].id)"
+                  class="nav-link"
+                >
                   <img
                     :src="state.hotProgram[idx].posterImg"
                     alt="Hover Effect"
@@ -137,13 +96,6 @@
       </splide-slide>
     </splide>
 
-    <!-- <h2 style="color: white">신규 프로그램을 추천드려요!</h2>
-    <splide id="carousel_recommend" :options="options">
-      <splide-slide v-for="(d, idx) in state.newProgramPosterImg" :key="idx">
-        <img :src="state.newProgramPosterImg[idx]" alt="Image" />
-      </splide-slide>
-    </splide> -->
-
     <h2 style="color: white">신규 프로그램을 추천드려요!</h2>
     <splide id="carousel_recommend" :options="options">
       <splide-slide v-for="(d, idx) in state.newProgram" :key="idx">
@@ -151,7 +103,11 @@
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
-                <router-link :to="{ name: 'detail' }" class="nav-link">
+                <router-link
+                  :to="{ name: 'detail' }"
+                  @click="moveProgramDetail(state.newProgram[idx].id)"
+                  class="nav-link"
+                >
                   <img
                     :src="state.newProgram[idx].posterImg"
                     alt="Hover Effect"
@@ -186,14 +142,20 @@
       </splide-slide>
     </splide>
 
-    <h2 style="color: white">{{state.userAge}}대 {{state.userGender}}자에게 인기 많은 프로그램</h2>
+    <h2 style="color: white">
+      {{ state.userAge }}대 {{ state.userGender }}자에게 인기 많은 프로그램
+    </h2>
     <splide id="carousel_recommend" :options="options">
       <splide-slide v-for="(d, idx) in state.genderAgeProgram" :key="idx">
         <div class="box-wrap">
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
-                <router-link :to="{ name: 'detail' }" class="nav-link">
+                <router-link
+                  :to="{ name: 'detail' }"
+                  @click="moveProgramDetail(state.genderAgeProgram[idx].id)"
+                  class="nav-link"
+                >
                   <img
                     :src="state.genderAgeProgram[idx].posterImg"
                     alt="Hover Effect"
@@ -228,14 +190,20 @@
       </splide-slide>
     </splide>
 
-    <h2 style="color: white">혹시 {{state.actorName}}님에게 관심이 있으신가요?</h2>
+    <h2 style="color: white">
+      혹시 {{ state.actorName }}님에게 관심이 있으신가요?
+    </h2>
     <splide id="carousel_recommend" :options="options">
       <splide-slide v-for="(d, idx) in state.actorProgram" :key="idx">
         <div class="box-wrap">
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
-                <router-link :to="{ name: 'detail' }" class="nav-link">
+                <router-link
+                  :to="{ name: 'detail' }"
+                  @click="moveProgramDetail(state.actorProgram[idx].id)"
+                  class="nav-link"
+                >
                   <img
                     :src="state.actorProgram[idx].posterImg"
                     alt="Hover Effect"
@@ -269,20 +237,6 @@
         </div>
       </splide-slide>
     </splide>
-
-    <!-- <h2 style="color: white">테스트 1</h2>
-    <splide id="carousel_recommend" :options="options">
-      <splide-slide v-for="(d, idx) in state.data" :key="idx">
-        <img :src="state.data[idx]" alt="Image" />
-      </splide-slide>
-    </splide> -->
-
-    <!-- <h2 style="color: white">테스트 2</h2>
-    <splide id="carousel_recommend" :options="options">
-      <splide-slide v-for="(d, idx) in state.newProgramPosterImg" :key="idx">
-        <img :src="state.newProgramPosterImg[idx]" alt="Image" />
-      </splide-slide>
-    </splide> -->
   </div>
 </template>
 
@@ -291,6 +245,7 @@ import { reactive } from "@vue/reactivity";
 import axios from "axios";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
+import { mapActions } from "vuex";
 
 export default {
   name: "MainSlider",
@@ -309,29 +264,11 @@ export default {
       userAge: {},
       userGender: {},
 
-      actorProgram : [],
-      actorName : {},
+      actorProgram: [],
+      actorName: {},
 
-      onairProgram :[],
+      onairProgram: [],
     });
-
-    // const add = () => {
-    //   // 지금 안됨.
-    //   // state.data.push("추가한 내용");
-    //   axios.post("/api/recommend/new").then((res) => {});
-    //   console.log(res.data);
-    // };
-
-    // axios.get("/api/recommend/new").then((res) => {
-    //   // 데이터 가져오는 거.
-    //   console.log(res.data);
-
-    //   var index;
-
-    //   for (index = 0; index < res.data.length; index++) {
-    //     state.data[index] = res.data[index].posterImg;
-    //   }
-    // });
 
     axios.get("/api/recommend/popular").then((res) => {
       // 인기 프로그램 추천 데이터 GET
@@ -351,20 +288,20 @@ export default {
       state.genderAgeProgram = res.data;
       state.userAge = res.data[0].userAge;
       state.userGender = res.data[0].userGender;
-});
+    });
 
-axios.get("/api/recommend/actor").then((res) => {
+    axios.get("/api/recommend/actor").then((res) => {
       // 출연진 프로그램 추천 데이터 GET
       console.log(res.data);
       state.actorProgram = res.data;
       state.actorName = res.data[0].actorName;
-});
+    });
 
-axios.get("/api/recommend/onair").then((res) => {
-      // 출연진 프로그램 추천 데이터 GET
+    axios.get("/api/recommend/onair").then((res) => {
+      // 온에어 프로그램 추천 데이터 GET
       console.log(res.data);
       state.onairProgram = res.data;
-});
+    });
     return { state };
   },
 
@@ -386,10 +323,11 @@ axios.get("/api/recommend/onair").then((res) => {
       list: [],
     };
   },
-  method: {
-    // gotoPage(link) {
-    //   this.$router.push(link);
-    // },
+  methods: {
+    ...mapActions(["getProgramDetail"]),
+    moveProgramDetail(programId) {
+      this.getProgramDetail(programId);
+    },
   },
 };
 </script>
