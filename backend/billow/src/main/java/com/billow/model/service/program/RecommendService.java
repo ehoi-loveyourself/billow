@@ -230,6 +230,8 @@ public class RecommendService {
                                         .imgUrl(ott.getOttInfo().getImgUrl())
                                         .build())
                                 .collect(Collectors.toList()))
+                        .userAge(user.getAge())
+                        .userGender(user.getGender())
                         .build())
                 .collect(Collectors.toList());
     }

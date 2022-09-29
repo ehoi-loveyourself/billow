@@ -61,9 +61,11 @@ public class RecommendController {
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
     @GetMapping("/actor")
-    public ResponseEntity<Object> recommendActor(@RequestHeader("Auth-access") String token) {
+    public ResponseEntity<Object> recommendActor(
+            //@RequestHeader("Auth-access") String token
+            ) {
         log.info("특정 배우 프로그램 추천 API 호출");
-        List<CastResponse> response = recommendService.recommendActor(JwtUtil.getUserId(token));
+        List<CastResponse> response = recommendService.recommendActor(1L);
         log.info("특정 배우 프로그램 추천 API 성공");
         return ResponseEntity.ok()
                 .body(response);
@@ -76,9 +78,11 @@ public class RecommendController {
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
     @GetMapping("/gender-age")
-    public ResponseEntity<Object> recommendGenderAge(@RequestHeader("Auth-access") String token) {
+    public ResponseEntity<Object> recommendGenderAge(
+            //@RequestHeader("Auth-access") String token
+            ) {
         log.info("성연령별 프로그램 추천 API 호출");
-        List<ProgramResponse> response = recommendService.recommendGenderAge(JwtUtil.getUserId(token));
+        List<ProgramResponse> response = recommendService.recommendGenderAge(1L);
         log.info("성연령별 프로그램 추천 API 성공");
         return ResponseEntity.ok()
                 .body(response);

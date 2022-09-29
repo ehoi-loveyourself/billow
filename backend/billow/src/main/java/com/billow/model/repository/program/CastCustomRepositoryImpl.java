@@ -39,7 +39,7 @@ public class CastCustomRepositoryImpl implements CastCustomRepository {
                         .and(cast.program.id.notIn(
                                 jpaQueryFactory.select(rating.program.id)
                                         .from(rating)
-                                        .where(rating.user.id.eq(userId))
+                                        .where(rating.user.id.eq(0L))
                         ))
                 )
                 .fetch();
