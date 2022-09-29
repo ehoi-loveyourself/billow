@@ -39,12 +39,9 @@ public class ChatController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "메시지 전송 성공")})
     @PostMapping("/{programId}/{userId}")
-//    public ResponseEntity<Object> sendMessage(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId, @RequestBody ChatRequest chatRequest) {
-//        log.info("메시지 등록 API 호출");
-//        Message response = chatService.sendMessage(JwtUtil.getUserId(token), programId, chatRequest);
-    public ResponseEntity<Object> sendMessage(@PathVariable("programId") Long programId, @PathVariable("userId") Long userId, @RequestBody ChatRequest chatRequest) {
+    public ResponseEntity<Object> sendMessage(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId, @RequestBody ChatRequest chatRequest) {
         log.info("메시지 등록 API 호출");
-        Message response = chatService.sendMessage(userId, programId, chatRequest);
+        Message response = chatService.sendMessage(JwtUtil.getUserId(token), programId, chatRequest);
         log.info("메시지 전송 성공");
         return ResponseEntity.ok()
                 .body(response);
