@@ -10,6 +10,8 @@ public class ReviewResponse {
 
     private String userNickName;
 
+    private String userProfile;
+
     private String content;
 
     private String regDateTime;
