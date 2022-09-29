@@ -24,7 +24,25 @@
     </div>
     <br />
     <div style="text-align: center">
-      <a class="kakao" href="#" role="button" style="border-radius: 15px">
+      <a @click="onKakao()" class="kakao" href="#" role="button" style="border-radius: 15px; font-size: 20px; padding: 20px; color: black">
+        카카오로 시작하기
+        <!-- <router-link
+          :to="{ name: 'userinfocollect' }"
+          class="nav-link"
+          style="font-size: 20px; padding: 10px; color: black"
+        >
+          카카오로 시작하기
+        </router-link> -->
+      </a>
+      <!-- <button @click="tokenTest()">클릭하면 로컬스토리지 확인 가능</button>
+      <button
+        class="kakao"
+        @click="onKakao"
+        style="font-size: 20px; padding: 10px; color: black"
+      >
+        카카오 로그인 테스트용
+      </button> -->
+      <!-- <a class="kakao" href="#" role="button" style="border-radius: 15px">
         <router-link
           :to="{ name: 'userinfocollect' }"
           class="nav-link"
@@ -32,26 +50,27 @@
         >
           카카오로 시작하기
         </router-link>
-      </a>
-      <div class="memos">
+      </a> -->
+      <!-- <button @click="tokenTest()">클릭하면 로컬스토리지 확인 가능</button>
+      <button
+        @click="onKakao"
+        style="font-size: 20px; padding: 10px; color: black"
+      >
+        카카오 로그인 테스트용
+      </button> -->
+
+      <!-- <div class="memos">
         <button class="btn btn-primary" @click="add()">추가하기</button>
         <ul>
           <li v-for="(d, idx) in state.data" :key="idx">{{ d }}</li>
         </ul>
-      </div>
+      </div> -->
     </div>
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
   </div>
 </template>
   
 <script>
-//  export default{
-//   method:{
-//     gotoPage(link) {
-//       this.$router.push(link);
-//     },
-//   }
-//  }
 import { reactive } from "@vue/reactivity";
 import axios from "axios";
 export default {
@@ -61,28 +80,90 @@ export default {
       data: [],
     });
 
-    const add = () => {
-      // 지금 안됨.
-      // state.data.push("추가한 내용");
-      axios.post("/api/recommend/new").then((res) => {
-        console.log(res.data);
-      });
+    // const add = () => {
+    //   // 지금 안됨.
+    //   // state.data.push("추가한 내용");
+    //   axios.post("/api/recommend/new").then((res) => {
+    //     console.log(res.data);
+    //   });
+    // };
+
+    // axios.get("/api/recommend/new").then((res) => {
+    //   // 데이터 가져오는 axios 테스트
+    //   console.log(res.data);
+    // });
+
+    return { state };
+  },
+
+  data() {
+    return {
+      authToken: "",
     };
+  },
 
-    axios.get("/api/recommend/new").then((res) => {
-      // 데이터 가져오는 거.
-      console.log(res);
-      console.log(res.data);
-      console.log(res.data[0]);
-      console.log(res.data[0].title);
-      console.log(res.data[0].backdropPath);
-      console.log(res.data[0].posterImg);
-      state.data[0] = res.data[0].title;
-      state.data[1] = res.data[0].backdropPath;
-      state.data[2] = res.data[0].posterImg;
-    });
+  methods: {
+    onKakao() {
+      window.Kakao.Auth.login({
+        scope: "profile_nickname, account_email",
+        success: this.GetMe,
+      });
+    },
+    GetMe() {
+      window.Kakao.API.request({
+        url: "/v2/user/me",
+        success: (res) => {
+          const kakao_account = res.kakao_account;
+          const userInfo = {
+            nickname: kakao_account.profile.nickname,
+            email: kakao_account.email,
+          };
+          // alert(userInfo);
+          // alert(kakao_account);
+          // alert(kakao_account.profile.nickname);
+          // alert(kakao_account.email);
 
-    return { state, add };
+          axios
+            .post("/api/users/oauth", {
+              name: kakao_account.profile.nickname,
+              email: kakao_account.email,
+            })
+            .then((response) => {
+              alert("post 테스트");
+              console.warn(response);
+              // console.log(response.name);
+              // console.log(email);
+              // console.log(response.authToken);
+              // alert("카카오 로그인 post 성공");
+              // alert(response.data.name);
+              // alert(response.data.email);
+              // alert(response.data.nickname);
+              alert(response.data.authToken);
+              localStorage.setItem(
+                "authToken",
+                JSON.stringify(response.data.authToken)
+              );
+              if(response.data.nickname == null){
+                alert("회원정보가 없어 회원가입 페이지로 이동합니다.");
+                this.$router.push("/userinfocollect");
+              } else{
+                alert("메인화면으로 이동합니다.");
+                this.$router.push("/main");
+              }
+              // localStorage.clear();
+            })
+            .catch((ex) => {
+              console.warn("ERROR : ", ex);
+            });
+        },
+      });
+    },
+    // tokenTest() { // 토큰 데이터에 저장 및 삭제 기능
+    //   // alert(localStorage.getItem("authToken"));
+    //   this.authToken = localStorage.getItem("authToken");
+    //   alert(this.authToken);
+    //   localStorage.clear(); // localStorage 초기화
+    // },
   },
 };
 </script>

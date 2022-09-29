@@ -2,77 +2,47 @@
   <div>
     <h2 style="color: white">지금 방송 중인 프로그램(ON AIR)</h2>
     <splide id="carousel_recommend" :options="options">
-      <splide-slide>
+      <splide-slide v-for="(d, idx) in state.onairProgram" :key="idx">
         <div class="box-wrap">
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
                 <router-link :to="{ name: 'detail' }" class="nav-link">
                   <img
-                    src="@/assets/hyori.png"
+                    :src="state.onairProgram[idx].posterImg"
                     alt="Hover Effect"
-                  /> </router-link
-              ></a>
+                  />
+                </router-link>
+              </a>
             </div>
             <div class="info">
-              <h3>효리네 민박</h3>
+              <h3>{{ state.onairProgram[idx].title }}</h3>
               <div class="detailbox">
-                <span class="detailbox_design">15+</span
-                ><span class="detailbox_design">금 오후7:00</span
-                ><span class="detailbox_design">예능</span
-                ><span class="detailbox_design">tvN</span>
+                <span
+                  class="detailbox_design"
+                  v-if="state.onairProgram[idx].age"
+                  >{{ state.onairProgram[idx].age }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="state.onairProgram[idx].broadcastingDay"
+                  >{{ state.onairProgram[idx].broadcastingDay }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="state.onairProgram[idx].genres[0]"
+                  >{{ state.onairProgram[idx].genres[0] }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="state.onairProgram[idx].broadcastingStation"
+                  >{{ state.onairProgram[idx].broadcastingStation }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="state.onairProgram[idx].broadcastingTime"
+                  >{{ state.onairProgram[idx].broadcastingTime }} ~</span
+                >
               </div>
             </div>
           </div>
         </div>
-      </splide-slide>
-      <splide-slide>
-        <div class="box-wrap">
-          <div class="box">
-            <div class="img">
-              <img src="@/assets/gs.png" alt="Hover Effect" />
-            </div>
-            <div class="info">
-              <h3>어차피 톡할거 행복하게</h3>
-              <div class="detailbox">
-                <span class="detailbox_design">12+</span
-                ><span class="detailbox_design">월,화 오후9:00</span
-                ><span class="detailbox_design">드라마</span
-                ><span class="detailbox_design">EnA</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/song.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/sign.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/heart_to_heart.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/alham.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/runningman.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/thatman.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/nangman.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/jugun.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/image_2.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/laggi.png" alt="Image" />
       </splide-slide>
     </splide>
 
@@ -127,38 +97,38 @@
 
     <h2 style="color: white">요즘 핫한 프로그램</h2>
     <splide id="carousel_recommend" :options="options">
-      <splide-slide v-for="(d, idx) in state.hotProgramPosterImg" :key="idx">
+      <splide-slide v-for="(d, idx) in state.hotProgram" :key="idx">
         <div class="box-wrap">
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
                 <router-link :to="{ name: 'detail' }" class="nav-link">
                   <img
-                    :src="state.hotProgramPosterImg[idx]"
+                    :src="state.hotProgram[idx].posterImg"
                     alt="Hover Effect"
                   />
                 </router-link>
               </a>
             </div>
             <div class="info">
-              <h3>{{ state.hotProgramTitle[idx] }}</h3>
+              <h3>{{ state.hotProgram[idx].title }}</h3>
               <div class="detailbox">
                 <span
                   class="detailbox_design"
-                  v-if="state.hotProgramAge[idx]"
-                  >{{ state.hotProgramAge[idx] }}</span
+                  v-if="state.hotProgram[idx].age"
+                  >{{ state.hotProgram[idx].age }}</span
                 ><span
                   class="detailbox_design"
-                  v-if="state.hotProgramBroadcastingDay[idx]"
-                  >{{ state.hotProgramBroadcastingDay[idx] }}</span
+                  v-if="state.hotProgram[idx].broadcastingDay"
+                  >{{ state.hotProgram[idx].broadcastingDay }}</span
                 ><span
                   class="detailbox_design"
-                  v-if="state.hotProgramGenres[idx][0]"
-                  >{{ state.hotProgramGenres[idx][0] }}</span
+                  v-if="state.hotProgram[idx].genres[0]"
+                  >{{ state.hotProgram[idx].genres[0] }}</span
                 ><span
                   class="detailbox_design"
-                  v-if="state.hotProgramBroadcastingStation[idx]"
-                  >{{ state.hotProgramBroadcastingStation[idx] }}</span
+                  v-if="state.hotProgram[idx].broadcastingStation"
+                  >{{ state.hotProgram[idx].broadcastingStation }}</span
                 >
               </div>
             </div>
@@ -176,38 +146,38 @@
 
     <h2 style="color: white">신규 프로그램을 추천드려요!</h2>
     <splide id="carousel_recommend" :options="options">
-      <splide-slide v-for="(d, idx) in state.newProgramPosterImg" :key="idx">
+      <splide-slide v-for="(d, idx) in state.newProgram" :key="idx">
         <div class="box-wrap">
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
                 <router-link :to="{ name: 'detail' }" class="nav-link">
                   <img
-                    :src="state.newProgramPosterImg[idx]"
+                    :src="state.newProgram[idx].posterImg"
                     alt="Hover Effect"
                   />
                 </router-link>
               </a>
             </div>
             <div class="info">
-              <h3>{{ state.newProgramTitle[idx] }}</h3>
+              <h3>{{ state.newProgram[idx].title }}</h3>
               <div class="detailbox">
                 <span
                   class="detailbox_design"
-                  v-if="state.newProgramAge[idx]"
-                  >{{ state.newProgramAge[idx] }}</span
+                  v-if="state.newProgram[idx].age"
+                  >{{ state.newProgram[idx].age }}</span
                 ><span
                   class="detailbox_design"
-                  v-if="state.newProgramBroadcastingDay[idx]"
-                  >{{ state.newProgramBroadcastingDay[idx] }}</span
+                  v-if="state.newProgram[idx].broadcastingDay"
+                  >{{ state.newProgram[idx].broadcastingDay }}</span
                 ><span
                   class="detailbox_design"
-                  v-if="state.newProgramGenres[idx][0]"
-                  >{{ state.newProgramGenres[idx][0] }}</span
+                  v-if="state.newProgram[idx].genres[0]"
+                  >{{ state.newProgram[idx].genres[0] }}</span
                 ><span
                   class="detailbox_design"
-                  v-if="state.newProgramBroadcastingStation[idx]"
-                  >{{ state.newProgramBroadcastingStation[idx] }}</span
+                  v-if="state.newProgram[idx].broadcastingStation"
+                  >{{ state.newProgram[idx].broadcastingStation }}</span
                 >
               </div>
             </div>
@@ -216,83 +186,87 @@
       </splide-slide>
     </splide>
 
-    <h2 style="color: white">20대 남자에게 인기 많은 프로그램</h2>
+    <h2 style="color: white">{{state.userAge}}대 {{state.userGender}}자에게 인기 많은 프로그램</h2>
     <splide id="carousel_recommend" :options="options">
-      <splide-slide>
-        <img src="@/assets/sign.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/thatman.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/nangman.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/jugun.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/image_2.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/gs.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/hyori.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/song.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/laggi.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/runningman.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/heart_to_heart.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/alham.png" alt="Image" />
+      <splide-slide v-for="(d, idx) in state.genderAgeProgram" :key="idx">
+        <div class="box-wrap">
+          <div class="box">
+            <div class="img">
+              <a class="enterDetail" href="#">
+                <router-link :to="{ name: 'detail' }" class="nav-link">
+                  <img
+                    :src="state.genderAgeProgram[idx].posterImg"
+                    alt="Hover Effect"
+                  />
+                </router-link>
+              </a>
+            </div>
+            <div class="info">
+              <h3>{{ state.genderAgeProgram[idx].title }}</h3>
+              <div class="detailbox">
+                <span
+                  class="detailbox_design"
+                  v-if="state.genderAgeProgram[idx].age"
+                  >{{ state.genderAgeProgram[idx].age }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="state.genderAgeProgram[idx].broadcastingDay"
+                  >{{ state.genderAgeProgram[idx].broadcastingDay }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="state.genderAgeProgram[idx].genres[0]"
+                  >{{ state.genderAgeProgram[idx].genres[0] }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="state.genderAgeProgram[idx].broadcastingStation"
+                  >{{ state.genderAgeProgram[idx].broadcastingStation }}</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
       </splide-slide>
     </splide>
 
-    <h2 style="color: white">혹시 안소희님에게 관심이 있으신가요?</h2>
+    <h2 style="color: white">혹시 {{state.actorName}}님에게 관심이 있으신가요?</h2>
     <splide id="carousel_recommend" :options="options">
-      <splide-slide>
-        <img src="@/assets/heart_to_heart.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/nangman.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/jugun.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/image_2.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/gs.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/sign.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/hyori.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/song.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/alham.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/laggi.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/runningman.png" alt="Image" />
-      </splide-slide>
-      <splide-slide>
-        <img src="@/assets/thatman.png" alt="Image" />
+      <splide-slide v-for="(d, idx) in state.actorProgram" :key="idx">
+        <div class="box-wrap">
+          <div class="box">
+            <div class="img">
+              <a class="enterDetail" href="#">
+                <router-link :to="{ name: 'detail' }" class="nav-link">
+                  <img
+                    :src="state.actorProgram[idx].posterImg"
+                    alt="Hover Effect"
+                  />
+                </router-link>
+              </a>
+            </div>
+            <div class="info">
+              <h3>{{ state.actorProgram[idx].title }}</h3>
+              <div class="detailbox">
+                <span
+                  class="detailbox_design"
+                  v-if="state.actorProgram[idx].age"
+                  >{{ state.actorProgram[idx].age }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="state.actorProgram[idx].broadcastingDay"
+                  >{{ state.actorProgram[idx].broadcastingDay }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="state.actorProgram[idx].genres[0]"
+                  >{{ state.actorProgram[idx].genres[0] }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="state.actorProgram[idx].broadcastingStation"
+                  >{{ state.actorProgram[idx].broadcastingStation }}</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
       </splide-slide>
     </splide>
 
@@ -327,19 +301,18 @@ export default {
   setup() {
     const state = reactive({
       data: [],
-      hotProgramPosterImg: [],
-      hotProgramTitle: [],
-      hotProgramAge: [],
-      hotProgramBroadcastingDay: [],
-      hotProgramGenres: [],
-      hotProgramBroadcastingStation: [],
+      hotProgram: [],
 
-      newProgramPosterImg: [],
-      newProgramTitle: [],
-      newProgramAge: [],
-      newProgramBroadcastingDay: [],
-      newProgramGenres: [],
-      newProgramBroadcastingStation: [],
+      newProgram: [],
+
+      genderAgeProgram: [],
+      userAge: {},
+      userGender: {},
+
+      actorProgram : [],
+      actorName : {},
+
+      onairProgram :[],
     });
 
     // const add = () => {
@@ -363,77 +336,42 @@ export default {
     axios.get("/api/recommend/popular").then((res) => {
       // 인기 프로그램 추천 데이터 GET
       console.log(res.data);
-
-      var index;
-
-      for (index = 0; index < res.data.length; index++) {
-        state.hotProgramPosterImg[index] = res.data[index].posterImg;
-      }
-
-      for (index = 0; index < res.data.length; index++) {
-        state.hotProgramTitle[index] = res.data[index].title;
-      }
-
-      for (index = 0; index < res.data.length; index++) {
-        state.hotProgramAge[index] = res.data[index].age;
-      }
-
-      for (index = 0; index < res.data.length; index++) {
-        state.hotProgramBroadcastingDay[index] =
-          res.data[index].broadcastingDay;
-      }
-
-      for (index = 0; index < res.data.length; index++) {
-        state.hotProgramBroadcastingStation[index] =
-          res.data[index].broadcastingStation;
-      }
-
-      for (index = 0; index < res.data.length; index++) {
-        state.hotProgramGenres[index] = res.data[index].genres;
-      }
+      state.hotProgram = res.data;
     });
 
     axios.get("/api/recommend/new").then((res) => {
       // 신규 프로그램 추천 데이터 GET
       console.log(res.data);
-      console.log(res.data[0].title);
-
-      var index;
-
-      for (index = 0; index < res.data.length; index++) {
-        state.newProgramPosterImg[index] = res.data[index].posterImg;
-      }
-
-      for (index = 0; index < res.data.length; index++) {
-        state.newProgramTitle[index] = res.data[index].title;
-      }
-
-      for (index = 0; index < res.data.length; index++) {
-        state.newProgramAge[index] = res.data[index].age;
-      }
-
-      for (index = 0; index < res.data.length; index++) {
-        state.newProgramBroadcastingDay[index] =
-          res.data[index].broadcastingDay;
-      }
-
-      for (index = 0; index < res.data.length; index++) {
-        state.newProgramBroadcastingStation[index] =
-          res.data[index].broadcastingStation;
-      }
-
-      for (index = 0; index < res.data.length; index++) {
-        state.newProgramGenres[index] = res.data[index].genres;
-      }
+      state.newProgram = res.data;
     });
 
+    axios.get("/api/recommend/gender-age").then((res) => {
+      // 성연령별 프로그램 추천 데이터 GET
+      console.log(res.data);
+      state.genderAgeProgram = res.data;
+      state.userAge = res.data[0].userAge;
+      state.userGender = res.data[0].userGender;
+});
+
+axios.get("/api/recommend/actor").then((res) => {
+      // 출연진 프로그램 추천 데이터 GET
+      console.log(res.data);
+      state.actorProgram = res.data;
+      state.actorName = res.data[0].actorName;
+});
+
+axios.get("/api/recommend/onair").then((res) => {
+      // 출연진 프로그램 추천 데이터 GET
+      console.log(res.data);
+      state.onairProgram = res.data;
+});
     return { state };
   },
 
   data() {
     return {
       options: {
-        type: "loop",
+        // type: "loop",
         perPage: 7,
         // perMove:6,
         // pagination:false,
@@ -497,6 +435,8 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
+  align-content: stretch;
 }
 .box {
   position: relative;

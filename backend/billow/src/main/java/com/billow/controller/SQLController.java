@@ -31,7 +31,7 @@ public class SQLController {
             String[] gender = {"여", "남"};
             int[] age = {0, 10, 20, 30, 40, 50, 60};
             int age1 = (int) ((Math.random() * 7));
-            int mobile = (char) (Math.random() * 99999999)+10000001;
+            int mobile = (char) (Math.random() * 99999999) + 10000001;
 
             int gender1 = (int) ((Math.random() * 2));
             int profile = i % 20 + 1;

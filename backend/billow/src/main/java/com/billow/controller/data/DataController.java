@@ -28,6 +28,7 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -76,15 +77,13 @@ public class DataController {
     @GetMapping(value = "/programorganization")
     public ResponseEntity<Object> programorganization() throws IOException, ParseException {
         log.info("프로그램 편성표 데이터 수집 Scheduler 호출");
-        //하루 전 데이터 삭제
         LocalDate today = LocalDate.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM.dd.");
-        String yesterDay = today.minusDays(1).format(dateTimeFormatter);
-        programOrganozationService.deleteByBroadcastingDayStartingWith(yesterDay);
+        Date date = new Date();
+        programOrganozationService.deleteByBroadcastingTimeBefore(date);
 
         List<Program> programList = programService.findAll();
-        for (int i = 0; i < 50; i++) {
-//        for (Program program : programList) {
+        for (int i = 0; i < programList.size(); i++) {
             Connection connection = Jsoup.connect("https://search.naver.com/search.naver?query=" + programList.get(i).getTitle() + "방송시간");
             Document document = connection.get();
             List<ProgramOrganization> programOrganizationList = programOrganozationService.findByProgram_Id(programList.get(i).getId());
@@ -94,13 +93,12 @@ public class DataController {
                 Elements broadcastingDay = document.select(".table_fixed_wrap span");
                 Elements broadcastingDayRow = document.select(".table_scroll_wrap>.table_body_area>.cm_table tr"); //이 사이즈는 날짜 index와 매칭
 
-                for (int d = 0; d < broadcastingDayRow.size(); d++) {//d는 날짜 인덱스와 같음
+                for (int d = 0; d < broadcastingDayRow.size(); d++) {
                     if (!programOrganizationList.isEmpty() && !broadcastingDay.get(d).text().substring(0, 6).equals(today.plusDays(6).format(dateTimeFormatter))) {
                         continue;
                     }
                     Elements broadcastingTimeRow = broadcastingDayRow.get(d).select(">td");
-
-                    for (int c = 0; c < broadcastingTimeRow.size(); c++) {//c는 채널 인덱스와 같음
+                    for (int c = 0; c < broadcastingTimeRow.size(); c++) {
                         Elements broadcastingInfos = broadcastingTimeRow.get(c).select(".info");
                         if (!broadcastingInfos.isEmpty()) {
                             for (Element broadcastingInfo : broadcastingInfos) {
@@ -155,9 +153,7 @@ public class DataController {
     public ResponseEntity<Object> cast() throws IOException {
         log.info("출연진 데이터 수집 Scheduler 실행");
         List<Program> programList = programService.findAll();
-        System.out.println(programList);
-        for (int i = 0; i < 50; i++) {
-//            for (Program program : programList) {
+        for (int i = 0; i < programList.size(); i++) {
             List<Cast> castList = castService.findByProgram_Id(programList.get(i).getId());
             if (castList.size() == 0) {
                 Connection connection = Jsoup.connect("https://search.naver.com/search.naver?query=" + programList.get(i).getTitle() + "출연진");
@@ -190,32 +186,44 @@ public class DataController {
     @GetMapping(value = "/programdetail")
     public ResponseEntity<Object> programDetail() throws IOException {
         log.info("프로그램 방영정보 데이터 수집 Scheduler 호출");
-        //TODO: 완결, 연재중, 시청연령, 여신강림은 웹툰이 들어감..
         List<Program> programList = programService.findAll();
-        for (int i = 0; i < 50; i++) {
-//        for (Program program : programList){
-            if (programList.get(i).getAge() != null) continue;
+        for (int i = 0; i < programList.size(); i++) {
+            if (programList.get(i).getBookmarkCnt() == null) {
+                programList.get(i).setBookmarkCnt(0);
+            }
+            if (programList.get(i).getRatingCnt() == null) {
+                programList.get(i).setRatingCnt(0L);
+            }
+//            if (programList.get(i).getAge() != null) continue;
             Connection connection = Jsoup.connect("https://search.naver.com/search.naver?query=" + programList.get(i).getTitle());
             Document document = connection.get();
 
-            Elements subTitle = document.select(".title_area").get(0).select(".sub_title span");
+            if (programList.get(i).getBookmarkCnt() == null) {
+                programList.get(i).setBookmarkCnt(0);
+                programList.get(i).setRatingCnt(0L);
+            }
+            Elements subTitles = document.select(".title_area");
+            if (subTitles.size() == 0) continue;
+            Elements subTitle = subTitles.get(0).select(".sub_title span");
             if (subTitle.size() > 1) {
                 String age = subTitle.get(2).text();
                 programList.get(i).setAge(age);
             }
             Elements info = document.select(".info_group");
-            if (subTitle.size() == 3) {
-                programList.get(i).setEndFlag(true);
+            if (info.size() > 0) {
                 Elements infoDetail = info.get(0).select("dd span");
                 if (infoDetail.size() > 1) {
                     String day = infoDetail.get(1).text();
-                    programList.get(i).setBroadcastingDay(day);
+                    if (!day.equals("") && day != null) {
+                        programList.get(i).setEndFlag(true);
+                        programList.get(i).setBroadcastingDay(day);
+                    } else {
+                        programList.get(i).setEndFlag(false);
+                    }
                 }
+                String episode = info.get(0).select("dd .state").text();
+                programList.get(i).setBroadcastingEpisode(episode);
             }
-            String episode = info.get(0).select("dd .state").text();
-            programList.get(i).setBroadcastingEpisode(episode);
-            programList.get(i).setBookmarkCnt(0);
-            programList.get(i).setRatingCnt(0L);
             programService.save(programList.get(i));
         }
         log.info("프로그램 방영정보 데이터 수집 Scheduler 성공");

@@ -27,29 +27,11 @@ public class RecommendController {
 
     private final RecommendService recommendService;
 
-    @ApiOperation(value = "사용자 맞춤 추천", response = Object.class)
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "사용자 맞춤 추천 성공")})
-    @GetMapping("/users")
-    public ResponseEntity<Object> recommendUsers() {
-        Message response = new Message("succeeded");
-        return ResponseEntity.ok()
-                .body(response);
-    }
-
-    @ApiOperation(value = "상황별 추천", response = Object.class)
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "상황별 프로그램 추천 성공")})
-    @GetMapping("/conditions")
-    public ResponseEntity<Object> recommendConditions() {
-        Message response = new Message("succeeded");
-        return ResponseEntity.ok()
-                .body(response);
-    }
-
     @ApiOperation(value = "신규 프로그램 추천", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "신규 프로그램 추천 성공")})
+            @ApiResponse(responseCode = "200", description = "신규 프로그램 추천 성공"),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @GetMapping("/new")
     public ResponseEntity<Object> recommendNew() {
         log.info("신규 프로그램 추천 API 호출");
@@ -61,7 +43,9 @@ public class RecommendController {
 
     @ApiOperation(value = "인기 프로그램 추천", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "인기 프로그램 추천 성공")})
+            @ApiResponse(responseCode = "200", description = "인기 프로그램 추천 성공"),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @GetMapping("/popular")
     public ResponseEntity<Object> recommendPopular() {
         log.info("인기 프로그램 추천 API 호출");
@@ -73,11 +57,15 @@ public class RecommendController {
 
     @ApiOperation(value = "특정 배우 프로그램 추천", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "특정 배우 추천 성공")})
+            @ApiResponse(responseCode = "200", description = "특정 배우 추천 성공"),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @GetMapping("/actor")
-    public ResponseEntity<Object> recommendActor(@RequestHeader("Auth-access") String token) {
+    public ResponseEntity<Object> recommendActor(
+            //@RequestHeader("Auth-access") String token
+            ) {
         log.info("특정 배우 프로그램 추천 API 호출");
-        List<CastResponse> response = recommendService.recommendActor(JwtUtil.getUserId(token));
+        List<CastResponse> response = recommendService.recommendActor(1L);
         log.info("특정 배우 프로그램 추천 API 성공");
         return ResponseEntity.ok()
                 .body(response);
@@ -85,11 +73,14 @@ public class RecommendController {
 
     @ApiOperation(value = "성연령별 프로그램 추천", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "성연령별 프로그램 추천 성공")})
+            @ApiResponse(responseCode = "200", description = "성연령별 프로그램 추천 성공"),
+            @ApiResponse(responseCode = "404", description = "해당 유저를 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @GetMapping("/gender-age")
     public ResponseEntity<Object> recommendGenderAge(
             //@RequestHeader("Auth-access") String token
-    ) {
+            ) {
         log.info("성연령별 프로그램 추천 API 호출");
         List<ProgramResponse> response = recommendService.recommendGenderAge(1L);
         log.info("성연령별 프로그램 추천 API 성공");
@@ -99,7 +90,9 @@ public class RecommendController {
 
     @ApiOperation(value = "온에어 프로그램 추천", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "온에어 프로그램 추천 성공")})
+            @ApiResponse(responseCode = "200", description = "온에어 프로그램 추천 성공"),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @GetMapping("/onair")
     public ResponseEntity<Object> recommendOnair() {
         log.info("온에어 프로그램 추천 API 호출");

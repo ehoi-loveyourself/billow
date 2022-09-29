@@ -30,7 +30,10 @@ public class ProgramController {
 
     @ApiOperation(value = "프로그램 검색", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "프로그램 검색 성공")})
+            @ApiResponse(responseCode = "200", description = "프로그램 검색 성공"),
+            @ApiResponse(responseCode = "404", description = "검색 내용이 없습니다."),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @GetMapping
     public ResponseEntity<Object> searchProgram(@RequestParam(value = "word") String word) {
         log.info("프로그램 검색 API 호출");
@@ -42,7 +45,10 @@ public class ProgramController {
 
     @ApiOperation(value = "프로그램 조회", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "프로그램 조회 성공")})
+            @ApiResponse(responseCode = "200", description = "프로그램 조회 성공"),
+            @ApiResponse(responseCode = "404", description = "해당 프로그램을 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @GetMapping("/{programId}")
     public ResponseEntity<Object> selectProgram(@PathVariable("programId") Long programId) {
         log.info("프로그램 조회 API 호출");
@@ -54,7 +60,11 @@ public class ProgramController {
 
     @ApiOperation(value = "사용자 초기 데이터 수집용 랜덤 프로그램 출력", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "랜덤 프로그램 출력 성공")})
+            @ApiResponse(responseCode = "200", description = "랜덤 프로그램 출력 성공"),
+            @ApiResponse(responseCode = "404", description = "해당 유저를 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "404", description = "해당 프로그램을 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @GetMapping("/random")
     public ResponseEntity<Object> randomProgram(@RequestHeader("Auth-access") String token) {
         log.info("사용자 초기 데이터 수집용 랜덤 프로그램 출력 API 호출");
@@ -66,7 +76,11 @@ public class ProgramController {
 
     @ApiOperation(value = "프로그램 평점 등록", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "프로그램 평점 등록 성공")})
+            @ApiResponse(responseCode = "200", description = "프로그램 평점 등록 성공"),
+            @ApiResponse(responseCode = "404", description = "해당 유저를 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "404", description = "해당 프로그램을 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @PostMapping("/{programId}")
     public ResponseEntity<Object> postProgramRating(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId, @RequestBody RatingRequest ratingRequest) {
         log.info("프로그램 평점 등록 API 호출");
@@ -78,7 +92,9 @@ public class ProgramController {
 
     @ApiOperation(value = "프로그램 출연진 조회", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "프로그램 출연진 조회 성공")})
+            @ApiResponse(responseCode = "200", description = "프로그램 출연진 조회 성공"),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @GetMapping("/cast/{programId}")
     public ResponseEntity<Object> selectCast(@PathVariable("programId") Long programId) {
         log.info("프로그램 출연진 조회 API 호출");
