@@ -34,50 +34,31 @@
     <br />
     <section>
       <article class="review_set">
-        <article class="reviews">
+        <article v-for="review in programReview" class="reviews">
           <h2>
-            걷지말고뛰어라&nbsp;&nbsp;
+            {{ review.userNickName }}&nbsp;&nbsp;
             <span class="wrap-star">
-              <span class="star-rating">
-                <span style="width: 100%"></span>
-              </span>
+              {{ review.regDateTime }}
             </span>
           </h2>
-          <p>너무 재밌어요!</p>
-        </article>
-        <article class="reviews">
-          <h2>
-            뛰지말고누워라&nbsp;&nbsp;<span class="wrap-star">
-              <span class="star-rating">
-                <span style="width: 40%"></span>
-              </span>
-            </span>
-          </h2>
-          <p>노잼..</p>
-        </article>
-        <article class="reviews">
-          <h2>
-            눕지마라&nbsp;&nbsp;
-            <span class="wrap-star">
-              <span class="star-rating">
-                <span style="width: 80%"></span>
-              </span>
-            </span>
-          </h2>
-          <p>재밌네요</p>
+          <p>{{ review.content }}</p>
         </article>
       </article>
     </section>
     <br />
   </div>
 </template>
-    
+
 <script>
 import { reactive } from "@vue/reactivity";
 import axios from "axios";
+import { mapState } from "vuex";
 
 export default {
   name: "ProgramReview",
+  computed: {
+    ...mapState(["programReview", "programId"]),
+  },
   setup() {
     const state = reactive({
       data: [],
@@ -91,18 +72,18 @@ export default {
     //   });
     // };
 
-    axios.get("/api/recommend/new").then((res) => {
-      // 데이터 가져오는 거.
-      console.log(res);
-      console.log(res.data);
-      console.log(res.data[0]);
-      console.log(res.data[0].title);
-      console.log(res.data[0].backdropPath);
-      console.log(res.data[0].posterImg);
-      state.data[0] = res.data[0].title;
-      state.data[1] = res.data[0].backdropPath;
-      state.data[2] = res.data[0].posterImg;
-    });
+    // axios.get("/api/recommend/new").then((res) => {
+    //   // 데이터 가져오는 거.
+    //   console.log(res);
+    //   console.log(res.data);
+    //   console.log(res.data[0]);
+    //   console.log(res.data[0].title);
+    //   console.log(res.data[0].backdropPath);
+    //   console.log(res.data[0].posterImg);
+    //   state.data[0] = res.data[0].title;
+    //   state.data[1] = res.data[0].backdropPath;
+    //   state.data[2] = res.data[0].posterImg;
+    // });
 
     return { state };
   },
@@ -116,15 +97,16 @@ export default {
     check(index) {
       this.score = index + 1;
     },
-    reviewRegist() { // post 사용 가능한 코드입니다. review 등록버튼 클릭 이벤트.
+    reviewRegist() {
+      // post 사용 가능한 코드입니다. review 등록버튼 클릭 이벤트.
       alert("post 테스트");
       axios
-        .post("/api/review/269", { // /review/프로그램아이디
+        .post(`/api/review/${this.programId}`, {
+          // /review/프로그램아이디
           content: this.review,
         })
         .then((response) => {
           console.warn(response);
-          console.log(content);
           console.log(this.review);
         })
         .catch((ex) => {
@@ -134,7 +116,7 @@ export default {
   },
 };
 </script>
-    
+
 <style scoped>
 .reviews {
   background: left/contain content-box border-box no-repeat

@@ -59,12 +59,10 @@
             }}</span>
           </div>
           <div class="genre">
-            <span v-for="genre in programDetail.genres" :key="index">
-              #{{ genre }}
-            </span>
+            <span v-for="genre in programDetail.genres"> #{{ genre }} </span>
           </div>
           <div class="ott">
-            <span v-for="ott in programDetail.otts" :key="index">
+            <span v-for="ott in programDetail.otts">
               <img class="ottImg" :src="ott.imgUrl" />
             </span>
           </div>
