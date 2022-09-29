@@ -73,28 +73,15 @@ public class UserService {
                 .build();
     }
 
-    public LoginResponse kakaoLogin(String code, HttpServletResponse httpServletResponse) throws ParseException {
-        User kakaoUser = kakaoOAuth2.getUserInfo(code);
-        log.info(kakaoUser.toString());
-
-        if (kakaoUser.getEmail() == null) {
+    public LoginResponse kakaoLogin(SignUpRequest signUpRequest, HttpServletResponse httpServletResponse) throws ParseException {
+        if (signUpRequest.getEmail() == null) {
             throw new NotFoundException(EMAIL_NOT_FOUND);
         } else {
-            User user = userRepository.findByEmail(kakaoUser.getEmail());
+            User user = userRepository.findByEmail(signUpRequest.getEmail());
             if (user == null) {
-                user = new User(kakaoUser.getEmail(), kakaoUser.getNickName());
+                user = new User(signUpRequest.getEmail(), signUpRequest.getName());
                 userRepository.save(user);
             }
-
-//            UserDetails userDetails = customUserDetailsService.loadUserByUsername(kakaoUser.getEmail());
-//
-//            Authentication authentication = new UsernamePasswordAuthenticationToken(
-//                    userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities()
-//            );
-//
-//            String refreshToken2 = jwtTokenProvider.createRefreshToken(authentication);
-//            String authToken2 = jwtTokenProvider.createAccessToken(authentication);
-
             String authToken = JwtTokenProvider.createAuthToken(user.getId(), user.getEmail(), user.getName());
             String refreshToken = JwtTokenProvider.createRefreshToken();
 

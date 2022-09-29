@@ -44,15 +44,17 @@ public class UserController {
 
     @ApiOperation(value = "소셜 로그인", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "소셜 로그인 성공")})
+            @ApiResponse(responseCode = "200", description = "소셜 로그인 성공"),
+            @ApiResponse(responseCode = "404", description = "이메일 수집에 동의해주세요."),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @GetMapping("/oauth")
-    public ResponseEntity<Object> kakaoLogin(String code, HttpServletResponse httpServletResponse) throws ParseException {
-            log.info("카카오 로그인 API 호출");
-            LoginResponse response = userService.kakaoLogin(code, httpServletResponse);
-            log.info("카카오 로그인 API 성공");
-            return ResponseEntity.ok()
-                    .header("Auth-access", response.getAuthToken())
-                    .body(response);
+    public ResponseEntity<Object> kakaoLogin(@RequestBody SignUpRequest signUpRequest, HttpServletResponse httpServletResponse) throws ParseException {
+        log.info("카카오 로그인 API 호출");
+        LoginResponse response = userService.kakaoLogin(signUpRequest, httpServletResponse);
+        log.info("카카오 로그인 API 성공");
+        return ResponseEntity.ok()
+                .body(response);
     }
 
     @ApiOperation(value = "닉네임 중복검사", response = Object.class)
