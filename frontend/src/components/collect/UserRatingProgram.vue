@@ -24,7 +24,7 @@
         </span>
       </div>
 
-      <div id="Img">
+      <!-- <div id="Img">
         <img class="poster" src="@/assets/sign.png" alt="Image" />
         <br />
         <span class="explain">
@@ -33,7 +33,7 @@
             <span v-if="index >= score"><img src="@/assets/grey_star_small.png" style="width:13%" /></span>
           </span>
         </span>
-      </div>
+      </div> -->
 
       <!-- <div id="Img">
         <img class="poster" v-for="(d, idx) in state.newProgramPosterImg" :key="idx"
