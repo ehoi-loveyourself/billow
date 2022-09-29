@@ -30,7 +30,9 @@ public class ChatController {
             @ApiResponse(responseCode = "200", description = "온에어 톡 조회 성공")})
     @GetMapping("/{programId}")
     public ResponseEntity<Object> selectChat(@PathVariable("programId") Long programId) {
+        log.info("온에어톡 조회 API 호출");
         List<ChatResponse> responses = chatService.selectChat(programId);
+        log.info("온에어톡 조회 성공");
         return ResponseEntity.ok()
                 .body(responses);
     }

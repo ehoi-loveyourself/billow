@@ -30,7 +30,11 @@ public class ChatService {
     private final ProgramRepository programRepository;
 
     public List<ChatResponse> selectChat(Long programId) {
-        return chatRepository.findByProgramId(programId)
+        Program program = programRepository.findById(programId)
+                .orElseThrow(
+                        () -> new NotFoundException("프로그램이 없습니다.")
+                );
+        return chatRepository.findByProgram(program)
                 .stream()
                 .map(chat -> ChatResponse.builder()
                         .userNickName(chat.getUser().getNickName())
