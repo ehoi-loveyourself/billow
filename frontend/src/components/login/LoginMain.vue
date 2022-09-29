@@ -101,19 +101,29 @@ export default {
             nickname: kakao_account.profile.nickname,
             email: kakao_account.email,
           };
-          console.log(userInfo);
-          console.log(kakao_account);
-          alert("post 테스트");
+          // alert(userInfo);
+          // alert(kakao_account);
+          // alert(kakao_account.profile.nickname);
+          // alert(kakao_account.email);
+          // alert("post 테스트");
           axios
             .post("/api/users/oauth", {
-              name: this.userInfo.nickname,
-              email: this.userInfo.email,
+              name: kakao_account.profile.nickname,
+              email: kakao_account.email,
             })
             .then((response) => {
               console.warn(response);
-              console.log(nickname);
-              console.log(email);
-              console.log(response.authToken);
+              // console.log(response.name);
+              // console.log(email);
+              // console.log(response.authToken);
+              alert("카카오 로그인 post 성공");
+              alert(response.data.name);
+              alert(response.data.email);
+              alert(response.data.nickname);
+              alert(response.data.authToken);
+              localStorage.setItem("authToken", JSON.stringify(response.data.authToken));
+              // localStorage.removeItem(authToken); // 키에 해당되는 데이터 삭제
+              // localStorage.clear();
             })
             .catch((ex) => {
               console.warn("ERROR : ", ex);
