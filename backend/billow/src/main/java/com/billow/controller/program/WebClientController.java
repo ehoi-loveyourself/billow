@@ -1,7 +1,7 @@
 package com.billow.controller.program;
 
 import com.billow.domain.dto.program.ProgramResponse;
-import com.billow.jwt.JwtUtil;
+import com.billow.jwt.JwtTokenProvider;
 import com.billow.model.service.webClient.webClientService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +33,7 @@ public class WebClientController {
     @GetMapping("/condition-recommend/{programId}")
     public ResponseEntity<Object> conditionRecommend(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId) {
         log.info("상황별 프로그램 추천 API 호출");
-        List<ProgramResponse> responses = webClientService.conditionRecommend(JwtUtil.getUserId(token), programId);
+        List<ProgramResponse> responses = webClientService.conditionRecommend(JwtTokenProvider.getUserId(token), programId);
         log.info("상황별 프로그램 추천 성공");
         return ResponseEntity.ok()
                 .body(responses);

@@ -3,8 +3,8 @@ package com.billow.controller.program;
 import com.billow.domain.dto.organization.OrganizationResponse;
 import com.billow.domain.dto.program.CastResponse;
 import com.billow.domain.dto.program.ProgramResponse;
+import com.billow.jwt.JwtTokenProvider;
 import com.billow.model.service.program.RecommendService;
-import com.billow.jwt.JwtUtil;
 import com.billow.util.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -79,7 +79,7 @@ public class RecommendController {
     @GetMapping("/actor")
     public ResponseEntity<Object> recommendActor(@RequestHeader("Auth-access") String token) {
         log.info("특정 배우 프로그램 추천 API 호출");
-        List<CastResponse> response = recommendService.recommendActor(JwtUtil.getUserId(token));
+        List<CastResponse> response = recommendService.recommendActor(JwtTokenProvider.getUserId(token));
         log.info("특정 배우 프로그램 추천 API 성공");
         return ResponseEntity.ok()
                 .body(response);
@@ -89,11 +89,9 @@ public class RecommendController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "성연령별 프로그램 추천 성공")})
     @GetMapping("/gender-age")
-    public ResponseEntity<Object> recommendGenderAge(
-            //@RequestHeader("Auth-access") String token
-    ) {
+    public ResponseEntity<Object> recommendGenderAge(@RequestHeader("Auth-access") String token) {
         log.info("성연령별 프로그램 추천 API 호출");
-        List<ProgramResponse> response = recommendService.recommendGenderAge(1L);
+        List<ProgramResponse> response = recommendService.recommendGenderAge(JwtTokenProvider.getUserId(token));
         log.info("성연령별 프로그램 추천 API 성공");
         return ResponseEntity.ok()
                 .body(response);

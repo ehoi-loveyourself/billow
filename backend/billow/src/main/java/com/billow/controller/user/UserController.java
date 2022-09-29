@@ -3,7 +3,7 @@ package com.billow.controller.user;
 import com.billow.domain.dto.addtion.RatingRequest;
 import com.billow.domain.dto.addtion.RatingResponse;
 import com.billow.domain.dto.user.*;
-import com.billow.jwt.JwtUtil;
+import com.billow.jwt.JwtTokenProvider;
 import com.billow.model.service.user.UserService;
 import com.billow.util.Message;
 import io.swagger.annotations.Api;
@@ -36,7 +36,7 @@ public class UserController {
     @GetMapping
     public ResponseEntity<Object> selectUser(@RequestHeader("Auth-access") String token) throws IOException {
             log.info("회원정보 조회 API 호출");
-            UserResponse response = userService.selectUser(JwtUtil.getUserId(token));
+            UserResponse response = userService.selectUser(JwtTokenProvider.getUserId(token));
             log.info("회원정보 조회 성공");
             return ResponseEntity.ok()
                     .body(response);
@@ -103,7 +103,7 @@ public class UserController {
     @PostMapping("/logout")
     public ResponseEntity<Object> logout(@RequestHeader("Auth-access") String token) {
             log.info("로그아웃 API 호출");
-            Message response = userService.logout(JwtUtil.getUserId(token));
+            Message response = userService.logout(JwtTokenProvider.getUserId(token));
             log.info("로그아웃 성공");
             return ResponseEntity.ok()
                     .body(response);
@@ -115,7 +115,7 @@ public class UserController {
     @PutMapping
     public ResponseEntity<Object> updateUser(@RequestHeader("Auth-access") String token, @RequestBody UserUpdateRequest userUpdateRequest) {
             log.info("회원정보 수정 API 호출");
-            Message response = userService.updateUser(JwtUtil.getUserId(token), userUpdateRequest);
+            Message response = userService.updateUser(JwtTokenProvider.getUserId(token), userUpdateRequest);
             log.info("회원정보 수정 성공");
             return ResponseEntity.ok()
                     .body(response);
@@ -127,7 +127,7 @@ public class UserController {
     @DeleteMapping
     public ResponseEntity<Object> deleteUser(@RequestHeader("Auth-access") String token) {
             log.info("회원 탈퇴 API 호출");
-            Message response = userService.deleteUser(JwtUtil.getUserId(token));
+            Message response = userService.deleteUser(JwtTokenProvider.getUserId(token));
             log.info("회원 탈퇴 성공");
             return ResponseEntity.ok()
                     .body(response);
@@ -139,7 +139,7 @@ public class UserController {
     @GetMapping("/rating")
     public ResponseEntity<Object> selectRating(@RequestHeader("Auth-access") String token) {
         log.info("평점 조회 API 호출");
-        List<RatingResponse> response = userService.selectRating(JwtUtil.getUserId(token));
+        List<RatingResponse> response = userService.selectRating(JwtTokenProvider.getUserId(token));
         log.info("평점 조회 성공");
         return ResponseEntity.ok()
                 .body(response);
@@ -153,7 +153,7 @@ public class UserController {
                                                @PathVariable("ratingId") Long ratingId,
                                                @RequestBody RatingRequest ratingRequest) {
         log.info("평점 수정 API 호출");
-        Message response = userService.updateRating(JwtUtil.getUserId(token), ratingId, ratingRequest);
+        Message response = userService.updateRating(JwtTokenProvider.getUserId(token), ratingId, ratingRequest);
         log.info("평점 수정 성공");
         return ResponseEntity.ok()
                 .body(response);
@@ -165,7 +165,7 @@ public class UserController {
     @DeleteMapping("/rating/{ratingId}")
     public ResponseEntity<Object> deleteRating(@RequestHeader("Auth-access") String token, @PathVariable("ratingId") Long ratingId) {
         log.info("평점 삭제 API 호출");
-        Message response = userService.deleteRating(JwtUtil.getUserId(token), ratingId);
+        Message response = userService.deleteRating(JwtTokenProvider.getUserId(token), ratingId);
         return ResponseEntity.ok()
                 .body(response);
     }

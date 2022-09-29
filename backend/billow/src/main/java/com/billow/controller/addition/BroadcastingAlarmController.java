@@ -1,8 +1,8 @@
 package com.billow.controller.addition;
 
 import com.billow.domain.dto.addtion.BroadcastingAlarmResponse;
+import com.billow.jwt.JwtTokenProvider;
 import com.billow.model.service.addtion.BroadcastingAlarmService;
-import com.billow.jwt.JwtUtil;
 import com.billow.util.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,7 +30,7 @@ public class BroadcastingAlarmController {
     @GetMapping
     public ResponseEntity<Object> selectAlarm(@RequestHeader("Auth-access") String token) {
         log.info("방영 알림 조회 API 호출");
-        List<BroadcastingAlarmResponse> responses = broadcastingAlarmService.selectAlarm(JwtUtil.getUserId(token));
+        List<BroadcastingAlarmResponse> responses = broadcastingAlarmService.selectAlarm(JwtTokenProvider.getUserId(token));
         log.info("방영 알림 조회 성공");
         return ResponseEntity.ok()
                 .body(responses);
@@ -42,7 +42,7 @@ public class BroadcastingAlarmController {
     @PostMapping("/{programOrganizationId}")
     public ResponseEntity<Object> postAlarm(@PathVariable("programOrganizationId") Long programOrganizationId, @RequestHeader("Auth-access") String token) {
         log.info("방영 알림 등록 API 호출");
-        Message responses = broadcastingAlarmService.postAlarm(JwtUtil.getUserId(token), programOrganizationId);
+        Message responses = broadcastingAlarmService.postAlarm(JwtTokenProvider.getUserId(token), programOrganizationId);
         log.info("방영 알림 등록 성공");
         return ResponseEntity.ok()
                 .body(responses);
