@@ -104,88 +104,36 @@ public class JwtTokenProvider implements InitializingBean {
                 .getBody();
     }
 
-    //////// 여기까지 JwtUtil
-
-
-//    private final CustomUserDetailsService customUserDetailsService;
-//
-//    private final String secretKey;
-//    private final long tokenValidityInMs;
-//    private final long refreshTokenValidityInMs;
-//
-//    public JwtTokenProvider(@Value("${jwt.secret-key}") String secretKey,
-//                            @Value("${jwt.token-validity-in-sec}") long tokenValidity,
-//                            @Value("${jwt.refresh-token-validity-in-sec}") long refreshTokenValidity,
-//                            CustomUserDetailsService customUserDetailsService){
-//        this.secretKey = secretKey;
-//        this.tokenValidityInMs = tokenValidity * 1000;
-//        this.refreshTokenValidityInMs = refreshTokenValidity * 1000;
-//        this.customUserDetailsService = customUserDetailsService;
-//    }
-
-
-//    public String createAccessToken(Authentication authentication) {
-//        Date now = new Date();
-//        Date validity = new Date(now.getTime() + tokenValidityInMs);
-//
-//        return Jwts.builder()
-//                .setSubject(authentication.getName())
-//                .setIssuedAt(now) // 발행시간
-//                .signWith(key, SignatureAlgorithm.HS512) // 암호화
-//                .setExpiration(validity) // 만료
-//                .compact();
-//    }
-
-    /**
-     * 토큰으로 부터 Authentication 객체를 얻어온다.
-     * Authentication 안에 user의 정보가 담겨있음.
-     * UsernamePasswordAuthenticationToken 객체로 Authentication을 쉽게 만들수 있으며,
-     * 매게변수로 UserDetails, pw, authorities 까지 넣어주면
-     * setAuthenticated(true)로 인스턴스를 생성해주고
-     * Spring-Security는 그것을 체크해서 로그인을 처리함
-     */
-    public Authentication getAuthentication(String token) {
-//        Claims claims = Jwts.parserBuilder()
-//                .setSigningKey(key)
-//                .build()
-//                .parseClaimsJws(token)
-//                .getBody();
-
-        UserDetails userDetails = (UserDetails) userRepository.findById(getUserId(token))
-                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
-//        return new UsernamePasswordAuthenticationToken(userDetails, token, userDetails.getAuthorities());
-        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
-    }
-
     // 토큰 유효성 검사
-    public boolean validateToken(String token) {
+    public static boolean validateToken(String token) {
         try {
             Jws<Claims> claims = Jwts.parserBuilder()
                     .setSigningKey(key)
                     .build()
                     .parseClaimsJws(token);
             return !claims.getBody().getExpiration().before(new Date());
-        } catch (ExpiredJwtException e){
-            // 만료된 경우에는 refresh token을 확인하기 위해
+        } catch (ExpiredJwtException e) {
+            log.info("액세스 토큰 만료");
             throw new UnauthorizedException(EXPIRED_TOKEN);
         } catch (JwtException | IllegalArgumentException e) {
+            log.info("JwtException, IllegalArgumentException");
             throw new WrongAccessException(RE_LOGIN);
         }
     }
 
-    public String resolveToken(HttpServletRequest request) {
-        return request.getHeader("Auth-access");
+    public static boolean validateRefreshToken(String token) {
+        try {
+            Jws<Claims> claims = Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token);
+            return !claims.getBody().getExpiration().before(new Date());
+        } catch (ExpiredJwtException e) {
+            log.info("리프레시 토큰 만료");
+            throw new WrongAccessException(RE_LOGIN);
+        } catch (JwtException | IllegalArgumentException e) {
+            log.info("JwtException, IllegalArgumentException");
+            throw new WrongAccessException(RE_LOGIN);
+        }
     }
-
-//    public String createRefreshToken(Authentication authentication){
-//        Date now = new Date();
-//        Date validity = new Date(now.getTime() + refreshTokenValidityInMs);
-//
-//        return Jwts.builder()
-//                .setSubject(authentication.getName())
-//                .setIssuedAt(now)
-//                .signWith(key, SignatureAlgorithm.HS512)
-//                .setExpiration(validity)
-//                .compact();
-//    }
 }
