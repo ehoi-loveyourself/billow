@@ -21,14 +21,6 @@ CONN = MySQLdb.connect(
     db = 'billow'
 )
 
-
-CONN = MySQLdb.connect(
-    host = 'localhost',
-    user = 'B309',
-    password = 'B309Billow',
-    db = 'billow'
-)
-
 def query_MySQL(query):
     # 2. 쿼리 로그 찍기
     print(query)
@@ -37,9 +29,6 @@ def query_MySQL(query):
     query_result = pd.read_sql(query, CONN)
     # 3. result 로그 찍기
     print(query_result)
-
-    # conn.close()
-    # print('-------------------')
 
     return query_result
     
@@ -138,9 +127,6 @@ def mf_algo_individual(request):
 
     return indi_predict_result
 
-# mf_algo()
-# mf_algo_individual(1)
-
 # 상황 추천 알고리즘을 위한 pivot_table
 def mf_condition_recomm(programId):
     program_data = query_MySQL('SELECT program_id, title from tb_program')
@@ -178,5 +164,3 @@ def mf_condition_recomm(programId):
     corr_coffey_hands = corr[coffey_hands]
     print(list(program_id[(corr_coffey_hands >= 0.9)])[:50])
     return list(program_id[(corr_coffey_hands >= 0.9)])[:50]
-
-# mf_condition_recomm(392)
