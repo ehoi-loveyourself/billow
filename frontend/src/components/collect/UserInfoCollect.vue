@@ -17,30 +17,106 @@
         프로필
       </b-col>
 
-
-      
       <b-col cols="10" style="padding-left:1%;">
-        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/12" size="4rem"></b-avatar>
-        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/11" size="4rem"></b-avatar>
-        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/15" size="4rem"></b-avatar>
-        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/13" size="4rem"></b-avatar>
-        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/16" size="4rem"></b-avatar>
-        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/17" size="4rem"></b-avatar>
-        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/18" size="4rem"></b-avatar>
-        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/19" size="4rem"></b-avatar>
-        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/20" size="4rem"></b-avatar>
-        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/14" size="4rem"></b-avatar><br/>
-        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/2" size="4rem"></b-avatar>
-        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/3" size="4rem"></b-avatar>
-        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/4" size="4rem"></b-avatar>
-        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/5" size="4rem"></b-avatar>
-        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/6" size="4rem"></b-avatar>
-        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/7" size="4rem"></b-avatar>
-        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/8" size="4rem"></b-avatar>
-        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/10" size="4rem"></b-avatar>
-        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/1" size="4rem"></b-avatar>
-        <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/9" size="4rem"></b-avatar>
-        <!-- <b-avatar class="avatar" variant="info" size="4rem" v-for="i in 20" src="https://j7b309.p.ssafy.io/api/profile/{{i}}" :key="i"></b-avatar> -->
+        <input type="radio" name="choice" id="choose-1" value="1" />
+        <label for="choose-1">
+          <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/12" size="4rem"></b-avatar>
+        </label>
+
+        <input type="radio" name="choice" id="choose-2" value="2" />
+        <label for="choose-2">
+          <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/11" size="4rem"></b-avatar>
+        </label>
+
+        <input type="radio" name="choice" id="choose-3" value="3" />
+        <label for="choose-3">
+          <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/15" size="4rem"></b-avatar>
+        </label>
+
+        <input type="radio" name="choice" id="choose-4" value="4" />
+        <label for="choose-4">
+          <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/13" size="4rem"></b-avatar>
+        </label>
+
+        <input type="radio" name="choice" id="choose-5" value="5" />
+        <label for="choose-5">
+          <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/16" size="4rem"></b-avatar>
+        </label>
+
+        <input type="radio" name="choice" id="choose-6" value="6" />
+        <label for="choose-6">
+          <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/17" size="4rem"></b-avatar>
+        </label>
+
+        <input type="radio" name="choice" id="choose-7" value="7" />
+        <label for="choose-7">
+          <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/18" size="4rem"></b-avatar>
+        </label>
+
+        <input type="radio" name="choice" id="choose-8" value="8" />
+        <label for="choose-8">
+          <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/19" size="4rem"></b-avatar>
+        </label>
+
+        <input type="radio" name="choice" id="choose-9" value="9" />
+        <label for="choose-9">
+          <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/20" size="4rem"></b-avatar>
+        </label>
+
+        <input type="radio" name="choice" id="choose-10" value="10" />
+        <label for="choose-10">
+          <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/14" size="4rem"></b-avatar>
+        </label>
+        <br />
+        <input type="radio" name="choice" id="choose-11" value="11" />
+        <label for="choose-11">
+          <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/1" size="4rem"></b-avatar>
+        </label>
+
+        <input type="radio" name="choice" id="choose-12" value="12" />
+        <label for="choose-12">
+          <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/2" size="4rem"></b-avatar>
+        </label>
+
+        <input type="radio" name="choice" id="choose-13" value="13" />
+        <label for="choose-13">
+          <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/3" size="4rem"></b-avatar>
+        </label>
+
+        <input type="radio" name="choice" id="choose-14" value="14" />
+        <label for="choose-14">
+          <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/4" size="4rem"></b-avatar>
+        </label>
+
+        <input type="radio" name="choice" id="choose-15" value="15" />
+        <label for="choose-15">
+          <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/5" size="4rem"></b-avatar>
+        </label>
+
+        <input type="radio" name="choice" id="choose-16" value="16" />
+        <label for="choose-16">
+          <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/6" size="4rem"></b-avatar>
+        </label>
+
+        <input type="radio" name="choice" id="choose-17" value="17" />
+        <label for="choose-17">
+          <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/7" size="4rem"></b-avatar>
+        </label>
+
+        <input type="radio" name="choice" id="choose-18" value="18" />
+        <label for="choose-18">
+          <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/8" size="4rem"></b-avatar>
+        </label>
+
+        <input type="radio" name="choice" id="choose-19" value="19" />
+        <label for="choose-19">
+          <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/9" size="4rem"></b-avatar>
+        </label>
+
+        <input type="radio" name="choice" id="choose-20" value="20" />
+        <label for="choose-20">
+          <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/10" size="4rem"></b-avatar>
+        </label>
       </b-col>
     </b-row>
     <b-row style="margin-bottom:2%">
@@ -92,7 +168,7 @@
         <b-form-select v-model="selected_tv_carrier" :options="options_tv_carrier" style="width:20%"></b-form-select>
       </b-col>
     </b-row>
-      <b-row style="margin-bottom:2%">
+    <b-row style="margin-bottom:2%">
       <b-col cols="2" style="text-align:right">
         휴대폰 번호
       </b-col>
@@ -101,7 +177,7 @@
       </b-col>
     </b-row>
 
-  
+
   </section>
   <br><br />
   <p style="text-align:center">
@@ -183,11 +259,6 @@ h2 {
   /* font-size: 1.4vw; */
 }
 
-.avatar {
-  margin-right: 2%;
-  margin-bottom: 2%;
-}
-
 .avatar:hover {
   filter: brightness(0.5);
 }
@@ -204,6 +275,29 @@ h2 {
 .logo {
   padding-left: 70px;
   padding-top: 0.05%;
+}
+
+label {
+  margin-bottom: 2%;
+  margin-right: 2%;
+}
+
+input[type=radio] {
+  display: none;
+}
+
+.avatar:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.avatar:active {
+  opacity: 0.4;
+  cursor: pointer;
+}
+
+input[type=radio]:checked+label>.avatar {
+  border: 6px solid rgb(228, 207, 94);
 }
 </style>
 <style>
