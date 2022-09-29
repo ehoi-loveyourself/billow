@@ -43,18 +43,6 @@
                   style="cursor: pointer"
                 />
               </div>
-              <div style="white-space: nowrap">
-                <span class="time">12:47&nbsp;</span
-                ><span class="station">ENA DRAMA&nbsp;</span
-                ><span class="episode">490회&nbsp;</span
-                ><span class="box"
-                  ><span class="box_design">재</span>&nbsp;</span
-                ><img
-                  src="@/assets/alarm.png"
-                  v-b-modal.modal-1
-                  style="cursor: pointer"
-                />
-              </div>
             </b-td>
           </b-tr>
         </tbody>
