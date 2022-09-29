@@ -8,6 +8,7 @@ import axios from "axios";
 export default new Vuex.Store({
   state: {
     programId: 0,
+    organizationId: 0,
     programDetail: null,
     programSchedule: null,
     programReview: null,
@@ -25,6 +26,9 @@ export default new Vuex.Store({
     },
     SET_PROGRAM_REVIEW(state, review) {
       state.programReview = review;
+    },
+    SET_ORGANIZATION_ID(state, id) {
+      state.organizationId = id;
     },
   },
   actions: {
@@ -46,6 +50,12 @@ export default new Vuex.Store({
         //리뷰 정보 조회 GET
         console.log(res.data);
         commit("SET_PROGRAM_REVIEW", res.data);
+      });
+    },
+    registAlarm({ commit }) {
+      axios.post(`/api/alarm//${state.organizationId}`).then((res) => {
+        //방영 알림 등록 POSt
+        console.log(res.data);
       });
     },
   },
