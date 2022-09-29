@@ -31,9 +31,7 @@ public class ChatService {
 
     public List<ChatResponse> selectChat(Long programId) {
         Program program = programRepository.findById(programId)
-                .orElseThrow(
-                        () -> new NotFoundException("프로그램이 없습니다.")
-                );
+                .orElseThrow(() -> new NotFoundException("프로그램이 없습니다."));
         return chatRepository.findByProgram(program)
                 .stream()
                 .map(chat -> ChatResponse.builder()
