@@ -103,6 +103,11 @@ const routes = [
     name: 'userratingprogram',
     component: () => import('@/components/collect/UserRatingProgram.vue'),
   },
+  {
+    path: '/searchresult',
+    name: 'searchresult',
+    component: () => import('@/components/search/SearchResult.vue'),
+  }
 ]
 
 const router = createRouter({

@@ -15,7 +15,6 @@ import com.billow.model.repository.user.ProfileImgRepository;
 import com.billow.model.repository.user.RegionRepository;
 import com.billow.model.repository.user.TvCarrierRepository;
 import com.billow.model.repository.user.UserRepository;
-import com.billow.util.KakaoOAuth2;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,10 +49,8 @@ public class UserService {
     private final RegionRepository regionRepository;
     private final TvCarrierRepository tvCarrierRepository;
     private final ProfileImgRepository profileImgRepository;
-    private final KakaoOAuth2 kakaoOAuth2;
-    private final JwtTokenProvider jwtTokenProvider;
 
-    public UserResponse selectUser(Long userId) throws IOException {
+    public UserResponse selectUser(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
         return UserResponse.builder()

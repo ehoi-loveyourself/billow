@@ -26,7 +26,9 @@ public class BroadcastingAlarmController {
 
     @ApiOperation(value = "방영 알림 조회", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "방영 알림 조회 성공")})
+            @ApiResponse(responseCode = "200", description = "방영 알림 조회 성공"),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @GetMapping
     public ResponseEntity<Object> selectAlarm(@RequestHeader("Auth-access") String token) {
         log.info("방영 알림 조회 API 호출");
@@ -38,7 +40,11 @@ public class BroadcastingAlarmController {
 
     @ApiOperation(value = "방영 알림 등록", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "방영 알림 등록 성공")})
+            @ApiResponse(responseCode = "200", description = "방영 알림 등록 성공"),
+            @ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "400", description = "편성표 정보를 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @PostMapping("/{programOrganizationId}")
     public ResponseEntity<Object> postAlarm(@PathVariable("programOrganizationId") Long programOrganizationId, @RequestHeader("Auth-access") String token) {
         log.info("방영 알림 등록 API 호출");
@@ -50,7 +56,10 @@ public class BroadcastingAlarmController {
 
     @ApiOperation(value = "방영 알림 삭제", response = Object.class)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "방영 알림 삭제 성공")})
+            @ApiResponse(responseCode = "200", description = "방영 알림 삭제 성공"),
+            @ApiResponse(responseCode = "400", description = "등록되지 않은 알람입니다."),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @DeleteMapping("/{alarmId}")
     public ResponseEntity<Object> deleteAlarm(@PathVariable("alarmId") Long alarmId) {
         log.info("방영 알림 삭제 API 호출");

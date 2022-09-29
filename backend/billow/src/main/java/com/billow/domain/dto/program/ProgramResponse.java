@@ -41,4 +41,8 @@ public class ProgramResponse {
     private String backdropPath;
 
     private List<OttResponse> otts;
+
+    private Integer userAge;
+
+    private String userGender;
 }

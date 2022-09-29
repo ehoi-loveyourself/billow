@@ -1,6 +1,13 @@
 <template>
-  <header-bar />
-  <br />
+  <!-- <b-row> -->
+          <!-- <b-col cols="8"> -->
+      <header-bar/>
+    <!-- </b-col> -->
+    <!-- <b-col cols="4">  -->
+      <SecondBar/>
+      <!-- </b-col> -->
+    <!-- </b-row> -->
+    <br/>
   <h2
     style="color: white; margin-left: 70px; font-size: 1.1vw; font-weight: 300"
   >
@@ -66,11 +73,13 @@
   
 <script>
 import HeaderBar from "@/components/layout/HeaderNavBar.vue";
+import SecondBar from "@/components/layout/SecondNavBar.vue";
 
 export default {
   name: "SituationSelect",
   components: {
     HeaderBar,
+    SecondBar
   },
 };
 </script>

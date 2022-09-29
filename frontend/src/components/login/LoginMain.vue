@@ -33,25 +33,26 @@
           카카오로 시작하기
         </router-link>
       </a>
-      <div class="memos">
+
+      <button
+        @click="onKakao"
+        style="font-size: 20px; padding: 10px; color: black"
+      >
+        카카오 로그인 테스트용
+      </button>
+
+      <!-- <div class="memos">
         <button class="btn btn-primary" @click="add()">추가하기</button>
         <ul>
           <li v-for="(d, idx) in state.data" :key="idx">{{ d }}</li>
         </ul>
-      </div>
+      </div> -->
     </div>
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
   </div>
 </template>
   
 <script>
-//  export default{
-//   method:{
-//     gotoPage(link) {
-//       this.$router.push(link);
-//     },
-//   }
-//  }
 import { reactive } from "@vue/reactivity";
 import axios from "axios";
 export default {
@@ -61,28 +62,75 @@ export default {
       data: [],
     });
 
-    const add = () => {
-      // 지금 안됨.
-      // state.data.push("추가한 내용");
-      axios.post("/api/recommend/new").then((res) => {
-        console.log(res.data);
+    // const add = () => {
+    //   // 지금 안됨.
+    //   // state.data.push("추가한 내용");
+    //   axios.post("/api/recommend/new").then((res) => {
+    //     console.log(res.data);
+    //   });
+    // };
+
+    // axios.get("/api/recommend/new").then((res) => {
+    //   // 데이터 가져오는 axios 테스트
+    //   console.log(res.data);
+    // });
+
+    return { state };
+  },
+
+  methods: {
+    // loginWithKakao() { // 카카오 로그인 Uri 버전(안됨)
+    //   const params = {
+    //     redirectUri: "http://localhost:8009/api/users/oauth",
+    //   };
+    //   window.Kakao.Auth.authorize(params);
+    // },
+
+    onKakao() {
+      window.Kakao.Auth.login({
+        scope: "profile_nickname, account_email",
+        success: this.GetMe,
       });
-    };
-
-    axios.get("/api/recommend/new").then((res) => {
-      // 데이터 가져오는 거.
-      console.log(res);
-      console.log(res.data);
-      console.log(res.data[0]);
-      console.log(res.data[0].title);
-      console.log(res.data[0].backdropPath);
-      console.log(res.data[0].posterImg);
-      state.data[0] = res.data[0].title;
-      state.data[1] = res.data[0].backdropPath;
-      state.data[2] = res.data[0].posterImg;
-    });
-
-    return { state, add };
+    },
+    GetMe() {
+      window.Kakao.API.request({
+        url: "/v2/user/me",
+        success: (res) => {
+          const kakao_account = res.kakao_account;
+          const userInfo = {
+            nickname: kakao_account.profile.nickname,
+            email: kakao_account.email,
+          };
+          // alert(userInfo);
+          // alert(kakao_account);
+          // alert(kakao_account.profile.nickname);
+          // alert(kakao_account.email);
+          // alert("post 테스트");
+          axios
+            .post("/api/users/oauth", {
+              name: kakao_account.profile.nickname,
+              email: kakao_account.email,
+            })
+            .then((response) => {
+              console.warn(response);
+              // console.log(response.name);
+              // console.log(email);
+              // console.log(response.authToken);
+              alert("카카오 로그인 post 성공");
+              alert(response.data.name);
+              alert(response.data.email);
+              alert(response.data.nickname);
+              alert(response.data.authToken);
+              localStorage.setItem("authToken", JSON.stringify(response.data.authToken));
+              // localStorage.removeItem(authToken); // 키에 해당되는 데이터 삭제
+              // localStorage.clear();
+            })
+            .catch((ex) => {
+              console.warn("ERROR : ", ex);
+            });
+        },
+      });
+    },
   },
 };
 </script>

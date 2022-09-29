@@ -32,11 +32,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class RecommendService {
-
-    private static final String RATING_NOT_FOUND = "사용자의 평점을 찾을 수 없습니다.";
-    private static final String ACTOR_NOT_FOUND = "출연진을 찾을 수 없습니다.";
     private static final String USER_NOT_FOUND = "해당 유저를 찾을 수 없습니다.";
-    private static final String PROGRAM_NOT_FOUND = "해당 프로그램을 찾을 수 없습니다.";
 
     private final ProgramRepository programRepository;
     private final RatingRepository ratingRepository;
@@ -88,14 +84,13 @@ public class RecommendService {
     }
 
     public List<CastResponse> recommendActor(Long userId) {
-        List<Rating> ratingList = ratingRepository.findByUser_Id(userId);
-        String actor = castRepository.findMaxCountByProgram_Id(ratingList);
-        List<Cast> castList = castRepository.findByActorName(userId, actor);
+        List<String> actor = castRepository.findActorName(userId);
+        List<Cast> castList = castRepository.findByActorName(userId, actor.get(0));
         return castList
                 .stream()
                 .map(cast -> CastResponse.builder()
                         .id(cast.getProgram().getId())
-                        .actorName(actor)
+                        .actorName(cast.getActorName())
                         .title(cast.getProgram().getTitle())
                         .genres(cast.getProgram().getGenreList()
                                 .stream()
@@ -204,30 +199,30 @@ public class RecommendService {
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
 
         List<GenderAgeViewer> genderAgeViewerList = genderAgeViewerRepository.findTop5ByGenderAge(user.getAge(), user.getGender());
-        List<Program> programResponseList = programRepository.findGenderAgeRecommend(userId, user.getAge(), user.getGender(), genderAgeViewerList.get(0).getProgram().getId(), genderAgeViewerList.get(1).getProgram().getId(), genderAgeViewerList.get(2).getProgram().getId(), genderAgeViewerList.get(3).getProgram().getId(), genderAgeViewerList.get(4).getProgram().getId());
+        List<Rating> ratingResponseList = programRepository.findGenderAgeRecommend(userId, user.getAge(), user.getGender(), genderAgeViewerList.get(0).getProgram().getId(), genderAgeViewerList.get(1).getProgram().getId(), genderAgeViewerList.get(2).getProgram().getId(), genderAgeViewerList.get(3).getProgram().getId(), genderAgeViewerList.get(4).getProgram().getId());
 
-        return programResponseList
+        return ratingResponseList
                 .stream()
-                .map(program -> ProgramResponse.builder()
-                        .id(program.getId())
-                        .title(program.getTitle())
-                        .genres(program.getGenreList()
+                .map(rating -> ProgramResponse.builder()
+                        .id(rating.getProgram().getId())
+                        .title(rating.getProgram().getTitle())
+                        .genres(rating.getProgram().getGenreList()
                                 .stream()
                                 .map(genre -> genre.getGenreInfo().getName())
                                 .collect(Collectors.toList()))
-                        .age(program.getAge())
-                        .summary(program.getSummary())
-                        .broadcastingDay(program.getBroadcastingDay())
-                        .broadcastingEpisode(program.getBroadcastingEpisode())
-                        .broadcastingStation(program.getBroadcastingStation())
-                        .endFlag(program.isEndFlag())
-                        .firstAirDate(DateFormat.getDateInstance(DateFormat.LONG).format(program.getFirstAirDate()))
-                        .averageRating(Float.valueOf(String.format("%.1f", program.getAverageRating())))
-                        .ratingCnt(program.getRatingCnt())
-                        .bookmarkCnt(program.getBookmarkCnt())
-                        .posterImg(program.getPosterImg())
-                        .backdropPath(program.getBackdropPath())
-                        .otts(program.getOttList()
+                        .age(rating.getProgram().getAge())
+                        .summary(rating.getProgram().getSummary())
+                        .broadcastingDay(rating.getProgram().getBroadcastingDay())
+                        .broadcastingEpisode(rating.getProgram().getBroadcastingEpisode())
+                        .broadcastingStation(rating.getProgram().getBroadcastingStation())
+                        .endFlag(rating.getProgram().isEndFlag())
+                        .firstAirDate(DateFormat.getDateInstance(DateFormat.LONG).format(rating.getProgram().getFirstAirDate()))
+                        .averageRating(Float.valueOf(String.format("%.1f", rating.getProgram().getAverageRating())))
+                        .ratingCnt(rating.getProgram().getRatingCnt())
+                        .bookmarkCnt(rating.getProgram().getBookmarkCnt())
+                        .posterImg(rating.getProgram().getPosterImg())
+                        .backdropPath(rating.getProgram().getBackdropPath())
+                        .otts(rating.getProgram().getOttList()
                                 .stream()
                                 .map(ott -> OttResponse.builder()
                                         .name(ott.getOttInfo().getName())
@@ -235,6 +230,8 @@ public class RecommendService {
                                         .imgUrl(ott.getOttInfo().getImgUrl())
                                         .build())
                                 .collect(Collectors.toList()))
+                        .userAge(user.getAge())
+                        .userGender(user.getGender())
                         .build())
                 .collect(Collectors.toList());
     }
