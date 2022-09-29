@@ -24,7 +24,7 @@
     </div>
     <br />
     <div style="text-align: center">
-      <a @click="onKakao()" class="kakao" href="#" role="button" style="border-radius: 15px; font-size: 20px; padding: 10px; color: black">
+      <a @click="onKakao()" class="kakao" href="#" role="button" style="border-radius: 15px; font-size: 20px; padding: 20px; color: black">
         카카오로 시작하기
         <!-- <router-link
           :to="{ name: 'userinfocollect' }"
