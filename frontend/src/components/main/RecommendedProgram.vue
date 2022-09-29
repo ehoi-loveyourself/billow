@@ -371,7 +371,7 @@ axios.get("/api/recommend/onair").then((res) => {
   data() {
     return {
       options: {
-        type: "loop",
+        // type: "loop",
         perPage: 7,
         // perMove:6,
         // pagination:false,
@@ -435,6 +435,8 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
+  align-content: stretch;
 }
 .box {
   position: relative;

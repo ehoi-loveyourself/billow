@@ -208,7 +208,7 @@ h2 {
 </style>
 <style>
 .form-check-input:checked {
-  background-color: #ffe812;
-  border-color: #ffe812;
+  background-color: blue;
+  border-color: blue;
 }
 </style>
