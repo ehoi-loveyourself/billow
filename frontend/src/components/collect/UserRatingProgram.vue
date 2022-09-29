@@ -13,139 +13,7 @@
       BILLOW가 회원님이 좋아할만한 프로그램을 추천해줄거예요.</h2>
     <br>
     <div class="flex">
-
-      <!-- <span class="explain">
-          <span v-for="index in 5" :key="index" @click="check(index)">
-            <span v-if="index < score"><img src="@/assets/blue_star_small.png" style="width:13%" /></span>
-            <span v-if="index >= score"><img src="@/assets/grey_star_small.png" style="width:13%" /></span>
-          </span>
-        </span> -->
-
-      <!-- <div class="Img">
       <div id="Img">
-        <img src="@/assets/laggi.png" alt="Image" />
-        <br />
-        <span class='explain'>
-          <span v-for="index in 5" :key="index" @click="check(index)">
-            <span v-if="index < score"><img src="@/assets/blue_star_small.png" style="width:13%" /></span>
-            <span v-if="index >= score"><img src="@/assets/grey_star_small.png" style="width:13%" /></span>
-          </span>
-        </span>
-      </div>
-
-
-      <div id="Img">
-        <img src="@/assets/runningman.png" alt="Image" />
-        <br />
-        <span class='explain'>
-          <span v-for="index in 5" :key="index" @click="check(index)">
-            <span v-if="index < score"><img src="@/assets/blue_star_small.png" style="width:13%" /></span>
-            <span v-if="index >= score"><img src="@/assets/grey_star_small.png" style="width:13%" /></span>
-          </span>
-        </span>
-      </div>
-
-      <div id="Img">
-        <img src="@/assets/thatman.png" alt="Image" />
-        <br />
-        <span class='explain'>
-          <span v-for="index in 5" :key="index" @click="check(index)">
-            <span v-if="index < score"><img src="@/assets/blue_star_small.png" style="width:13%" /></span>
-            <span v-if="index >= score"><img src="@/assets/grey_star_small.png" style="width:13%" /></span>
-          </span>
-        </span>
-      </div>
-
-      <div id="Img">
-        <img src="@/assets/nangman.png" alt="Image" />
-        <br />
-        <span class='explain'>
-          <span v-for="index in 5" :key="index" @click="check(index)">
-            <span v-if="index < score"><img src="@/assets/blue_star_small.png" style="width:13%" /></span>
-            <span v-if="index >= score"><img src="@/assets/grey_star_small.png" style="width:13%" /></span>
-          </span>
-        </span>
-      </div>
-
-      <div id="Img">
-        <img src="@/assets/hyori.png" alt="Image" />
-        <br />
-        <span class='explain'>
-          <span v-for="index in 5" :key="index" @click="check(index)">
-            <span v-if="index < score"><img src="@/assets/blue_star_small.png" style="width:13%" /></span>
-            <span v-if="index >= score"><img src="@/assets/grey_star_small.png" style="width:13%" /></span>
-          </span>
-        </span>
-      </div>
-
-      <div id="Img">
-        <img src="@/assets/sign.png" alt="Image" />
-        <br />
-        <span class='explain'>
-          <span v-for="index in 5" :key="index" @click="check(index)">
-            <span v-if="index < score"><img src="@/assets/blue_star_small.png" style="width:13%" /></span>
-            <span v-if="index >= score"><img src="@/assets/grey_star_small.png" style="width:13%" /></span>
-          </span>
-        </span>
-      </div>
-
-      <div id="Img">
-        <img src="@/assets/jugun.png" alt="Image" />
-        <br />
-        <span class='explain'>
-          <span v-for="index in 5" :key="index" @click="check(index)">
-            <span v-if="index < score"><img src="@/assets/blue_star_small.png" style="width:13%" /></span>
-            <span v-if="index >= score"><img src="@/assets/grey_star_small.png" style="width:13%" /></span>
-          </span>
-        </span>
-      </div>
-
-      <div id="Img">
-        <img src="@/assets/laggi.png" alt="Image" />
-        <br />
-        <span class='explain'>
-          <span v-for="index in 5" :key="index" @click="check(index)">
-            <span v-if="index < score"><img src="@/assets/blue_star_small.png" style="width:13%" /></span>
-            <span v-if="index >= score"><img src="@/assets/grey_star_small.png" style="width:13%" /></span>
-          </span>
-        </span>
-      </div>
-
-
-      <div id="Img">
-        <img src="@/assets/runningman.png" alt="Image" />
-        <br />
-        <span class='explain'>
-          <span v-for="index in 5" :key="index" @click="check(index)">
-            <span v-if="index < score"><img src="@/assets/blue_star_small.png" style="width:13%" /></span>
-            <span v-if="index >= score"><img src="@/assets/grey_star_small.png" style="width:13%" /></span>
-          </span>
-        </span>
-      </div>
-
-      <div id="Img">
-        <img src="@/assets/thatman.png" alt="Image" />
-        <br />
-        <span class='explain'>
-          <span v-for="index in 5" :key="index" @click="check(index)">
-            <span v-if="index < score"><img src="@/assets/blue_star_small.png" style="width:13%" /></span>
-            <span v-if="index >= score"><img src="@/assets/grey_star_small.png" style="width:13%" /></span>
-          </span>
-        </span>
-      </div>
-
-      <div id="Img">
-        <img src="@/assets/nangman.png" alt="Image" />
-        <br />
-        <span class='explain'>
-          <span v-for="index in 5" :key="index" @click="check(index)">
-            <span v-if="index < score"><img src="@/assets/blue_star_small.png" style="width:13%" /></span>
-            <span v-if="index >= score"><img src="@/assets/grey_star_small.png" style="width:13%" /></span>
-          </span>
-        </span>
-      </div>
-       -->
-       <div id="Img">
         <img class="poster" src="@/assets/hyori.png" alt="Image" />
         <br />
         <span class="explain">
@@ -167,64 +35,19 @@
         </span>
       </div>
 
-      <div id="Img">
+      <!-- <div id="Img">
         <img class="poster" v-for="(d, idx) in state.newProgramPosterImg" :key="idx"
-          :src="state.newProgramPosterImg[idx]" alt="Image"/>
+          :src="state.newProgramPosterImg[idx]" alt="Image" />
         <br />
-        <span v-for="(d, idx) in state.newProgramId" :key="idx"
-          :src="state.newProgramId[idx]" class="explain">
-          <span v-for="index in 5" :key="index" @click="check(index)">
-            <span v-if="index < score"><img src="@/assets/blue_star_small.png" style="width:13%" /></span>
+        <span v-for="(d, idx) in state.newProgramId" :key="idx" class="explain">
+          <span v-for="index[idx] in 5" :key="index" @click="check(index[idx])">
+            <span v-if="index[idx] < score[idx]"><img src="@/assets/blue_star_small.png" style="width:13%" /></span>
             <span v-if="index >= score"><img src="@/assets/grey_star_small.png" style="width:13%" /></span>
           </span>
         </span>
-      </div>
+      </div> -->
+      
     </div>
-    <!-- 
-  <section>
-<img src="@/assets/jugun.png" alt="Image" />
-<br/>
-<span id='explain'>
-      <span v-for="index in 5" :key="index" @click="check(index)">
-        <span v-if="index < score"><img src="@/assets/blue_star_small.png" style="width:2%"/></span>
-        <span v-if="index >= score"><img src="@/assets/grey_star_small.png" style="width:2%"/></span>
-      </span>
-    </span>
-  </section>
-
-  <section>
-<img src="@/assets/image_2.png" alt="Image" />
-<br/>
-<span id='explain'>
-      <span v-for="index in 5" :key="index" @click="check(index)">
-        <span v-if="index < score"><img src="@/assets/blue_star_small.png" style="width:2%"/></span>
-        <span v-if="index >= score"><img src="@/assets/grey_star_small.png" style="width:2%"/></span>
-      </span>
-    </span>
-  </section>
-
-  <section>
-<img src="@/assets/gs.png" alt="Image" />
-<br/>
-<span id='explain'>
-      <span v-for="index in 5" :key="index" @click="check(index)">
-        <span v-if="index < score"><img src="@/assets/blue_star_small.png" style="width:2%"/></span>
-        <span v-if="index >= score"><img src="@/assets/grey_star_small.png" style="width:2%"/></span>
-      </span>
-    </span>
-  </section>
-
-  <section>
-<img src="@/assets/laggi.png" alt="Image" />
-<br/>
-<span id='explain'>
-      <span v-for="index in 5" :key="index" @click="check(index)">
-        <span v-if="index < score"><img src="@/assets/blue_star_small.png" style="width:2%"/></span>
-        <span v-if="index >= score"><img src="@/assets/grey_star_small.png" style="width:2%"/></span>
-      </span>
-    </span>
-  </section> -->
-
     <br /><br /><br /><br />
   </div>
   <p style="text-align:center">
@@ -276,31 +99,31 @@ export default {
       }
 
 
-    // const add = () => {
-    //   // 지금 안됨.
-    //   // state.data.push("추가한 내용");
-    //   axios.post("/api/recommend/new").then((res) => {
-    //     console.log(res.data);
-    //   });
-    // };
+      // const add = () => {
+      //   // 지금 안됨.
+      //   // state.data.push("추가한 내용");
+      //   axios.post("/api/recommend/new").then((res) => {
+      //     console.log(res.data);
+      //   });
+      // };
 
-    // axios.get("/api/recommend/new").then((res) => {
-    //   // 데이터 가져오는 거.
-    //   console.log(res);
-    //   console.log(res.data);
-    //   console.log(res.data[0]);
-    //   console.log(res.data[0].title);
-    //   console.log(res.data[0].backdropPath);
-    //   console.log(res.data[0].posterImg);
-    //   state.data = res.data[0].posterImg;
+      // axios.get("/api/recommend/new").then((res) => {
+      //   // 데이터 가져오는 거.
+      //   console.log(res);
+      //   console.log(res.data);
+      //   console.log(res.data[0]);
+      //   console.log(res.data[0].title);
+      //   console.log(res.data[0].backdropPath);
+      //   console.log(res.data[0].posterImg);
+      //   state.data = res.data[0].posterImg;
 
-    //   var step;
+      //   var step;
 
-    //   for (step = 0; step < 20; step++) {
-    //     // Runs 5 times, with values of step 0 through 4.
-    //     console.log("Walking east one step");
-    //   }
-    // });
+      //   for (step = 0; step < 20; step++) {
+      //     // Runs 5 times, with values of step 0 through 4.
+      //     console.log("Walking east one step");
+      //   }
+      // });
     });
     return { state };
   },
@@ -308,7 +131,6 @@ export default {
 
 </script>
   
-
 <style scoped>
 .startButton {
   background-color: #ffffff;
@@ -349,11 +171,11 @@ export default {
   align-content: stretch;
 }
 
-.poster:hover {
+/* .poster:hover {
   filter: brightness(0.5);
-}
+} */
 
-.explain {
+/* .explain {
   display: none;
 }
 
@@ -363,5 +185,5 @@ export default {
   position: absolute;
   top: 1vw;
   left: 1vw;
-}
+} */
 </style>

@@ -4,9 +4,9 @@
       <div id="Img">
         <img class="liked_2" src="@/assets/runningman.png" alt="Image" />
         <div class="button">
-          <button @click="addToFavorites" v-show="!isFavorite" style="border:none; background: none"><img
+          <button @click="addToFavorites()" v-show="!isFavorite" style="border:none; background: none"><img
               class="hearted" src="@/assets/white_heart.png" /></button>
-          <button @click="deleteFromFavorites" v-show="isFavorite" style="background:none; border:none;"><img
+          <button @click="deleteFromFavorites()" v-show="isFavorite" style="background:none; border:none;"><img
               class="hearted" src="@/assets/red_heart.png" /></button>
         </div>
       </div>
@@ -14,9 +14,9 @@
       <div id="Img">
         <img class="liked_2" src="@/assets/thatman.png" alt="Image" />
         <div class="button">
-          <button @click="addToFavorites" v-show="!isFavorite" style="border:none; background: none"><img
+          <button @click="addToFavorites()" v-show="!isFavorite" style="border:none; background: none"><img
               class="hearted" src="@/assets/white_heart.png" /></button>
-          <button @click="deleteFromFavorites" v-show="isFavorite" style="background:none; border:none;"><img
+          <button @click="deleteFromFavorites()" v-show="isFavorite" style="background:none; border:none;"><img
               class="hearted" src="@/assets/red_heart.png" /></button>
         </div>
       </div>
@@ -64,9 +64,9 @@
         <img class="liked" v-for="(d, idx) in state.newProgramPosterImg" :key="idx"
           :src="state.newProgramPosterImg[idx]" alt="Image" />
         <div class="button">
-          <button v-for="(d, idx) in state.likedIndex" :key="idx" :src="state.likedIndex[idx]" @click="addToFavorites" v-show="!isFavorite[idx]" style="border:none; background: none"><img
+          <button v-for="(d, idx) in state.likedIndex" :key="idx" @click="addToFavorites()" v-show="!isFavorite[idx]" style="border:none; background: none"><img
               class="hearted" src="@/assets/white_heart.png" /></button>
-          <button v-for="(d, idx) in state.likedIndex" :key="idx" :src="state.likedIndex[idx]" @click="deleteFromFavorites" v-show="isFavorite[idx]" style="background:none; border:none;"><img
+          <button v-for="(d, idx) in state.likedIndex" :key="idx" @click="deleteFromFavorites()" v-show="isFavorite[idx]" style="background:none; border:none;"><img
               class="hearted" src="@/assets/red_heart.png" /></button>
         </div>
       </div>
@@ -95,7 +95,7 @@ export default {
   name: "LikedProgram",
   data() {
     return {
-      isFavorite: false,
+      isFavorite: true,
     }
   },
   setup() {
