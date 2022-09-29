@@ -1,7 +1,5 @@
 package com.billow.jwt;
 
-import com.billow.domain.entity.user.User;
-import com.billow.exception.NotFoundException;
 import com.billow.exception.UnauthorizedException;
 import com.billow.exception.WrongAccessException;
 import com.billow.model.repository.user.UserRepository;
@@ -10,13 +8,8 @@ import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
@@ -29,8 +22,7 @@ public class JwtTokenProvider implements InitializingBean {
 
     private static final String SECRET = "ssafy second project B309 Billow";
     private static final long EXPIRATION = 1000 * 60 * 60 * 2L;
-//    private static final long EXPIRATION = 1000 * 5L; // 테스트 1초
-    private static final String EXPIRED_TOKEN = "토큰이 만료되었습니다.";
+    private static final String EXPIRED_TOKEN = "토큰이 만료되었습니다. 리프레시 토큰을 주세요.";
     private static final String USER_NOT_FOUND = "해당 유저를 찾을 수 없습니다.";
     private static final String RE_LOGIN = "다시 로그인 해주세요!";
 
@@ -46,36 +38,22 @@ public class JwtTokenProvider implements InitializingBean {
     }
 
     public static String createAuthToken(Long id, String email, String name) {
-        return create(id, email, name, "Auth-access", EXPIRATION);
+        return create(id, email, name, "Auth-access",
+                EXPIRATION
+//                1000 * 30L // 테스트용 : 3초
+        );
     }
 
     public static String createRefreshToken() {
-        return create(null, null, null, "refreshToken", EXPIRATION * 5);
+        return create(null, null, null, "refreshToken",
+                EXPIRATION * 5
+//                1000 * 60 * 2L // 테스트용 : 2분
+        );
     }
 
     public static Long getUserId(String token) {
         return ((Number) getAllClaims(token).get("id")).longValue();
     }
-
-//    public static boolean validateToken(String token) {
-//        try {
-//            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
-//            return true;
-//        } catch (ExpiredJwtException e){
-//            // 만료된 경우에는 refresh token을 확인하기 위해
-//            throw new UnauthorizedException(EXPIRED_TOKEN);
-//        } catch (JwtException | IllegalArgumentException e) {
-//            throw e;
-//        }
-//    }
-
-//    public static void validateToken(String token) {
-//        try {
-//            getAllClaims(token);
-//        } catch (ExpiredJwtException e) {
-//            throw new UnauthorizedException(EXPIRED_TOKEN);
-//        }
-//    }
 
     private static String create(Long id, String email, String name, String subject, long expiration) {
         final JwtBuilder builder = Jwts.builder()
@@ -86,7 +64,6 @@ public class JwtTokenProvider implements InitializingBean {
                 .claim("email", email)
                 .claim("name", name)
                 .signWith(SignatureAlgorithm.HS256, key);
-//                .signWith(SignatureAlgorithm.HS256, SECRET.getBytes(StandardCharsets.UTF_8));
         final String jwt = builder.compact();
         if (email == null) {
             log.info("리프레시 토큰 발행: {}", jwt);
@@ -98,7 +75,6 @@ public class JwtTokenProvider implements InitializingBean {
 
     private static Claims getAllClaims(String token) {
         return Jwts.parser()
-//                .setSigningKey(SECRET.getBytes(StandardCharsets.UTF_8))
                 .setSigningKey(key)
                 .parseClaimsJws(token)
                 .getBody();
