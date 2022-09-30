@@ -114,26 +114,18 @@ def ott_data(request):
 def user_recomm(request, user_id):
 
     user_id = user_id
-    print(user_id)
     indi_user_recomm = recomm.mf_algo_individual(user_id)
 
     indi_user_recomm = indi_user_recomm.values.tolist()
-    print('#############')
-    print(indi_user_recomm)
+
     lst = []
     for i in indi_user_recomm:
         lst.append(i[0])
-    print(lst)
-    # print(indi_user_recomm)
-    print('#############')
 
     indi_user_recomm_list = []
     for program_id in indi_user_recomm:
         program = TbProgram.objects.get(pk=program_id[0])
         indi_user_recomm_list.append(program)
-    
-    print(indi_user_recomm_list)
-
 
     serializer = ProgramSerializer(data = indi_user_recomm_list, many = True)
     if serializer.is_valid():
@@ -145,7 +137,6 @@ def user_recomm(request, user_id):
 def condition_recomm(request, program_id):
     # 매개변수로 받은 아이들 확인   
     program_id = program_id
-    print(program_id)
     
     # 프로그램 아이디로 검색해서 나온 결과 받기
     indi_condition_program = recomm.mf_condition_recomm(program_id)
