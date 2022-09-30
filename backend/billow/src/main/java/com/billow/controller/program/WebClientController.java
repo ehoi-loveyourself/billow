@@ -31,8 +31,12 @@ public class WebClientController {
             @ApiResponse(responseCode = "200", description = "추천리스트 호출 성공"),
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
-    @GetMapping("/user-recommend")
-    public ResponseEntity<Object> userRecommend(@RequestHeader("Auth-access") String token) {
+    @GetMapping("/user-recommend/{userId}")
+//    public ResponseEntity<Object> userRecommend(@RequestHeader("Auth-access") String token) {
+//        log.info("사용자 평점 기반 프로그램 추천 API 호출");
+//        List<ProgramResponse> responses = webClientService.userProgramRecommend(JwtTokenProvider.getUserId(token));
+//        log.info("추천리스트 호출 성공");
+    public ResponseEntity<Object> userRecommend(@PathVariable("userId") Long userId) {
         log.info("사용자 평점 기반 프로그램 추천 API 호출");
         List<ProgramResponse> responses = webClientService.userProgramRecommend(JwtTokenProvider.getUserId(token));
         log.info("추천리스트 호출 성공");
@@ -47,10 +51,13 @@ public class WebClientController {
             @ApiResponse(responseCode = "404", description = "해당 프로그램을 찾을 수 없습니다."),
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
-    @GetMapping("/condition-recommend/{programId}")
-    public ResponseEntity<Object> conditionRecommend(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId) {
+    @GetMapping("/condition-recommend/{programId}/{userId}")
+//    @GetMapping("/condition-recommend/{programId}")
+//    public ResponseEntity<Object> conditionRecommend(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId) {
+    public ResponseEntity<Object> conditionRecommend(@PathVariable("userId") Long userId, @PathVariable("programId") Long programId) {
+
         log.info("상황별 프로그램 추천 API 호출");
-        List<ProgramResponse> responses = webClientService.conditionRecommend(JwtTokenProvider.getUserId(token), programId);
+        List<ProgramResponse> responses = webClientService.conditionRecommend(userId, programId);
         log.info("상황별 프로그램 추천 성공");
         return ResponseEntity.ok()
                 .body(responses);
