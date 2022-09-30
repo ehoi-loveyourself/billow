@@ -36,6 +36,7 @@ public class ChatService {
                 .stream()
                 .map(chat -> ChatResponse.builder()
                         .userNickName(chat.getUser().getNickName())
+                        .userProfile(chat.getUser().getProfileImg().getUrl())
                         .content(chat.getContent())
                         .regDateTime(chat.getDateTime())
                         .build())

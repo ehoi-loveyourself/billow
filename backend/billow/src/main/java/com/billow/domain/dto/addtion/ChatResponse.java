@@ -10,6 +10,8 @@ public class ChatResponse {
 
     private String userNickName;
 
+    private String userProfile;
+
     private String content;
 
     private String regDateTime;
