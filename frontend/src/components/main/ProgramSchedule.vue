@@ -36,11 +36,9 @@
                 <span class="box" v-if="organization.broadcastingRerun"
                   ><span class="box_design">재</span>&nbsp;</span
                 >
-                <img
-                  src="@/assets/alarm.png"
-                  v-b-modal.modal-1
-                  style="cursor: pointer"
-                />
+                <span @click="alarm(organization.programOrganizationId)">
+                  <img src="@/assets/alarm.png" style="cursor: pointer" />
+                </span>
               </div>
             </b-td>
           </b-tr>
@@ -49,7 +47,7 @@
     </div>
   </div>
 
-  <b-modal
+  <!-- <b-modal
     size="sm"
     hide-footer
     id="modal-1"
@@ -70,19 +68,24 @@
       aria-label="Close"
       >좋아요!</b-button
     >
-  </b-modal>
+  </b-modal> -->
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   name: "Star",
   computed: {
     ...mapState(["programSchedule"]),
   },
   methods: {
-    registAlarm() {
-      alert("emdf");
+    ...mapActions(["registAlarm"]),
+    alarm(id) {
+      if (confirm("방영 15분전 알람을 등록합니다.") == true) {
+        this.registAlarm(id);
+      } else {
+        return;
+      }
     },
   },
 };
