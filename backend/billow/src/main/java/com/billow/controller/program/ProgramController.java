@@ -3,6 +3,7 @@ package com.billow.controller.program;
 import com.billow.domain.dto.addtion.RatingRequest;
 import com.billow.domain.dto.program.CastResponse;
 import com.billow.domain.dto.program.ProgramResponse;
+import com.billow.domain.dto.program.RandomProgramResponse;
 import com.billow.jwt.JwtTokenProvider;
 import com.billow.model.service.program.CastService;
 import com.billow.model.service.program.ProgramService;
@@ -68,7 +69,7 @@ public class ProgramController {
     @GetMapping("/random")
     public ResponseEntity<Object> randomProgram() {
         log.info("사용자 초기 데이터 수집용 랜덤 프로그램 출력 API 호출");
-        List<ProgramResponse> response = programService.randomProgram();
+        List<RandomProgramResponse> response = programService.randomProgram();
         log.info("랜덤 프로그램 출력 성공");
         return ResponseEntity.ok()
                 .body(response);
