@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import AboutView from '../views/AboutView.vue';
 
+
 const routes = [
   {
     path: '/',
@@ -39,38 +40,6 @@ const routes = [
               },
     ]
   },
-
-
-  // {
-  //   path: '/',
-  //   name: 'home',
-  //   component: HomeView,
-  // },
-  // {
-  //   path:'/',
-  //   name:'loginmain',
-  //   component:()=>import("@/components/login/LoginMain.vue"),
-  // },
-  // {
-  //   path: '/about',
-  //   name: 'about',
-  //   component: AboutView,
-  // },
-  // {
-  //   path: '/situation',
-  //   name: 'situation',
-  //   component: () => import('@/views/SituationView.vue'),
-  // },
-  // {
-  //   path: '/like',
-  //   name: 'like',
-  //   component: () => import('@/views/LikeView.vue'),
-  // },
-  // {
-  //   path: '/main',
-  //   name: 'main',
-  //   component: () => import('@/views/MainView.vue'),
-  // },
   {
     path: '/detail',
     name: 'detail',
@@ -107,6 +76,11 @@ const routes = [
     path: '/searchresult',
     name: 'searchresult',
     component: () => import('@/components/search/SearchResult.vue'),
+  },
+  {
+    path: '/userinfo',
+    name: 'userinfo',
+    component: () => import('@/components/user/UserInfo.vue'),
   }
 ]
 
