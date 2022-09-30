@@ -418,7 +418,7 @@
       <b-col cols="10" style="padding-left: 1%">
         <b-form-input
           v-model="phonenum"
-          placeholder="휴대폰 번호를 입력하세요."
+          placeholder="000-0000-0000"
           style="width: 20%"
         ></b-form-input>
       </b-col>
@@ -439,15 +439,20 @@
 </template>
   
 <script>
+import axios from "axios";
+import "@splidejs/splide/dist/css/themes/splide-default.min.css";
+
 export default {
   data() {
     return {
       nickname: "",
+      email: "",
+      name: "",
       phonenum: "",
       selected_gender: "",
       selected_age: null,
-      selected_region: null,
-      selected_tv_carrier: null,
+      selected_region: "",
+      selected_tv_carrier: "",
       profileImgId: null,
       options_age: [
         { value: null, text: "연령대를 선택하세요" },
@@ -473,33 +478,34 @@ export default {
       ],
       options_tv_carrier: [
         { value: null, text: "통신사를 선택하세요" },
-        { value: "a", text: "SK 브로드밴드" },
-        { value: "b", text: "KT olleh" },
-        { value: "c", text: "LG U+" },
-        { value: "d", text: "SkyLife" },
-        { value: "e", text: "LG 헬로비전" },
-        { value: "f", text: "티브로드" },
-        { value: "g", text: "아름방송(성남)" },
-        { value: "h", text: "딜라이브" },
-        { value: "i", text: "현대 HCN(새로넷 방송)" },
-        { value: "j", text: "서경방송" },
-        { value: "k", text: "NIB 남인천방송" },
-        { value: "l", text: "CCS 충북방송" },
-        { value: "m", text: "CMB방송" },
-        { value: "n", text: "JCN울산중앙방송" },
-        { value: "o", text: "하나방송" },
+        { value: "SK 브로드밴드", text: "SK 브로드밴드" },
+        { value: "KT olleh", text: "KT olleh" },
+        { value: "LG U+", text: "LG U+" },
+        { value: "SkyLife", text: "SkyLife" },
+        { value: "LG 헬로비전", text: "LG 헬로비전" },
+        { value: "티브로드", text: "티브로드" },
+        { value: "아름방송(성남)", text: "아름방송(성남)" },
+        { value: "딜라이브", text: "딜라이브" },
+        { value: "현대 HCN(새로넷 방송)", text: "현대 HCN(새로넷 방송)" },
+        { value: "서경방송", text: "서경방송" },
+        { value: "NIB 남인천방송", text: "NIB 남인천방송" },
+        { value: "CCS 충북방송", text: "CCS 충북방송" },
+        { value: "CMB방송", text: "CMB방송" },
+        { value: "JCN울산중앙방송", text: "JCN울산중앙방송" },
+        { value: "하나방송", text: "하나방송" },
       ],
     };
   },
   name: "UserInfoCollect",
   methods: {
-    test() {
-      alert("dd");
-      alert(this.profileImgId);
-    },
     signUp() {
+      if (this.nickname == "") {
+        alert("닉네임 널이여");
+      } else {
+        alert("닉네임 채워졌으니 포스트실행");
+      }
       // 회원가입
-      alert("post 테스트");
+      // alert("post 테스트");
       // alert(localStorage.getItem("email"));
       // alert(localStorage.getItem("name"));
       // alert(localStorage.getItem("authToken"));
@@ -510,11 +516,17 @@ export default {
       // alert(this.selected_tv_carrier);
       // alert(this.profileImgId);
       // alert(this.phonenum);
-      this.$router.push("/main");
+      // this.$router.push("/main");
+      this.email = localStorage.getItem("email");
+      this.name = localStorage.getItem("name");
+      // alert(this.email);
+      // this.email.replace(/\"/gi, "");
+      // alert(this.name);
+      // alert(this.email);
       axios
         .post(`/api/users/signup`, {
-          email: localStorage.getItem("email"),
-          name: localStorage.getItem("name"),
+          email: this.email,
+          name: this.name,
           nickName: this.nickname,
           gender: this.selected_gender,
           age: this.selected_age,
@@ -525,8 +537,8 @@ export default {
         })
         .then((response) => {
           console.warn(response);
-          console.log(this.review);
-          this.$router.push("/main");
+          alert("post 성공");
+          this.$router.push("/userratingprogram");
         })
         .catch((ex) => {
           console.warn("ERROR!!!!! : ", ex);
