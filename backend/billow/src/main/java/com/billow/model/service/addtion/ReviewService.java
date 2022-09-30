@@ -36,6 +36,7 @@ public class ReviewService {
         return reviewRepository.findByProgramId(programId)
                 .stream()
                 .map(review -> ReviewResponse.builder()
+                        .reviewId(review.getId())
                         .userNickName(review.getUser().getNickName())
                         .userProfile(review.getUser().getProfileImg().getUrl())
                         .content(review.getContent())

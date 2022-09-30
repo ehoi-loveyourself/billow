@@ -3,7 +3,6 @@ package com.billow.model.service.program;
 import com.billow.domain.dto.organization.OrganizationResponse;
 import com.billow.domain.dto.program.CastResponse;
 import com.billow.domain.dto.program.OttResponse;
-import com.billow.domain.dto.program.ProgramIWatchedRequest;
 import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.domain.entity.addition.Rating;
 import com.billow.domain.entity.organization.ProgramOrganization;
@@ -19,7 +18,6 @@ import com.billow.model.repository.program.GenderAgeViewerRepository;
 import com.billow.model.repository.program.ProgramRepository;
 import com.billow.model.repository.user.UserRepository;
 import com.billow.util.DateUtil;
-import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

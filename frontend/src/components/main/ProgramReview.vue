@@ -16,20 +16,29 @@
           </span>
         </span>
       </b-col> -->
-      <b-col cols="11">
-        <b-form-input
+      <b-col cols="12">
+        <!-- <b-form-input
           v-model="review"
           placeholder="리뷰를 작성해주세요."
           required
           style="border-color: #a48282"
         >
-        </b-form-input>
+        </b-form-input> -->
+        <input
+          v-model="message"
+          class="form-control"
+          type="text"
+          name="search"
+          placeholder="리뷰를 작성해주세요."
+          required
+          @keyup.enter="onSubmit()"
+        />
       </b-col>
-      <b-col cols="1">
+      <!-- <b-col cols="1">
         <b-button size="md" type="submit" @click="reviewRegist()">
           <span>등록</span>
         </b-button>
-      </b-col>
+      </b-col> -->
     </b-row>
     <br />
     <section>
@@ -40,6 +49,15 @@
             <span class="wrap-star">
               {{ review.regDateTime }}
             </span>
+            <a href="#" class="button btnBorder btnBlue" v-b-modal.modal-5
+              ><span style="font-size: 0.8vw">수정</span></a
+            >&nbsp;
+            <a
+              href="#"
+              @click="reviewDelete(review.reviewId)"
+              class="button btnBorder btnRed"
+              ><span style="font-size: 0.8vw">삭제</span></a
+            >
           </h2>
           <p>{{ review.content }}</p>
         </article>
@@ -47,12 +65,43 @@
     </section>
     <br />
   </div>
+
+  <b-modal
+    size="m"
+    hide-footer
+    id="modal-5"
+    centered
+    no-stacking
+    title="리뷰 수정하기"
+    style="text-align: center"
+  >
+    <div style="margin-bottom: 5%">
+      <input
+        v-model="modifyReview"
+        class="form-control"
+        type="text"
+        placeholder="리뷰를 작성해주세요."
+        required
+        @keyup.enter="modifyReview()"
+      />
+    </div>
+    <b-button
+      size="m"
+      type="submit"
+      @click="reviewModify()"
+      style="background-color: blue"
+      data-bs-dismiss="modal"
+      aria-label="Close"
+    >
+      <span>수정</span>
+    </b-button>
+  </b-modal>
 </template>
 
 <script>
 import { reactive } from "@vue/reactivity";
 import axios from "axios";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "ProgramReview",
@@ -63,55 +112,42 @@ export default {
     const state = reactive({
       data: [],
     });
-
-    // const add = () => {
-    //   // 지금 안됨.
-    //   // state.data.push("추가한 내용");
-    //   axios.post("/api/recommend/new").then((res) => {
-    //     console.log(res.data);
-    //   });
-    // };
-
-    // axios.get("/api/recommend/new").then((res) => {
-    //   // 데이터 가져오는 거.
-    //   console.log(res);
-    //   console.log(res.data);
-    //   console.log(res.data[0]);
-    //   console.log(res.data[0].title);
-    //   console.log(res.data[0].backdropPath);
-    //   console.log(res.data[0].posterImg);
-    //   state.data[0] = res.data[0].title;
-    //   state.data[1] = res.data[0].backdropPath;
-    //   state.data[2] = res.data[0].posterImg;
-    // });
-
     return { state };
   },
   data() {
     return {
       score: 0,
-      review: "",
+      message: "",
+      modifyReview: "",
     };
   },
   methods: {
+    ...mapActions([
+      "registReview",
+      "deleteProgramReview",
+      "modifyProgramReview",
+    ]),
     check(index) {
       this.score = index + 1;
     },
-    reviewRegist() {
-      // post 사용 가능한 코드입니다. review 등록버튼 클릭 이벤트.
-      alert("post 테스트");
-      axios
-        .post(`/api/review/${this.programId}`, {
-          // /review/프로그램아이디
-          content: this.review,
-        })
-        .then((response) => {
-          console.warn(response);
-          console.log(this.review);
-        })
-        .catch((ex) => {
-          console.warn("ERROR!!!!! : ", ex);
-        });
+    onSubmit() {
+      if (this.message == "") {
+        alert("내용을 입력하세요.");
+        return;
+      }
+      this.registReview({ review: this.message, programId: this.programId });
+      this.message = "";
+    },
+    reviewModify() {
+      this.modifyProgramReview({
+        //채우기
+      });
+    },
+    reviewDelete(reviewId) {
+      this.deleteProgramReview({
+        reviewId: reviewId,
+        programId: this.programId,
+      });
     },
   },
 };
@@ -153,5 +189,41 @@ export default {
   background-position: left bottom;
   line-height: 0;
   vertical-align: top;
+}
+
+a.button {
+  padding: 0.2%;
+  /* margin: 10px 20px 10px 0; */
+  font-weight: 600;
+  text-align: center;
+  /* line-height: 50px; */
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btnBlue.btnBorder {
+  box-shadow: 0px 0px 0px 0px #212682;
+}
+
+.btnBlue.btnBorder:hover {
+  box-shadow: 0px 0px 0px 5px #212682;
+}
+
+.btnBlue {
+  background: #002bae;
+}
+
+.btnRed.btnBorder {
+  box-shadow: 0px 0px 0px 0px #823621;
+}
+
+.btnRed.btnBorder:hover {
+  box-shadow: 0px 0px 0px 5px #823621;
+}
+
+.btnRed {
+  background: #ae2b00;
 }
 </style>

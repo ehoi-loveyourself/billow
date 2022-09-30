@@ -47,10 +47,6 @@ public class ProgramService {
                 .map(program -> ProgramResponse.builder()
                         .id(program.getId())
                         .title(program.getTitle())
-                        .genres(program.getGenreList()
-                                .stream()
-                                .map(genre -> genre.getGenreInfo().getName())
-                                .collect(Collectors.toList()))
                         .age(program.getAge())
                         .summary(program.getSummary())
                         .broadcastingDay(program.getBroadcastingDay())
@@ -62,14 +58,6 @@ public class ProgramService {
                         .ratingCnt(program.getRatingCnt())
                         .posterImg(program.getPosterImg())
                         .backdropPath(program.getBackdropPath())
-                        .otts(program.getOttList()
-                                .stream()
-                                .map(ott -> OttResponse.builder()
-                                        .name(ott.getOttInfo().getName())
-                                        .url(ott.getOttInfo().getUrl())
-                                        .imgUrl(ott.getOttInfo().getImgUrl())
-                                        .build())
-                                .collect(Collectors.toList()))
                         .build())
                 .collect(Collectors.toList());
     }
@@ -101,6 +89,8 @@ public class ProgramService {
 
         Random r = new Random();
         int[] random = new int[50];
+        List<ProgramResponse> responses = new ArrayList<>();
+
         for (int i = 0; i < 50; i++) {
             random[i] = r.nextInt(programCnt);
         }

@@ -8,6 +8,8 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ReviewResponse {
 
+    private Long reviewId;
+
     private String userNickName;
 
     private String userProfile;
