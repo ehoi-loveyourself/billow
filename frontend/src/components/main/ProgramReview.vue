@@ -16,20 +16,29 @@
           </span>
         </span>
       </b-col> -->
-      <b-col cols="11">
-        <b-form-input
+      <b-col cols="12">
+        <!-- <b-form-input
           v-model="review"
           placeholder="리뷰를 작성해주세요."
           required
           style="border-color: #a48282"
         >
-        </b-form-input>
+        </b-form-input> -->
+        <input
+          v-model="message"
+          class="form-control"
+          type="text"
+          name="search"
+          placeholder="리뷰를 작성해주세요."
+          required
+          @keyup.enter="onSubmit()"
+        />
       </b-col>
-      <b-col cols="1">
+      <!-- <b-col cols="1">
         <b-button size="md" type="submit" @click="reviewRegist()">
           <span>등록</span>
         </b-button>
-      </b-col>
+      </b-col> -->
     </b-row>
     <br />
     <section>
@@ -41,10 +50,10 @@
               {{ review.regDateTime }}
             </span>
             <a href="#" class="button btnBorder btnBlue" v-b-modal.modal-5
-              ><span style="font-size:0.8vw">수정</span></a
+              ><span style="font-size: 0.8vw">수정</span></a
             >&nbsp;
             <a href="#" @click="reviewDelete()" class="button btnBorder btnRed"
-              ><span style="font-size:0.8vw">삭제</span></a
+              ><span style="font-size: 0.8vw">삭제</span></a
             >
           </h2>
           <p>{{ review.content }}</p>
@@ -60,10 +69,10 @@
             BILLOW&nbsp;&nbsp;
             <span class="wrap-star">2022-09-30 10:30&nbsp;&nbsp;&nbsp;</span>
             <a href="#" class="button btnBorder btnBlue" v-b-modal.modal-5
-              ><span style="font-size:0.8vw">수정</span></a
+              ><span style="font-size: 0.8vw">수정</span></a
             >&nbsp;
             <a href="#" @click="reviewDelete()" class="button btnBorder btnRed"
-              ><span style="font-size:0.8vw">삭제</span></a
+              ><span style="font-size: 0.8vw">삭제</span></a
             >
           </h2>
           <p>이 프로그램 너무 재밌어요!</p>
@@ -73,10 +82,10 @@
             billow&nbsp;&nbsp;
             <span class="wrap-star">2022-09-30 11:00&nbsp;&nbsp;&nbsp;</span>
             <a href="#" class="button btnBorder btnBlue" v-b-modal.modal-5
-              ><span style="font-size:0.8vw">수정</span></a
+              ><span style="font-size: 0.8vw">수정</span></a
             >&nbsp;
             <a href="#" @click="reviewDelete()" class="button btnBorder btnRed"
-              ><span style="font-size:0.8vw">삭제</span></a
+              ><span style="font-size: 0.8vw">삭제</span></a
             >
           </h2>
           <p>저도 너무 재밌어요!</p>
@@ -120,7 +129,7 @@
 <script>
 import { reactive } from "@vue/reactivity";
 import axios from "axios";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "ProgramReview",
@@ -131,56 +140,27 @@ export default {
     const state = reactive({
       data: [],
     });
-
-    // const add = () => {
-    //   // 지금 안됨.
-    //   // state.data.push("추가한 내용");
-    //   axios.post("/api/recommend/new").then((res) => {
-    //     console.log(res.data);
-    //   });
-    // };
-
-    // axios.get("/api/recommend/new").then((res) => {
-    //   // 데이터 가져오는 거.
-    //   console.log(res);
-    //   console.log(res.data);
-    //   console.log(res.data[0]);
-    //   console.log(res.data[0].title);
-    //   console.log(res.data[0].backdropPath);
-    //   console.log(res.data[0].posterImg);
-    //   state.data[0] = res.data[0].title;
-    //   state.data[1] = res.data[0].backdropPath;
-    //   state.data[2] = res.data[0].posterImg;
-    // });
-
     return { state };
   },
   data() {
     return {
       score: 0,
-      review: "",
+      message: "",
       modifyReview: "",
     };
   },
   methods: {
+    ...mapActions(["registReview"]),
     check(index) {
       this.score = index + 1;
     },
-    reviewRegist() {
-      // post 사용 가능한 코드입니다. review 등록버튼 클릭 이벤트.
-      alert("post 테스트");
-      axios
-        .post(`/api/review/${this.programId}`, {
-          // /review/프로그램아이디
-          content: this.review,
-        })
-        .then((response) => {
-          console.warn(response);
-          console.log(this.review);
-        })
-        .catch((ex) => {
-          console.warn("ERROR!!!!! : ", ex);
-        });
+    onSubmit() {
+      if (this.message == "") {
+        alert("내용을 입력하세요.");
+        return;
+      }
+      this.registReview({ review: this.message, programId: this.programId });
+      this.message = "";
     },
     reviewModify() {
       alert("리뷰 수정 버튼 실행");
