@@ -8,16 +8,13 @@ import com.billow.domain.entity.user.ProfileImg;
 import com.billow.domain.entity.user.Region;
 import com.billow.domain.entity.user.TvCarrier;
 import com.billow.domain.entity.user.User;
-import com.billow.exception.BadRequestException;
-import com.billow.exception.DuplicationException;
-import com.billow.exception.NotFoundException;
-import com.billow.exception.WrongFormException;
+import com.billow.exception.*;
+import com.billow.jwt.JwtTokenProvider;
 import com.billow.model.repository.addition.RatingRepository;
 import com.billow.model.repository.user.ProfileImgRepository;
 import com.billow.model.repository.user.RegionRepository;
 import com.billow.model.repository.user.TvCarrierRepository;
 import com.billow.model.repository.user.UserRepository;
-import com.billow.util.JwtUtil;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +23,6 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -45,6 +41,7 @@ public class UserService {
     private static final String TOKEN_NOT_VALID = "토큰 정보가 올바르지 않습니다.";
     private static final String PROFILE_IMG_NOT_FOUND = "프로필 이미지를 찾을 수 없습니다.";
     private static final String NO_RATING = "남기신 평점이 없습니다!";
+    private static final String RE_LOGIN = "다시 로그인 해주세요";
 
 
     private final UserRepository userRepository;
@@ -78,8 +75,8 @@ public class UserService {
                 user = new User(signUpRequest.getEmail(), signUpRequest.getName());
                 userRepository.save(user);
             }
-            String authToken = JwtUtil.createAuthToken(user.getId(), user.getEmail(), user.getName());
-            String refreshToken = JwtUtil.createRefreshToken();
+            String authToken = JwtTokenProvider.createAuthToken(user.getId(), user.getEmail(), user.getName());
+            String refreshToken = JwtTokenProvider.createRefreshToken();
 
             Cookie refreshCookie = new Cookie("refreshToken", refreshToken);
             refreshCookie.setMaxAge(60 * 60 * 24); // 하루
@@ -105,7 +102,7 @@ public class UserService {
             throw new DuplicationException(NICKNAME_DUPLICATED);
         }
         return new Message("사용 가능한 닉네임입니다.");
-   }
+    }
 
     public Message signUp(SignUpRequest signUpRequest) {
         User user = userRepository.findByEmail(signUpRequest.getEmail());
@@ -135,13 +132,20 @@ public class UserService {
 
     public AuthTokenResponse refresh(String email, String refreshToken) {
         User user = userRepository.findByEmail(email);
+        if (refreshToken == null) {
+            throw new WrongAccessException(RE_LOGIN);
+        }
         // 데이터베이스에 있는 리프레시 토큰과 같은지 판단
         if (!user.getRefreshToken().equals(refreshToken)) {
             throw new WrongFormException(TOKEN_NOT_VALID);
         }
-        return AuthTokenResponse.builder()
-                .AuthToken(JwtUtil.createAuthToken(user.getId(), user.getEmail(), user.getName()))
-                .build();
+        // 리프레시 토큰도 만료되었는지 판단
+        if (JwtTokenProvider.validateRefreshToken(refreshToken)) {
+            return AuthTokenResponse.builder()
+                    .authToken(JwtTokenProvider.createAuthToken(user.getId(), user.getEmail(), user.getName()))
+                    .build();
+        }
+        throw new WrongAccessException(RE_LOGIN);
     }
 
     public Message logout(Long userId) {

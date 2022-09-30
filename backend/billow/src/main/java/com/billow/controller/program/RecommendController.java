@@ -2,10 +2,9 @@ package com.billow.controller.program;
 
 import com.billow.domain.dto.organization.OrganizationResponse;
 import com.billow.domain.dto.program.CastResponse;
-import com.billow.domain.dto.program.ProgramIWatchedRequest;
 import com.billow.domain.dto.program.ProgramResponse;
+import com.billow.jwt.JwtTokenProvider;
 import com.billow.model.service.program.RecommendService;
-import com.billow.util.JwtUtil;
 import com.billow.util.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -14,7 +13,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -65,7 +67,7 @@ public class RecommendController {
             //@RequestHeader("Auth-access") String token
             ) {
         log.info("특정 배우 프로그램 추천 API 호출");
-        List<CastResponse> response = recommendService.recommendActor(1L);
+        List<CastResponse> response = recommendService.recommendActor(JwtTokenProvider.getUserId(token));
         log.info("특정 배우 프로그램 추천 API 성공");
         return ResponseEntity.ok()
                 .body(response);
@@ -78,11 +80,9 @@ public class RecommendController {
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
     @GetMapping("/gender-age")
-    public ResponseEntity<Object> recommendGenderAge(
-            //@RequestHeader("Auth-access") String token
-            ) {
+    public ResponseEntity<Object> recommendGenderAge(@RequestHeader("Auth-access") String token) {
         log.info("성연령별 프로그램 추천 API 호출");
-        List<ProgramResponse> response = recommendService.recommendGenderAge(1L);
+        List<ProgramResponse> response = recommendService.recommendGenderAge(JwtTokenProvider.getUserId(token));
         log.info("성연령별 프로그램 추천 API 성공");
         return ResponseEntity.ok()
                 .body(response);

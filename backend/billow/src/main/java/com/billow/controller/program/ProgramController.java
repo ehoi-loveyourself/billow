@@ -3,9 +3,9 @@ package com.billow.controller.program;
 import com.billow.domain.dto.addtion.RatingRequest;
 import com.billow.domain.dto.program.CastResponse;
 import com.billow.domain.dto.program.ProgramResponse;
+import com.billow.jwt.JwtTokenProvider;
 import com.billow.model.service.program.CastService;
 import com.billow.model.service.program.ProgramService;
-import com.billow.util.JwtUtil;
 import com.billow.util.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -66,9 +66,9 @@ public class ProgramController {
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
     @GetMapping("/random")
-    public ResponseEntity<Object> randomProgram(@RequestHeader("Auth-access") String token) {
+    public ResponseEntity<Object> randomProgram() {
         log.info("사용자 초기 데이터 수집용 랜덤 프로그램 출력 API 호출");
-        List<ProgramResponse> response = programService.randomProgram(JwtUtil.getUserId(token));
+        List<ProgramResponse> response = programService.randomProgram();
         log.info("랜덤 프로그램 출력 성공");
         return ResponseEntity.ok()
                 .body(response);
@@ -84,7 +84,7 @@ public class ProgramController {
     @PostMapping("/{programId}")
     public ResponseEntity<Object> postProgramRating(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId, @RequestBody RatingRequest ratingRequest) {
         log.info("프로그램 평점 등록 API 호출");
-        Message response = programService.postProgramRating(JwtUtil.getUserId(token), programId, ratingRequest);
+        Message response = programService.postProgramRating(JwtTokenProvider.getUserId(token), programId, ratingRequest);
         log.info("프로그램 평점 등록 성공");
         return ResponseEntity.ok()
                 .body(response);
