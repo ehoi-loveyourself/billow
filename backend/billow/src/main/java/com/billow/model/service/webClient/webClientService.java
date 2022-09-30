@@ -7,6 +7,7 @@ import com.billow.exception.NotFoundException;
 import com.billow.model.repository.program.GenreRepository;
 import com.billow.model.repository.program.ProgramRepository;
 import com.billow.model.repository.user.UserRepository;
+import io.swagger.models.auth.In;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -30,14 +32,12 @@ public class webClientService {
     private final ProgramRepository programRepository;
 
     public List<ProgramResponse> userProgramRecommend(Long userId) {
-        List<Program> programList = callDjangoApi(userId);
-        List<Genre> genreList = new ArrayList<>();
-        for (Program program : programList) {
-            Long programId = program.getId();
-            genreList = genreRepository.findByProgramId(programId);
-            for (Genre genre : genreList) {
-                program.getGenreList().add(genre);
-            }
+        List<Long> programIdList = callDjangoApi(userId);
+        List<Program> programList = new ArrayList<>();
+        for (Long programId : programIdList) {
+            Program program = programRepository.findById(programId)
+                    .orElseThrow(() -> new NotFoundException("프로그램이 없습니다."));
+            programList.add(program);
         }
         return programList
                 .stream()
@@ -64,12 +64,12 @@ public class webClientService {
                 .collect(Collectors.toList());
     }
 
-    private List<Program> callDjangoApi(Long userId) {
+    private List<Long> callDjangoApi(Long userId) {
         return webClient.get()
                 .uri("db/" + userId + "/")
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .bodyToFlux(Program.class)
+                .bodyToFlux(Long.class)
                 .toStream()
                 .collect(Collectors.toList());
     }
@@ -79,17 +79,14 @@ public class webClientService {
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
         programRepository.findById(programId)
                 .orElseThrow(() -> new NotFoundException(PROGRAM_NOT_FOUND));
-
-        List<Program> conditionProgramByDjango = getConditionProgramByDjango(programId);
-        List<Genre> genreList = new ArrayList<>();
-        for (Program program : conditionProgramByDjango) {
-            genreList = genreRepository.findByProgramId(programId);
-            for (Genre genre : genreList) {
-                program.getGenreList().add(genre);
-            }
+        List<Program> programList = new ArrayList<>();
+        List<Long> conditionProgramByDjango = getConditionProgramByDjango(programId);
+        for (Long programNum : conditionProgramByDjango) {
+            Program program = programRepository.findById(programNum)
+                    .orElseThrow(() -> new NotFoundException("프로그램이 없습니다."));
+            programList.add(program);
         }
-
-        return conditionProgramByDjango
+        return programList
                 .stream()
                 .map(program -> ProgramResponse.builder()
                         .id(program.getId())
@@ -114,12 +111,12 @@ public class webClientService {
                 .collect(Collectors.toList());
     }
 
-    private List<Program> getConditionProgramByDjango(Long programId) {
+    private List<Long> getConditionProgramByDjango(Long programId) {
         return webClient.get()
-                .uri("db/" + programId + "/")
+                .uri("db/program/" + programId + "/")
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .bodyToFlux(Program.class)
+                .bodyToFlux(Long.class)
                 .toStream()
                 .collect(Collectors.toList());
     }
