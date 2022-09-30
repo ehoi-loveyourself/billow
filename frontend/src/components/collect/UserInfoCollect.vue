@@ -18,102 +18,102 @@
       </b-col>
 
       <b-col cols="10" style="padding-left:1%;">
-        <input type="radio" name="choice" id="choose-1" value="1" />
+        <input type="radio" name="choice" id="choose-1" value="1" v-model="profileImgId" />
         <label for="choose-1">
           <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/12" size="4rem"></b-avatar>
         </label>
 
-        <input type="radio" name="choice" id="choose-2" value="2" />
+        <input type="radio" name="choice" id="choose-2" value="2" v-model="profileImgId"/>
         <label for="choose-2">
           <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/11" size="4rem"></b-avatar>
         </label>
 
-        <input type="radio" name="choice" id="choose-3" value="3" />
+        <input type="radio" name="choice" id="choose-3" value="3" v-model="profileImgId"/>
         <label for="choose-3">
           <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/15" size="4rem"></b-avatar>
         </label>
 
-        <input type="radio" name="choice" id="choose-4" value="4" />
+        <input type="radio" name="choice" id="choose-4" value="4" v-model="profileImgId"/>
         <label for="choose-4">
           <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/13" size="4rem"></b-avatar>
         </label>
 
-        <input type="radio" name="choice" id="choose-5" value="5" />
+        <input type="radio" name="choice" id="choose-5" value="5" v-model="profileImgId"/>
         <label for="choose-5">
           <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/16" size="4rem"></b-avatar>
         </label>
 
-        <input type="radio" name="choice" id="choose-6" value="6" />
+        <input type="radio" name="choice" id="choose-6" value="6" v-model="profileImgId"/>
         <label for="choose-6">
           <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/17" size="4rem"></b-avatar>
         </label>
 
-        <input type="radio" name="choice" id="choose-7" value="7" />
+        <input type="radio" name="choice" id="choose-7" value="7" v-model="profileImgId"/>
         <label for="choose-7">
           <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/18" size="4rem"></b-avatar>
         </label>
 
-        <input type="radio" name="choice" id="choose-8" value="8" />
+        <input type="radio" name="choice" id="choose-8" value="8" v-model="profileImgId"/>
         <label for="choose-8">
           <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/19" size="4rem"></b-avatar>
         </label>
 
-        <input type="radio" name="choice" id="choose-9" value="9" />
+        <input type="radio" name="choice" id="choose-9" value="9" v-model="profileImgId"/>
         <label for="choose-9">
           <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/20" size="4rem"></b-avatar>
         </label>
 
-        <input type="radio" name="choice" id="choose-10" value="10" />
+        <input type="radio" name="choice" id="choose-10" value="10" v-model="profileImgId"/>
         <label for="choose-10">
           <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/14" size="4rem"></b-avatar>
         </label>
         <br />
-        <input type="radio" name="choice" id="choose-11" value="11" />
+        <input type="radio" name="choice" id="choose-11" value="11" v-model="profileImgId"/>
         <label for="choose-11">
           <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/1" size="4rem"></b-avatar>
         </label>
 
-        <input type="radio" name="choice" id="choose-12" value="12" />
+        <input type="radio" name="choice" id="choose-12" value="12" v-model="profileImgId"/>
         <label for="choose-12">
           <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/2" size="4rem"></b-avatar>
         </label>
 
-        <input type="radio" name="choice" id="choose-13" value="13" />
+        <input type="radio" name="choice" id="choose-13" value="13" v-model="profileImgId"/>
         <label for="choose-13">
           <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/3" size="4rem"></b-avatar>
         </label>
 
-        <input type="radio" name="choice" id="choose-14" value="14" />
+        <input type="radio" name="choice" id="choose-14" value="14" v-model="profileImgId"/>
         <label for="choose-14">
           <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/4" size="4rem"></b-avatar>
         </label>
 
-        <input type="radio" name="choice" id="choose-15" value="15" />
+        <input type="radio" name="choice" id="choose-15" value="15" v-model="profileImgId"/>
         <label for="choose-15">
           <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/5" size="4rem"></b-avatar>
         </label>
 
-        <input type="radio" name="choice" id="choose-16" value="16" />
+        <input type="radio" name="choice" id="choose-16" value="16" v-model="profileImgId"/>
         <label for="choose-16">
           <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/6" size="4rem"></b-avatar>
         </label>
 
-        <input type="radio" name="choice" id="choose-17" value="17" />
+        <input type="radio" name="choice" id="choose-17" value="17" v-model="profileImgId"/>
         <label for="choose-17">
           <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/7" size="4rem"></b-avatar>
         </label>
 
-        <input type="radio" name="choice" id="choose-18" value="18" />
+        <input type="radio" name="choice" id="choose-18" value="18" v-model="profileImgId"/>
         <label for="choose-18">
           <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/8" size="4rem"></b-avatar>
         </label>
 
-        <input type="radio" name="choice" id="choose-19" value="19" />
+        <input type="radio" name="choice" id="choose-19" value="19" v-model="profileImgId"/>
         <label for="choose-19">
           <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/9" size="4rem"></b-avatar>
         </label>
 
-        <input type="radio" name="choice" id="choose-20" value="20" />
+        <input type="radio" name="choice" id="choose-20" value="20" v-model="profileImgId"/>
         <label for="choose-20">
           <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/10" size="4rem"></b-avatar>
         </label>
@@ -126,11 +126,11 @@
       <b-col cols="10" style="padding-left:1%">
         <b-row>
           <b-col cols="1">
-            <b-form-radio v-model="selected_gender" :aria-describedby="ariaDescribedby" name="some-radios" value="A">남
+            <b-form-radio v-model="selected_gender" :aria-describedby="ariaDescribedby" name="some-radios" value="남">남
             </b-form-radio>
           </b-col>
           <b-col>
-            <b-form-radio v-model="selected_gender" :aria-describedby="ariaDescribedby" name="some-radios" value="B">여
+            <b-form-radio v-model="selected_gender" :aria-describedby="ariaDescribedby" name="some-radios" value="여">여
             </b-form-radio>
           </b-col>
         </b-row>
@@ -181,12 +181,8 @@
   </section>
   <br><br />
   <p style="text-align:center">
-    <a class="startButton" href="#" role="button" style="border-radius: 15px;">
-      <router-link :to="{ name: 'userratingprogram' }" class="nav-link"
-        style="font-size:20px; padding:10px; color:black;">
-        NEXT
-      </router-link>
-    </a>
+    <a @click="signUp()" class="startButton" href="#" role="button" style="border-radius: 15px; font-size: 20px;
+          padding: 15px; color: black;">NEXT</a>
   </p>
   <br /><br /><br /><br /><br />
 </template>
@@ -201,13 +197,15 @@ export default {
       selected_age: null,
       selected_region: null,
       selected_tv_carrier: null,
+      profileImgId: null,
       options_age: [
         { value: null, text: '연령대를 선택하세요' },
-        { value: 'a', text: '20대' },
-        { value: 'b', text: '30대' },
-        { value: 'c', text: '40대' },
-        { value: 'd', text: '50대' },
-        { value: 'd', text: '60대 이상' },
+        { value: '10', text: '10대' },
+        { value: '20', text: '20대' },
+        { value: '30', text: '30대' },
+        { value: '40', text: '40대' },
+        { value: '50', text: '50대' },
+        { value: '60', text: '60대 이상' },
       ],
       options_region: [
         { value: null, text: '지역을 선택하세요' },
@@ -243,6 +241,46 @@ export default {
     }
   },
   name: "UserInfoCollect",
+  methods: {
+    test(){
+      alert("dd");
+      alert(this.profileImgId);
+    },
+    signUp() { // 회원가입
+      alert("post 테스트");
+      // alert(localStorage.getItem("email"));
+      // alert(localStorage.getItem("name"));
+      // alert(localStorage.getItem("authToken"));
+      // alert(this.nickname);
+      // alert(this.selected_gender);
+      // alert(this.selected_age);
+      // alert(this.selected_region);
+      // alert(this.selected_tv_carrier);
+      // alert(this.profileImgId);
+      // alert(this.phonenum);
+      this.$router.push("/main");
+      axios
+        .post(`/api/users/signup`, {
+          email: localStorage.getItem("email"),
+          name: localStorage.getItem("name"),
+          nickName: this.nickname,
+          gender: this.selected_gender,
+          age: this.selected_age,
+          region: this.selected_region,
+          tvCarrier: this.selected_tv_carrier,
+          profileImgId: this.profileImgId,
+          mobile: this.phonenum,
+        })
+        .then((response) => {
+          console.warn(response);
+          console.log(this.review);
+          this.$router.push("/main");
+        })
+        .catch((ex) => {
+          console.warn("ERROR!!!!! : ", ex);
+        });
+    },
+  },
 }
 </script>
   

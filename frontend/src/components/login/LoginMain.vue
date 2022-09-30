@@ -154,6 +154,14 @@ export default {
                 "authToken",
                 JSON.stringify(response.data.authToken)
               );
+              localStorage.setItem(
+                "name",
+                JSON.stringify(response.data.name)
+              );
+              localStorage.setItem(
+                "email",
+                JSON.stringify(response.data.email)
+              );
               if (response.data.nickname == null) {
                 // alert("회원정보가 없어 회원가입 페이지로 이동합니다.");
                 this.$router.push("/userinfocollect");
