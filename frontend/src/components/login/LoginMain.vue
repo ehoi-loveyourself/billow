@@ -152,16 +152,17 @@ export default {
               // alert(response.data.authToken);
               localStorage.setItem(
                 "authToken",
-                JSON.stringify(response.data.authToken)
+                JSON.stringify(response.data.authToken).replace(/\"/gi, "")
               );
               localStorage.setItem(
                 "name",
-                JSON.stringify(response.data.name)
+                JSON.stringify(response.data.name).replace(/\"/gi, "")
               );
               localStorage.setItem(
                 "email",
-                JSON.stringify(response.data.email)
+                JSON.stringify(response.data.email).replace(/\"/gi, "")
               );
+              // localStorage.clear();
               if (response.data.nickname == null) {
                 // alert("회원정보가 없어 회원가입 페이지로 이동합니다.");
                 this.$router.push("/userinfocollect");
