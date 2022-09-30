@@ -15,6 +15,7 @@
     </svg>
   </div>
   <br />
+  <br/>
   <div class="body">
     <h2 style="color: white; font-size: 1.1vw; font-weight: 300">
       회원님이 봤던 프로그램들을 평가해주세요.<br />
@@ -28,10 +29,10 @@
         <span class="explain">
           <span v-for="index in 5" :key="index" @click="check(index)">
             <span v-if="index < score"
-              ><img src="@/assets/blue_star_small.png" style="width: 13%"
+              ><img src="@/assets/blue_star_small.png" style="width: 8%"
             /></span>
             <span v-if="index >= score"
-              ><img src="@/assets/grey_star_small.png" style="width: 13%"
+              ><img src="@/assets/grey_star_small.png" style="width: 8%"
             /></span>
           </span>
         </span>
