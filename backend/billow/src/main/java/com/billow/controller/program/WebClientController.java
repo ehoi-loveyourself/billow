@@ -3,7 +3,6 @@ package com.billow.controller.program;
 import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.jwt.JwtTokenProvider;
 import com.billow.model.service.webClient.webClientService;
-import com.billow.util.JwtUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -35,7 +34,7 @@ public class WebClientController {
     @GetMapping("/user-recommend")
     public ResponseEntity<Object> userRecommend(@RequestHeader("Auth-access") String token) {
         log.info("사용자 평점 기반 프로그램 추천 API 호출");
-        List<ProgramResponse> responses = webClientService.userProgramRecommend(JwtUtil.getUserId(token));
+        List<ProgramResponse> responses = webClientService.userProgramRecommend(JwtTokenProvider.getUserId(token));
         log.info("추천리스트 호출 성공");
         return (ResponseEntity.ok()
                 .body(responses));

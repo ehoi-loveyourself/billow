@@ -63,9 +63,7 @@ public class RecommendController {
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
     @GetMapping("/actor")
-    public ResponseEntity<Object> recommendActor(
-            //@RequestHeader("Auth-access") String token
-            ) {
+    public ResponseEntity<Object> recommendActor(@RequestHeader("Auth-access") String token) {
         log.info("특정 배우 프로그램 추천 API 호출");
         List<CastResponse> response = recommendService.recommendActor(JwtTokenProvider.getUserId(token));
         log.info("특정 배우 프로그램 추천 API 성공");

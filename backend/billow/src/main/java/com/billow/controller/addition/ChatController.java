@@ -2,8 +2,8 @@ package com.billow.controller.addition;
 
 import com.billow.domain.dto.addtion.ChatRequest;
 import com.billow.domain.dto.addtion.ChatResponse;
+import com.billow.jwt.JwtTokenProvider;
 import com.billow.model.service.addtion.ChatService;
-import com.billow.util.JwtUtil;
 import com.billow.util.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -43,7 +43,7 @@ public class ChatController {
     @PostMapping("/{programId}/{userId}")
     public ResponseEntity<Object> sendMessage(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId, @RequestBody ChatRequest chatRequest) {
         log.info("메시지 등록 API 호출");
-        Message response = chatService.sendMessage(JwtUtil.getUserId(token), programId, chatRequest);
+        Message response = chatService.sendMessage(JwtTokenProvider.getUserId(token), programId, chatRequest);
         log.info("메시지 전송 성공");
         return ResponseEntity.ok()
                 .body(response);
