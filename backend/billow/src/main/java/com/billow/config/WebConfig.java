@@ -23,7 +23,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowCredentials(true);
     }
 
-    public void addInterceptors(InterceptorRegistry interceptorRegistry) {
-        interceptorRegistry.addInterceptor(new JwtAuthInterceptor());
-    }
+//    public void addInterceptors(InterceptorRegistry interceptorRegistry) {
+//        interceptorRegistry.addInterceptor(new JwtAuthInterceptor());
+//    }
 }

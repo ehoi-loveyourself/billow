@@ -32,20 +32,12 @@ public class webClientService {
     private final ProgramRepository programRepository;
 
     public List<ProgramResponse> userProgramRecommend(Long userId) {
-        List<Integer> programIdList = callDjangoApi(userId);
+        List<Long> programIdList = callDjangoApi(userId);
         List<Program> programList = new ArrayList<>();
-        List<Genre> genreList;
-        for (Integer intProgramId : programIdList) {
-            Long programId = Long.valueOf(intProgramId);
-            Optional<Program> oProgram = programRepository.findById(programId);
-            if (oProgram.isPresent()) {
-                Program program = oProgram.get();
-                genreList = genreRepository.findByProgramId(programId);
-                for (Genre genre : genreList) {
-                    program.getGenreList().add(genre);
-                }
-                programList.add(program);
-            }
+        for (Long programId : programIdList) {
+            Program program = programRepository.findById(programId)
+                    .orElseThrow(() -> new NotFoundException("프로그램이 없습니다."));
+            programList.add(program);
         }
         return programList
                 .stream()
@@ -72,12 +64,12 @@ public class webClientService {
                 .collect(Collectors.toList());
     }
 
-    private List<Integer> callDjangoApi(Long userId) {
+    private List<Long> callDjangoApi(Long userId) {
         return webClient.get()
                 .uri("db/" + userId + "/")
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .bodyToFlux(Integer.class)
+                .bodyToFlux(Long.class)
                 .toStream()
                 .collect(Collectors.toList());
     }
@@ -88,19 +80,12 @@ public class webClientService {
         programRepository.findById(programId)
                 .orElseThrow(() -> new NotFoundException(PROGRAM_NOT_FOUND));
         List<Program> programList = new ArrayList<>();
-
         List<Long> conditionProgramByDjango = getConditionProgramByDjango(programId);
-        List<Genre> genreList = new ArrayList<>();
         for (Long programNum : conditionProgramByDjango) {
             Program program = programRepository.findById(programNum)
                     .orElseThrow(() -> new NotFoundException("프로그램이 없습니다."));
-            genreList = genreRepository.findByProgramId(programId);
-            for (Genre genre : genreList) {
-                program.getGenreList().add(genre);
-            }
             programList.add(program);
         }
-
         return programList
                 .stream()
                 .map(program -> ProgramResponse.builder()
