@@ -8,12 +8,12 @@
           class="form-control"
           type="text"
           name="search"
-          placeholder="프로그램명 검색"
+          placeholder="프로그램 검색"
           required
           @keyup.enter="onSubmit()"
         />
       </b-nav-item>
-      &nbsp;&nbsp;
+      
       <b-nav-item class="profile">
 		<router-link
           :to="{ name: 'userinfo' }"
@@ -73,7 +73,7 @@ nav .navbar-nav a:hover {
   top: 0;
   align-items: center;
 }
-
+/* 
 * {
   border: 0;
   box-sizing: border-box;
@@ -127,7 +127,7 @@ body {
 }
 .search-bar {
   margin: auto;
-  /* padding: 1.5em; */
+  
   justify-content: right;
   max-width: 30em;
   text-align: right;
@@ -191,10 +191,10 @@ body {
   overflow: hidden;
   width: 1px;
   height: 1px;
-}
+} */
 
 /* Active state */
-.search-bar input:focus + .search-btn,
+/* .search-bar input:focus + .search-btn,
 .search-bar input:valid + .search-btn {
   background: white;
   border-radius: 0 0.375em 0.375em 0;
@@ -235,8 +235,27 @@ body {
   .search-btn {
     background: #f1f1f1;
   }
-}
+} */
 .navbar-expand-lg {
   padding: 8px 0px;
+}
+input[type=text] {
+  display:block;
+  margin: 0 0 0 auto;
+  width: 64%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('@/assets/search.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 12px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+input[type=text]:focus {
+  width: 105%;
 }
 </style>
