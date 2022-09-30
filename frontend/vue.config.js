@@ -22,6 +22,7 @@ module.exports = {
   publicPath: '',
   
   devServer:{
-    proxy: "http://localhost:8009"
+    proxy: "http://localhost:8009",
+    historyApiFallback: true
   }
 }

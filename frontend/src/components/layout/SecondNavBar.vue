@@ -15,7 +15,16 @@
       </b-nav-item>
       &nbsp;&nbsp;
       <b-nav-item class="profile">
-        <img src="@/assets/toystory.png" alt="Image" />
+		<router-link
+          :to="{ name: 'userinfo' }"
+          class="nav-link"
+        >
+        <b-avatar
+            class="avatar"
+            variant="info"
+            src="https://j7b309.p.ssafy.io/api/profile/11"
+            size="2.4rem"
+          ></b-avatar></router-link>
       </b-nav-item>
     </b-navbar-nav>
   </b-navbar>
@@ -78,7 +87,7 @@ body,
 button,
 input {
   font: 1em Hind, sans-serif;
-  line-height: 1.5em;
+  line-height: 2em;
 }
 body,
 input {
