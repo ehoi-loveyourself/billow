@@ -41,10 +41,10 @@
               {{ review.regDateTime }}
             </span>
             <a href="#" class="button btnBorder btnBlue" v-b-modal.modal-5
-              >수정</a
+              ><span style="font-size:0.8vw">수정</span></a
             >&nbsp;
             <a href="#" @click="reviewDelete()" class="button btnBorder btnRed"
-              >삭제</a
+              ><span style="font-size:0.8vw">삭제</span></a
             >
           </h2>
           <p>{{ review.content }}</p>
@@ -97,7 +97,7 @@
   >
     <div style="margin-bottom: 5%">
       <b-form-input
-        v-model="review"
+        v-model="modifyReview"
         placeholder="리뷰를 작성해주세요."
         required
         style="border-color: #a48282"
@@ -159,6 +159,7 @@ export default {
     return {
       score: 0,
       review: "",
+      modifyReview: "",
     };
   },
   methods: {
