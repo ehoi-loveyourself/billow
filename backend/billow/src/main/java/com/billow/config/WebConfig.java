@@ -1,8 +1,10 @@
 package com.billow.config;
 
+import com.billow.jwt.JwtAuthInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
@@ -19,5 +21,9 @@ public class WebConfig implements WebMvcConfigurer {
                         HttpMethod.DELETE.name()
                 )
                 .allowCredentials(true);
+    }
+
+    public void addInterceptors(InterceptorRegistry interceptorRegistry) {
+        interceptorRegistry.addInterceptor(new JwtAuthInterceptor());
     }
 }

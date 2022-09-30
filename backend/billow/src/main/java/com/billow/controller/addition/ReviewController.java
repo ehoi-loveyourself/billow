@@ -2,8 +2,8 @@ package com.billow.controller.addition;
 
 import com.billow.domain.dto.addtion.ReviewRequest;
 import com.billow.domain.dto.addtion.ReviewResponse;
+import com.billow.jwt.JwtTokenProvider;
 import com.billow.model.service.addtion.ReviewService;
-import com.billow.util.JwtUtil;
 import com.billow.util.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -49,7 +49,7 @@ public class ReviewController {
     @PostMapping("/{programId}")
     public ResponseEntity<Object> postReview(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId, @RequestBody ReviewRequest reviewRequest) {
         log.info("리뷰 등록 API 호출");
-        Message response = reviewService.postReview(JwtUtil.getUserId(token), programId, reviewRequest);
+        Message response = reviewService.postReview(JwtTokenProvider.getUserId(token), programId, reviewRequest);
         log.info("리뷰 등록 성공");
         return ResponseEntity.ok()
                 .body(response);
@@ -66,7 +66,7 @@ public class ReviewController {
     @PutMapping("/{reviewId}")
     public ResponseEntity<Object> updateReview(@RequestHeader("Auth-access") String token, @PathVariable("reviewId") Long reviewId, @RequestBody ReviewRequest reviewRequest) {
         log.info("리뷰 수정 API 호출");
-        Message response = reviewService.updateReview(JwtUtil.getUserId(token), reviewId, reviewRequest);
+        Message response = reviewService.updateReview(JwtTokenProvider.getUserId(token), reviewId, reviewRequest);
         log.info("리뷰 수정 성공");
         return ResponseEntity.ok()
                 .body(response);
@@ -83,7 +83,7 @@ public class ReviewController {
     @DeleteMapping("/{reviewId}")
     public ResponseEntity<Object> deleteReview(@RequestHeader("Auth-access") String token, @PathVariable("reviewId") Long reviewId) {
         log.info("리뷰 삭제 API 호출");
-        Message response = reviewService.deleteReview(JwtUtil.getUserId(token), reviewId);
+        Message response = reviewService.deleteReview(JwtTokenProvider.getUserId(token), reviewId);
         log.info("리뷰 삭제 성공");
         return ResponseEntity.ok()
                 .body(response);

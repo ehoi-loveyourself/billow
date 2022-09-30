@@ -57,9 +57,9 @@ public class ControllerAdvice {
     }
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @ExceptionHandler(ExpiredJwtException.class)
-    public ResponseEntity<String> makeCookie(ExpiredJwtException e) {
-        log.info("jwt 토큰 만료", e);
-        return new ResponseEntity<String>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+    @ExceptionHandler({ExpiredJwtException.class, UnauthorizedException.class})
+    public Message UnauthorizedException(RuntimeException runtimeException) {
+        log.info(runtimeException.getMessage());
+        return new Message((runtimeException.getMessage()));
     }
 }

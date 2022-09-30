@@ -1,5 +1,5 @@
-from urllib import response
 from django.shortcuts import render
+from django.conf import Settings
 
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -7,15 +7,14 @@ from rest_framework.decorators import api_view
 from datas.models import TbGenre, TbGenreInfo, TbOtt, TbOttInfo, TbProgram, TbRating, TbUser
 from datas.serializers import ProgramSerializer
 from datas import recomm
+from my_settings import API_KEY
 
 import requests
 import random
 
-API_KEY = '3beacdbb8f7b35eb8c782851ddc5b403'
-
 @api_view(['GET'])
 def genre_data(request):
-    res = requests.get('https://api.themoviedb.org/3/genre/tv/list?api_key=3beacdbb8f7b35eb8c782851ddc5b403&language=ko-kr')
+    res = requests.get('https://api.themoviedb.org/3/genre/tv/list?api_key={API_KEY}&language=ko-kr')
     data = res.json()['genres']
     for genre_data in data:
         genre_id = genre_data.get('id')
@@ -27,9 +26,8 @@ def genre_data(request):
         )
     return Response()
 
-@api_view(['GET'])
-def all_program_data(request):
-    BASE_URL = 'https://api.themoviedb.org/3/tv/popular?api_key=3beacdbb8f7b35eb8c782851ddc5b403&language=ko-kr&page='
+def all_program_data():
+    BASE_URL = 'https://api.themoviedb.org/3/tv/popular?api_key={API_KEY}&language=ko-kr&page='
     i = 0
     while True:
         i += 1
@@ -44,8 +42,8 @@ def all_program_data(request):
                 continue
             program_country = program_data['original_language']
             if program_country == 'ko':
-                program_detail = f'https://api.themoviedb.org/3/tv/{program_id}?api_key=3beacdbb8f7b35eb8c782851ddc5b403&language=ko-kr'
-                program_ott = f'https://api.themoviedb.org/3/tv/{program_id}/watch/providers?api_key=3beacdbb8f7b35eb8c782851ddc5b403'
+                program_detail = f'https://api.themoviedb.org/3/tv/{program_id}?api_key={API_KEY}&language=ko-kr'
+                program_ott = f'https://api.themoviedb.org/3/tv/{program_id}/watch/providers?api_key={API_KEY}'
                 detail_res = requests.get(program_detail)
                 ott_res = requests.get(program_ott)
                 data = detail_res.json()
@@ -55,9 +53,6 @@ def all_program_data(request):
                     title = data.get('name')
                     if data.get('overview'):
                         summary = data.get('overview')
-                    print(title)
-                    print('############################')
-                    print(summary)
                     networks = data.get('networks')
                     if data.get('poster_path'):
                         poster_img = data.get('poster_path')
@@ -102,7 +97,7 @@ def all_program_data(request):
 
 @api_view(['GET'])
 def ott_data(request):
-    BASE_URL = "https://api.themoviedb.org/3/watch/providers/tv?api_key=3beacdbb8f7b35eb8c782851ddc5b403&language=ko-kr&watch_region=KR"
+    BASE_URL = "https://api.themoviedb.org/3/watch/providers/tv?api_key={API_KEY}&language=ko-kr&watch_region=KR"
     res = requests.get(BASE_URL)
     ott_list = res.json()['results']
     for ott_data in ott_list:
@@ -114,35 +109,6 @@ def ott_data(request):
             name = name
         )
     return Response()
-
-# @api_view(['GET'])
-# def user_create(request):
-#     for i in range(500):
-#         name = f'name{i}',
-#         nick_name = f'nick_name{i}'
-#         TbUser.objects.create(
-#             name = name,
-#             nick_name = nick_name
-#         )
-#     return Response()
-
-# @api_view(['GET'])
-# def rating_create(request):
-#     lst = []
-#     for num in range(1, 590):
-#         lst.append(num)
-#     for i in range(1001, 1001):
-#         user = TbUser.objects.get(pk=i)
-#         program_list = random.sample(lst, 50)
-#         for program_number in program_list:
-#             program = TbProgram.objects.get(pk=program_number)
-#             score = random.uniform(0,5)
-#             TbRating.objects.create(
-#                 score = score,
-#                 user_id = i,
-#                 program_id = program_number
-#         )
-#     return response()
 
 @api_view(['GET'])
 def user_recomm(request, user_id):
