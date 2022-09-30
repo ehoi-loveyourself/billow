@@ -3,6 +3,7 @@
     <b-navbar-nav>
       <br />
       <b-nav-item>
+		<div id="drop">
         <input
           v-model="searchValue"
           class="form-control"
@@ -12,6 +13,7 @@
           required
           @keyup.enter="onSubmit()"
         />
+	</div>
       </b-nav-item>
       
       <b-nav-item class="profile">
@@ -23,7 +25,7 @@
             class="avatar"
             variant="info"
             src="https://j7b309.p.ssafy.io/api/profile/11"
-            size="2.4rem"
+            size="2.4vw"
           ></b-avatar></router-link>
       </b-nav-item>
     </b-navbar-nav>
@@ -239,23 +241,35 @@ body {
 .navbar-expand-lg {
   padding: 8px 0px;
 }
-input[type=text] {
+#drop input[type=text] {
   display:block;
   margin: 0 0 0 auto;
   width: 64%;
   box-sizing: border-box;
-  border: 2px solid #ccc;
+  border: 2px solid #2b2b2b;
   border-radius: 4px;
   font-size: 16px;
-  background-color: white;
-  /* background-image: url('@/assets/search.png'); */
-  background-position: 10px 10px;
+  border-color:#2b2b2b;
+  background:none;
+  color:#ffffff;
+  /* background-image: url("https://cdn-icons-png.flaticon.com/128/711/711319.png"); */
+
+  background-position: 0 0;
   background-repeat: no-repeat;
   padding: 12px 20px 12px 12px;
   -webkit-transition: width 0.25s ease-in-out;
   transition: width 0.25s ease-in-out;
+  margin-top:4%;
 }
-input[type=text]:focus {
-  width: 105%;
+#drop input[type=text]:focus {
+  width: 106%;
+}
+#drop input {
+  font: 1em Hind, sans-serif;
+  line-height: 1em;
+  height: 2.3vw;
+}
+#drop input::placeholder {
+  color: #E8E0E0;
 }
 </style>
