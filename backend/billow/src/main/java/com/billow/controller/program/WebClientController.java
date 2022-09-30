@@ -31,10 +31,10 @@ public class WebClientController {
             @ApiResponse(responseCode = "200", description = "추천리스트 호출 성공"),
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
-    @GetMapping("/user-recommend/{userId}")
-    public ResponseEntity<Object> userRecommend(@PathVariable("userId") Long userId) {
+    @GetMapping("/user-recommend")
+    public ResponseEntity<Object> userRecommend(@RequestHeader("Auth-access") String token) {
         log.info("사용자 평점 기반 프로그램 추천 API 호출");
-        List<ProgramResponse> responses = webClientService.userProgramRecommend(userId);
+        List<ProgramResponse> responses = webClientService.userProgramRecommend(JwtUtil.getUserId(token));
         log.info("추천리스트 호출 성공");
         return (ResponseEntity.ok()
                 .body(responses));
