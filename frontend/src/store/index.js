@@ -12,6 +12,8 @@ export default new Vuex.Store({
     programDetail: null,
     programSchedule: null,
     programReview: null,
+    searchWord: null,
+    searchProgram: null,
   },
   getters: {},
   mutations: {
@@ -29,6 +31,12 @@ export default new Vuex.Store({
     },
     SET_ORGANIZATION_ID(state, id) {
       state.organizationId = id;
+    },
+    SET_SEARCH_PROGRAM(state, search) {
+      state.searchProgram = search;
+    },
+    SET_SEARCH_WORD(state, word) {
+      state.searchWord = word;
     },
   },
   actions: {
@@ -52,11 +60,25 @@ export default new Vuex.Store({
         commit("SET_PROGRAM_REVIEW", res.data);
       });
     },
-    registAlarm({ commit }) {
-      axios.post(`/api/alarm//${state.organizationId}`).then((res) => {
+    registAlarm({ commit }, id) {
+      axios.post(`/api/alarm/${id}`).then((res) => {
         //방영 알림 등록 POSt
         console.log(res.data);
       });
+    },
+    getSearchProgram({ commit }, word) {
+      commit("SET_SEARCH_WORD", word);
+      axios
+        .get("/api/program", { params: { word: word } })
+        .then((res) => {
+          //프로그램 검색 GET
+          console.log(res.data);
+          commit("SET_SEARCH_PROGRAM", res.data);
+        })
+        .catch((ex) => {
+          commit("SET_SEARCH_PROGRAM", null);
+          console.log("프로그램이 없습니다.");
+        });
     },
   },
   modules: {},
