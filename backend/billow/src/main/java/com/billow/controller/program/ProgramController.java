@@ -83,7 +83,7 @@ public class ProgramController {
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
     @PostMapping("/{programId}")
-    public ResponseEntity<Object> postProgramRating환(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId, @RequestBody RatingRequest ratingRequest) {
+    public ResponseEntity<Object> postProgramRating(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId, @RequestBody RatingRequest ratingRequest) {
         log.info("프로그램 평점 등록 API 호출");
         Message response = programService.postProgramRating(JwtTokenProvider.getUserId(token), programId, ratingRequest);
         log.info("프로그램 평점 등록 성공");
