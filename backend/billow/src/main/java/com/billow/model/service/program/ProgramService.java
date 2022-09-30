@@ -3,6 +3,7 @@ package com.billow.model.service.program;
 import com.billow.domain.dto.addtion.RatingRequest;
 import com.billow.domain.dto.program.OttResponse;
 import com.billow.domain.dto.program.ProgramResponse;
+import com.billow.domain.dto.program.RandomProgramResponse;
 import com.billow.domain.entity.addition.Rating;
 import com.billow.domain.entity.program.Program;
 import com.billow.domain.entity.user.User;
@@ -16,10 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -86,7 +84,7 @@ public class ProgramService {
         return new Message("프로그램 평점 등록에 성공하였습니다.");
     }
 
-    public List<ProgramResponse> randomProgram() {
+    public List<RandomProgramResponse> randomProgram() {
         int programCnt = (int) programRepository.count();
 
         Random r = new Random();
@@ -95,20 +93,24 @@ public class ProgramService {
 
         for (int i = 0; i < 50; i++) {
             random[i] = r.nextInt(programCnt);
-//            Program program = programRepository.findById(Long.valueOf(random[i]))
-//                    .orElseThrow(() -> new NotFoundException(PROGRAM_NOT_FOUND));
-            Program program = programRepository.findById(Long.valueOf(random[i]))
-                    .orElseThrow(() -> new NotFoundException(PROGRAM_NOT_FOUND));
-            responses.add(ProgramResponse.builder()
-                    .id(program.getId())
-                    .title(program.getTitle())
-                    .posterImg(program.getPosterImg())
-                    .build());
         }
 
+        List<Long> list = new ArrayList<>();
+        for (int i = 0; i < random.length; i++) {
+            list.add((long) random[i]);
+        }
+        Collections.sort(list);
+
         log.info("프로그램 총 개수 : {}", programCnt);
-        log.info("랜덤 프로그램 id : {}", Arrays.toString(random));
-        return responses;
+        log.info("랜덤 프로그램 id : {}", list);
+
+        return programRepository.findByIdIn(list)
+                .stream()
+                .map(program -> RandomProgramResponse.builder()
+                        .id(program.getId())
+                        .posterImg(program.getPosterImg())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     public ProgramResponse selectProgram(Long programId) {
