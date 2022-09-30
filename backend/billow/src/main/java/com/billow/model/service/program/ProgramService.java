@@ -98,9 +98,7 @@ public class ProgramService {
         return new Message("프로그램 평점 등록에 성공하였습니다.");
     }
 
-    public List<ProgramResponse> randomProgram(Long userId) {
-        userRepository.findById(userId)
-                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
+    public List<ProgramResponse> randomProgram() {
         int programCnt = (int) programRepository.count();
 
         Random r = new Random();
