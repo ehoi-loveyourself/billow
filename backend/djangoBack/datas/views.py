@@ -118,17 +118,28 @@ def user_recomm(request, user_id):
     indi_user_recomm = recomm.mf_algo_individual(user_id)
 
     indi_user_recomm = indi_user_recomm.values.tolist()
+    print('#############')
+    print(indi_user_recomm)
+    lst = []
+    for i in indi_user_recomm:
+        lst.append(i[0])
+    print(lst)
+    # print(indi_user_recomm)
+    print('#############')
 
     indi_user_recomm_list = []
     for program_id in indi_user_recomm:
         program = TbProgram.objects.get(pk=program_id[0])
         indi_user_recomm_list.append(program)
+    
+    print(indi_user_recomm_list)
+
 
     serializer = ProgramSerializer(data = indi_user_recomm_list, many = True)
     if serializer.is_valid():
         pass
 
-    return Response(serializer.data)
+    return Response(lst)
 
 @api_view(['GET'])
 def condition_recomm(request, program_id):
@@ -138,20 +149,25 @@ def condition_recomm(request, program_id):
     
     # 프로그램 아이디로 검색해서 나온 결과 받기
     indi_condition_program = recomm.mf_condition_recomm(program_id)
-    
-    # 값을 리스트로 받기
-    indi_condition_program = indi_condition_program.values.tolist()
-    
-    # 확인해보자
     print(indi_condition_program)
     
-    indi_condition_program_list = []
-    for program_id in indi_condition_program:
-        program = TbProgram.objects.get(pk=program_id[0])
-        indi_condition_program_list.append(program)
+    # 값을 리스트로 받기
+    # indi_condition_program = indi_condition_program.values.tolist()    
+    # lst = []
+    # for i in indi_condition_program:
+    #     lst.append(i[0])
+    # print(lst)
     
-    print(indi_condition_program_list)
+    # 확인해보자
+    # print(indi_condition_program)
     
-    serializer = ProgramSerializer(indi_condition_program_list, many = True)
+    # indi_condition_program_list = []
+    # for program_id in indi_condition_program:
+    #     program = TbProgram.objects.get(pk=program_id[0])
+    #     indi_condition_program_list.append(program)
     
-    return Response(serializer.data)
+    # print(indi_condition_program_list)
+    
+    # serializer = ProgramSerializer(indi_condition_program_list, many = True)
+    
+    return Response(indi_condition_program)
