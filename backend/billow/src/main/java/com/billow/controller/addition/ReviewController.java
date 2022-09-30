@@ -47,7 +47,7 @@ public class ReviewController {
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
     @PostMapping("/{programId}")
-    public ResponseEntity<Object> postReview(@PathVariable("programId") Long programId, @RequestBody ReviewRequest reviewRequest) {
+    public ResponseEntity<Object> postReview( @PathVariable("programId") Long programId, @RequestBody ReviewRequest reviewRequest) {
         log.info("리뷰 등록 API 호출");
         Message response = reviewService.postReview(1L, programId, reviewRequest);
         log.info("리뷰 등록 성공");
@@ -81,9 +81,9 @@ public class ReviewController {
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
     @DeleteMapping("/{reviewId}")
-    public ResponseEntity<Object> deleteReview(@PathVariable("reviewId") Long reviewId) {
+    public ResponseEntity<Object> deleteReview(@RequestHeader("Auth-access") String token, @PathVariable("reviewId") Long reviewId) {
         log.info("리뷰 삭제 API 호출");
-        Message response = reviewService.deleteReview(1L, reviewId);
+        Message response = reviewService.deleteReview(JwtTokenProvider.getUserId(token), reviewId);
         log.info("리뷰 삭제 성공");
         return ResponseEntity.ok()
                 .body(response);
