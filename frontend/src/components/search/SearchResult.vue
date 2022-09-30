@@ -3,12 +3,12 @@
   <SecondBar />
   <br />
   <h2
-    style="color: white; margin-left: 70px; font-size: 1.1vw; font-weight: 300"
+    style="color: white; padding-left: 70px; font-size: 1.1vw; font-weight: 300"
   >
     "{{ searchWord }}" 검색 결과입니다.
   </h2>
-  <br /><br />
-  <div class="flex">
+  <br />
+  <div class="flex" style="padding-left: 70px; padding-right:70px">
     <div v-if="searchProgram != null">
       <div id="Img" v-for="search in searchProgram">
         <router-link
