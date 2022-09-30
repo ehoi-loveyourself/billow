@@ -52,43 +52,14 @@
             <a href="#" class="button btnBorder btnBlue" v-b-modal.modal-5
               ><span style="font-size: 0.8vw">수정</span></a
             >&nbsp;
-            <a href="#" @click="reviewDelete()" class="button btnBorder btnRed"
+            <a
+              href="#"
+              @click="reviewDelete(review.reviewId)"
+              class="button btnBorder btnRed"
               ><span style="font-size: 0.8vw">삭제</span></a
             >
           </h2>
           <p>{{ review.content }}</p>
-        </article>
-      </article>
-    </section>
-
-    <!-- 리뷰 수정 삭제 버튼 예시 -->
-    <section>
-      <article class="review_set">
-        <article class="reviews">
-          <h2>
-            BILLOW&nbsp;&nbsp;
-            <span class="wrap-star">2022-09-30 10:30&nbsp;&nbsp;&nbsp;</span>
-            <a href="#" class="button btnBorder btnBlue" v-b-modal.modal-5
-              ><span style="font-size: 0.8vw">수정</span></a
-            >&nbsp;
-            <a href="#" @click="reviewDelete()" class="button btnBorder btnRed"
-              ><span style="font-size: 0.8vw">삭제</span></a
-            >
-          </h2>
-          <p>이 프로그램 너무 재밌어요!</p>
-        </article>
-        <article class="reviews">
-          <h2>
-            billow&nbsp;&nbsp;
-            <span class="wrap-star">2022-09-30 11:00&nbsp;&nbsp;&nbsp;</span>
-            <a href="#" class="button btnBorder btnBlue" v-b-modal.modal-5
-              ><span style="font-size: 0.8vw">수정</span></a
-            >&nbsp;
-            <a href="#" @click="reviewDelete()" class="button btnBorder btnRed"
-              ><span style="font-size: 0.8vw">삭제</span></a
-            >
-          </h2>
-          <p>저도 너무 재밌어요!</p>
         </article>
       </article>
     </section>
@@ -105,13 +76,14 @@
     style="text-align: center"
   >
     <div style="margin-bottom: 5%">
-      <b-form-input
+      <input
         v-model="modifyReview"
+        class="form-control"
+        type="text"
         placeholder="리뷰를 작성해주세요."
         required
-        style="border-color: #a48282"
-      >
-      </b-form-input>
+        @keyup.enter="modifyReview()"
+      />
     </div>
     <b-button
       size="m"
@@ -150,7 +122,11 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["registReview"]),
+    ...mapActions([
+      "registReview",
+      "deleteProgramReview",
+      "modifyProgramReview",
+    ]),
     check(index) {
       this.score = index + 1;
     },
@@ -163,10 +139,15 @@ export default {
       this.message = "";
     },
     reviewModify() {
-      alert("리뷰 수정 버튼 실행");
+      this.modifyProgramReview({
+        //채우기
+      });
     },
-    reviewDelete() {
-      alert("리뷰 삭제 버튼 실행");
+    reviewDelete(reviewId) {
+      this.deleteProgramReview({
+        reviewId: reviewId,
+        programId: this.programId,
+      });
     },
   },
 };

@@ -30,9 +30,22 @@ export default new Vuex.Store({
     SET_PROGRAM_REVIEW(state, programReview) {
       state.programReview = programReview;
     },
+    // DELETE__PROGRAM_REVIEW(state, reviewId) {
+    //   const find = state.programReview.find(
+    //     (review) => (review.reviewId = reviewId)
+    //   );
+    //   for (let i = 0; i < state.programReview.length; i++) {
+    //     if (state.programReview[i].reviewId == reviewId) {
+    //       state.programReview.slice(0, i);
+    //     }
+    //   }
+
+    //   // state.programReview.forEach(function (review) {});
+    // },
     SET_ORGANIZATION_ID(state, organizationId) {
       state.organizationId = organizationId;
     },
+
     SET_SEARCH_PROGRAM(state, searchProgram) {
       state.searchProgram = searchProgram;
     },
@@ -41,9 +54,6 @@ export default new Vuex.Store({
     },
     SET_ONAIR_TALK(state, onairTalk) {
       state.onairTalk = onairTalk;
-    },
-    ADD_ONAIR_TALK(state, onairTalk) {
-      state.onairTalk += onairTalk;
     },
   },
   actions: {
@@ -85,6 +95,14 @@ export default new Vuex.Store({
         .catch((ex) => {
           console.warn("ERROR!!!!! : ", ex);
         });
+    },
+    deleteProgramReview({ commit, dispatch }, deleteReview) {
+      axios.delete(`/api/review/${deleteReview.reviewId}`).then((res) => {
+        //리뷰 삭제 DELETE
+        console.log(res.data);
+        alert("리뷰를 삭제했습니다.");
+        dispatch("getProgramReview", deleteReview.programId);
+      });
     },
     getProgramOnairTalk({ commit }, programId) {
       axios.get(`/api/chat/${programId}`).then((res) => {
