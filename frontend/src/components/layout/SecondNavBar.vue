@@ -248,12 +248,12 @@ input[type=text] {
   border-radius: 4px;
   font-size: 16px;
   background-color: white;
-  background-image: url('@/assets/search.png');
+  /* background-image: url('@/assets/search.png'); */
   background-position: 10px 10px;
   background-repeat: no-repeat;
   padding: 12px 20px 12px 12px;
-  -webkit-transition: width 0.4s ease-in-out;
-  transition: width 0.4s ease-in-out;
+  -webkit-transition: width 0.25s ease-in-out;
+  transition: width 0.25s ease-in-out;
 }
 input[type=text]:focus {
   width: 105%;
