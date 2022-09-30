@@ -40,13 +40,81 @@
             <span class="wrap-star">
               {{ review.regDateTime }}
             </span>
+            <a href="#" class="button btnBorder btnBlue" v-b-modal.modal-5
+              >수정</a
+            >&nbsp;
+            <a href="#" @click="reviewDelete()" class="button btnBorder btnRed"
+              >삭제</a
+            >
           </h2>
           <p>{{ review.content }}</p>
         </article>
       </article>
     </section>
+
+    <!-- 리뷰 수정 삭제 버튼 예시 -->
+    <section>
+      <article class="review_set">
+        <article class="reviews">
+          <h2>
+            BILLOW&nbsp;&nbsp;
+            <span class="wrap-star">2022-09-30 10:30&nbsp;&nbsp;&nbsp;</span>
+            <a href="#" class="button btnBorder btnBlue" v-b-modal.modal-5
+              ><span style="font-size:0.8vw">수정</span></a
+            >&nbsp;
+            <a href="#" @click="reviewDelete()" class="button btnBorder btnRed"
+              ><span style="font-size:0.8vw">삭제</span></a
+            >
+          </h2>
+          <p>이 프로그램 너무 재밌어요!</p>
+        </article>
+        <article class="reviews">
+          <h2>
+            billow&nbsp;&nbsp;
+            <span class="wrap-star">2022-09-30 11:00&nbsp;&nbsp;&nbsp;</span>
+            <a href="#" class="button btnBorder btnBlue" v-b-modal.modal-5
+              ><span style="font-size:0.8vw">수정</span></a
+            >&nbsp;
+            <a href="#" @click="reviewDelete()" class="button btnBorder btnRed"
+              ><span style="font-size:0.8vw">삭제</span></a
+            >
+          </h2>
+          <p>저도 너무 재밌어요!</p>
+        </article>
+      </article>
+    </section>
     <br />
   </div>
+
+  <b-modal
+    size="m"
+    hide-footer
+    id="modal-5"
+    centered
+    no-stacking
+    title="리뷰 수정하기"
+    style="text-align: center"
+  >
+    <div style="margin-bottom: 5%">
+      <b-form-input
+        v-model="review"
+        placeholder="리뷰를 작성해주세요."
+        required
+        style="border-color: #a48282"
+      >
+      </b-form-input>
+    </div>
+    <b-button
+      size="m"
+      type="submit"
+      @click="reviewModify()"
+      style="background-color: blue"
+      data-bs-dismiss="modal"
+      aria-label="Close"
+    >
+      <span>수정</span>
+    </b-button>
+  </b-modal>
 </template>
 
 <script>
@@ -113,6 +181,12 @@ export default {
           console.warn("ERROR!!!!! : ", ex);
         });
     },
+    reviewModify() {
+      alert("리뷰 수정 버튼 실행");
+    },
+    reviewDelete() {
+      alert("리뷰 삭제 버튼 실행");
+    },
   },
 };
 </script>
@@ -153,5 +227,41 @@ export default {
   background-position: left bottom;
   line-height: 0;
   vertical-align: top;
+}
+
+a.button {
+  padding: 0.2%;
+  /* margin: 10px 20px 10px 0; */
+  font-weight: 600;
+  text-align: center;
+  /* line-height: 50px; */
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btnBlue.btnBorder {
+  box-shadow: 0px 0px 0px 0px #212682;
+}
+
+.btnBlue.btnBorder:hover {
+  box-shadow: 0px 0px 0px 5px #212682;
+}
+
+.btnBlue {
+  background: #002bae;
+}
+
+.btnRed.btnBorder {
+  box-shadow: 0px 0px 0px 0px #823621;
+}
+
+.btnRed.btnBorder:hover {
+  box-shadow: 0px 0px 0px 5px #823621;
+}
+
+.btnRed {
+  background: #ae2b00;
 }
 </style>
