@@ -3,6 +3,7 @@ package com.billow.controller.program;
 import com.billow.domain.dto.addtion.RatingRequest;
 import com.billow.domain.dto.program.CastResponse;
 import com.billow.domain.dto.program.ProgramResponse;
+import com.billow.domain.dto.program.RandomProgramResponse;
 import com.billow.jwt.JwtTokenProvider;
 import com.billow.model.service.program.CastService;
 import com.billow.model.service.program.ProgramService;

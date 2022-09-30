@@ -10,4 +10,6 @@ public interface ProgramRepository extends JpaRepository<Program, Long>, Program
     List<Program> findByTitleContaining(String word);
 
     List<Program> findByFirstAirDateAfterOrderByFirstAirDateDesc(Date date);
+
+    List<Program> findByIdIn(List<Long> programList);
 }
