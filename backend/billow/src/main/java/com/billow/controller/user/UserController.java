@@ -164,9 +164,9 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
     @GetMapping("/rating")
-    public ResponseEntity<Object> selectRating(@RequestHeader("Auth-access") String token) {
+    public ResponseEntity<Object> selectRating() {
         log.info("평점 조회 API 호출");
-        List<RatingResponse> response = userService.selectRating(JwtTokenProvider.getUserId(token));
+        List<RatingResponse> response = userService.selectRating(1L);
         log.info("평점 조회 성공");
         return ResponseEntity.ok()
                 .body(response);
