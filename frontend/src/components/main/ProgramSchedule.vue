@@ -9,11 +9,11 @@
       <b-table-simple
         bordered
         fixed
-        style="border-color: #ffffff; color: #ffffff; font-weight: 400; font-size: 0.95vw;"
+        style="border-color: #ffffff; color: #ffffff; font-weight: 400"
       >
         <b-thead style="background-color: #5a5a5a">
           <b-tr>
-            <b-th v-for="schedule in programSchedule" style="white-space: nowrap">
+            <b-th v-for="schedule in programSchedule">
               {{ schedule.day }}
             </b-th>
           </b-tr>

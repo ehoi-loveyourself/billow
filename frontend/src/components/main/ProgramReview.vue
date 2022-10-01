@@ -49,7 +49,11 @@
             <span class="wrap-star">
               {{ review.regDateTime }}
             </span>
-            <a href="#" class="button btnBorder btnBlue" v-b-modal.modal-5
+            <a
+              href="#"
+              @click="setReviewId(review.reviewId)"
+              class="button btnBorder btnBlue"
+              v-b-modal.modal-5
               ><span style="font-size: 0.8vw">수정</span></a
             >&nbsp;
             <a
@@ -101,7 +105,7 @@
 <script>
 import { reactive } from "@vue/reactivity";
 import axios from "axios";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 
 export default {
   name: "ProgramReview",
@@ -119,6 +123,7 @@ export default {
       score: 0,
       message: "",
       modifyReview: "",
+      reviewId: 0,
     };
   },
   methods: {
@@ -138,9 +143,18 @@ export default {
       this.registReview({ review: this.message, programId: this.programId });
       this.message = "";
     },
+    setReviewId(reviewId) {
+      this.reviewId = reviewId;
+    },
     reviewModify() {
+      if (this.modifyReview == "") {
+        alert("내용을 입력하세요.");
+        return;
+      }
       this.modifyProgramReview({
-        //채우기
+        reviewId: this.reviewId,
+        programId: this.programId,
+        review: this.modifyReview,
       });
     },
     reviewDelete(reviewId) {
