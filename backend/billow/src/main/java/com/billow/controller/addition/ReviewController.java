@@ -47,9 +47,9 @@ public class ReviewController {
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
     @PostMapping("/{programId}")
-    public ResponseEntity<Object> postReview( @PathVariable("programId") Long programId, @RequestBody ReviewRequest reviewRequest) {
+    public ResponseEntity<Object> postReview(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId, @RequestBody ReviewRequest reviewRequest) {
         log.info("리뷰 등록 API 호출");
-        Message response = reviewService.postReview(1L, programId, reviewRequest);
+        Message response = reviewService.postReview(JwtTokenProvider.getUserId(token), programId, reviewRequest);
         log.info("리뷰 등록 성공");
         return ResponseEntity.ok()
                 .body(response);

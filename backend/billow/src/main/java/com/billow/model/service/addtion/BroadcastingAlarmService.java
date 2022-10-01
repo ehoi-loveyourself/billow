@@ -46,6 +46,7 @@ public class BroadcastingAlarmService {
                         .alarmDay(DateUtil.toYYYY_MM_DD(alarm.getProgramOrganization().getBroadcastingTime()) + " " + alarm.getProgramOrganization().getBroadcastingDay())
                         .alarmTime(DateUtil.toHH_mm(alarm.getProgramOrganization().getBroadcastingTime()))
                         .alarmStation(alarm.getProgramOrganization().getBroadcastingStation())
+                        .alarmEpisode(alarm.getProgramOrganization().getBroadcastingEpisode())
                         .build())
                 .collect(Collectors.toList());
     }

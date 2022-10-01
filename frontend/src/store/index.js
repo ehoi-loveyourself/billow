@@ -15,6 +15,8 @@ export default new Vuex.Store({
     searchWord: null,
     searchProgram: null,
     onairTalk: null,
+    castInfoList: null,
+    alarmList: null,
   },
   getters: {},
   mutations: {
@@ -33,14 +35,20 @@ export default new Vuex.Store({
     SET_PROGRAM_REVIEW(state, programReview) {
       state.programReview = programReview;
     },
+    SET_ONAIR_TALK(state, onairTalk) {
+      state.onairTalk = onairTalk;
+    },
+    SET_CAST_INFO(state, castInfoList) {
+      state.castInfoList = castInfoList;
+    },
     SET_SEARCH_PROGRAM(state, searchProgram) {
       state.searchProgram = searchProgram;
     },
     SET_SEARCH_WORD(state, searchWord) {
       state.searchWord = searchWord;
     },
-    SET_ONAIR_TALK(state, onairTalk) {
-      state.onairTalk = onairTalk;
+    SET_ALARM_LIST(state, alarmList) {
+      state.alarmList = alarmList;
     },
   },
   actions: {
@@ -53,6 +61,7 @@ export default new Vuex.Store({
         dispatch("getProgramOrganization", programId);
         dispatch("getProgramReview", programId);
         dispatch("getProgramOnairTalk", programId);
+        dispatch("getProgramCastInfo", programId);
       });
     },
     getProgramOrganization({ commit }, programId) {
@@ -62,6 +71,13 @@ export default new Vuex.Store({
         commit("SET_PROGRAM_SCHEDULE", res.data);
       });
     },
+    getProgramCastInfo({ commit }, programId) {
+      axios.get(`/api/program/cast/${programId}`).then((res) => {
+        //출연진 정보 조회 GET
+        console.log(res.data);
+        commit("SET_CAST_INFO", res.data);
+      });
+    },
     getProgramReview({ commit }, programId) {
       axios.get(`/api/review/${programId}`).then((res) => {
         //리뷰 정보 조회 GET
@@ -69,21 +85,21 @@ export default new Vuex.Store({
         commit("SET_PROGRAM_REVIEW", res.data);
       });
     },
-    registReview({ commit, dispatch }, review) {
+    registReview({ commit, dispatch, state }, review) {
       //리뷰 등록 POST
       axios
-        .post(`/api/review/${review.programId}`, {
-          content: review.review,
+        .post(`/api/review/${state.programId}`, {
+          content: review,
         })
         .then((res) => {
           console.log(res.data);
-          dispatch("getProgramReview", review.programId);
+          dispatch("getProgramReview", state.programId);
         })
         .catch((ex) => {
           console.warn("ERROR!!!!! : ", ex);
         });
     },
-    modifyProgramReview({ commit, dispatch }, modifyReview) {
+    modifyProgramReview({ commit, dispatch, state }, modifyReview) {
       axios
         .put(`/api/review/${modifyReview.reviewId}`, {
           content: modifyReview.review,
@@ -92,15 +108,15 @@ export default new Vuex.Store({
           //리뷰 수정 PUT
           console.log(res.data);
           alert("리뷰를 수정했습니다.");
-          dispatch("getProgramReview", modifyReview.programId);
+          dispatch("getProgramReview", state.programId);
         });
     },
-    deleteProgramReview({ commit, dispatch }, deleteReview) {
-      axios.delete(`/api/review/${deleteReview.reviewId}`).then((res) => {
+    deleteProgramReview({ commit, dispatch, state }, reviewId) {
+      axios.delete(`/api/review/${reviewId}`).then((res) => {
         //리뷰 삭제 DELETE
         console.log(res.data);
         alert("리뷰를 삭제했습니다.");
-        dispatch("getProgramReview", deleteReview.programId);
+        dispatch("getProgramReview", state.programId);
       });
     },
     getProgramOnairTalk({ commit }, programId) {
@@ -110,10 +126,35 @@ export default new Vuex.Store({
         commit("SET_ONAIR_TALK", res.data);
       });
     },
+    sendMessage({ commit, dispatch, state }, message) {
+      axios
+        .post(`/api/chat/${state.programId}`, {
+          content: message,
+        })
+        .then((res) => {
+          //온에어 톡 메시지 POST
+          console.log(res.data);
+          dispatch("getProgramOnairTalk", state.programId);
+        });
+    },
     registAlarm({ commit }, id) {
       axios.post(`/api/alarm/${id}`).then((res) => {
         //방영 알림 등록 POSt
         console.log(res.data);
+      });
+    },
+    getAlarm({ commit }) {
+      axios.get(`/api/alarm`).then((res) => {
+        //방영 알림 조회 GET
+        console.log(res.data);
+        commit("SET_ALARM_LIST", res.data);
+      });
+    },
+    deleteAlarm({ commit, dispatch, state }, broadcastingAlarmId) {
+      axios.delete(`/api/alarm/${broadcastingAlarmId}`).then((res) => {
+        //방영 알림 삭제 DELETE
+        console.log(res.data);
+        dispatch("getAlarm", state.programId);
       });
     },
     getSearchProgram({ commit }, word) {
@@ -128,16 +169,6 @@ export default new Vuex.Store({
         .catch((ex) => {
           commit("SET_SEARCH_PROGRAM", null);
           console.log("프로그램이 없습니다.");
-        });
-    },
-    sendMessage({ commit, dispatch }, talk) {
-      console.log(talk);
-      axios
-        .post(`/api/chat/${talk.programId}`, { content: talk.message })
-        .then((res) => {
-          //온에어 톡 메시지 POST
-          console.log(res.data);
-          dispatch("getProgramOnairTalk", talk.programId);
         });
     },
   },
