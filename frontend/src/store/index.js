@@ -21,6 +21,9 @@ export default new Vuex.Store({
     SET_PROGRAM_ID(state, programId) {
       state.programId = programId;
     },
+    SET_ORGANIZATION_ID(state, organizationId) {
+      state.organizationId = organizationId;
+    },
     SET_PROGRAM_DETAIL(state, programDetail) {
       state.programDetail = programDetail;
     },
@@ -30,22 +33,6 @@ export default new Vuex.Store({
     SET_PROGRAM_REVIEW(state, programReview) {
       state.programReview = programReview;
     },
-    // DELETE__PROGRAM_REVIEW(state, reviewId) {
-    //   const find = state.programReview.find(
-    //     (review) => (review.reviewId = reviewId)
-    //   );
-    //   for (let i = 0; i < state.programReview.length; i++) {
-    //     if (state.programReview[i].reviewId == reviewId) {
-    //       state.programReview.slice(0, i);
-    //     }
-    //   }
-
-    //   // state.programReview.forEach(function (review) {});
-    // },
-    SET_ORGANIZATION_ID(state, organizationId) {
-      state.organizationId = organizationId;
-    },
-
     SET_SEARCH_PROGRAM(state, searchProgram) {
       state.searchProgram = searchProgram;
     },
@@ -94,6 +81,18 @@ export default new Vuex.Store({
         })
         .catch((ex) => {
           console.warn("ERROR!!!!! : ", ex);
+        });
+    },
+    modifyProgramReview({ commit, dispatch }, modifyReview) {
+      axios
+        .put(`/api/review/${modifyReview.reviewId}`, {
+          content: modifyReview.review,
+        })
+        .then((res) => {
+          //리뷰 수정 PUT
+          console.log(res.data);
+          alert("리뷰를 수정했습니다.");
+          dispatch("getProgramReview", modifyReview.programId);
         });
     },
     deleteProgramReview({ commit, dispatch }, deleteReview) {
