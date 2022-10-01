@@ -4,7 +4,13 @@
     <br />
     <div class="flex">
       <div id="Img" v-for="alarm in alarmList">
-        <img class="poster" :src="alarm.posterImg" alt="Image" />
+        <router-link
+          :to="{ name: 'detail' }"
+          @click="moveProgramDetail(alarm.id)"
+          class="nav-link"
+        >
+          <img class="poster" :src="alarm.posterImg" alt="Image" />
+        </router-link>
         <br />
         <span>
           <!-- <img src="@/assets/alarm.png" style="cursor: pointer" />&nbsp; -->
@@ -80,7 +86,7 @@ export default {
     this.getAlarm();
   },
   methods: {
-    ...mapActions(["getAlarm", "deleteAlarm"]),
+    ...mapActions(["getAlarm", "deleteAlarm", "getProgramDetail"]),
     check(index) {
       this.score = index + 1;
     },
@@ -90,6 +96,9 @@ export default {
       } else {
         return;
       }
+    },
+    moveProgramDetail(programId) {
+      this.getProgramDetail(programId);
     },
   },
 };

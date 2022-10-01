@@ -16,6 +16,7 @@ export default new Vuex.Store({
     searchProgram: null,
     onairTalk: null,
     castInfoList: null,
+    ratingList: null,
     alarmList: null,
   },
   getters: {},
@@ -46,6 +47,9 @@ export default new Vuex.Store({
     },
     SET_SEARCH_WORD(state, searchWord) {
       state.searchWord = searchWord;
+    },
+    SET_RATING_LIST(state, ratingList) {
+      state.ratingList = ratingList;
     },
     SET_ALARM_LIST(state, alarmList) {
       state.alarmList = alarmList;
@@ -155,6 +159,20 @@ export default new Vuex.Store({
         //방영 알림 삭제 DELETE
         console.log(res.data);
         dispatch("getAlarm", state.programId);
+      });
+    },
+    getRating({ commit }) {
+      axios.get(`/api/users/rating`).then((res) => {
+        //평점 조회 GET
+        console.log(res.data);
+        commit("SET_RATING_LIST", res.data);
+      });
+    },
+    deleteRating({ commit, dispatch, state }, ratingId) {
+      axios.delete(`/api/users/rating/${ratingId}`).then((res) => {
+        //평점 삭제 DELETE
+        console.log(res.data);
+        dispatch("getRating", state.programId);
       });
     },
     getSearchProgram({ commit }, word) {
