@@ -1,11 +1,9 @@
 <template>
-  <div style="margin-top: 10px">
-    <br />
-    <div>
-      <div class="flex">
-        <b-card
-          v-for="cast in castInfoList"
-          style="
+    <div style="margin-top: 10px">
+        <br />
+        <div>
+            <div class="flex">
+                <b-card v-for="cast in castInfoList" style="
             width: 10%;
             height: 13vw;
             background-color: #1f1f1f;
@@ -13,52 +11,54 @@
             margin-bottom: 1%;
             margin-right: 1%;
             border-radius: 1vw;
-          "
-        >
-          <b-avatar
-            class="avatar"
-            variant="info"
-            :src="cast.castImageUrl"
-            size="6rem"
-            style="margin-bottom: 7%"
-          ></b-avatar>
-          <div class="actorName">{{ cast.actorName }}</div>
-          <div class="playerName">{{ cast.playName }}</div>
-        </b-card>
-      </div>
+          ">
+                    <img :src="cast.castImageUrl" />
+                    <div class="actorName">{{ cast.actorName }}</div>
+                    <div class="playerName">{{ cast.playName }}</div>
+                </b-card>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 
 export default {
-  // name: "App",
-  name: "Star",
-  computed: {
-    ...mapState(["castInfoList"]),
-  },
-  data() {
-    return {};
-  },
-  methods: {},
+    // name: "App",
+    name: "Star",
+    computed: {
+        ...mapState(["castInfoList"]),
+    },
+    data() {
+        return {};
+    },
+    methods: {},
 };
 </script>
 
 <style scoped>
 .actorName {
-  color: #ffffff;
-  font-size: 1vw;
+    color: #ffffff;
+    font-size: 1vw;
 }
+
 .playerName {
-  color: #a1a1a1;
-  font-size: 0.9vw;
+    color: #a1a1a1;
+    font-size: 0.9vw;
 }
+
 .flex {
-  display: flex;
-  /* height: 600px; */
-  flex-wrap: wrap;
-  align-content: stretch;
+    display: flex;
+    /* height: 600px; */
+    flex-wrap: wrap;
+    align-content: stretch;
+}
+
+img {
+    width: 6rem;
+    margin-bottom: 7%;
+    border-radius: 1vw;
+
 }
 </style>
