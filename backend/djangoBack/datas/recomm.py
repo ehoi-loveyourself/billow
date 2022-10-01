@@ -166,12 +166,14 @@ def mf_condition_recomm(programId):
 
     program_id = user_program_rating.columns
     program_id_list = list(program_id)
+    if programId not in program_id_list:
+        return []
+    print(program_id_list) 
     coffey_hands = program_id_list.index(programId)
-
     corr_coffey_hands = corr[coffey_hands]
     print('##########추천 프로그램 ID##########')
     print(list(program_id[(corr_coffey_hands >= 0.9)])[:10])
     return list(program_id[(corr_coffey_hands >= 0.9)])[:10]
 
 
-mf_condition_recomm(2)
+# mf_condition_recomm(100)
