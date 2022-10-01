@@ -10,7 +10,6 @@ import com.billow.domain.entity.user.User;
 import com.billow.exception.NotFoundException;
 import com.billow.model.repository.addition.RatingRepository;
 import com.billow.model.repository.program.ConditionRecommendRepository;
-import com.billow.model.repository.program.GenreRepository;
 import com.billow.model.repository.program.ProgramRepository;
 import com.billow.model.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +31,6 @@ public class webClientService {
     private static final String PROGRAM_NOT_FOUND = "해당 프로그램을 찾을 수 없습니다.";
 
     private final WebClient webClient;
-    private final GenreRepository genreRepository;
     private final UserRepository userRepository;
     private final ProgramRepository programRepository;
     private final ConditionRecommendRepository conditionRecommendRepository;
