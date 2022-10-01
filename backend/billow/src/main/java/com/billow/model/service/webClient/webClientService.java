@@ -161,12 +161,10 @@ public class webClientService {
             List<Long> idList = getConditionProgramIdByDjango(programId);
             log.info("상위 프로그램 3개를 넣어서 나온 프로그램 : " + ++cnt + "회차, 프로그램 id : " + idList.toString());
             // 나온 결과값을 셋에 넣는다 : 중복된 프로그램 id를 없앨 수 있도록
-            for (Long id : idList) {
-                programIdSet.add(id);
-            }
+            programIdSet.addAll(idList);
         }
         // 프로그램 id가 중복이 제거된 채로 셋에 들어있다.
-        log.info("중복이 제거된 셋 : " + programIdSet.toString());
+        log.info("중복이 제거된 셋 : " + programIdSet);
 
 
         // 셋을 돌리면서 responses 에 담는다.
