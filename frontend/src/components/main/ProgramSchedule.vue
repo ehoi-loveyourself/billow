@@ -1,51 +1,45 @@
 <template>
-  <div style="margin-top: 10px">
-    <br />
-    <!-- <div style="text-align: center">
-      지금은 9월 26일 월요일 11시 55분 입니다.
-    </div> -->
-    <br />
-    <div class="flex">
-      <b-table-simple
-        bordered
-        fixed
-        style="border-color: #ffffff; color: #ffffff; font-weight: 400"
-      >
-        <b-thead style="background-color: #5a5a5a">
-          <b-tr>
-            <b-th v-for="schedule in programSchedule">
-              {{ schedule.day }}
-            </b-th>
-          </b-tr>
-        </b-thead>
-        <tbody>
-          <b-tr style="padding: 5">
-            <b-td v-for="schedule in programSchedule">
-              <div
-                v-for="organization in schedule.organizationResponseList"
-                style="white-space: nowrap"
-              >
-                <span class="time"
-                  >{{ organization.broadcastingTime }}&nbsp;</span
-                ><span class="station"
-                  >{{ organization.broadcastingStation }}&nbsp;</span
-                >
-                <span class="episode" v-if="organization.broadcastingEpisode">{{
-                  organization.broadcastingEpisode
-                }}</span>
-                <span class="box" v-if="organization.broadcastingRerun"
-                  ><span class="box_design">재</span>&nbsp;</span
-                >
-                <span @click="alarm(organization.programOrganizationId)">
-                  <img src="@/assets/alarm.png" style="cursor: pointer" />
-                </span>
-              </div>
-            </b-td>
-          </b-tr>
-        </tbody>
-      </b-table-simple>
-    </div>
+  <br />
+  <br />
+  <div style="margin-top: 10px" class="flex" v-if="programSchedule != null">
+    <b-table-simple bordered fixed style="border-color: #ffffff; color: #ffffff; font-weight: 400">
+      <b-thead style="background-color: #5a5a5a">
+        <b-tr>
+          <b-th v-for="schedule in programSchedule">
+            {{ schedule.day }}
+          </b-th>
+        </b-tr>
+      </b-thead>
+      <tbody>
+        <b-tr style="padding: 5">
+          <b-td v-for="schedule in programSchedule">
+            <div v-for="organization in schedule.organizationResponseList" style="white-space: nowrap">
+              <span class="time">{{ organization.broadcastingTime }}&nbsp;</span><span class="station">{{
+              organization.broadcastingStation }}&nbsp;</span>
+              <span class="episode" v-if="organization.broadcastingEpisode">{{
+              organization.broadcastingEpisode
+              }}</span>
+              <span class="box" v-if="organization.broadcastingRerun"><span class="box_design">재</span>&nbsp;</span>
+              <span @click="alarm(organization.programOrganizationId)">
+                <img src="@/assets/alarm.png" style="cursor: pointer" />
+              </span>
+            </div>
+          </b-td>
+        </b-tr>
+      </tbody>
+    </b-table-simple>
   </div>
+  <div v-else>
+    <h2 style="
+          color: white;
+          margin-left: 70px;
+          font-size: 1.1vw;
+          font-weight: 300;
+        ">
+      편성 정보가 없습니다.
+    </h2>
+  </div>
+
 
   <!-- <b-modal
     size="sm"
@@ -125,7 +119,7 @@ export default {
   /* height: 600px; */
   /* flex-wrap: wrap;
   align-content: stretch; */
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
 }
 
 .station {
