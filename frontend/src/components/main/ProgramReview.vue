@@ -16,7 +16,7 @@
           </span>
         </span>
       </b-col> -->
-      <b-col cols="12">
+      <b-col cols="12" style="padding-left:4.8%; padding-right: 4.8%;">
         <!-- <b-form-input
           v-model="review"
           placeholder="리뷰를 작성해주세요."

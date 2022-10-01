@@ -1,6 +1,7 @@
 <template>
   <div style="margin-top: 10px">
     <br />
+    <div style="padding-left:4%; padding-right:4%">
     <!-- length? 계산 필요 -->
     <div>3개의 TALK</div>
     <b-row style="margin-top: 20px">
@@ -28,6 +29,7 @@
         </b-button>
       </b-col> -->
     </b-row>
+  </div>
     <br />
     <!-- <section>
       <article class="review_set">
