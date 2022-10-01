@@ -45,7 +45,8 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
                 || requestURI.matches("/api/program/cast/[0-9]")
                 || requestURI.equals("/api/program")
                 || requestURI.equals("/api/users/validation/nickname")
-                || requestURI.equals("/api/mf/random") // 더미데이터 만들기용 임시
+//                || requestURI.equals("/api/mf/random") // 더미데이터 만들기용 임시
+//                || requestURI.equals("/api/mf/randomRating") // 더미데이터 만들기용 임시
         ) {
             log.info("JWT 토큰 없이 요청 가능");
             return true;
