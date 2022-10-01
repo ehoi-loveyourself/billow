@@ -25,4 +25,6 @@ public class BroadcastingAlarmResponse {
     private String alarmTime;
 
     private String alarmStation;
+
+    private String alarmEpisode;
 }

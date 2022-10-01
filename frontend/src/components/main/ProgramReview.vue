@@ -110,7 +110,7 @@ import { mapState, mapActions, mapMutations } from "vuex";
 export default {
   name: "ProgramReview",
   computed: {
-    ...mapState(["programReview", "programId"]),
+    ...mapState(["programReview"]),
   },
   setup() {
     const state = reactive({
@@ -140,7 +140,7 @@ export default {
         alert("내용을 입력하세요.");
         return;
       }
-      this.registReview({ review: this.message, programId: this.programId });
+      this.registReview(this.message);
       this.message = "";
     },
     setReviewId(reviewId) {
@@ -153,15 +153,16 @@ export default {
       }
       this.modifyProgramReview({
         reviewId: this.reviewId,
-        programId: this.programId,
         review: this.modifyReview,
       });
+      this.modifyReview = "";
     },
     reviewDelete(reviewId) {
-      this.deleteProgramReview({
-        reviewId: reviewId,
-        programId: this.programId,
-      });
+      if (confirm("리뷰를 삭제하시겠습니까?") == true) {
+        this.deleteProgramReview(reviewId);
+      } else {
+        return;
+      }
     },
   },
 };

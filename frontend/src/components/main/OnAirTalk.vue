@@ -48,7 +48,7 @@ export default {
   // name: "App",
   name: "Star",
   computed: {
-    ...mapState(["onairTalk", "programId"]),
+    ...mapState(["onairTalk"]),
   },
   data() {
     return {
@@ -62,7 +62,7 @@ export default {
         alert("내용을 입력하세요.");
         return;
       }
-      this.sendMessage({ message: this.message, programId: this.programId });
+      this.sendMessage(this.message);
       this.message = "";
     },
   },
