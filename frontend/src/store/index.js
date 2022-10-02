@@ -7,6 +7,15 @@ import axios from "axios";
 
 export default new Vuex.Store({
   state: {
+    hotProgram: null,
+    newProgram: null,
+    genderAgeProgram: null,
+    userAge: 0,
+    userGender: null,
+    actorProgram: null,
+    actorName: "",
+    onairProgram: null,
+
     programId: 0,
     organizationId: 0,
     programDetail: null,
@@ -54,8 +63,58 @@ export default new Vuex.Store({
     SET_ALARM_LIST(state, alarmList) {
       state.alarmList = alarmList;
     },
+    SET_HOT_PROGRAM(state, hotProgram) {
+      state.hotProgram = hotProgram;
+    },
+    SET_NEW_PROGRAM(state, newProgram) {
+      state.newProgram = newProgram;
+    },
+    SET_GENDERAGE_PROGRAM(state, genderAgeProgram) {
+      state.genderAgeProgram = genderAgeProgram;
+      state.userAge = genderAgeProgram[0].userAge;
+      staet.userGender = genderAgeProgram[0].userGender;
+    },
+    SET_ACTOR_PROGRAM(state, actorProgram) {
+      state.actorProgram = actorProgram;
+      state.actorName = actorProgram[0].actorName;
+    },
+    SET_ONAIR_PROGRAM(state, onairProgram) {
+      state.onairProgram = onairProgram;
+    },
   },
   actions: {
+    getRecommendProgram({ commit }) {
+      axios.get("/api/recommend/popular").then((res) => {
+        // 인기 프로그램 추천 데이터 GET
+        console.log(res.data);
+        commit("SET_HOT_PROGRAM", res.data);
+      });
+
+      axios.get("/api/recommend/new").then((res) => {
+        // 신규 프로그램 추천 데이터 GET
+        console.log(res.data);
+        commit("SET_NEW_PROGRAM", res.data);
+      });
+
+      axios.get("/api/recommend/gender-age").then((res) => {
+        // 성연령별 프로그램 추천 데이터 GET
+        console.log(res.data);
+        commit("SET_GENDERAGE_PROGRAM", res.data);
+      });
+
+      axios.get("/api/recommend/actor").then((res) => {
+        // 출연진 프로그램 추천 데이터 GET
+        console.log(res.data);
+        commit("SET_ACTOR_PROGRAM", res.data);
+      });
+
+      axios.get("/api/recommend/onair").then((res) => {
+        // 온에어 프로그램 추천 데이터 GET
+        console.log(res.data);
+        commit("SET_ONAIR_PROGRAM", res.data);
+      });
+    },
+
     getProgramDetail({ commit, dispatch }, programId) {
       commit("SET_PROGRAM_ID", programId);
       axios.get(`/api/program/${programId}`).then((res) => {
@@ -188,6 +247,30 @@ export default new Vuex.Store({
           commit("SET_SEARCH_PROGRAM", null);
           console.log("프로그램이 없습니다.");
         });
+    },
+    registBookmark({ commit, state }) {
+      axios.post(`/api/bookmark/${state.programId}`).then((res) => {
+        //즐겨찾기 등록 POST
+        console.log(res.data);
+      });
+    },
+    deleteBookmark({ commit, state }) {
+      axios.delete(`/api/bookmark/${state.programId}`).then((res) => {
+        //즐겨찾기 삭제 DELETE
+        console.log(res.data);
+      });
+    },
+    userRegistBookmark({ commit }, programId) {
+      axios.post(`/api/bookmark/${programId}`).then((res) => {
+        //사용자 즐겨찾기 등록 POST
+        console.log(res.data);
+      });
+    },
+    userDeleteBookmark({ commit }, programId) {
+      axios.delete(`/api/bookmark/${programId}`).then((res) => {
+        //사용자 즐겨찾기 삭제 DELETE
+        console.log(res.data);
+      });
     },
   },
   modules: {},
