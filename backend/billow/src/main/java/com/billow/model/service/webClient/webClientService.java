@@ -27,7 +27,6 @@ public class webClientService {
     private static final String PROGRAM_NOT_FOUND = "해당 프로그램을 찾을 수 없습니다.";
 
     private final WebClient webClient;
-    private final GenreRepository genreRepository;
     private final UserRepository userRepository;
     private final ProgramRepository programRepository;
 
