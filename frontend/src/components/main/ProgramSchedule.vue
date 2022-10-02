@@ -34,7 +34,7 @@
                   <span
                     class="episode"
                     v-if="organization.broadcastingEpisode"
-                    >{{ organization.broadcastingEpisode }}</span
+                    >{{ organization.broadcastingEpisode }}&nbsp;</span
                   >
                   <span class="box" v-if="organization.broadcastingRerun"
                     ><span class="box_design">재</span>&nbsp;</span
@@ -146,4 +146,5 @@ th {
   font-weight: 400;
   text-align: center;
 }
+
 </style>
