@@ -10,14 +10,14 @@
           <img class="liked_2" :src="like.posterImg" alt="Image" />
           <div class="button">
             <button
-              @click="addToFavorites()"
+              @click="addToFavorites(like.programId)"
               v-show="!isFavorite"
               style="border: none; background: none"
             >
               <img class="hearted" src="@/assets/white_heart.png" />
             </button>
             <button
-              @click="deleteFromFavorites()"
+              @click="deleteFromFavorites(like.programId)"
               v-show="isFavorite"
               style="background: none; border: none"
             >
@@ -98,12 +98,18 @@ export default {
   },
 
   methods: {
-    ...mapActions(["getProgramDetail"]),
-    addToFavorites() {
+    ...mapActions([
+      "getProgramDetail",
+      "userRegistBookmark",
+      "userDeleteBookmark",
+    ]),
+    addToFavorites(programId) {
       this.isFavorite = true;
+      this.userRegistBookmark(programId);
     },
-    deleteFromFavorites() {
+    deleteFromFavorites(programId) {
       this.isFavorite = false;
+      this.userDeleteBookmark(programId);
     },
     moveProgramDetail(programId) {
       this.getProgramDetail(programId);

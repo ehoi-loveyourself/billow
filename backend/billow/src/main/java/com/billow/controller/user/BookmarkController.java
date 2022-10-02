@@ -39,6 +39,15 @@ public class BookmarkController {
                 .body(responses);
     }
 
+    @GetMapping("/{programId}")
+    public ResponseEntity<Object> selectUserBookmark(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId) {
+        log.info("즐겨찾기 사용자 조회 API 호출");
+        Boolean responses = bookmarkService.selectUserBookmark(JwtTokenProvider.getUserId(token), programId);
+        log.info("즐겨찾기 사용자 조회 성공");
+        return ResponseEntity.ok()
+                .body(responses);
+    }
+
     @ApiOperation(value = "즐겨찾기 등록", response = Object.class)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "즐겨찾기 등록 성공"),
@@ -64,10 +73,10 @@ public class BookmarkController {
             @ApiResponse(responseCode = "400", description = "잘못된 요청입니다."),
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
-    @DeleteMapping("/{bookmarkId}")
-    public ResponseEntity<Object> deleteBookmark(@RequestHeader("Auth-access") String token, @PathVariable("bookmarkId") Long bookmarkId) {
+    @DeleteMapping("/{programId}")
+    public ResponseEntity<Object> deleteBookmark(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId) {
         log.info("즐겨찾기 삭제 API 호출");
-        Message response = bookmarkService.deleteBookmark(JwtTokenProvider.getUserId(token), bookmarkId);
+        Message response = bookmarkService.deleteBookmark(JwtTokenProvider.getUserId(token), programId);
         log.info("즐겨찾기 삭제 성공");
         return ResponseEntity.ok()
                 .body(response);
