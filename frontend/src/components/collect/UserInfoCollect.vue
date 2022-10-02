@@ -499,16 +499,24 @@ export default {
   name: "UserInfoCollect",
   methods: {
     signUp() {
-      if (this.nickname == "") {
-        alert("닉네임 널이여");
+      if (
+        this.nickname == "" ||
+        this.selected_gender == "" ||
+        this.selected_age == null ||
+        this.selected_region == "" ||
+        this.selected_tv_carrier == "" ||
+        this.profileImgId == null ||
+        this.phonenum == ""
+      ) {
+        alert("모든 정보를 입력해주세요.");
       } else {
-        alert("닉네임 채워졌으니 포스트실행");
-      }
+        alert("모든 정보가 채워졌으니 포스트실행");
       // 회원가입
       // alert("post 테스트");
       // alert(localStorage.getItem("email"));
       // alert(localStorage.getItem("name"));
       // alert(localStorage.getItem("authToken"));
+      // localStorage.clear();
       // alert(this.nickname);
       // alert(this.selected_gender);
       // alert(this.selected_age);
@@ -543,6 +551,7 @@ export default {
         .catch((ex) => {
           console.warn("ERROR!!!!! : ", ex);
         });
+      }
     },
   },
 };

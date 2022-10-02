@@ -130,7 +130,7 @@ export default {
   /* height: 600px; */
   /* flex-wrap: wrap;
   align-content: stretch; */
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
 }
 
 .station {

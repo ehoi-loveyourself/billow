@@ -16,7 +16,7 @@
           </span>
         </span>
       </b-col> -->
-      <b-col cols="12">
+      <b-col cols="12" style="padding-left:4.8%; padding-right: 4.8%;">
         <!-- <b-form-input
           v-model="review"
           placeholder="리뷰를 작성해주세요."
@@ -24,15 +24,8 @@
           style="border-color: #a48282"
         >
         </b-form-input> -->
-        <input
-          v-model="message"
-          class="form-control"
-          type="text"
-          name="search"
-          placeholder="리뷰를 작성해주세요."
-          required
-          @keyup.enter="onSubmit()"
-        />
+        <input v-model="message" class="form-control" type="text" name="search" placeholder="리뷰를 작성해주세요." required
+          @keyup.enter="onSubmit()" />
       </b-col>
       <!-- <b-col cols="1">
         <b-button size="md" type="submit" @click="reviewRegist()">
@@ -41,62 +34,36 @@
       </b-col> -->
     </b-row>
     <br />
-    <section>
-      <article class="review_set">
-        <article v-for="review in programReview" class="reviews">
-          <h2>
-            {{ review.userNickName }}&nbsp;&nbsp;
-            <span class="wrap-star">
-              {{ review.regDateTime }}
+
+    <article class="review_set">
+      <b-row class="reviews" v-for="review in programReview" track-by="id">
+        <b-col cols="1" style="text-align:right; padding-right:0.1%">
+          <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/6" size="3rem"></b-avatar>
+        </b-col>
+        <b-col cols="11">
+            <span class="username">{{ review.userNickName }}</span>&nbsp;&nbsp;
+            <span class="time">
+              {{ review.regDateTime }}&nbsp;
             </span>
-            <a
-              href="#"
-              @click="setReviewId(review.reviewId)"
-              class="button btnBorder btnBlue"
-              v-b-modal.modal-5
-              ><span style="font-size: 0.8vw">수정</span></a
-            >&nbsp;
-            <a
-              href="#"
-              @click="reviewDelete(review.reviewId)"
-              class="button btnBorder btnRed"
-              ><span style="font-size: 0.8vw">삭제</span></a
-            >
-          </h2>
+            <a href="#" @click="setReviewId(review.reviewId)" class="button btnBorder btnBlue" v-b-modal.modal-5><span
+                style="font-size: 0.8vw">수정</span></a>&nbsp;
+            <a href="#" @click="reviewDelete(review.reviewId)" class="button btnBorder btnRed"><span
+                style="font-size: 0.8vw">삭제</span></a>
           <p>{{ review.content }}</p>
-        </article>
-      </article>
-    </section>
+        </b-col>
+      </b-row>
+    </article>
+
     <br />
   </div>
 
-  <b-modal
-    size="m"
-    hide-footer
-    id="modal-5"
-    centered
-    no-stacking
-    title="리뷰 수정하기"
-    style="text-align: center"
-  >
+  <b-modal size="m" hide-footer id="modal-5" centered no-stacking title="리뷰 수정하기" style="text-align: center">
     <div style="margin-bottom: 5%">
-      <input
-        v-model="modifyReview"
-        class="form-control"
-        type="text"
-        placeholder="리뷰를 작성해주세요."
-        required
-        @keyup.enter="modifyReview()"
-      />
+      <input v-model="modifyReview" class="form-control" type="text" placeholder="리뷰를 작성해주세요." required
+        @keyup.enter="modifyReview()" />
     </div>
-    <b-button
-      size="m"
-      type="submit"
-      @click="reviewModify()"
-      style="background-color: blue"
-      data-bs-dismiss="modal"
-      aria-label="Close"
-    >
+    <b-button size="m" type="submit" @click="reviewModify()" style="background-color: blue" data-bs-dismiss="modal"
+      aria-label="Close">
       <span>수정</span>
     </b-button>
   </b-modal>
@@ -169,26 +136,30 @@ export default {
 </script>
 
 <style scoped>
-.reviews {
-  background: left/contain content-box border-box no-repeat
-    url("@/assets/toystory.png") #141414;
-  margin-bottom: 1.5rem;
+.review_set {
+  display: flex;
+  flex-direction: column-reverse;
 }
 
-.reviews > h2 {
+.reviews>h2 {
   padding-left: 4.5rem;
   font-weight: 600;
   font-size: 0.9rem;
   margin: 0;
 }
 
-.reviews > p {
+.reviews>p {
   padding-left: 4.5rem;
   font-size: 0.9rem;
   color: #84868d;
 }
 
-.star-rating {
+.time {
+  font-size: 0.8rem;
+  color: #a1a1a1;
+}
+
+/* .star-rating {
   width: 100px;
 }
 
@@ -204,7 +175,7 @@ export default {
   background-position: left bottom;
   line-height: 0;
   vertical-align: top;
-}
+} */
 
 a.button {
   padding: 0.2%;
@@ -240,5 +211,11 @@ a.button {
 
 .btnRed {
   background: #ae2b00;
+}
+.username {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin: 0;
+  color:#f1f1f1
 }
 </style>
