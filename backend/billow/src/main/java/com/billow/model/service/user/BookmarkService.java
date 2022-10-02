@@ -81,16 +81,21 @@ public class BookmarkService {
         return new Message("프로그램을 즐겨찾기에 담았습니다.");
     }
 
-    public Message deleteBookmark(Long userId, Long bookmarkId) {
-        Bookmark bookmark = bookmarkRepository.findById(bookmarkId)
-                .orElseThrow(() -> new NotFoundException(BOOKMARK_NOT_FOUND));
+    public Message deleteBookmark(Long userId, Long programId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
-        if (!bookmark.getUser().equals(user)) {
-            throw new BadRequestException(BAD_REQUEST);
-        }
+        Bookmark bookmark = bookmarkRepository.findByUser_IdAndProgram_Id(userId, programId)
+                .orElseThrow(() -> new NotFoundException(BOOKMARK_NOT_FOUND));
         bookmark.getProgram().deleteBookmark();
         bookmarkRepository.delete(bookmark);
         return new Message("프로그램을 즐겨찾기에서 삭제했습니다.");
+    }
+
+    public Boolean selectUserBookmark(Long userId, Long programId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
+        Bookmark bookmark = bookmarkRepository.findByUser_IdAndProgram_Id(userId, programId)
+                .orElseThrow(() -> new NotFoundException(BOOKMARK_NOT_FOUND));
+        return true;
     }
 }
