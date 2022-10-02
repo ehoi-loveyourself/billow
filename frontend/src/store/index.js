@@ -7,6 +7,10 @@ import axios from "axios";
 
 export default new Vuex.Store({
   state: {
+    randomProgram: null,
+    userRecommend: null,
+    who: "",
+    genre: "",
     hotProgram: null,
     newProgram: null,
     genderAgeProgram: null,
@@ -30,6 +34,34 @@ export default new Vuex.Store({
   },
   getters: {},
   mutations: {
+    SET_RANDOM_PROGRAM(state, randomProgram) {
+      state.randomProgram = randomProgram;
+    },
+    SET_USER_RECOMMEND_PROGRAM(state, userRecommend) {
+      state.userRecommend = userRecommend;
+    },
+    SET_CONDITION(state, condition) {
+      state.who = condition.who;
+      state.genre = condition.genre;
+    },
+    SET_HOT_PROGRAM(state, hotProgram) {
+      state.hotProgram = hotProgram;
+    },
+    SET_NEW_PROGRAM(state, newProgram) {
+      state.newProgram = newProgram;
+    },
+    SET_GENDERAGE_PROGRAM(state, genderAgeProgram) {
+      state.genderAgeProgram = genderAgeProgram;
+      state.userAge = genderAgeProgram[0].userAge;
+      staet.userGender = genderAgeProgram[0].userGender;
+    },
+    SET_ACTOR_PROGRAM(state, actorProgram) {
+      state.actorProgram = actorProgram;
+      state.actorName = actorProgram[0].actorName;
+    },
+    SET_ONAIR_PROGRAM(state, onairProgram) {
+      state.onairProgram = onairProgram;
+    },
     SET_PROGRAM_ID(state, programId) {
       state.programId = programId;
     },
@@ -63,26 +95,22 @@ export default new Vuex.Store({
     SET_ALARM_LIST(state, alarmList) {
       state.alarmList = alarmList;
     },
-    SET_HOT_PROGRAM(state, hotProgram) {
-      state.hotProgram = hotProgram;
-    },
-    SET_NEW_PROGRAM(state, newProgram) {
-      state.newProgram = newProgram;
-    },
-    SET_GENDERAGE_PROGRAM(state, genderAgeProgram) {
-      state.genderAgeProgram = genderAgeProgram;
-      state.userAge = genderAgeProgram[0].userAge;
-      staet.userGender = genderAgeProgram[0].userGender;
-    },
-    SET_ACTOR_PROGRAM(state, actorProgram) {
-      state.actorProgram = actorProgram;
-      state.actorName = actorProgram[0].actorName;
-    },
-    SET_ONAIR_PROGRAM(state, onairProgram) {
-      state.onairProgram = onairProgram;
-    },
   },
   actions: {
+    getRandomProgram({ commit }) {
+      axios.get("/api/program/random").then((res) => {
+        // 랜덤 프로그램 추천 데이터 GET
+        console.log(res.data);
+        commit("SET_RANDOM_PROGRAM", res.data);
+      });
+    },
+    getUserRecommendProgram({ commit }) {
+      axios.get("/api/mf/user-recommend").then((res) => {
+        // 사용자 맞춤 프로그램 추천 데이터 GET
+        console.log(res.data);
+        commit("SET_USER_RECOMMEND_PROGRAM", res.data);
+      });
+    },
     getRecommendProgram({ commit }) {
       axios.get("/api/recommend/popular").then((res) => {
         // 인기 프로그램 추천 데이터 GET
