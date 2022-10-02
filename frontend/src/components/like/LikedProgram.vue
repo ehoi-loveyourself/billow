@@ -2,29 +2,27 @@
   <div style="padding-left: 70px; margin-top: 10px">
     <div class="flex">
       <div id="Img" v-for="like in state.likeList">
-        <router-link
+        <!-- <router-link
           :to="{ name: 'detail' }"
           @click="moveProgramDetail(like.programId)"
           class="nav-link"
-        >
-          <img class="liked_2" :src="like.posterImg" alt="Image" />
-          <div class="button">
-            <button
-              @click="addToFavorites(like.programId)"
-              v-show="!isFavorite"
-              style="border: none; background: none"
-            >
-              <img class="hearted" src="@/assets/white_heart.png" />
-            </button>
-            <button
-              @click="deleteFromFavorites(like.programId)"
-              v-show="isFavorite"
-              style="background: none; border: none"
-            >
-              <img class="hearted" src="@/assets/red_heart.png" />
-            </button>
-          </div>
-        </router-link>
+        > -->
+        <img class="liked_2" :src="like.posterImg" alt="Image" />
+        <div class="button">
+          <!-- <button @click="addToFavorites(like.programId)" :id="like.programId" v-show="!isFavorite" style="border: none; background: none">
+            <img class="hearted" src="@/assets/white_heart.png" />
+          </button> -->
+          <button @click="deleteFromFavorites(like.programId)" :id="like.programId" v-show="isFavorite" style="background: none; border: none">
+            <img class="hearted" src="@/assets/red_heart.png" />
+          </button>
+          <!-- <button @click="setFavorites(isFavorite)" :id="like.programId" v-show="!isFavorite" style="border: none; background: none">
+            <img class="hearted" src="@/assets/white_heart.png" />
+          </button>
+          <button @click="setFavorites(isFavorite)" :id="like.programId" v-show="isFavorite" style="background: none; border: none">
+            <img class="hearted" src="@/assets/red_heart.png" />
+          </button> -->
+        </div>
+        <!-- </router-link> -->
       </div>
 
       <!-- <div id="Img">
@@ -77,6 +75,7 @@
 import { reactive } from "@vue/reactivity";
 import axios from "axios";
 import { mapActions } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "LikedProgram",
@@ -84,6 +83,9 @@ export default {
     return {
       isFavorite: true,
     };
+  },
+  computed: {
+    ...mapState(["programId"]),
   },
   setup() {
     const state = reactive({
@@ -103,14 +105,33 @@ export default {
       "userRegistBookmark",
       "userDeleteBookmark",
     ]),
-    addToFavorites(programId) {
-      this.isFavorite = true;
-      this.userRegistBookmark(programId);
-    },
+    // addToFavorites(programId) {
+    //   this.isFavorite = true;
+    //   this.userRegistBookmark(programId);
+    // },
     deleteFromFavorites(programId) {
       this.isFavorite = false;
-      this.userDeleteBookmark(programId);
+
+      // alert("내가 찜한 콘텐츠에서 삭제되었습니다.");
+      if (confirm("내가 찜한 콘텐츠에서 삭제하시겠습니까?") == true){
+        this.userDeleteBookmark(programId);
+        history.go();
+      }
+      else{
+        history.go();
+      }
+      
     },
+    // setFavorites(isFavorite) {
+    //   if (isFavorite) {
+    //     this.isFavorite = false;
+    //     this.userDeleteBookmark(programId);
+    //   }
+    //   else {
+    //     this.isFavorite = true;
+    //     this.userRegistBookmark(programId);
+    //   }
+    // },
     moveProgramDetail(programId) {
       this.getProgramDetail(programId);
     },
@@ -122,9 +143,8 @@ export default {
 .liked {
   width: 14vw;
   height: 21vw;
-  margin-right: 0.5%;
-  margin-bottom: 0.5%;
 }
+
 .liked_2 {
   width: 14vw;
   height: 21vw;
@@ -142,9 +162,11 @@ img:hover {
 
 #Img {
   position: relative;
+  margin-right: 0.5%;
+  margin-bottom: 0.5%;
 }
 
-img:hover + .button,
+img:hover+.button,
 .button:hover {
   display: inline-block;
   position: absolute;
