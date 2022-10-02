@@ -19,6 +19,8 @@ public interface ProgramOrganizationRepository extends JpaRepository<ProgramOrga
 
     List<ProgramOrganization> findByBroadcastingTimeBetween(Date date, Date now);
 
-    @Transactional
-    void deleteByBroadcastingTimeBefore(Date date);
+//    @Transactional
+//    void deleteByBroadcastingTimeBefore(Date date);
+
+    List<ProgramOrganization> findByBroadcastingTimeBefore(Date date);
 }

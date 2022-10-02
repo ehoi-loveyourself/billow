@@ -52,7 +52,7 @@ public class BroadcastingAlarmService {
     }
 
     public Message postAlarm(Long userId, Long programOrganizationId) {
-        Optional<BroadcastingAlarm> findBroadcastingAlarm = broadcastingAlarmRepository.findByProgramOrganization_Id(programOrganizationId);
+        Optional<BroadcastingAlarm> findBroadcastingAlarm = broadcastingAlarmRepository.findByUser_IdAndProgramOrganization_Id(userId, programOrganizationId);
         if (!findBroadcastingAlarm.isEmpty()) {
             return new Message("이미 등록된 알림입니다.");
         }
@@ -77,5 +77,9 @@ public class BroadcastingAlarmService {
         messageService.cancleMessage(findBroadcastingAlarm.getGroupId());
         broadcastingAlarmRepository.delete(findBroadcastingAlarm);
         return new Message("방영 알림 삭제에 성공하였습니다.");
+    }
+
+    public List<BroadcastingAlarm> findByProgramOrganization_Id(Long programOrganizationId) {
+        return broadcastingAlarmRepository.findByProgramOrganization_Id(programOrganizationId);
     }
 }
