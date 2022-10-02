@@ -15,7 +15,7 @@
     </svg>
   </div>
   <br />
-  <br/>
+  <br />
   <div class="body">
     <h2 style="color: white; font-size: 1.1vw; font-weight: 300">
       회원님이 봤던 프로그램들을 평가해주세요.<br />
@@ -23,7 +23,7 @@
     </h2>
     <br />
     <div class="flex">
-      <div id="Img" v-for="random in state.randomProgram">
+      <div id="Img" v-for="random in randomProgram">
         <img class="poster" :src="random.posterImg" alt="Image" />
         <br />
         <span class="explain">
@@ -78,8 +78,7 @@
 </template>
 
 <script>
-import { reactive } from "@vue/reactivity";
-import axios from "axios";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "Star",
@@ -88,23 +87,17 @@ export default {
       score: 0,
     };
   },
+  computed: {
+    ...mapState(["randomProgram"]),
+  },
+  created() {
+    this.getRandomProgram();
+  },
   methods: {
+    ...mapActions(["getRandomProgram"]),
     check(index) {
       this.score = index + 1;
     },
-  },
-
-  setup() {
-    const state = reactive({
-      randomProgram: [],
-    });
-
-    axios.get("/api/program/random").then((res) => {
-      // 랜덤 프로그램 추천 데이터 GET
-      console.log(res.data);
-      state.randomProgram = res.data;
-    });
-    return { state };
   },
 };
 </script>
