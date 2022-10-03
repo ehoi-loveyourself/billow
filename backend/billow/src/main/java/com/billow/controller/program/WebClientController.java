@@ -1,5 +1,6 @@
 package com.billow.controller.program;
 
+import com.billow.domain.dto.program.ConditionRecommendRequest;
 import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.jwt.JwtTokenProvider;
 import com.billow.model.service.webClient.webClientService;
@@ -23,7 +24,6 @@ import java.util.List;
 public class WebClientController {
 
     public final WebClient webClient;
-
     public final webClientService webClientService;
 
     @ApiOperation(value = "사용자 평점 기반 프로그램 추천", response = Object.class)
@@ -51,15 +51,26 @@ public class WebClientController {
             @ApiResponse(responseCode = "404", description = "해당 프로그램을 찾을 수 없습니다."),
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
-    @GetMapping("/condition-recommend/{programId}/{userId}")
-//    @GetMapping("/condition-recommend/{programId}")
-//    public ResponseEntity<Object> conditionRecommend(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId) {
-    public ResponseEntity<Object> conditionRecommend(@PathVariable("userId") Long userId, @PathVariable("programId") Long programId) {
-
+    @PostMapping("/condition-recommend")
+    public ResponseEntity<Object> conditionRecommend(@RequestHeader("Auth-access") String token, @RequestBody ConditionRecommendRequest conditionRecommendRequest) {
         log.info("상황별 프로그램 추천 API 호출");
-        List<ProgramResponse> responses = webClientService.conditionRecommend(userId, programId);
+        List<ProgramResponse> responses = webClientService.conditionRecommend(JwtTokenProvider.getUserId(token), conditionRecommendRequest);
         log.info("상황별 프로그램 추천 성공");
         return ResponseEntity.ok()
                 .body(responses);
+    }
+
+    @GetMapping("/random")
+    public void makeRandomData() {
+        log.info("데이터 만든다!");
+        webClientService.makeRandomData();
+        log.info("생성 끝");
+    }
+
+    @GetMapping("/randomRating")
+    public void makeRandomRating() {
+        log.info("평점 더미데이터 만든다.");
+        webClientService.makeRandomRating();
+        log.info("평점 더미 다 만들어따!");
     }
 }

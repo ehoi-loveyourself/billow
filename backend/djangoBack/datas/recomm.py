@@ -140,7 +140,8 @@ def mf_condition_recomm(programId):
     rating_data = query_MySQL('SELECT score, program_id, user_id from tb_rating')
 
     user_program_data = pd.merge(rating_data, program_data, on = 'program_id')
-    print(user_program_data)
+    # print('##################user_program_data################')
+    # print(user_program_data)
 
     # pivot 테이블을 만들자! value에는 score값을, column에는 program_id를, index에는 user id를 넣자
     user_program_rating = user_program_data.pivot_table('score', index = 'user_id', columns = 'program_id').fillna(0)
@@ -148,11 +149,17 @@ def mf_condition_recomm(programId):
     # 이제 사용자-프로그램 기준의 데이터를 프로그램-사용자 기준으로 만들어서 특정 '프로그램'과 비슷한 프로그램을 추천해주는 로직을 구현합시다!
     program_user_rating = user_program_rating.T
 
+    # print('##################user_program_rating################')
+    # print(program_user_rating)
+
     SVD = TruncatedSVD(n_components=12)
     matrix = SVD.fit_transform(program_user_rating)
     matrix.shape
 
     matrix[0]
+
+    print('#########matrix[0]###########')
+    print(matrix[0])
 
     # 이제 이렇게 나온 데이터를 활용해서 피어슨 상관계수(corr)를 구합니다.
     corr = np.corrcoef(matrix)
@@ -166,8 +173,14 @@ def mf_condition_recomm(programId):
 
     program_id = user_program_rating.columns
     program_id_list = list(program_id)
+    if programId not in program_id_list:
+        return []
+    print(program_id_list) 
     coffey_hands = program_id_list.index(programId)
-
     corr_coffey_hands = corr[coffey_hands]
-    print(list(program_id[(corr_coffey_hands >= 0.9)])[:50])
-    return list(program_id[(corr_coffey_hands >= 0.9)])[:50]
+    print('##########추천 프로그램 ID##########')
+    print(list(program_id[(corr_coffey_hands >= 0.9)])[:10])
+    return list(program_id[(corr_coffey_hands >= 0.9)])[:10]
+
+
+# mf_condition_recomm(100)
