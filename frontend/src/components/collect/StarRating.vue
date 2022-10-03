@@ -230,22 +230,22 @@ export default {
 }
 
 .poster {
-  width: 14vw;
-  height: 21vw;
-  padding-right: 0.5%;
-  padding-bottom: 0.5%;
+    width: 14vw;
+    height: 21vw;
+    padding-right: 0.5%;
+    padding-bottom: 0.5%;
 }
 
 #Img {
-  text-align: center;
-  padding-right: 0.5%;
-  padding-bottom: 2%;
-  position: relative;
+    text-align: center;
+    padding-right: 0.5%;
+    padding-bottom: 2%;
+    position: relative;
 }
 
 .flex {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: stretch;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: stretch;
 }
 </style>

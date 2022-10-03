@@ -45,9 +45,15 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import { reactive } from "@vue/reactivity";
+import axios from "axios";
 import StarRating from "@/components/collect/StarRating.vue";
 
 export default {
+  name: "UserRatingProgram",
+  components: {
+    StarRating
+  },
   computed: {
     ...mapState(["randomProgram"]),
   },
@@ -56,9 +62,6 @@ export default {
   },
   methods: {
     ...mapActions(["getRandomProgram"]),
-    // check(index) {
-    //   this.score = index + 1;
-    // },
   },
   components: {
     StarRating,
