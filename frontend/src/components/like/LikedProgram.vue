@@ -2,11 +2,11 @@
   <div style="padding-left: 70px; margin-top: 10px">
     <div class="flex">
       <div id="Img" v-for="like in state.likeList">
-        <!-- <router-link
+        <router-link
           :to="{ name: 'detail' }"
           @click="moveProgramDetail(like.programId)"
           class="nav-link"
-        > -->
+        >
         <img class="liked_2" :src="like.posterImg" alt="Image" />
         <div class="button">
           <!-- <button @click="addToFavorites(like.programId)" :id="like.programId" v-show="!isFavorite" style="border: none; background: none">
@@ -15,60 +15,11 @@
           <button @click="deleteFromFavorites(like.programId)" :id="like.programId" v-show="isFavorite" style="background: none; border: none">
             <img class="hearted" src="@/assets/red_heart.png" />
           </button>
-          <!-- <button @click="setFavorites(isFavorite)" :id="like.programId" v-show="!isFavorite" style="border: none; background: none">
-            <img class="hearted" src="@/assets/white_heart.png" />
-          </button>
-          <button @click="setFavorites(isFavorite)" :id="like.programId" v-show="isFavorite" style="background: none; border: none">
-            <img class="hearted" src="@/assets/red_heart.png" />
-          </button> -->
         </div>
-        <!-- </router-link> -->
+        </router-link>
       </div>
-
-      <!-- <div id="Img">
-        <img
-          class="liked"
-          v-for="(d, idx) in state.newProgramPosterImg"
-          :key="idx"
-          :src="state.newProgramPosterImg[idx]"
-          alt="Image"
-        />
-        <div class="button">
-          <button
-            v-for="(d, idx) in state.likedIndex"
-            :key="idx"
-            @click="addToFavorites()"
-            v-show="!isFavorite[idx]"
-            style="border: none; background: none"
-          >
-            <img class="hearted" src="@/assets/white_heart.png" />
-          </button>
-          <button
-            v-for="(d, idx) in state.likedIndex"
-            :key="idx"
-            @click="deleteFromFavorites()"
-            v-show="isFavorite[idx]"
-            style="background: none; border: none"
-          >
-            <img class="hearted" src="@/assets/red_heart.png" />
-          </button>
-        </div>
-      </div> -->
-
-      <!-- <img
-      :src="state.data"
-      alt="Image"
-      v-for="(d, idx) in state.data"
-      :key="idx"
-    /> -->
     </div>
   </div>
-  <!-- <div class="memos">
-    <button class="btn btn-primary" @click="add()">추가하기</button>
-    <ul>
-      <li v-for="(d, idx) in state.data" :key="idx">{{ d }}</li>
-    </ul>
-  </div> -->
 </template>
 
 <script>
@@ -122,16 +73,6 @@ export default {
       }
       
     },
-    // setFavorites(isFavorite) {
-    //   if (isFavorite) {
-    //     this.isFavorite = false;
-    //     this.userDeleteBookmark(programId);
-    //   }
-    //   else {
-    //     this.isFavorite = true;
-    //     this.userRegistBookmark(programId);
-    //   }
-    // },
     moveProgramDetail(programId) {
       this.getProgramDetail(programId);
     },
@@ -211,7 +152,6 @@ img:hover+.button,
 
 .flex {
   display: flex;
-  /* height: 600px; */
   flex-wrap: wrap;
   align-content: stretch;
 }
