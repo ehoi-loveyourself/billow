@@ -16,8 +16,8 @@
     </h2>
     <br />
     <div class="flex">
-      <span v-for="random in randomProgram" id="Img" >
-        <StarRating v-bind:random="random"/>
+      <span v-for="random in randomProgram" id="Img">
+        <StarRating v-bind:random="random" />
       </span>
     </div>
     <br /><br /><br /><br />
@@ -34,9 +34,15 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import { reactive } from "@vue/reactivity";
+import axios from "axios";
 import StarRating from "@/components/collect/StarRating.vue";
 
 export default {
+  name: "UserRatingProgram",
+  components: {
+    StarRating
+  },
   computed: {
     ...mapState(["randomProgram"]),
   },
@@ -45,13 +51,18 @@ export default {
   },
   methods: {
     ...mapActions(["getRandomProgram"]),
-    // check(index) {
-    //   this.score = index + 1;
-    // },
   },
-  components: {
-    StarRating
-  }
+  setup() {
+    const state = reactive({
+      ratingList: [],
+    });
+    axios.get(`/api/users/rating`).then((res) => {
+      //평점 데이터 GET
+      console.log(res.data);
+      state.ratingList = res.data;
+    });
+    return { state };
+  },
 }
 
 </script>
