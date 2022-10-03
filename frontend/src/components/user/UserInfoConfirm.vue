@@ -333,7 +333,7 @@
         <b-row>
           <b-col cols="1">
             <b-form-radio
-              v-model="selected_gender"
+              v-model="state.data.gender"
               :aria-describedby="ariaDescribedby"
               name="some-radios"
               value="남"
@@ -342,7 +342,7 @@
           </b-col>
           <b-col>
             <b-form-radio
-              v-model="selected_gender"
+              v-model="state.data.gender"
               :aria-describedby="ariaDescribedby"
               name="some-radios"
               value="여"
@@ -356,7 +356,7 @@
       <b-col cols="1" style="text-align: right"> 연령대 </b-col>
       <b-col cols="11" style="padding-left: 1%">
         <b-form-select
-          v-model="selected_age"
+          v-model="state.data.age"
           :options="options_age"
           style="width: 21%"
         ></b-form-select>
@@ -366,7 +366,7 @@
       <b-col cols="1" style="text-align: right"> 닉네임 </b-col>
       <b-col cols="11" style="padding-left: 1%">
         <b-form-input
-          v-model="nickname"
+          v-model="state.data.nickName"
           placeholder="닉네임을 입력하세요."
           style="width: 21%"
         ></b-form-input>
@@ -376,7 +376,7 @@
       <b-col cols="1" style="text-align: right"> 지역 </b-col>
       <b-col cols="11" style="padding-left: 1%">
         <b-form-select
-          v-model="selected_region"
+          v-model="state.data.region"
           :options="options_region"
           style="width: 21%"
         ></b-form-select>
@@ -386,7 +386,7 @@
       <b-col cols="1" style="text-align: right"> 통신사 </b-col>
       <b-col cols="11" style="padding-left: 1%">
         <b-form-select
-          v-model="selected_tv_carrier"
+          v-model="state.data.tvCarrier"
           :options="options_tv_carrier"
           style="width: 21%"
         ></b-form-select>
@@ -396,7 +396,7 @@
       <b-col cols="1" style="text-align: right"> 휴대폰 번호 </b-col>
       <b-col cols="11" style="padding-left: 1%">
         <b-form-input
-          v-model="phonenum"
+          v-model="state.data.mobile"
           placeholder="000-0000-0000"
           style="width: 21%"
         ></b-form-input>
@@ -432,13 +432,59 @@
     </b-row>
   </section>
 
+  <a href="#" @click="test()" class="button btnBorder btnRed"
+    ><span style="font-size: 1vw">테스트 버튼</span></a
+  >
+
   <br /><br /><br /><br /><br />
 </template>
     
   <script>
 import axios from "axios";
+import { reactive } from "@vue/reactivity";
+
 export default {
   name: "UserInfoConfirm",
+  setup() {
+    const state = reactive({
+      data: [],
+      authToken: localStorage.getItem("authToken"),
+    });
+
+    axios
+      .get("/api/users", {
+        headers: {
+          "Auth-access": state.authToken,
+        },
+      })
+      .then((res) => {
+        // 데이터 가져오는 axios 테스트
+        console.log(res.data);
+        console.log(res.data.age);
+        console.log(res.data.email);
+        console.log(res.data.gender);
+        console.log(res.data.mobile);
+        console.log(res.data.name);
+        console.log(res.data.nickName);
+        console.log(res.data.profileImgUrl);
+        console.log(res.data.region);
+        console.log(res.data.tvCarrier);
+
+        state.data = res.data;
+
+        console.log(state.data);
+        console.log(state.data.age);
+        console.log(state.data.email);
+        // this.phonenum = res.data.mobile;
+        // console.log(this.phonenum);
+        console.log(state.data.mobile);
+      });
+
+      console.log(state.data.mobile);
+
+    return { state };
+  },
+
   data() {
     return {
       nickname: "",
@@ -494,6 +540,30 @@ export default {
   },
 
   methods: {
+    test() {
+      alert("테스트 버튼");
+      // alert(state.data.gender);
+      // alert(data.age);
+      // alert(state.data.region);
+      // alert(this.authToken);
+      // alert(localStorage.getItem("authToken"));
+      // this.authToken = localStorage.getItem("authToken");
+      // alert(this.authToken);
+
+      // axios
+      //   .get("/api/users", {
+      //     headers: {
+      //       "Auth-access": this.authToken,
+      //     },
+      //   })
+      //   .then((res) => {
+      //     // 데이터 가져오는 axios 테스트
+      //     console.log(res.data);
+      //     console.log(res.data[0].title);
+      //     state.data = res.data[0].title;
+      //     console.log(state.data);
+      //   });
+    },
     signUp() {
       if (
         this.nickname == "" ||
