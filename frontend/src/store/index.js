@@ -9,8 +9,11 @@ export default new Vuex.Store({
   state: {
     randomProgram: null,
     userRecommend: null,
+    conditionRecommend: null,
     who: "",
     genre: "",
+    conditionId: [],
+
     hotProgram: null,
     newProgram: null,
     genderAgeProgram: null,
@@ -40,9 +43,26 @@ export default new Vuex.Store({
     SET_USER_RECOMMEND_PROGRAM(state, userRecommend) {
       state.userRecommend = userRecommend;
     },
+    SET_CONDITION_RECOMMEND_PROGRAM(state, conditionRecommend) {
+      state.conditionRecommend = conditionRecommend;
+    },
     SET_CONDITION(state, condition) {
       state.who = condition.who;
       state.genre = condition.genre;
+    },
+    ADD_CONDITION_ID(state, conditionId) {
+      state.conditionId.push(conditionId);
+      console.log(state.conditionId);
+    },
+    DELETE_CONDITION_ID(state, conditionId) {
+      const idx = state.conditionId.findIndex(function (item) {
+        return item === conditionId;
+      });
+      state.conditionId.splice(idx, 1);
+      console.log(state.conditionId);
+    },
+    CLEAR_CONDITION_ID(state) {
+      state.conditionId = [];
     },
     SET_HOT_PROGRAM(state, hotProgram) {
       state.hotProgram = hotProgram;
@@ -110,6 +130,19 @@ export default new Vuex.Store({
         console.log(res.data);
         commit("SET_USER_RECOMMEND_PROGRAM", res.data);
       });
+    },
+    getConditionRecommendProgram({ commit, state }) {
+      axios
+        .post("/api/mf/condition-recommend", {
+          who: state.who,
+          genre: state.genre,
+          programList: state.conditionId,
+        })
+        .then((res) => {
+          // 상황별 프로그램 추천 데이터 GET
+          console.log(res.data);
+          commit("SET_CONDITION_RECOMMEND_PROGRAM", res.data);
+        });
     },
     getRecommendProgram({ commit }) {
       axios.get("/api/recommend/popular").then((res) => {
