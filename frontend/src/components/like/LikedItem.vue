@@ -1,11 +1,29 @@
 <template>
-  <div style="padding-left: 70px; margin-top: 10px">
-    <div class="flex">
-      <div id="Img" v-for="like in state.likeList">
-        <LikedItem v-bind:like="like" />
-      </div>
-    </div>
+  <!-- <router-link
+    :to="{ name: 'detail' }"
+    @click="moveProgramDetail(like.programId)"
+    class="nav-link"
+  > -->
+  <img class="liked_2" :src="like.posterImg" alt="Image" />
+  <div class="button">
+    <button
+      @click="addToFavorites(like.programId)"
+      :id="like.programId"
+      v-show="!isFavorite"
+      style="border: none; background: none"
+    >
+      <img class="hearted" src="@/assets/white_heart.png" />
+    </button>
+    <button
+      @click="deleteFromFavorites(like.programId)"
+      :id="like.programId"
+      v-show="isFavorite"
+      style="background: none; border: none"
+    >
+      <img class="hearted" src="@/assets/red_heart.png" />
+    </button>
   </div>
+  <!-- </router-link> -->
 </template>
 
 <script>
@@ -13,16 +31,18 @@ import { reactive } from "@vue/reactivity";
 import axios from "axios";
 import { mapActions } from "vuex";
 import { mapState } from "vuex";
-import LikedItem from "@/components/like/LikedItem.vue";
 
 export default {
   name: "LikedProgram",
-  components: {
-    LikedItem,
+  data() {
+    return {
+      isFavorite: true,
+    };
   },
-  // computed: {
-  //   ...mapState(["programId"]),
-  // },
+  props: ["like"],
+  computed: {
+    ...mapState(["programId"]),
+  },
   setup() {
     const state = reactive({
       likeList: [],
@@ -35,12 +55,24 @@ export default {
     return { state };
   },
 
-  // methods: {
-  //   ...mapActions(["getProgramDetail"]),
-  //   moveProgramDetail(programId) {
-  //     this.getProgramDetail(programId);
-  //   },
-  // },
+  methods: {
+    ...mapActions([
+      "getProgramDetail",
+      "userRegistBookmark",
+      "userDeleteBookmark",
+    ]),
+    addToFavorites(programId) {
+      this.isFavorite = true;
+      this.userRegistBookmark(programId);
+    },
+    deleteFromFavorites(programId) {
+      this.isFavorite = false;
+      this.userDeleteBookmark(programId);
+    },
+    moveProgramDetail(programId) {
+      this.getProgramDetail(programId);
+    },
+  },
 };
 </script>
 

@@ -21,7 +21,13 @@
   <div style="padding-left: 70px; margin-top: 10px">
     <br />
     <span v-for="condition in conditionRecommend">
-      <img :src="condition.posterImg" alt="Image" />
+      <router-link
+        :to="{ name: 'detail' }"
+        @click="moveProgramDetail(condition.id)"
+        class="nav-link"
+      >
+        <img :src="condition.posterImg" alt="Image" />
+      </router-link>
     </span>
     <br /><br />
   </div>
@@ -51,6 +57,11 @@ export default {
   },
   computed: {
     ...mapState(["who", "genre", "conditionRecommend"]),
+  },
+  methods: {
+    moveProgramDetail(programId) {
+      this.getProgramDetail(programId);
+    },
   },
 };
 </script>
