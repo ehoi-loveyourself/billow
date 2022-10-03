@@ -72,6 +72,12 @@ public class ProgramService {
         Program program = programRepository.findById(programId)
                 .orElseThrow(() -> new NotFoundException(PROGRAM_NOT_FOUND));
 
+        Rating findRating = ratingRepository.findByUser_IdAndProgram_Id(userId, programId);
+        if(findRating != null){
+            findRating.setScore(ratingRequest.getScore());
+            ratingRepository.save(findRating);
+            return new Message("프로그램 평점 수정에 성공하였습니다.");
+        }
         program.updateAverageRatingByPost(ratingRequest.getScore());
 
         Rating rating = Rating.builder()

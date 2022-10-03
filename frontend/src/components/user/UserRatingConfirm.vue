@@ -4,7 +4,8 @@
     <br />
     <div class="flex">
       <div id="Img" v-for="rating in ratingList">
-        <router-link
+        <UserRatingItem v-bind:rating="rating" />
+        <!-- <router-link
           :to="{ name: 'detail' }"
           @click="moveProgramDetail(rating.id)"
           class="nav-link"
@@ -23,7 +24,6 @@
               /></span>
             </span>
           </span>
-          <span> {{ rating.score }}</span>
           &nbsp;
           <a
             href="#"
@@ -31,7 +31,7 @@
             class="button btnBorder btnRed"
             ><span style="font-size: 0.8vw">삭제</span></a
           >
-        </div>
+        </div> -->
       </div>
 
       <!-- <div id="Img">
@@ -71,9 +71,13 @@
 import { reactive } from "@vue/reactivity";
 import axios from "axios";
 import { mapActions, mapState } from "vuex";
+import UserRatingItem from "./UserRatingItem.vue";
 
 export default {
   name: "Star",
+  components: {
+    UserRatingItem,
+  },
   data() {
     return {
       score: 0,

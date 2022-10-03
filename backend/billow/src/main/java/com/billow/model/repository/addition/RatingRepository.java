@@ -8,4 +8,6 @@ import java.util.Optional;
 
 public interface RatingRepository extends JpaRepository<Rating, Long> {
     List<Rating> findByUser_Id(Long userId);
+
+    Rating findByUser_IdAndProgram_Id(Long userId, Long programId);
 }
