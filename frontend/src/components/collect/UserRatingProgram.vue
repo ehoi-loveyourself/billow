@@ -1,17 +1,10 @@
 <template>
   <br />
   <div class="logo">
-    <svg
-      width="167"
-      height="28"
-      viewBox="0 0 167 28"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="167" height="28" viewBox="0 0 167 28" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M0.685547 1.05176H14.5479C16.2412 1.05176 17.7132 1.23438 18.9639 1.59961C20.2256 1.95378 21.2715 2.44629 22.1016 3.07715C22.9316 3.70801 23.5459 4.46061 23.9443 5.33496C24.3538 6.19824 24.5586 7.13346 24.5586 8.14062C24.5586 9.78971 24.0384 11.234 22.998 12.4736C24.1934 13.182 25.0843 14.1006 25.6709 15.2295C26.2575 16.3584 26.5508 17.6423 26.5508 19.0811C26.5508 20.2874 26.346 21.3776 25.9365 22.3516C25.5381 23.3255 24.9238 24.1611 24.0938 24.8584C23.2747 25.5446 22.2344 26.0758 20.9727 26.4521C19.722 26.8174 18.2445 27 16.54 27H0.685547V1.05176ZM16.5732 11.0127C17.027 11.0127 17.4697 11.0293 17.9014 11.0625C18.6429 10.3542 19.0137 9.54622 19.0137 8.63867C19.0137 7.69792 18.6429 6.97298 17.9014 6.46387C17.1709 5.94368 16.0973 5.68359 14.6807 5.68359H5.94824V11.0127H16.5732ZM16.6729 22.418C18.0895 22.418 19.1631 22.1136 19.8936 21.5049C20.6351 20.8962 21.0059 20.0384 21.0059 18.9316C21.0059 17.8249 20.6351 16.9616 19.8936 16.3418C19.1631 15.722 18.0895 15.4121 16.6729 15.4121H5.94824V22.418H16.6729ZM31.2324 1.05176H36.5283V27H31.2324V1.05176ZM43.252 1.05176H48.5146V22.3848H63.6055V27H43.252V1.05176ZM68.7188 1.05176H73.9814V22.3848H89.0723V27H68.7188V1.05176ZM92.6582 13.9512C92.6582 11.9922 93.0179 10.1992 93.7373 8.57227C94.4567 6.94531 95.4639 5.55078 96.7588 4.38867C98.0648 3.21549 99.6253 2.30794 101.44 1.66602C103.267 1.02409 105.286 0.703125 107.5 0.703125C109.702 0.703125 111.717 1.02409 113.543 1.66602C115.369 2.30794 116.93 3.21549 118.225 4.38867C119.531 5.55078 120.543 6.94531 121.263 8.57227C121.982 10.1992 122.342 11.9922 122.342 13.9512C122.342 15.9212 121.982 17.7308 121.263 19.3799C120.543 21.0179 119.531 22.429 118.225 23.6133C116.93 24.7975 115.369 25.7217 113.543 26.3857C111.717 27.0387 109.702 27.3652 107.5 27.3652C105.286 27.3652 103.267 27.0387 101.44 26.3857C99.6253 25.7217 98.0648 24.7975 96.7588 23.6133C95.4639 22.429 94.4567 21.0179 93.7373 19.3799C93.0179 17.7308 92.6582 15.9212 92.6582 13.9512ZM97.9209 13.9512C97.9209 15.2904 98.1589 16.4967 98.6348 17.5703C99.1217 18.6439 99.7913 19.5625 100.644 20.3262C101.507 21.0788 102.52 21.6598 103.682 22.0693C104.855 22.4788 106.128 22.6836 107.5 22.6836C108.872 22.6836 110.14 22.4788 111.302 22.0693C112.475 21.6598 113.488 21.0788 114.34 20.3262C115.192 19.5625 115.862 18.6439 116.349 17.5703C116.836 16.4967 117.079 15.2904 117.079 13.9512C117.079 12.612 116.836 11.4111 116.349 10.3486C115.862 9.28613 115.192 8.38965 114.34 7.65918C113.488 6.91764 112.475 6.35319 111.302 5.96582C110.14 5.57845 108.872 5.38477 107.5 5.38477C106.128 5.38477 104.855 5.57845 103.682 5.96582C102.52 6.35319 101.507 6.91764 100.644 7.65918C99.7913 8.38965 99.1217 9.28613 98.6348 10.3486C98.1589 11.4111 97.9209 12.612 97.9209 13.9512ZM124.832 1.05176H130.576L137.615 17.8027L139.242 21.8535L140.521 17.8027L143.11 11.6934L138.445 1.05176H143.857L145.767 6.11523L147.543 1.05176H152.955L148.29 11.6934L150.93 17.9355L152.523 21.8535L153.752 17.8691L160.824 1.05176H166.568L155.113 27H149.9L147.593 21.8535L145.717 16.8564L143.841 21.8535L141.5 27H136.287L124.832 1.05176Z"
-        fill="white"
-      />
+        fill="white" />
     </svg>
   </div>
   <br />
@@ -26,51 +19,34 @@
       <div id="Img" v-for="random in randomProgram">
         <img class="poster" :src="random.posterImg" alt="Image" />
         <br />
-        <span class="explain">
+        <!-- <span class="explain">
           <span v-for="index in 5" :key="index" @click="check(index)">
-            <span v-if="index < score"
-              ><img src="@/assets/blue_star_small.png" style="width: 8%"
-            /></span>
-            <span v-if="index >= score"
-              ><img src="@/assets/grey_star_small.png" style="width: 8%"
-            /></span>
+            <span v-if="index < score"><img src="@/assets/blue_star_small.png"
+                style="width: 8%" /></span>
+            <span v-if="index >= score"><img src="@/assets/grey_star_small.png"
+                style="width: 8%" /></span>
           </span>
-        </span>
+        </span> -->
+        <div class="star-rating space-x-4 mx-auto">
+          <input type="radio" id="5-stars" name="rating" value="5" v-model="ratings" />
+          <label for="5-stars" class="star pr-4">★</label>
+          <input type="radio" id="4-stars" name="rating" value="4" v-model="ratings" />
+          <label for="4-stars" class="star">★</label>
+          <input type="radio" id="3-stars" name="rating" value="3" v-model="ratings" />
+          <label for="3-stars" class="star">★</label>
+          <input type="radio" id="2-stars" name="rating" value="2" v-model="ratings" />
+          <label for="2-stars" class="star">★</label>
+          <input type="radio" id="1-star" name="rating" value="1" v-model="ratings" />
+          <label for="1-star" class="star">★</label>
+        </div>
       </div>
-
-      <!-- <div id="Img">
-        <img class="poster" src="@/assets/sign.png" alt="Image" />
-        <br />
-        <span class="explain">
-          <span v-for="index in 5" :key="index" @click="check(index)">
-            <span v-if="index < score"><img src="@/assets/blue_star_small.png" style="width:13%" /></span>
-            <span v-if="index >= score"><img src="@/assets/grey_star_small.png" style="width:13%" /></span>
-          </span>
-        </span>
-      </div> -->
-
-      <!-- <div id="Img">
-        <img class="poster" v-for="(d, idx) in state.newProgramPosterImg" :key="idx"
-          :src="state.newProgramPosterImg[idx]" alt="Image" />
-        <br />
-        <span v-for="(d, idx) in state.newProgramId" :key="idx" class="explain">
-          <span v-for="index[idx] in 5" :key="index" @click="check(index[idx])">
-            <span v-if="index[idx] < score[idx]"><img src="@/assets/blue_star_small.png" style="width:13%" /></span>
-            <span v-if="index >= score"><img src="@/assets/grey_star_small.png" style="width:13%" /></span>
-          </span>
-        </span>
-      </div> -->
     </div>
     <br /><br /><br /><br />
   </div>
   <p style="text-align: center">
     <a class="startButton" href="#" role="button" style="border-radius: 15px">
-      <router-link
-        :to="{ name: 'main' }"
-        class="nav-link"
-        style="font-size: 20px; padding: 10px; color: black"
-      >
-        NEXT
+      <router-link :to="{ name: 'main' }" class="nav-link" style="font-size: 20px; padding: 10px; color: black">
+        BILLOW 만나러 가기
       </router-link>
     </a>
   </p>
@@ -81,25 +57,30 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
-  name: "Star",
-  data() {
-    return {
-      score: 0,
-    };
-  },
+  // data() {
+  //   return {
+  //     score: 0
+  //   }
+  // },
+  // data() {
+  //   return {
+  //     ratings: 0
+  //   }
+  // },
   computed: {
-    ...mapState(["randomProgram"]),
+    ...mapState(["randomProgram", "programId"]),
   },
   created() {
     this.getRandomProgram();
   },
   methods: {
     ...mapActions(["getRandomProgram"]),
-    check(index) {
-      this.score = index + 1;
-    },
+    // check(index) {
+    //   this.score = index + 1;
+    // },
   },
-};
+}
+
 </script>
 
 <style scoped>
@@ -137,7 +118,6 @@ export default {
 
 .flex {
   display: flex;
-  /* height: 600px; */
   flex-wrap: wrap;
   align-content: stretch;
 }
@@ -157,4 +137,36 @@ export default {
   top: 1vw;
   left: 1vw;
 } */
+
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 1.8rem;
+  line-height: 2.5rem;
+  justify-content: space-around;
+  padding: 0 0.2em;
+  text-align: center;
+  width: 5em;
+}
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  -webkit-text-fill-color: transparent;
+  /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 2.3px;
+  -webkit-text-stroke-color: #2b2a29;
+  cursor: pointer;
+}
+
+.star-rating :checked~label {
+  -webkit-text-fill-color: gold;
+}
+
+.star-rating label:hover,
+.star-rating label:hover~label {
+  -webkit-text-fill-color: #fff58c;
+}
 </style>
