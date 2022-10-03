@@ -12,6 +12,7 @@
   "dependencies": {
     "@popperjs/core": "^2.11.6",
     "@splidejs/vue-splide": "^0.6.10",
+    "awesome-vue-star-rating": "^1.0.9",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.1",
     "bootstrap-vue-3": "^0.3.3",
