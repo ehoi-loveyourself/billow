@@ -79,55 +79,6 @@ public class webClientService {
                 .collect(Collectors.toList());
     }
 
-//    public List<ProgramResponse> conditionRecommend(Long userId, Long programId) {
-//        userRepository.findById(userId)
-//                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
-//        programRepository.findById(programId)
-//                .orElseThrow(() -> new NotFoundException(PROGRAM_NOT_FOUND));
-//        List<Program> programList = new ArrayList<>();
-//        List<Long> conditionProgramByDjango = getConditionProgramByDjango(programId);
-//        for (Long programNum : conditionProgramByDjango) {
-//            Program program = programRepository.findById(programNum)
-//                    .orElseThrow(() -> new NotFoundException("프로그램이 없습니다."));
-//            programList.add(program);
-//        }
-//        return programList
-//                .stream()
-//                .map(program -> ProgramResponse.builder()
-//                        .id(program.getId())
-//                        .title(program.getTitle())
-//                        .genres(program.getGenreList()
-//                                .stream()
-//                                .map(genre -> genre.getGenreInfo().getName())
-//                                .collect(Collectors.toList()))
-//                        .age(program.getAge())
-//                        .summary(program.getSummary())
-//                        .broadcastingDay(program.getBroadcastingDay())
-//                        .broadcastingEpisode(program.getBroadcastingEpisode())
-//                        .broadcastingStation(program.getBroadcastingStation())
-//                        .endFlag(program.isEndFlag())
-//                        .firstAirDate(DateFormat.getDateInstance(DateFormat.LONG).format(program.getFirstAirDate()))
-//                        .averageRating(program.getAverageRating())
-//                        .bookmarkCnt(program.getBookmarkCnt())
-//                        .ratingCnt(program.getRatingCnt())
-//                        .posterImg(program.getPosterImg())
-//                        .backdropPath(program.getBackdropPath())
-//                        .build())
-//                .collect(Collectors.toList());
-//    }
-
-//    private List<Long> getConditionProgramByDjango(Long programId) {
-//        return webClient.get()
-//                .uri("db/program/" + programId + "/")
-//                .accept(MediaType.APPLICATION_JSON)
-//                .retrieve()
-//                .bodyToFlux(Long.class)
-//                .toStream()
-//                .collect(Collectors.toList());
-//    }
-
-    // TODO 이 밑에는 내꺼 위에는 오빠꺼
-
     public List<ProgramResponse> conditionRecommend(Long userId, ConditionRecommendRequest conditionRecommendRequest) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
@@ -205,45 +156,6 @@ public class webClientService {
         }
 
         return responses;
-
-//        List<Long> programIdList = getConditionProgramIdByDjango(111L);
-        // 이걸 수행하는 과정에서 맥에서는 터짐..
-
-//        log.info(programIdList.toString());
-
-
-//        List<Program> conditionProgramByDjango = getConditionProgramByDjango(programId);
-//        List<Genre> genreList = new ArrayList<>();
-//        for (Program program : conditionProgramByDjango) {
-//            genreList = genreRepository.findByProgramId(programId);
-//            for (Genre genre : genreList) {
-//                program.getGenreList().add(genre);
-//            }
-//        }
-//
-//        return conditionProgramByDjango
-//                .stream()
-//                .map(program -> ProgramResponse.builder()
-//                        .id(program.getId())
-//                        .title(program.getTitle())
-//                        .genres(program.getGenreList()
-//                                .stream()
-//                                .map(genre -> genre.getGenreInfo().getName())
-//                                .collect(Collectors.toList()))
-//                        .age(program.getAge())
-//                        .summary(program.getSummary())
-//                        .broadcastingDay(program.getBroadcastingDay())
-//                        .broadcastingEpisode(program.getBroadcastingEpisode())
-//                        .broadcastingStation(program.getBroadcastingStation())
-//                        .endFlag(program.isEndFlag())
-//                        .firstAirDate(DateFormat.getDateInstance(DateFormat.LONG).format(program.getFirstAirDate()))
-//                        .averageRating(program.getAverageRating())
-//                        .bookmarkCnt(program.getBookmarkCnt())
-//                        .ratingCnt(program.getRatingCnt())
-//                        .posterImg(program.getPosterImg())
-//                        .backdropPath(program.getBackdropPath())
-//                        .build())
-//                .collect(Collectors.toList());
     }
 
     private List<Long> getConditionProgramIdByDjango(Long programId) {
@@ -316,15 +228,4 @@ public class webClientService {
             ratingRepository.save(build);
         }
     }
-
-    // TODO 프로그램 아이디 받아오는 게 아니고 프로그램 자체를 받아오던 버전
-//    private List<Program> getConditionProgramByDjango(Long programId) {
-//        return webClient.get()
-//                .uri("db/" + programId + "/")
-//                .accept(MediaType.APPLICATION_JSON)
-//                .retrieve()
-//                .bodyToFlux(Program.class)
-//                .toStream()
-//                .collect(Collectors.toList());
-//    }
 }
