@@ -194,7 +194,10 @@ public class UserService {
         return ratingRepository.findByUser_Id(userId)
                 .stream()
                 .map(rating -> RatingResponse.builder()
+                        .id(rating.getProgram().getId())
+                        .posterImg(rating.getProgram().getPosterImg())
                         .title(rating.getProgram().getTitle())
+                        .ratingId(rating.getId())
                         .score(rating.getScore())
                         .build())
                 .collect(Collectors.toList());

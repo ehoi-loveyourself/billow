@@ -2,46 +2,38 @@
   <div>
     <h2 style="color: white">지금 방송 중인 프로그램(ON AIR)</h2>
     <splide id="carousel_recommend" :options="options">
-      <splide-slide v-for="(d, idx) in state.onairProgram" :key="idx">
+      <splide-slide v-for="onair in onairProgram">
         <div class="box-wrap">
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
                 <router-link
                   :to="{ name: 'detail' }"
-                  @click="moveProgramDetail(state.onairProgram[idx].id)"
+                  @click="moveProgramDetail(onair.id)"
                   class="nav-link"
                 >
-                  <img
-                    :src="state.onairProgram[idx].posterImg"
-                    alt="Hover Effect"
-                  />
+                  <img :src="onair.posterImg" alt="Hover Effect" />
                 </router-link>
               </a>
             </div>
             <div class="info">
-              <h3>{{ state.onairProgram[idx].title }}</h3>
+              <h3>{{ onair.title }}</h3>
               <div class="detailbox">
-                <span
-                  class="detailbox_design"
-                  v-if="state.onairProgram[idx].age"
-                  >{{ state.onairProgram[idx].age }}</span
+                <span class="detailbox_design" v-if="onair.age">{{
+                  onair.age
+                }}</span
+                ><span class="detailbox_design" v-if="onair.broadcastingDay">{{
+                  onair.broadcastingDay
+                }}</span
+                ><span class="detailbox_design" v-if="onair.genres[0]">{{
+                  onair.genres[0]
+                }}</span
                 ><span
                   class="detailbox_design"
-                  v-if="state.onairProgram[idx].broadcastingDay"
-                  >{{ state.onairProgram[idx].broadcastingDay }}</span
-                ><span
-                  class="detailbox_design"
-                  v-if="state.onairProgram[idx].genres[0]"
-                  >{{ state.onairProgram[idx].genres[0] }}</span
-                ><span
-                  class="detailbox_design"
-                  v-if="state.onairProgram[idx].broadcastingStation"
-                  >{{ state.onairProgram[idx].broadcastingStation }}</span
-                ><span
-                  class="detailbox_design"
-                  v-if="state.onairProgram[idx].broadcastingTime"
-                  >{{ state.onairProgram[idx].broadcastingTime }} ~</span
+                  v-if="onair.broadcastingStation"
+                  >{{ onair.broadcastingStation }}</span
+                ><span class="detailbox_design" v-if="onair.broadcastingTime"
+                  >{{ onair.broadcastingTime }} ~</span
                 >
               </div>
             </div>
@@ -52,42 +44,36 @@
 
     <h2 style="color: white">요즘 핫한 프로그램</h2>
     <splide id="carousel_recommend" :options="options">
-      <splide-slide v-for="(d, idx) in state.hotProgram" :key="idx">
+      <splide-slide v-for="hot in hotProgram">
         <div class="box-wrap">
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
                 <router-link
                   :to="{ name: 'detail' }"
-                  @click="moveProgramDetail(state.hotProgram[idx].id)"
+                  @click="moveProgramDetail(hot.id)"
                   class="nav-link"
                 >
-                  <img
-                    :src="state.hotProgram[idx].posterImg"
-                    alt="Hover Effect"
-                  />
+                  <img :src="hot.posterImg" alt="Hover Effect" />
                 </router-link>
               </a>
             </div>
             <div class="info">
-              <h3>{{ state.hotProgram[idx].title }}</h3>
+              <h3>{{ hot.title }}</h3>
               <div class="detailbox">
-                <span
-                  class="detailbox_design"
-                  v-if="state.hotProgram[idx].age"
-                  >{{ state.hotProgram[idx].age }}</span
+                <span class="detailbox_design" v-if="hot.age">{{
+                  hot.age
+                }}</span
+                ><span class="detailbox_design" v-if="hot.broadcastingDay">{{
+                  hot.broadcastingDay
+                }}</span
+                ><span class="detailbox_design" v-if="hot.genres[0]">{{
+                  hot.genres[0]
+                }}</span
                 ><span
                   class="detailbox_design"
-                  v-if="state.hotProgram[idx].broadcastingDay"
-                  >{{ state.hotProgram[idx].broadcastingDay }}</span
-                ><span
-                  class="detailbox_design"
-                  v-if="state.hotProgram[idx].genres[0]"
-                  >{{ state.hotProgram[idx].genres[0] }}</span
-                ><span
-                  class="detailbox_design"
-                  v-if="state.hotProgram[idx].broadcastingStation"
-                  >{{ state.hotProgram[idx].broadcastingStation }}</span
+                  v-if="hot.broadcastingStation"
+                  >{{ hot.broadcastingStation }}</span
                 >
               </div>
             </div>
@@ -98,42 +84,37 @@
 
     <h2 style="color: white">신규 프로그램을 추천드려요!</h2>
     <splide id="carousel_recommend" :options="options">
-      <splide-slide v-for="(d, idx) in state.newProgram" :key="idx">
+      <splide-slide v-for="newProgram in newProgram">
         <div class="box-wrap">
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
                 <router-link
                   :to="{ name: 'detail' }"
-                  @click="moveProgramDetail(state.newProgram[idx].id)"
+                  @click="moveProgramDetail(newProgram.id)"
                   class="nav-link"
                 >
-                  <img
-                    :src="state.newProgram[idx].posterImg"
-                    alt="Hover Effect"
-                  />
+                  <img :src="newProgram.posterImg" alt="Hover Effect" />
                 </router-link>
               </a>
             </div>
             <div class="info">
-              <h3>{{ state.newProgram[idx].title }}</h3>
+              <h3>{{ newProgram.title }}</h3>
               <div class="detailbox">
-                <span
-                  class="detailbox_design"
-                  v-if="state.newProgram[idx].age"
-                  >{{ state.newProgram[idx].age }}</span
+                <span class="detailbox_design" v-if="newProgram.age">{{
+                  newProgram.age
+                }}</span
                 ><span
                   class="detailbox_design"
-                  v-if="state.newProgram[idx].broadcastingDay"
-                  >{{ state.newProgram[idx].broadcastingDay }}</span
+                  v-if="newProgram.broadcastingDay"
+                  >{{ newProgram.broadcastingDay }}</span
+                ><span class="detailbox_design" v-if="newProgram.genres[0]">{{
+                  newProgram.genres[0]
+                }}</span
                 ><span
                   class="detailbox_design"
-                  v-if="state.newProgram[idx].genres[0]"
-                  >{{ state.newProgram[idx].genres[0] }}</span
-                ><span
-                  class="detailbox_design"
-                  v-if="state.newProgram[idx].broadcastingStation"
-                  >{{ state.newProgram[idx].broadcastingStation }}</span
+                  v-if="newProgram.broadcastingStation"
+                  >{{ newProgram.broadcastingStation }}</span
                 >
               </div>
             </div>
@@ -143,45 +124,40 @@
     </splide>
 
     <h2 style="color: white">
-      {{ state.userAge }}대 {{ state.userGender }}자에게 인기 많은 프로그램
+      {{ userAge }}대 {{ userGender }}자에게 인기 많은 프로그램
     </h2>
     <splide id="carousel_recommend" :options="options">
-      <splide-slide v-for="(d, idx) in state.genderAgeProgram" :key="idx">
+      <splide-slide v-for="genderAge in genderAgeProgram">
         <div class="box-wrap">
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
                 <router-link
                   :to="{ name: 'detail' }"
-                  @click="moveProgramDetail(state.genderAgeProgram[idx].id)"
+                  @click="moveProgramDetail(genderAge.id)"
                   class="nav-link"
                 >
-                  <img
-                    :src="state.genderAgeProgram[idx].posterImg"
-                    alt="Hover Effect"
-                  />
+                  <img :src="genderAge.posterImg" alt="Hover Effect" />
                 </router-link>
               </a>
             </div>
             <div class="info">
-              <h3>{{ state.genderAgeProgram[idx].title }}</h3>
+              <h3>{{ genderAge.title }}</h3>
               <div class="detailbox">
-                <span
-                  class="detailbox_design"
-                  v-if="state.genderAgeProgram[idx].age"
-                  >{{ state.genderAgeProgram[idx].age }}</span
+                <span class="detailbox_design" v-if="genderAge.age">{{
+                  genderAge.age
+                }}</span
                 ><span
                   class="detailbox_design"
-                  v-if="state.genderAgeProgram[idx].broadcastingDay"
-                  >{{ state.genderAgeProgram[idx].broadcastingDay }}</span
+                  v-if="genderAge.broadcastingDay"
+                  >{{ genderAge.broadcastingDay }}</span
+                ><span class="detailbox_design" v-if="genderAge.genres[0]">{{
+                  genderAge.genres[0]
+                }}</span
                 ><span
                   class="detailbox_design"
-                  v-if="state.genderAgeProgram[idx].genres[0]"
-                  >{{ state.genderAgeProgram[idx].genres[0] }}</span
-                ><span
-                  class="detailbox_design"
-                  v-if="state.genderAgeProgram[idx].broadcastingStation"
-                  >{{ state.genderAgeProgram[idx].broadcastingStation }}</span
+                  v-if="genderAge.broadcastingStation"
+                  >{{ genderAge.broadcastingStation }}</span
                 >
               </div>
             </div>
@@ -190,46 +166,38 @@
       </splide-slide>
     </splide>
 
-    <h2 style="color: white">
-      혹시 {{ state.actorName }}님에게 관심이 있으신가요?
-    </h2>
+    <h2 style="color: white">혹시 {{ actorName }}님에게 관심이 있으신가요?</h2>
     <splide id="carousel_recommend" :options="options">
-      <splide-slide v-for="(d, idx) in state.actorProgram" :key="idx">
+      <splide-slide v-for="actor in actorProgram">
         <div class="box-wrap">
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
                 <router-link
                   :to="{ name: 'detail' }"
-                  @click="moveProgramDetail(state.actorProgram[idx].id)"
+                  @click="moveProgramDetail(actor.id)"
                   class="nav-link"
                 >
-                  <img
-                    :src="state.actorProgram[idx].posterImg"
-                    alt="Hover Effect"
-                  />
+                  <img :src="actor.posterImg" alt="Hover Effect" />
                 </router-link>
               </a>
             </div>
             <div class="info">
-              <h3>{{ state.actorProgram[idx].title }}</h3>
+              <h3>{{ actor.title }}</h3>
               <div class="detailbox">
-                <span
-                  class="detailbox_design"
-                  v-if="state.actorProgram[idx].age"
-                  >{{ state.actorProgram[idx].age }}</span
+                <span class="detailbox_design" v-if="actor.age">{{
+                  actor.age
+                }}</span
+                ><span class="detailbox_design" v-if="actor.broadcastingDay">{{
+                  actor.broadcastingDay
+                }}</span
+                ><span class="detailbox_design" v-if="actor.genres[0]">{{
+                  actor.genres[0]
+                }}</span
                 ><span
                   class="detailbox_design"
-                  v-if="state.actorProgram[idx].broadcastingDay"
-                  >{{ state.actorProgram[idx].broadcastingDay }}</span
-                ><span
-                  class="detailbox_design"
-                  v-if="state.actorProgram[idx].genres[0]"
-                  >{{ state.actorProgram[idx].genres[0] }}</span
-                ><span
-                  class="detailbox_design"
-                  v-if="state.actorProgram[idx].broadcastingStation"
-                  >{{ state.actorProgram[idx].broadcastingStation }}</span
+                  v-if="actor.broadcastingStation"
+                  >{{ actor.broadcastingStation }}</span
                 >
               </div>
             </div>
@@ -245,7 +213,7 @@ import { reactive } from "@vue/reactivity";
 import axios from "axios";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "MainSlider",
@@ -253,58 +221,18 @@ export default {
     Splide,
     SplideSlide,
   },
-  setup() {
-    const state = reactive({
-      data: [],
-      hotProgram: [],
-
-      newProgram: [],
-
-      genderAgeProgram: [],
-      userAge: {},
-      userGender: {},
-
-      actorProgram: [],
-      actorName: {},
-
-      onairProgram: [],
-    });
-
-    axios.get("/api/recommend/popular").then((res) => {
-      // 인기 프로그램 추천 데이터 GET
-      console.log(res.data);
-      state.hotProgram = res.data;
-    });
-
-    axios.get("/api/recommend/new").then((res) => {
-      // 신규 프로그램 추천 데이터 GET
-      console.log(res.data);
-      state.newProgram = res.data;
-    });
-
-    axios.get("/api/recommend/gender-age").then((res) => {
-      // 성연령별 프로그램 추천 데이터 GET
-      console.log(res.data);
-      state.genderAgeProgram = res.data;
-      state.userAge = res.data[0].userAge;
-      state.userGender = res.data[0].userGender;
-    });
-
-    axios.get("/api/recommend/actor").then((res) => {
-      // 출연진 프로그램 추천 데이터 GET
-      console.log(res.data);
-      state.actorProgram = res.data;
-      state.actorName = res.data[0].actorName;
-    });
-
-    axios.get("/api/recommend/onair").then((res) => {
-      // 온에어 프로그램 추천 데이터 GET
-      console.log(res.data);
-      state.onairProgram = res.data;
-    });
-    return { state };
+  computed: {
+    ...mapState([
+      "hotProgram",
+      "newProgram",
+      "genderAgeProgram",
+      "userAge",
+      "userGender",
+      "actorProgram",
+      "actorName",
+      "onairProgram",
+    ]),
   },
-
   data() {
     return {
       options: {
@@ -323,8 +251,11 @@ export default {
       list: [],
     };
   },
+  created() {
+    this.getRecommendProgram();
+  },
   methods: {
-    ...mapActions(["getProgramDetail"]),
+    ...mapActions(["getProgramDetail", "getRecommendProgram"]),
     moveProgramDetail(programId) {
       this.getProgramDetail(programId);
     },

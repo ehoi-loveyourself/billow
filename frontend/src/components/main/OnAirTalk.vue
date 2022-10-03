@@ -1,43 +1,66 @@
 <template>
   <div style="margin-top: 10px">
     <br />
-    <div>3개의 TALK</div>
-    <b-row style="margin-top: 20px">
-      <b-col cols="12">
-        <!-- <b-form-input
+    <div style="padding-left: 4%; padding-right: 4%">
+      <!-- list size -->
+      <div>{{ onairTalkCount }}개의 TALK</div>
+      <b-row style="margin-top: 20px">
+        <b-col cols="12">
+          <!-- <b-form-input
           v-model="message"
           placeholder="주제와 무관한 톡은 삭제될 수 있습니다."
           required
           style="border-color: #a48282"
         >
         </b-form-input> -->
-        <input
-          v-model="message"
-          class="form-control"
-          type="text"
-          name="search"
-          placeholder="주제와 무관한 톡은 삭제될 수 있습니다."
-          required
-          @keyup.enter="onSubmit()"
-        />
-      </b-col>
-      <!-- <b-col cols="1">
+          <input
+            v-model="message"
+            class="form-control"
+            type="text"
+            name="search"
+            placeholder="주제와 무관한 톡은 삭제될 수 있습니다."
+            required
+            @keyup.enter="onSubmit()"
+          />
+        </b-col>
+        <!-- <b-col cols="1">
         <b-button size="md" type="submit" onclick="onSubmit">
           <span>등록</span>
         </b-button>
       </b-col> -->
-    </b-row>
+      </b-row>
+    </div>
     <br />
-    <section>
+    <!-- <section>
       <article class="review_set">
-        <article class="reviews" v-for="talk in onairTalk">
+        <article class="reviews" v-for="talk in onairTalk" track-by="id">
           <span class="username">
             {{ talk.userNickName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span
           ><span class="time">{{ talk.regDateTime }}</span>
           <p>{{ talk.content }}</p>
         </article>
       </article>
-    </section>
+    </section> -->
+    <article class="review_set">
+      <b-row class="reviews" v-for="talk in onairTalk" track-by="id">
+        <b-col cols="1" style="text-align: right; padding-right: 0.1%">
+          <b-avatar
+            class="avatar"
+            variant="info"
+            :src="talk.userProfile"
+            size="3rem"
+          ></b-avatar>
+        </b-col>
+        <b-col cols="11">
+          <span class="username">
+            {{
+              talk.userNickName
+            }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span
+          ><span class="time">{{ talk.regDateTime }}</span>
+          <p>{{ talk.content }}</p>
+        </b-col>
+      </b-row>
+    </article>
     <br />
   </div>
 </template>
@@ -48,11 +71,12 @@ export default {
   // name: "App",
   name: "Star",
   computed: {
-    ...mapState(["onairTalk", "programId"]),
+    ...mapState(["onairTalk"]),
   },
   data() {
     return {
       message: "",
+      onairTalkCount: 0,
     };
   },
   methods: {
@@ -62,7 +86,7 @@ export default {
         alert("내용을 입력하세요.");
         return;
       }
-      this.sendMessage({ message: this.message, programId: this.programId });
+      this.sendMessage(this.message);
       this.message = "";
     },
   },
@@ -70,24 +94,26 @@ export default {
 </script>
 
 <style scoped>
-.reviews {
+.review_set {
+  display: flex;
+  flex-direction: column-reverse;
+}
+/* .reviews {
   background: left/contain content-box border-box no-repeat
     url("@/assets/toystory.png") #141414;
-  margin-bottom: 1.5rem;
+
   background-size: auto;
-}
-.reviews > .username {
-  padding-left: 3.5rem;
+} */
+.username {
   font-weight: 600;
   font-size: 0.9rem;
   margin: 0;
 }
-.reviews > .time {
+.time {
   font-size: 0.8rem;
   color: #a1a1a1;
 }
-.reviews > p {
-  margin-left: 3.5rem;
+p {
   font-size: 0.9rem;
   color: #141414;
   background-color: #e6edeb;

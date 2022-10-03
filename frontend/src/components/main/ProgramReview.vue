@@ -16,7 +16,7 @@
           </span>
         </span>
       </b-col> -->
-      <b-col cols="12">
+      <b-col cols="12" style="padding-left: 4.8%; padding-right: 4.8%">
         <!-- <b-form-input
           v-model="review"
           placeholder="리뷰를 작성해주세요."
@@ -41,28 +41,39 @@
       </b-col> -->
     </b-row>
     <br />
-    <section>
-      <article class="review_set">
-        <article v-for="review in programReview" class="reviews">
-          <h2>
-            {{ review.userNickName }}&nbsp;&nbsp;
-            <span class="wrap-star">
-              {{ review.regDateTime }}
-            </span>
-            <a href="#" class="button btnBorder btnBlue" v-b-modal.modal-5
-              ><span style="font-size: 0.8vw">수정</span></a
-            >&nbsp;
-            <a
-              href="#"
-              @click="reviewDelete(review.reviewId)"
-              class="button btnBorder btnRed"
-              ><span style="font-size: 0.8vw">삭제</span></a
-            >
-          </h2>
+
+    <article class="review_set">
+      <b-row class="reviews" v-for="review in programReview" track-by="id">
+        <b-col cols="1" style="text-align: right; padding-right: 0.1%">
+          <b-avatar
+            class="avatar"
+            variant="info"
+            :src="review.userProfile"
+            size="3rem"
+          ></b-avatar>
+        </b-col>
+        <b-col cols="11">
+          <span class="username">{{ review.userNickName }}</span
+          >&nbsp;&nbsp;
+          <span class="time"> {{ review.regDateTime }}&nbsp; </span>
+          <a
+            href="#"
+            @click="setReviewId(review.reviewId)"
+            class="button btnBorder btnBlue"
+            v-b-modal.modal-5
+            ><span style="font-size: 0.8vw">수정</span></a
+          >&nbsp;
+          <a
+            href="#"
+            @click="reviewDelete(review.reviewId)"
+            class="button btnBorder btnRed"
+            ><span style="font-size: 0.8vw">삭제</span></a
+          >
           <p>{{ review.content }}</p>
-        </article>
-      </article>
-    </section>
+        </b-col>
+      </b-row>
+    </article>
+
     <br />
   </div>
 
@@ -101,12 +112,12 @@
 <script>
 import { reactive } from "@vue/reactivity";
 import axios from "axios";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 
 export default {
   name: "ProgramReview",
   computed: {
-    ...mapState(["programReview", "programId"]),
+    ...mapState(["programReview"]),
   },
   setup() {
     const state = reactive({
@@ -119,6 +130,7 @@ export default {
       score: 0,
       message: "",
       modifyReview: "",
+      reviewId: 0,
     };
   },
   methods: {
@@ -135,29 +147,38 @@ export default {
         alert("내용을 입력하세요.");
         return;
       }
-      this.registReview({ review: this.message, programId: this.programId });
+      this.registReview(this.message);
       this.message = "";
     },
+    setReviewId(reviewId) {
+      this.reviewId = reviewId;
+    },
     reviewModify() {
+      if (this.modifyReview == "") {
+        alert("내용을 입력하세요.");
+        return;
+      }
       this.modifyProgramReview({
-        //채우기
+        reviewId: this.reviewId,
+        review: this.modifyReview,
       });
+      this.modifyReview = "";
     },
     reviewDelete(reviewId) {
-      this.deleteProgramReview({
-        reviewId: reviewId,
-        programId: this.programId,
-      });
+      if (confirm("리뷰를 삭제하시겠습니까?") == true) {
+        this.deleteProgramReview(reviewId);
+      } else {
+        return;
+      }
     },
   },
 };
 </script>
 
 <style scoped>
-.reviews {
-  background: left/contain content-box border-box no-repeat
-    url("@/assets/toystory.png") #141414;
-  margin-bottom: 1.5rem;
+.review_set {
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .reviews > h2 {
@@ -173,7 +194,12 @@ export default {
   color: #84868d;
 }
 
-.star-rating {
+.time {
+  font-size: 0.8rem;
+  color: #a1a1a1;
+}
+
+/* .star-rating {
   width: 100px;
 }
 
@@ -189,7 +215,7 @@ export default {
   background-position: left bottom;
   line-height: 0;
   vertical-align: top;
-}
+} */
 
 a.button {
   padding: 0.2%;
@@ -225,5 +251,11 @@ a.button {
 
 .btnRed {
   background: #ae2b00;
+}
+.username {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin: 0;
+  color: #f1f1f1;
 }
 </style>

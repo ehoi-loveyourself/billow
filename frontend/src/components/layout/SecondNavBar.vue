@@ -3,30 +3,33 @@
     <b-navbar-nav>
       <br />
       <b-nav-item>
-        <input
-          v-model="searchValue"
-          class="form-control"
-          type="text"
-          name="search"
-          placeholder="프로그램명 검색"
-          required
-          @keyup.enter="onSubmit()"
-        />
+        <div id="drop">
+          <input
+            v-model="searchValue"
+            class="form-control"
+            type="text"
+            name="search"
+            placeholder="프로그램 검색"
+            required
+            @keyup.enter="onSubmit()"
+          />
+        </div>
       </b-nav-item>
-      &nbsp;&nbsp;
+
       <b-nav-item class="profile">
-		<router-link
-          :to="{ name: 'userinfo' }"
-          class="nav-link"
-        >
-        <b-avatar
+        <router-link :to="{ name: 'userinfo' }" class="nav-link">
+          <b-avatar
             class="avatar"
             variant="info"
             src="https://j7b309.p.ssafy.io/api/profile/11"
-            size="2.4rem"
-          ></b-avatar></router-link>
+            size="2.4vw"
+          ></b-avatar
+        ></router-link>
       </b-nav-item>
     </b-navbar-nav>
+    <a href="#" @click="logout()" class="button btnBorder btnRed"
+      ><span style="font-size: 0.8vw">로그아웃</span></a
+    >
   </b-navbar>
 </template>
 
@@ -49,11 +52,39 @@ export default {
       this.$router.push("/searchresult");
       this.searchValue = "";
     },
+
+    logout() {
+      localStorage.clear();
+      this.$router.push("/loginmain");
+    },
   },
 };
 </script>
 
 <style scoped>
+a.button {
+  padding: 0.02%;
+  font-weight: 500;
+  text-align: center;
+  /* line-height: 50px; */
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btnRed.btnBorder {
+  box-shadow: 0px 0px 0px 0px #823021;
+}
+
+.btnRed.btnBorder:hover {
+  box-shadow: 0px 0px 0px 5px #823021;
+}
+
+.btnRed {
+  background: #ae1d00;
+}
+
 nav .navbar-nav a.router-link-active {
   color: white;
   font-weight: bold;
@@ -73,7 +104,7 @@ nav .navbar-nav a:hover {
   top: 0;
   align-items: center;
 }
-
+/* 
 * {
   border: 0;
   box-sizing: border-box;
@@ -127,7 +158,7 @@ body {
 }
 .search-bar {
   margin: auto;
-  /* padding: 1.5em; */
+  
   justify-content: right;
   max-width: 30em;
   text-align: right;
@@ -191,10 +222,10 @@ body {
   overflow: hidden;
   width: 1px;
   height: 1px;
-}
+} */
 
 /* Active state */
-.search-bar input:focus + .search-btn,
+/* .search-bar input:focus + .search-btn,
 .search-bar input:valid + .search-btn {
   background: white;
   border-radius: 0 0.375em 0.375em 0;
@@ -235,8 +266,39 @@ body {
   .search-btn {
     background: #f1f1f1;
   }
-}
+} */
 .navbar-expand-lg {
   padding: 8px 0px;
+}
+#drop input[type="text"] {
+  display: block;
+  margin: 0 0 0 auto;
+  width: 64%;
+  box-sizing: border-box;
+  border: 2px solid #2b2b2b;
+  border-radius: 4px;
+  font-size: 16px;
+  border-color: #2b2b2b;
+  background: none;
+  color: #ffffff;
+  /* background-image: url("https://cdn-icons-png.flaticon.com/128/711/711319.png"); */
+
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 12px;
+  -webkit-transition: width 0.25s ease-in-out;
+  transition: width 0.25s ease-in-out;
+  margin-top: 4%;
+}
+#drop input[type="text"]:focus {
+  width: 106%;
+}
+#drop input {
+  font: 1em Hind, sans-serif;
+  line-height: 1em;
+  height: 2.3vw;
+}
+#drop input::placeholder {
+  color: #e8e0e0;
 }
 </style>

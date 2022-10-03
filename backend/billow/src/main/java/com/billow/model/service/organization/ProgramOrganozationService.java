@@ -27,16 +27,16 @@ public class ProgramOrganozationService {
         programOrganizationRepository.save(programOrganization);
     }
 
-    public void deleteByBroadcastingDayStartingWith(String yesterDay) {
-        programOrganizationRepository.deleteByBroadcastingDayStartingWith(yesterDay);
-    }
-
-    public void deleteByBroadcastingTimeBefore(Date date) {
-        programOrganizationRepository.deleteByBroadcastingTimeBefore(date);
-    }
-
     public List<ProgramOrganization> findByProgram_Id(Long id) {
         return programOrganizationRepository.findByProgram_Id(id);
+    }
+
+    public List<ProgramOrganization> findByBroadcastingTimeBefore(Date date) {
+        return programOrganizationRepository.findByBroadcastingTimeBefore(date);
+    }
+
+    public void delete(ProgramOrganization programOrganization) {
+        programOrganizationRepository.delete(programOrganization);
     }
 
     public List<OrganizationListResponse> selectProgramOrganization(Long programId) {

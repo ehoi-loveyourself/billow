@@ -3,7 +3,7 @@
     <b-navbar-nav>
       <br> 
       <b-nav-item>    
-          <router-link :to="{ name: 'home' }" class="nav-link">
+          <router-link :to="{ name: 'main' }" class="nav-link">
             <span class="logo">
             <svg width="167" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path

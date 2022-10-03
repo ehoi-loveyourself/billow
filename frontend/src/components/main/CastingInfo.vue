@@ -1,82 +1,66 @@
 <template>
-    <div style="margin-top: 10px;">
-        <br />
-        <div>
-            <div class="flex">
-                <b-card style="width:10%; height: 13vw; background-color: #1f1f1f; text-align: center; margin-bottom: 1%; margin-right: 1%; border-radius: 1vw;">
-                    <b-avatar class="avatar" variant="info" src="https://search.pstatic.net/common?type=b&size=216&expire=1&refresh=true&quality=100&direct=true&src=http%3A%2F%2Fsstatic.naver.net%2Fpeople%2Fportrait%2F201906%2F20190622023642657-9058598.png" size="6rem" style="margin-bottom:7%"></b-avatar> 
-                    <div class="actorName">박기웅</div>
-                    <div class="playerName">기무라 슌지 역</div>
-                </b-card>
-                <b-card style="width:10%; height: 13vw; background-color: #1f1f1f; text-align: center; margin-bottom: 1%; margin-right: 1%; border-radius: 1vw;">
-                    <b-avatar class="avatar" variant="info" src="https://search.pstatic.net/common?type=f&size=174x196&quality=75&direct=true&src=http%3A%2F%2Fsstatic.naver.net%2Fkeypage%2Fimage%2Fdss%2F60%2F72%2F53%2F76%2F60_725376_main_image_new_1490342891931.jpg" size="6rem" style="margin-bottom:7%"></b-avatar> 
-                    <div class="actorName">진세연</div>
-                    <div class="playerName">목단 역</div>
-                </b-card>
-                <b-card style="width:10%; height: 13vw; background-color: #1f1f1f; text-align: center; margin-bottom: 1%; margin-right: 1%; border-radius: 1vw;">
-                    <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/12" size="6rem" style="margin-bottom:7%"></b-avatar> 
-                    <div class="actorName">박기웅</div>
-                    <div class="playerName">기무라 슌지 역</div>
-                </b-card>
-                <b-card style="width:10%; height: 13vw; background-color: #1f1f1f; text-align: center; margin-bottom: 1%; margin-right: 1%; border-radius: 1vw;">
-                    <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/12" size="6rem" style="margin-bottom:7%"></b-avatar> 
-                    <div class="actorName">박기웅</div>
-                    <div class="playerName">기무라 슌지 역</div>
-                </b-card>
-                <b-card style="width:10%; height: 13vw; background-color: #1f1f1f; text-align: center; margin-bottom: 1%; margin-right: 1%; border-radius: 1vw;">
-                    <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/12" size="6rem" style="margin-bottom:7%"></b-avatar> 
-                    <div class="actorName">박기웅</div>
-                    <div class="playerName">기무라 슌지 역</div>
-                </b-card>
-                <b-card style="width:10%; height: 13vw; background-color: #1f1f1f; text-align: center; margin-bottom: 1%; margin-right: 1%; border-radius: 1vw;">
-                    <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/12" size="6rem" style="margin-bottom:7%"></b-avatar> 
-                    <div class="actorName">박기웅</div>
-                    <div class="playerName">기무라 슌지 역</div>
-                </b-card>
-                <b-card style="width:10%; height: 13vw; background-color: #1f1f1f; text-align: center; margin-bottom: 1%; margin-right: 1%; border-radius: 1vw;">
-                    <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/12" size="6rem" style="margin-bottom:7%"></b-avatar> 
-                    <div class="actorName">박기웅</div>
-                    <div class="playerName">기무라 슌지 역</div>
-                </b-card>
-                <b-card style="width:10%; height: 13vw; background-color: #1f1f1f; text-align: center; margin-bottom: 1%; margin-right: 1%; border-radius: 1vw;">
-                    <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/12" size="6rem" style="margin-bottom:7%"></b-avatar> 
-                    <div class="actorName">박기웅</div>
-                    <div class="playerName">기무라 슌지 역</div>
-                </b-card>
-                <b-card style="width:10%; height: 13vw; background-color: #1f1f1f; text-align: center; margin-bottom: 1%; margin-right: 1%; border-radius: 1vw;">
-                    <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/12" size="6rem" style="margin-bottom:7%"></b-avatar> 
-                    <div class="actorName">박기웅</div>
-                    <div class="playerName">기무라 슌지 역</div>
-                </b-card>
-                <b-card style="width:10%; height: 13vw; background-color: #1f1f1f; text-align: center; margin-bottom: 1%; margin-right: 1%; border-radius: 1vw;">
-                    <b-avatar class="avatar" variant="info" src="https://j7b309.p.ssafy.io/api/profile/12" size="6rem" style="margin-bottom:7%"></b-avatar> 
-                    <div class="actorName">박기웅</div>
-                    <div class="playerName">기무라 슌지 역</div>
-                </b-card>
-                
-            </div>
-        </div>
-
+  <div style="margin-top: 10px">
+    <br />
+    <div>
+      <div class="flex">
+        <b-card
+          v-for="cast in castInfoList"
+          style="
+            width: 10%;
+            height: 13vw;
+            background-color: #1f1f1f;
+            text-align: center;
+            margin-bottom: 1%;
+            margin-right: 1%;
+            border-radius: 1vw;
+          "
+        >
+          <img :src="cast.castImageUrl" />
+          <div class="actorName">{{ cast.actorName }}</div>
+          <div class="playerName">{{ cast.playName }}</div>
+        </b-card>
+      </div>
     </div>
+  </div>
 </template>
-            
-<script>
 
+<script>
+import { mapState } from "vuex";
+
+export default {
+  // name: "App",
+  name: "Star",
+  computed: {
+    ...mapState(["castInfoList"]),
+  },
+  data() {
+    return {};
+  },
+  methods: {},
+};
 </script>
-            
+
 <style scoped>
-.actorName{
-    color:#ffffff;
-    font-size: 1vw;
+.actorName {
+  color: #ffffff;
+  font-size: 1vw;
 }
-.playerName{
-    color:#a1a1a1;
-    font-size: 0.9vw;
+
+.playerName {
+  color: #a1a1a1;
+  font-size: 0.9vw;
 }
+
 .flex {
   display: flex;
   /* height: 600px; */
   flex-wrap: wrap;
   align-content: stretch;
+}
+
+img {
+  width: 6rem;
+  margin-bottom: 7%;
+  border-radius: 1vw;
 }
 </style>

@@ -14,8 +14,16 @@ import pickle
 warnings.filterwarnings("ignore")
 
 # 1 DB 커넥션 따로
+# CONN = MySQLdb.connect(
+#     host = 'localhost',
+#     user = 'B309',
+#     password = 'B309Billow',
+#     db = 'billow'
+# )
+
+
 CONN = MySQLdb.connect(
-    host = 'localhost',
+    host = 'j7b309.p.ssafy.io',
     user = 'B309',
     password = 'B309Billow',
     db = 'billow'
@@ -91,12 +99,12 @@ def recommend_programs(df_svd_preds, user_id, ori_programs_df, ori_ratings_df, n
 def mf_algo():
     users, df_program, df_rating, df_svd_preds = predict_table()
     predict_result = pd.DataFrame()
+
     for i, user in enumerate(users):
 
         user_result = recommend_programs(df_svd_preds, user, df_program, df_rating)
         user_result.insert(2, 'user_id', user)
         user_result = user_result[0:10]
-
         predict_result = pd.concat([predict_result, user_result])
 
     with open('predict_result', 'wb') as f:
@@ -111,7 +119,6 @@ def mf_algo_individual(request):
     user_id = request
     users, df_program, df_rating, df_svd_preds = predict_table()
     indi_predict_result = pd.DataFrame()
-
     indi_user_result = recommend_programs(df_svd_preds, user_id, df_program, df_rating)
     indi_user_result.insert(2, 'user_id', user_id)
     indi_user_result = indi_user_result[0:10]

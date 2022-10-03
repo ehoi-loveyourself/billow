@@ -9,5 +9,7 @@ import java.util.Optional;
 public interface BroadcastingAlarmRepository extends JpaRepository<BroadcastingAlarm, Long> {
     List<BroadcastingAlarm> findByUser_Id(Long userId);
 
-    Optional<BroadcastingAlarm> findByProgramOrganization_Id(Long programOrganizationId);
+    Optional<BroadcastingAlarm> findByUser_IdAndProgramOrganization_Id(Long userId, Long programOrganizationId);
+
+    List<BroadcastingAlarm> findByProgramOrganization_Id(Long programOrganizationId);
 }

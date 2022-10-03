@@ -7,76 +7,26 @@
           @click="moveProgramDetail(like.programId)"
           class="nav-link"
         >
-          <img class="liked_2" :src="like.posterImg" alt="Image" />
-          <div class="button">
-            <button
-              @click="addToFavorites()"
-              v-show="!isFavorite"
-              style="border: none; background: none"
-            >
-              <img class="hearted" src="@/assets/white_heart.png" />
-            </button>
-            <button
-              @click="deleteFromFavorites()"
-              v-show="isFavorite"
-              style="background: none; border: none"
-            >
-              <img class="hearted" src="@/assets/red_heart.png" />
-            </button>
-          </div>
-        </router-link>
-      </div>
-
-      <!-- <div id="Img">
-        <img
-          class="liked"
-          v-for="(d, idx) in state.newProgramPosterImg"
-          :key="idx"
-          :src="state.newProgramPosterImg[idx]"
-          alt="Image"
-        />
+        <img class="liked_2" :src="like.posterImg" alt="Image" />
         <div class="button">
-          <button
-            v-for="(d, idx) in state.likedIndex"
-            :key="idx"
-            @click="addToFavorites()"
-            v-show="!isFavorite[idx]"
-            style="border: none; background: none"
-          >
+          <!-- <button @click="addToFavorites(like.programId)" :id="like.programId" v-show="!isFavorite" style="border: none; background: none">
             <img class="hearted" src="@/assets/white_heart.png" />
-          </button>
-          <button
-            v-for="(d, idx) in state.likedIndex"
-            :key="idx"
-            @click="deleteFromFavorites()"
-            v-show="isFavorite[idx]"
-            style="background: none; border: none"
-          >
+          </button> -->
+          <button @click="deleteFromFavorites(like.programId)" :id="like.programId" v-show="isFavorite" style="background: none; border: none">
             <img class="hearted" src="@/assets/red_heart.png" />
           </button>
         </div>
-      </div> -->
-
-      <!-- <img
-      :src="state.data"
-      alt="Image"
-      v-for="(d, idx) in state.data"
-      :key="idx"
-    /> -->
+        </router-link>
+      </div>
     </div>
   </div>
-  <!-- <div class="memos">
-    <button class="btn btn-primary" @click="add()">추가하기</button>
-    <ul>
-      <li v-for="(d, idx) in state.data" :key="idx">{{ d }}</li>
-    </ul>
-  </div> -->
 </template>
 
 <script>
 import { reactive } from "@vue/reactivity";
 import axios from "axios";
 import { mapActions } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "LikedProgram",
@@ -84,6 +34,9 @@ export default {
     return {
       isFavorite: true,
     };
+  },
+  computed: {
+    ...mapState(["programId"]),
   },
   setup() {
     const state = reactive({
@@ -98,12 +51,27 @@ export default {
   },
 
   methods: {
-    ...mapActions(["getProgramDetail"]),
-    addToFavorites() {
-      this.isFavorite = true;
-    },
-    deleteFromFavorites() {
+    ...mapActions([
+      "getProgramDetail",
+      "userRegistBookmark",
+      "userDeleteBookmark",
+    ]),
+    // addToFavorites(programId) {
+    //   this.isFavorite = true;
+    //   this.userRegistBookmark(programId);
+    // },
+    deleteFromFavorites(programId) {
       this.isFavorite = false;
+
+      // alert("내가 찜한 콘텐츠에서 삭제되었습니다.");
+      if (confirm("내가 찜한 콘텐츠에서 삭제하시겠습니까?") == true){
+        this.userDeleteBookmark(programId);
+        history.go();
+      }
+      else{
+        history.go();
+      }
+      
     },
     moveProgramDetail(programId) {
       this.getProgramDetail(programId);
@@ -116,9 +84,8 @@ export default {
 .liked {
   width: 14vw;
   height: 21vw;
-  margin-right: 0.5%;
-  margin-bottom: 0.5%;
 }
+
 .liked_2 {
   width: 14vw;
   height: 21vw;
@@ -136,9 +103,11 @@ img:hover {
 
 #Img {
   position: relative;
+  margin-right: 0.5%;
+  margin-bottom: 0.5%;
 }
 
-img:hover + .button,
+img:hover+.button,
 .button:hover {
   display: inline-block;
   position: absolute;
@@ -183,7 +152,6 @@ img:hover + .button,
 
 .flex {
   display: flex;
-  /* height: 600px; */
   flex-wrap: wrap;
   align-content: stretch;
 }
