@@ -25,42 +25,42 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String requestURI = request.getRequestURI();
-        String requestMethod = request.getMethod();
-        log.info("요청 URI: " + requestURI);
-        log.info("요청 Method:" + requestMethod);
-        if (DATA_REQUEST.matcher(requestURI).matches() && HttpMethod.GET.matches(requestMethod)
-                || CHAT_REQUEST.equals(requestURI) && HttpMethod.GET.matches(requestMethod)
-                || REVIEW_REQUEST.matcher(requestURI).matches() && HttpMethod.GET.matches(requestMethod)
-                || PROGRAM_REQUEST.matcher(requestURI).matches() && HttpMethod.GET.matches(requestMethod)
-                || PROFILE_REQUEST.matcher(requestURI).matches()
-                || requestURI.equals("/api/users/oauth")
-                || requestURI.equals("/api/users/signup")
-                || requestURI.equals("/api/users/refresh")
-                || requestURI.equals("/api/recommend/new")
-                || requestURI.equals("/api/recommend/popular")
-                || requestURI.equals("/api/recommend/onair")
-                || requestURI.matches("/api/organization/[0-9]*")
-                || requestURI.equals("/api/program/random")
-                || requestURI.matches("/api/program/cast/[0-9]")
-                || requestURI.equals("/api/program")
-                || requestURI.equals("/api/users/validation/nickname")
-//                || requestURI.equals("/api/mf/random") // 더미데이터 만들기용 임시
-//                || requestURI.equals("/api/mf/randomRating") // 더미데이터 만들기용 임시
-        ) {
-            log.info("JWT 토큰 없이 요청 가능");
-            return true;
-        }
-        log.info("JWT 토큰 검증 시작");
-        String token = request.getHeader(HEADER);
-        if (token == null) {
-            log.info("토큰이 없습니다. -> 재로그인 요청");
-            throw new BadRequestException(NO_TOKEN);
-        }
-        // 만료됐을때
-        if (JwtTokenProvider.validateToken(token)) {
-            return true;
-        }
+//        String requestURI = request.getRequestURI();
+//        String requestMethod = request.getMethod();
+//        log.info("요청 URI: " + requestURI);
+//        log.info("요청 Method:" + requestMethod);
+//        if (DATA_REQUEST.matcher(requestURI).matches() && HttpMethod.GET.matches(requestMethod)
+//                || CHAT_REQUEST.equals(requestURI) && HttpMethod.GET.matches(requestMethod)
+//                || REVIEW_REQUEST.matcher(requestURI).matches() && HttpMethod.GET.matches(requestMethod)
+//                || PROGRAM_REQUEST.matcher(requestURI).matches() && HttpMethod.GET.matches(requestMethod)
+//                || PROFILE_REQUEST.matcher(requestURI).matches()
+//                || requestURI.equals("/api/users/oauth")
+//                || requestURI.equals("/api/users/signup")
+//                || requestURI.equals("/api/users/refresh")
+//                || requestURI.equals("/api/recommend/new")
+//                || requestURI.equals("/api/recommend/popular")
+//                || requestURI.equals("/api/recommend/onair")
+//                || requestURI.matches("/api/organization/[0-9]*")
+//                || requestURI.equals("/api/program/random")
+//                || requestURI.matches("/api/program/cast/[0-9]")
+//                || requestURI.equals("/api/program")
+//                || requestURI.equals("/api/users/validation/nickname")
+////                || requestURI.equals("/api/mf/random") // 더미데이터 만들기용 임시
+////                || requestURI.equals("/api/mf/randomRating") // 더미데이터 만들기용 임시
+//        ) {
+//            log.info("JWT 토큰 없이 요청 가능");
+//            return true;
+//        }
+//        log.info("JWT 토큰 검증 시작");
+//        String token = request.getHeader(HEADER);
+//        if (token == null) {
+//            log.info("토큰이 없습니다. -> 재로그인 요청");
+//            throw new BadRequestException(NO_TOKEN);
+//        }
+//        // 만료됐을때
+//        if (JwtTokenProvider.validateToken(token)) {
+//            return true;
+//        }
         return true;
     }
 }

@@ -66,15 +66,14 @@
   </div>
   <br />
   <p style="text-align: center">
-    <a class="startButton" href="#" role="button" style="border-radius: 15px">
-      <router-link
-        :to="{ name: 'situationcollectdata' }"
-        class="nav-link"
-        @click="setCondition"
-        style="font-size: 20px; padding: 10px; color: black"
-      >
-        NEXT
-      </router-link>
+    <a
+      class="startButton"
+      href="#"
+      role="button"
+      style="border-radius: 15px"
+      @click="setCondition"
+    >
+      NEXT
     </a>
   </p>
   <br /><br /><br /><br /><br />
@@ -122,7 +121,12 @@ export default {
       }
     },
     setCondition() {
+      if (this.who == "" || this.genre == "") {
+        alert("상황을 선택해주세요.");
+        return;
+      }
       this.SET_CONDITION({ who: this.who, genre: this.genre });
+      this.$router.push("/situationcollectdata");
     },
   },
 };

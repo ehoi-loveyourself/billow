@@ -21,12 +21,9 @@
   </h2>
   <div style="padding-left: 70px; margin-top: 10px">
     <br />
-    <img
-      v-for="random in randomProgram"
-      :src="random.posterImg"
-      alt="Image"
-      @click="select()"
-    />
+    <span v-for="random in randomProgram">
+      <SituationRandom v-bind:random="random" />
+    </span>
     <br /><br />
   </div>
   <p style="text-align: center">
@@ -35,6 +32,7 @@
         :to="{ name: 'situationresult' }"
         class="nav-link"
         style="font-size: 20px; padding: 10px; color: black"
+        @click="coditionRecommend()"
       >
         NEXT
       </router-link>
@@ -45,13 +43,15 @@
 <script>
 import HeaderBar from "@/components/layout/HeaderNavBar.vue";
 import SecondBar from "@/components/layout/SecondNavBar.vue";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
+import SituationRandom from "@/components/situation/SituationRandom.vue";
 
 export default {
   name: "SituationSelect",
   components: {
     HeaderBar,
     SecondBar,
+    SituationRandom,
   },
   computed: {
     ...mapState(["who", "genre", "randomProgram"]),
@@ -60,9 +60,12 @@ export default {
     this.getRandomProgram();
   },
   methods: {
-    ...mapActions(["getRandomProgram"]),
-    select() {
-      alert("g");
+    ...mapActions(["getRandomProgram", "getConditionRecommendProgram"]),
+    ...mapMutations(["CLEAR_CONDITION_ID"]),
+
+    coditionRecommend() {
+      this.getConditionRecommendProgram();
+      this.CLEAR_CONDITION_ID();
     },
   },
 };

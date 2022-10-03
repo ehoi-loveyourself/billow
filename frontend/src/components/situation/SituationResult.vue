@@ -1,17 +1,17 @@
 <template>
   <!-- <b-row> -->
-          <!-- <b-col cols="8"> -->
-            <header-bar/>
-    <!-- </b-col> -->
-    <!-- <b-col cols="4">  -->
-      <SecondBar/>
-      <!-- </b-col> -->
-    <!-- </b-row> -->
+  <!-- <b-col cols="8"> -->
+  <header-bar />
+  <!-- </b-col> -->
+  <!-- <b-col cols="4">  -->
+  <SecondBar />
+  <!-- </b-col> -->
+  <!-- </b-row> -->
   <br />
   <h2
     style="color: white; margin-left: 67px; font-size: 1.1vw; font-weight: 300"
   >
-    #혼자 #심심
+    #{{ who }} #{{ genre }}
   </h2>
   <h2
     style="color: white; margin-left: 67px; font-size: 1.1vw; font-weight: 300"
@@ -20,13 +20,9 @@
   </h2>
   <div style="padding-left: 70px; margin-top: 10px">
     <br />
-    <img src="@/assets/runningman.png" alt="Image" />
-    <img src="@/assets/thatman.png" alt="Image" />
-    <img src="@/assets/nangman.png" alt="Image" />
-    <img src="@/assets/jugun.png" alt="Image" />
-    <img src="@/assets/image_2.png" alt="Image" />
-    <img src="@/assets/gs.png" alt="Image" />
-    <img src="@/assets/laggi.png" alt="Image" />
+    <span v-for="condition in conditionRecommend">
+      <img :src="condition.posterImg" alt="Image" />
+    </span>
     <br /><br />
   </div>
   <p style="text-align: center">
@@ -41,21 +37,25 @@
     </a>
   </p>
 </template>
-  
+
 <script>
 import HeaderBar from "@/components/layout/HeaderNavBar.vue";
-import SecondBar from "@/components/layout/SecondNavBar.vue"
+import SecondBar from "@/components/layout/SecondNavBar.vue";
+import { mapState } from "vuex";
 
 export default {
   name: "SituationSelect",
   components: {
     HeaderBar,
-    SecondBar
+    SecondBar,
+  },
+  computed: {
+    ...mapState(["who", "genre", "conditionRecommend"]),
   },
 };
 </script>
-  
-  <style scoped>
+
+<style scoped>
 h2 {
   font-weight: 500;
   font-size: 1.4vw;
