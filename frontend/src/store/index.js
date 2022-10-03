@@ -295,11 +295,13 @@ export default new Vuex.Store({
         dispatch("getRating", state.programId);
       });
     },
-    sendRating({commit, state}, programId){
-      axios.post(`/api/users/rating/${programId}`).then((res) => {
-        //평점 등록 POST
-        console.log(res.data);
-      });
+    registRating({ commit }, rating) {
+      axios
+        .post(`/api/program/${rating.programId}`, { score: rating.score })
+        .then((res) => {
+          //평점 등록 POST
+          console.log(res.data);
+        });
     },
     getSearchProgram({ commit }, word) {
       commit("SET_SEARCH_WORD", word);

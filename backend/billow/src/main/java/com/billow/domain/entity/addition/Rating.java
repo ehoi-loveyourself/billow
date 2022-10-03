@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 
 @ToString
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tb_rating")
 @Entity
