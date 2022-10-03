@@ -3,7 +3,15 @@
     <splide id="carousel_user_recommend" :options="options">
       <splide-slide v-for="recommend in userRecommend">
         <figure>
-          <img class="img_2" :src="recommend.posterImg" alt="main2" />
+          <a class="enterDetail" href="#">
+                <router-link
+                  :to="{ name: 'detail' }"
+                  @click="moveProgramDetail(recommend.id)"
+                  class="nav-link"
+                >
+          <img class="img_2" :src="recommend.backdropPath" alt="main2" />
+          </router-link>
+          </a>
           <figcaption>{{ recommend.title }}</figcaption>
         </figure>
       </splide-slide>
@@ -30,7 +38,10 @@ export default {
     this.getUserRecommendProgram();
   },
   methods: {
-    ...mapActions(["getUserRecommendProgram"]),
+    ...mapActions(["getProgramDetail", "getUserRecommendProgram"]),
+    moveProgramDetail(programId) {
+      this.getProgramDetail(programId);
+    },
   },
   data() {
     return {
@@ -66,14 +77,8 @@ export default {
 #carousel_user_recommend .splide__arrow {
   background: none;
 }
-.img_1 {
-  width: 100%;
-  padding-left: 0.5%;
-  padding-right: 0.5%;
-  height: 640px;
-}
 .img_2 {
-  height: 640px;
+  height: 40vw;
   width: 100%;
   padding-left: 0.5%;
   padding-right: 0.5%;
