@@ -163,7 +163,7 @@ export default {
                 JSON.stringify(response.data.email).replace(/\"/gi, "")
               );
               // localStorage.clear();
-              if (response.data.nickname == null) {
+              if (response.data.nickName == null) {
                 // alert("회원정보가 없어 회원가입 페이지로 이동합니다.");
                 this.$router.push("/userinfocollect");
               } else {
