@@ -34,7 +34,6 @@ export default new Vuex.Store({
     castInfoList: null,
     ratingList: null,
     alarmList: null,
-    userRating: null,
   },
   getters: {},
   mutations: {
@@ -115,9 +114,6 @@ export default new Vuex.Store({
     },
     SET_ALARM_LIST(state, alarmList) {
       state.alarmList = alarmList;
-    },
-    SET_USER_RATING(state, userRating) {
-      state.userRating = userRating;
     },
   },
   actions: {
@@ -306,13 +302,6 @@ export default new Vuex.Store({
           //평점 등록 POST
           console.log(res.data);
         });
-    },
-    getUserRating({ commit }, programId) {
-      axios.get(`/api/program/rating/${programId}`).then((res) => {
-        //사용자 평점 조회 GET
-        console.log(res.data);
-        commit("SET_USER_RATING", res.data);
-      });
     },
     getSearchProgram({ commit }, word) {
       commit("SET_SEARCH_WORD", word);
