@@ -1,50 +1,50 @@
 <template>
-  <!-- <b-row> -->
-  <!-- <b-col cols="8"> -->
-  <header-bar />
-  <!-- </b-col> -->
-  <!-- <b-col cols="4">  -->
-  <SecondBar />
-  <!-- </b-col> -->
-  <!-- </b-row> -->
-  <br />
-  <h2 style="color: white; margin-left: 70px; font-size: 1.2vw; font-weight: 400">
-    #{{ who }} #{{ genre }}
-  </h2>
-  <h2 style="color: white; margin-left: 70px; font-size: 1.1vw; font-weight: 300">
-    딱 맞는 프로그램을 추천해드릴게요.
-  </h2>
-  <div style="padding-left: 70px; margin-top: 10px">
+  <!-- <div id="app">
+    <PageLoader/> -->
+    <header-bar />
+    <SecondBar />
     <br />
-    <div class="flex">
-      <span v-for="condition in conditionRecommend">
-        <router-link :to="{ name: 'detail' }" @click="moveProgramDetail(condition.id)" class="nav-link">
-          <img :src="condition.posterImg" alt="Image" />
-        </router-link>
-      </span>
+    <h2 style="color: white; margin-left: 70px; font-size: 1.2vw; font-weight: 400; margin-bottom: 1%;">
+      #{{ who }} #{{ genre }}
+    </h2>
+    <h2 style="color: white; margin-left: 70px; font-size: 1.1vw; font-weight: 300">
+      딱 맞는 프로그램을 추천해드릴게요.
+    </h2>
+    <div style="padding-left: 70px; margin-top: 10px">
+      <br />
+      <div class="flex">
+        <span v-for="condition in conditionRecommend">
+          <router-link :to="{ name: 'detail' }" @click="moveProgramDetail(condition.id)" class="nav-link">
+            <img :src="condition.posterImg" alt="Image" />
+          </router-link>
+        </span>
+      </div>
+      <br /><br /><br/><br/><br/>
     </div>
-    <br /><br />
-  </div>
-  <p style="text-align: center">
-    <a class="startButton" href="#" role="button" style="border-radius: 15px">
-      <router-link :to="{ name: 'main' }" class="nav-link" style="font-size: 20px; padding: 10px; color: black">
-        홈으로
-      </router-link>
-    </a>
-  </p>
+    <p style="text-align: center">
+      <a class="startButton" href="#" role="button" style="border-radius: 15px">
+        <router-link :to="{ name: 'main' }" class="nav-link" style="font-size: 20px; padding: 10px; color: black">
+          홈으로
+        </router-link>
+      </a>
+    </p>
+    <br /><br /><br/><br/><br/>
+  <!-- </div> -->
 </template>
 
 <script>
 import HeaderBar from "@/components/layout/HeaderNavBar.vue";
 import SecondBar from "@/components/layout/SecondNavBar.vue";
 import { mapState, mapActions } from "vuex";
+// import PageLoader from "@/components/PageLoader.vue";
 
 export default {
-  name: "SituationSelect",
+  name: "App",
   components: {
     HeaderBar,
     SecondBar,
-  },
+    // PageLoader,
+},
   computed: {
     ...mapState(["who", "genre", "conditionRecommend"]),
   },
@@ -87,7 +87,8 @@ img {
   flex-wrap: wrap;
   align-content: stretch;
 }
-img:hover{
-  filter:brightness(0.5)
+
+img:hover {
+  filter: brightness(0.5)
 }
 </style>

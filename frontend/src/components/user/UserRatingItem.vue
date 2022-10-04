@@ -22,61 +22,61 @@
       v-show="!isTrue1"
       @click="setFlagTrue1"
       class="hearted"
-      src="@/assets/white_heart.png"
+      src="@/assets/grey_star_small.png"
     />
     <img
       v-show="isTrue1"
       @click="setFlagFalse1"
       class="hearted"
-      src="@/assets/red_heart.png"
+      src="@/assets/blue_star_small.png"
     />
     <img
       v-show="!isTrue2"
       @click="setFlagTrue2"
       class="hearted"
-      src="@/assets/white_heart.png"
+      src="@/assets/grey_star_small.png"
     />
     <img
       v-show="isTrue2"
       @click="setFlagFalse2"
       class="hearted"
-      src="@/assets/red_heart.png"
+      src="@/assets/blue_star_small.png"
     />
     <img
       v-show="!isTrue3"
       @click="setFlagTrue3"
       class="hearted"
-      src="@/assets/white_heart.png"
+      src="@/assets/grey_star_small.png"
     />
     <img
       v-show="isTrue3"
       @click="setFlagFalse3"
       class="hearted"
-      src="@/assets/red_heart.png"
+      src="@/assets/blue_star_small.png"
     />
     <img
       v-show="!isTrue4"
       @click="setFlagTrue4"
       class="hearted"
-      src="@/assets/white_heart.png"
+      src="@/assets/grey_star_small.png"
     />
     <img
       v-show="isTrue4"
       @click="setFlagFalse4"
       class="hearted"
-      src="@/assets/red_heart.png"
+      src="@/assets/blue_star_small.png"
     />
     <img
       v-show="!isTrue5"
       @click="setFlagTrue5"
       class="hearted"
-      src="@/assets/white_heart.png"
+      src="@/assets/grey_star_small.png"
     />
     <img
       v-show="isTrue5"
       @click="setFlagFalse5"
       class="hearted"
-      src="@/assets/red_heart.png"
+      src="@/assets/blue_star_small.png"
     />
     &nbsp;
     <a
