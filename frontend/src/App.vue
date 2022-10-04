@@ -1,17 +1,20 @@
 <template>
   <div id="app">
-      <router-view />
+    <PageLoader />
+      <router-view/>
     <footer-bar />
   </div>
 </template>
 
 <script>
 import FooterBar from '@/components/layout/FooterNavBar.vue';
+import PageLoader from '@/components/PageLoader.vue';
 
 export default {
   name: 'App',
   components: {
     FooterBar,
+    PageLoader
   },
 };
 </script>
