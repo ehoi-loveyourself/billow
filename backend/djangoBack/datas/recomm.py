@@ -210,15 +210,15 @@ def mf_condition_recomm_prac(programId):
     # 평점이 비슷하다는 것을 코사인 유사도로 측정해서 보여주자
     item_based_collabor = cosine_similarity(program_user_rating)
 
-    print(program_user_rating.shape)
-    print(item_based_collabor.shape)
+    # print(program_user_rating.shape)
+    # print(item_based_collabor.shape)
 
     item_based_collabor = pd.DataFrame(data= item_based_collabor, index= program_user_rating.index, columns= program_user_rating.index)
-    print(item_based_collabor.head())
+    # print(item_based_collabor.head())
 
     print('#### 결과 ###')
     print(item_based_collabor[programId].sort_values(ascending=False)[:30])
     return item_based_collabor[programId].sort_values(ascending=False)[:30]
 
-mf_condition_recomm_prac(1)
+# mf_condition_recomm_prac(6)
 
