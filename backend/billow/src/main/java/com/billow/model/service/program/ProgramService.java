@@ -1,6 +1,7 @@
 package com.billow.model.service.program;
 
 import com.billow.domain.dto.addtion.RatingRequest;
+import com.billow.domain.dto.addtion.RatingResponse;
 import com.billow.domain.dto.program.OttResponse;
 import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.domain.dto.program.RandomProgramResponse;
@@ -73,7 +74,7 @@ public class ProgramService {
                 .orElseThrow(() -> new NotFoundException(PROGRAM_NOT_FOUND));
 
         Rating findRating = ratingRepository.findByUser_IdAndProgram_Id(userId, programId);
-        if(findRating != null){
+        if (findRating != null) {
             findRating.setScore(ratingRequest.getScore());
             ratingRepository.save(findRating);
             return new Message("프로그램 평점 수정에 성공하였습니다.");
@@ -151,5 +152,21 @@ public class ProgramService {
                                 .build())
                         .collect(Collectors.toList()))
                 .build();
+    }
+
+    public RatingResponse userSelectRating(Long userId, Long programId) {
+        userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
+        Rating rating = ratingRepository.findByUser_IdAndProgram_Id(userId, programId);
+        if (rating != null) {
+            return RatingResponse.builder()
+                    .id(rating.getProgram().getId())
+                    .posterImg(rating.getProgram().getPosterImg())
+                    .title(rating.getProgram().getTitle())
+                    .ratingId(rating.getId())
+                    .score(rating.getScore())
+                    .build();
+        }
+        return null;
     }
 }

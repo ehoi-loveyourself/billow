@@ -95,18 +95,9 @@
             <span style="--i: 12">면</span>
             <span style="--i: 13">?</span>
           </div>
-          <span class="inner">
-            <span>
-              <span v-for="index in 5" :key="index" @click="check(index)">
-                <span v-if="index < score"
-                  ><img src="@/assets/blue_star_big.png"
-                /></span>
-                <span v-if="index >= score"
-                  ><img src="@/assets/grey_star_big.png"
-                /></span>
-              </span>
-            </span>
-          </span>
+          <div>
+            <StarRating />
+          </div>
         </b-card>
       </div>
     </section>
@@ -141,6 +132,7 @@ import Review from "@/components/main/ProgramReview.vue";
 import OnAirTalk from "@/components/main/OnAirTalk.vue";
 import Schedule from "@/components/main/ProgramSchedule.vue";
 import Cast from "@/components/main/CastingInfo.vue";
+import StarRating from "@/components/main/StarRating.vue";
 import { reactive } from "@vue/reactivity";
 import axios from "axios";
 import { mapState, mapActions } from "vuex";
@@ -189,6 +181,7 @@ export default {
     OnAirTalk,
     Schedule,
     Cast,
+    StarRating,
   },
 };
 </script>
@@ -198,13 +191,13 @@ export default {
   width: 100px;
 }
 
-.star-rating,
+/* .star-rating,
 .star-rating span {
   display: inline-block;
   height: 18px;
   overflow: hidden;
   background: url(@/assets/star_1.png) no-repeat;
-}
+} */
 
 .star-rating span {
   background-position: left bottom;

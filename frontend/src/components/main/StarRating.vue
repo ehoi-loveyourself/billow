@@ -1,42 +1,4 @@
 <template>
-  <img class="poster" :src="random.posterImg" alt="Image" />
-  <br />
-  <div class="star-rating space-x-4 mx-auto">
-    <input
-      type="radio"
-      id="5-stars"
-      name="rating"
-      value="5"
-      v-model="ratings"
-    />
-    <label for="5-stars" class="star pr-4">★</label>
-    <input
-      type="radio"
-      id="4-stars"
-      name="rating"
-      value="4"
-      v-model="ratings"
-    />
-    <label for="4-stars" class="star">★</label>
-    <input
-      type="radio"
-      id="3-stars"
-      name="rating"
-      value="3"
-      v-model="ratings"
-    />
-    <label for="3-stars" class="star">★</label>
-    <input
-      type="radio"
-      id="2-stars"
-      name="rating"
-      value="2"
-      v-model="ratings"
-    />
-    <label for="2-stars" class="star">★</label>
-    <input type="radio" id="1-star" name="rating" value="1" v-model="ratings" />
-    <label for="1-star" class="star">★</label>
-  </div>
   <div class="star-rating space-x-4 mx-auto">
     <img
       v-show="!isTrue5"
@@ -102,11 +64,12 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
+import axios from "axios";
 export default {
   data() {
     return {
-      ratings: 5,
+      userRating: null,
       isTrue1: false,
       isTrue2: false,
       isTrue3: false,
@@ -114,7 +77,33 @@ export default {
       isTrue5: false,
     };
   },
-  props: ["random"],
+  computed: {
+    ...mapState(["programId"]),
+  },
+  created() {
+    axios.get(`/api/program/rating/${this.programId}`).then((res) => {
+      //사용자 평점 조회 GET
+      console.log(res.data);
+      this.userRating = res.data;
+      if (this.userRating != null) {
+        if (this.userRating.score >= 2) {
+          this.isTrue1 = true;
+        }
+        if (this.userRating.score >= 4) {
+          this.isTrue2 = true;
+        }
+        if (this.userRating.score >= 6) {
+          this.isTrue3 = true;
+        }
+        if (this.userRating.score >= 8) {
+          this.isTrue4 = true;
+        }
+        if (this.userRating.score >= 10) {
+          this.isTrue5 = true;
+        }
+      }
+    });
+  },
   methods: {
     ...mapActions(["registRating"]),
     setFlagTrue5() {
@@ -123,11 +112,11 @@ export default {
       this.isTrue3 = true;
       this.isTrue4 = true;
       this.isTrue5 = true;
-      this.registRating({ programId: this.random.id, score: 10 });
+      this.registRating({ programId: this.programId, score: 10 });
     },
     setFlagFalse5() {
       this.isTrue5 = false;
-      this.registRating({ programId: this.random.id, score: 8 });
+      this.registRating({ programId: this.programId, score: 8 });
     },
     setFlagTrue4() {
       this.isTrue1 = true;
@@ -135,7 +124,7 @@ export default {
       this.isTrue3 = true;
       this.isTrue4 = true;
       this.isTrue5 = false;
-      this.registRating({ programId: this.random.id, score: 8 });
+      this.registRating({ programId: this.programId, score: 8 });
     },
     setFlagFalse4() {
       //   this.isTrue1 = false;
@@ -143,7 +132,7 @@ export default {
       //   this.isTrue3 = false;
       //   this.isTrue4 = false;
       this.isTrue5 = false;
-      this.registRating({ programId: this.random.id, score: 8 });
+      this.registRating({ programId: this.programId, score: 8 });
     },
     setFlagTrue3() {
       this.isTrue1 = true;
@@ -151,7 +140,7 @@ export default {
       this.isTrue3 = true;
       //   this.isTrue4 = false;
       //   this.isTrue5 = false;
-      this.registRating({ programId: this.random.id, score: 6 });
+      this.registRating({ programId: this.programId, score: 6 });
     },
     setFlagFalse3() {
       //   this.isTrue1 = false;
@@ -159,7 +148,7 @@ export default {
       //   this.isTrue3 = false;
       this.isTrue4 = false;
       this.isTrue5 = false;
-      this.registRating({ programId: this.random.id, score: 6 });
+      this.registRating({ programId: this.programId, score: 6 });
     },
     setFlagTrue2() {
       this.isTrue1 = true;
@@ -167,7 +156,7 @@ export default {
       this.isTrue3 = false;
       this.isTrue4 = false;
       this.isTrue5 = false;
-      this.registRating({ programId: this.random.id, score: 4 });
+      this.registRating({ programId: this.programId, score: 4 });
     },
     setFlagFalse2() {
       //   this.isTrue1 = false;
@@ -175,7 +164,7 @@ export default {
       this.isTrue3 = false;
       this.isTrue4 = false;
       this.isTrue5 = false;
-      this.registRating({ programId: this.random.id, score: 4 });
+      this.registRating({ programId: this.programId, score: 4 });
     },
     setFlagTrue1() {
       this.isTrue1 = true;
@@ -183,7 +172,7 @@ export default {
       this.isTrue3 = false;
       this.isTrue4 = false;
       this.isTrue5 = false;
-      this.registRating({ programId: this.random.id, score: 2 });
+      this.registRating({ programId: this.programId, score: 2 });
     },
     setFlagFalse1() {
       this.isTrue1 = true;
@@ -191,7 +180,7 @@ export default {
       this.isTrue3 = false;
       this.isTrue4 = false;
       this.isTrue5 = false;
-      this.registRating({ programId: this.random.id, score: 2 });
+      this.registRating({ programId: this.programId, score: 2 });
     },
   },
 };
