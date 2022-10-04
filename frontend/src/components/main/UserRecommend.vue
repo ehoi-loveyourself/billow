@@ -1,21 +1,23 @@
 <template>
   <div id="mainslider" style="text-align: center; margin-top: 10px">
+    <!-- <splide id="carousel_user_recommend" :options="options">
+      <splide-slide>
+        <img src="@/assets/image_1.png"/>
+      </splide-slide>
+    </splide> -->
     <splide id="carousel_user_recommend" :options="options">
       <splide-slide v-for="recommend in userRecommend">
         <figure>
           <a class="enterDetail" href="#">
-                <router-link
-                  :to="{ name: 'detail' }"
-                  @click="moveProgramDetail(recommend.id)"
-                  class="nav-link"
-                >
-          <img class="img_2" :src="recommend.backdropPath" alt="main2" />
-          </router-link>
+            <router-link :to="{ name: 'detail' }" @click="moveProgramDetail(recommend.id)" class="nav-link">
+              <img class="img_2" :src="recommend.backdropPath" alt="main2" />
+            </router-link>
           </a>
           <figcaption>{{ recommend.title }}</figcaption>
         </figure>
       </splide-slide>
     </splide>
+
   </div>
   <br /><br /><br />
 </template>
@@ -31,6 +33,9 @@ export default {
     Splide,
     SplideSlide,
   },
+  data: () => {
+    isLoaded: false;
+  },
   computed: {
     ...mapState(["userRecommend"]),
   },
@@ -42,6 +47,16 @@ export default {
     moveProgramDetail(programId) {
       this.getProgramDetail(programId);
     },
+    gotoPage(link) {
+      this.$router.push(link);
+    },
+  },
+  mounted() {
+    document.onreadystatechange = () => {
+      if (document.readyState == "complete") {
+        this.isloaded = true;
+      }
+    }
   },
   data() {
     return {
@@ -59,11 +74,6 @@ export default {
       },
     };
   },
-  method: {
-    gotoPage(link) {
-      this.$router.push(link);
-    },
-  },
 };
 </script>
 
@@ -71,12 +81,15 @@ export default {
 #carousel_user_recommend .splide__arrow--next {
   right: 0.5em;
 }
+
 #carousel_user_recommend .splide__arrow--prev {
   left: 0.5em;
 }
+
 #carousel_user_recommend .splide__arrow {
   background: none;
 }
+
 .img_2 {
   height: 40vw;
   width: 100%;
@@ -84,12 +97,14 @@ export default {
   padding-right: 0.5%;
   border-radius: 1.4pc;
 }
+
 .splide__arrow svg {
   fill: white;
   opacity: 50%;
   height: 6em;
   width: 6em;
 }
+
 .splide__arrow {
   width: fit-content;
 }
@@ -134,5 +149,65 @@ html {
 
 * {
   box-sizing: border-box;
+}
+</style>
+
+<style lang="scss" scoped>
+$colors: #8CC271, #69BEEB, #F5AA39, #E9643B;
+
+// -----------------------------------------------------
+.page-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #333;
+  z-index: 999;
+}
+
+// -----------------------------------------------------
+.cube {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+
+  @for $i from 1 through length($colors) {
+    &:nth-child(#{$i}) {
+      background-color: nth($colors, $i);
+    }
+  }
+
+  &:first-child {
+    animation: left 1s infinite;
+  }
+
+  &:last-child {
+    animation: right 1s infinite .5s;
+  }
+}
+
+// -----------------------------------------------------
+@keyframes left {
+  40% {
+    transform: translateX(-60px);
+  }
+
+  50% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes right {
+  40% {
+    transform: translateX(60px);
+  }
+
+  50% {
+    transform: translateX(0);
+  }
 }
 </style>

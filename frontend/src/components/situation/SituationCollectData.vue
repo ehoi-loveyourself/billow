@@ -9,11 +9,11 @@
   <!-- </b-row> -->
   <br />
   <div style="margin-left:70px">
-  <h2 style="color: white; font-size: 1.2vw; font-weight: 400">
+  <h2 style="color: white; font-size: 1.2vw; font-weight: 400; margin-bottom: 1%;">
     #{{ who }} #{{ genre }}
   </h2>
   <h2 style="color: white; font-size: 1.1vw; font-weight: 300">
-    위와 같은 상황일 때 ㅇㅇ님은 어떤 프로그램을 보셨나요? 다른 사용자들을 위해
+    위와 같은 상황일 때 {{userNickName}}님은 어떤 프로그램을 보셨나요? 다른 사용자들을 위해
     회원님의 취향을 알려주세요!
   </h2>
   <br />
@@ -49,7 +49,7 @@ export default {
     SituationRandom,
   },
   computed: {
-    ...mapState(["who", "genre", "randomProgram"]),
+    ...mapState(["who", "genre", "randomProgram", "userNickName"]),
   },
   created() {
     this.getRandomProgram();
