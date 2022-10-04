@@ -22,6 +22,7 @@ export default new Vuex.Store({
     actorProgram: null,
     actorName: "",
     onairProgram: null,
+    userNickName: "",
 
     programId: 0,
     organizationId: 0,
