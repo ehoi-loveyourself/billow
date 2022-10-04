@@ -13,66 +13,34 @@
   >
     중복 선택이 가능합니다!
   </h2> -->
-  <br /><br />
+  <br />
   <div>
     <div class="left" style="border-right: 1px solid #ffffff">
-      <h2 style="color: white; text-align: center">누구와 있으신가요?</h2>
-      <img
-        style="margin-top: 50px; margin-left: 169px; width: 25%"
-        @click="setWho(1)"
-        src="@/assets/situation/alone.png"
-      />
-      <img
-        style="margin-top: 50px; margin-left: 50px; width: 25%"
-        @click="setWho(2)"
-        src="@/assets/situation/friend.png"
-      />
-      <br /><br />
-      <img
-        style="margin-left: 169px; margin-top: 15px; width: 25%"
-        @click="setWho(3)"
-        src="@/assets/situation/couple.png"
-      />
-      <img
-        style="margin-left: 50px; margin-top: 15px; width: 25%"
-        @click="setWho(4)"
-        src="@/assets/situation/family.png"
-      />
+      <h2 style="color: white; text-align: center">누구와 있으신가요?&nbsp;&nbsp;&nbsp;<span style="color:#ffe812; font-size: larger;">{{who}}</span></h2>
+      <img class="img" style="margin-top: 5%; margin-left: 20%; width: 25%" @click="setWho(1)"
+        src="@/assets/situation/alone.png" />
+      <img class="img" style="margin-top: 5%; margin-left: 10%; width: 25%" @click="setWho(2)"
+        src="@/assets/situation/friend.png" />
+      <img class="img" style="margin-left: 20%; margin-top: 10%; width: 25%" @click="setWho(3)"
+        src="@/assets/situation/couple.png" />
+      <img class="img" style="margin-left: 10%; margin-top: 10%; width: 25%" @click="setWho(4)"
+        src="@/assets/situation/family.png" />     
     </div>
     <div class="right">
-      <h2 style="color: white; text-align: center">기분이 어떠신가요?</h2>
-      <img
-        style="margin-top: 50px; margin-left: 169px; width: 25%"
-        @click="setGenre(1)"
-        src="@/assets/situation/happy.png"
-      />
-      <img
-        style="margin-top: 50px; margin-left: 50px; width: 25%"
-        @click="setGenre(2)"
-        src="@/assets/situation/boring.png"
-      />
-      <br /><br />
-      <img
-        style="margin-left: 169px; margin-top: 15px; width: 25%"
-        @click="setGenre(3)"
-        src="@/assets/situation/angry.png"
-      />
-      <img
-        style="margin-left: 50px; margin-top: 15px; width: 25%"
-        @click="setGenre(4)"
-        src="@/assets/situation/sad.png"
-      />
+      <h2 style="color: white; text-align: center">기분이 어떠신가요?&nbsp;&nbsp;&nbsp;<span style="color:#ffe812; font-size: larger;">{{genre}}</span></h2>
+      <img class="img" style="margin-top: 5%; margin-left: 20%; width: 25%" @click="setGenre(1)"
+        src="@/assets/situation/happy.png" />
+      <img class="img" style="margin-top: 5%; margin-left: 10%; width: 25%" @click="setGenre(2)"
+        src="@/assets/situation/boring.png" />
+      <img class="img" style="margin-left: 20%; margin-top: 10%; width: 25%" @click="setGenre(3)"
+        src="@/assets/situation/angry.png" />
+      <img class="img" style="margin-left: 10%; margin-top: 10%; width: 25%" @click="setGenre(4)"
+        src="@/assets/situation/sad.png" />
     </div>
   </div>
-  <br />
+  <br /><br />
   <p style="text-align: center">
-    <a
-      class="startButton"
-      href="#"
-      role="button"
-      style="border-radius: 15px"
-      @click="setCondition"
-    >
+    <a class="startButton" href="#" role="button" style="border-radius: 15px" @click="setCondition">
       NEXT
     </a>
   </p>
@@ -100,7 +68,7 @@ export default {
     ...mapMutations(["SET_CONDITION"]),
     setWho(who) {
       if (who == 1) {
-        this.who = "혼자";
+        this.who = "혼자";   
       } else if (who == 2) {
         this.who = "친구와";
       } else if (who == 3) {
@@ -135,13 +103,15 @@ export default {
 <style scoped>
 div {
   width: 100%;
-  height: 550px;
+  height: 35.5vw
 }
+
 div.left {
   width: 50%;
   float: left;
   box-sizing: border-box;
 }
+
 div.right {
   width: 50%;
   float: right;
@@ -152,11 +122,14 @@ h2 {
   font-weight: 500;
   font-size: 1.4vw;
 }
+
 img {
   width: 15%;
 }
+
 img:hover {
-  filter: brightness(0.5);
+  filter: brightness(0.4);
+  cursor: pointer;
 }
 
 .startButton {
@@ -166,5 +139,10 @@ img:hover {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+}
+
+img:active{
+  border: 3px solid #ffe812;
+  border-radius: 3vw;
 }
 </style>
