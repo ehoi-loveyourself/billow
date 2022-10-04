@@ -2,101 +2,65 @@
   <img class="poster" :src="random.posterImg" alt="Image" />
   <br />
   <div class="star-rating space-x-4 mx-auto">
-    <input
-      type="radio"
-      id="5-stars"
-      name="rating"
-      value="5"
-      v-model="ratings"
-    />
-    <label for="5-stars" class="star pr-4">★</label>
-    <input
-      type="radio"
-      id="4-stars"
-      name="rating"
-      value="4"
-      v-model="ratings"
-    />
-    <label for="4-stars" class="star">★</label>
-    <input
-      type="radio"
-      id="3-stars"
-      name="rating"
-      value="3"
-      v-model="ratings"
-    />
-    <label for="3-stars" class="star">★</label>
-    <input
-      type="radio"
-      id="2-stars"
-      name="rating"
-      value="2"
-      v-model="ratings"
-    />
-    <label for="2-stars" class="star">★</label>
-    <input type="radio" id="1-star" name="rating" value="1" v-model="ratings" />
-    <label for="1-star" class="star">★</label>
-  </div>
-  <div class="star-rating space-x-4 mx-auto">
     <img
       v-show="!isTrue5"
       @click="setFlagTrue5"
       class="hearted"
-      src="@/assets/white_heart.png"
+      src="@/assets/grey_star_small.png"
     />
     <img
       v-show="isTrue5"
       @click="setFlagFalse5"
       class="hearted"
-      src="@/assets/red_heart.png"
+      src="@/assets/blue_star_small.png"
     />
     <img
       v-show="!isTrue4"
       @click="setFlagTrue4"
       class="hearted"
-      src="@/assets/white_heart.png"
+      src="@/assets/grey_star_small.png"
     />
     <img
       v-show="isTrue4"
       @click="setFlagFalse4"
       class="hearted"
-      src="@/assets/red_heart.png"
+      src="@/assets/blue_star_small.png"
     />
     <img
       v-show="!isTrue3"
       @click="setFlagTrue3"
       class="hearted"
-      src="@/assets/white_heart.png"
+      src="@/assets/grey_star_small.png"
     />
     <img
       v-show="isTrue3"
       @click="setFlagFalse3"
       class="hearted"
-      src="@/assets/red_heart.png"
+      src="@/assets/blue_star_small.png"
     />
     <img
       v-show="!isTrue2"
       @click="setFlagTrue2"
       class="hearted"
-      src="@/assets/white_heart.png"
+      src="@/assets/grey_star_small.png"
     />
     <img
       v-show="isTrue2"
       @click="setFlagFalse2"
       class="hearted"
-      src="@/assets/red_heart.png"
+      src="@/assets/blue_star_small.png"
     />
     <img
       v-show="!isTrue1"
       @click="setFlagTrue1"
       class="hearted"
-      src="@/assets/white_heart.png"
+      src="@/assets/grey_star_small.png"
     />
     <img
       v-show="isTrue1"
       @click="setFlagFalse1"
       class="hearted"
-      src="@/assets/red_heart.png"
+      src="@/assets/blue_star_small.png"
     />
   </div>
 </template>
