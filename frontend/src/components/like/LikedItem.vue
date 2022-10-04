@@ -1,17 +1,29 @@
 <template>
-  <router-link :to="{ name: 'detail' }" @click="moveProgramDetail(like.programId)" class="nav-link">
+  <router-link
+    :to="{ name: 'detail' }"
+    @click="moveProgramDetail(like.programId)"
+    class="nav-link"
+  >
     <img class="liked_2" :src="like.posterImg" alt="Image" />
 
     <!-- 원래는 /template 위이나 라우터 링크가 우선적으로 되야 하므로 티빙과 같은 형식으로 임시 조치 -->
   </router-link>
 
   <div class="button">
-    <button @click="addToFavorites(like.programId)" :id="like.programId" v-show="!isFavorite"
-      style="border: none; background: none">
+    <button
+      @click="addToFavorites(like.programId)"
+      :id="like.programId"
+      v-show="!isFavorite"
+      style="border: none; background: none"
+    >
       <img class="hearted" src="@/assets/white_heart.png" />
     </button>
-    <button @click="deleteFromFavorites(like.programId)" :id="like.programId" v-show="isFavorite"
-      style="background: none; border: none">
+    <button
+      @click="deleteFromFavorites(like.programId)"
+      :id="like.programId"
+      v-show="isFavorite"
+      style="background: none; border: none"
+    >
       <img class="hearted" src="@/assets/red_heart.png" />
     </button>
   </div>
@@ -33,17 +45,6 @@ export default {
   props: ["like"],
   computed: {
     ...mapState(["programId"]),
-  },
-  setup() {
-    const state = reactive({
-      likeList: [],
-    });
-    axios.get(`/api/bookmark`).then((res) => {
-      //즐겨찾기 데이터 GET
-      console.log(res.data);
-      state.likeList = res.data;
-    });
-    return { state };
   },
 
   methods: {
@@ -94,7 +95,7 @@ img:hover {
   margin-bottom: 0.5%;
 }
 
-img:hover+.button,
+img:hover + .button,
 .button:hover {
   display: inline-block;
   position: absolute;

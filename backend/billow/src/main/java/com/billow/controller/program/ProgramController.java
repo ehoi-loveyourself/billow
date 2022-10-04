@@ -63,8 +63,6 @@ public class ProgramController {
     @ApiOperation(value = "사용자 초기 데이터 수집용 랜덤 프로그램 출력", response = Object.class)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "랜덤 프로그램 출력 성공"),
-            @ApiResponse(responseCode = "404", description = "해당 유저를 찾을 수 없습니다."),
-            @ApiResponse(responseCode = "404", description = "해당 프로그램을 찾을 수 없습니다."),
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
     @GetMapping("/random")
@@ -84,9 +82,9 @@ public class ProgramController {
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
     @PostMapping("/{programId}")
-    public ResponseEntity<Object> postProgramRating(@PathVariable("programId") Long programId, @RequestBody RatingRequest ratingRequest) {
+    public ResponseEntity<Object> postProgramRating(@RequestHeader("Auth-access") String token,@PathVariable("programId") Long programId, @RequestBody RatingRequest ratingRequest) {
         log.info("프로그램 평점 등록 API 호출");
-        Message response = programService.postProgramRating(1L, programId, ratingRequest);
+        Message response = programService.postProgramRating(JwtTokenProvider.getUserId(token), programId, ratingRequest);
         log.info("프로그램 평점 등록 성공");
         return ResponseEntity.ok()
                 .body(response);
@@ -99,7 +97,7 @@ public class ProgramController {
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
     @GetMapping("/rating/{programId}")
-    public ResponseEntity<Object> userSelectRating(@PathVariable("programId") Long programId) {
+    public ResponseEntity<Object> userSelectRating( @PathVariable("programId") Long programId) {
         log.info("사용자 평점 조회 API 호출");
         RatingResponse response = programService.userSelectRating(1L, programId);
         log.info("사용자 평점 조회 성공");

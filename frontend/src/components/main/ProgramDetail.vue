@@ -143,20 +143,8 @@ export default {
   computed: {
     ...mapState(["programDetail", "programId"]),
   },
-  created() {
-    axios
-      .get(`/api/bookmark/${this.programId}`)
-      .then((res) => {
-        //사용자 즐겨찾기 조회 GET
-        this.isFavorite = true;
-      })
-      .catch((ex) => {
-        this.isFavorite = false;
-      });
-  },
   data() {
     return {
-      isFavorite: false,
       score: 0,
     };
   },
@@ -166,11 +154,9 @@ export default {
       this.score = index + 1;
     },
     addToFavorites() {
-      this.isFavorite = true;
       this.registBookmark();
     },
     deleteFromFavorites() {
-      this.isFavorite = false;
       this.deleteBookmark();
     },
   },

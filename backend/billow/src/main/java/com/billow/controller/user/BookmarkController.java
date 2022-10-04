@@ -31,14 +31,21 @@ public class BookmarkController {
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
     @GetMapping
-    public ResponseEntity<Object> selectBookmark(@RequestHeader("Auth-access") String token) {
+    public ResponseEntity<Object> selectBookmark() {
         log.info("즐겨찾기 조회 API 호출");
-        List<BookmarkResponse> responses = bookmarkService.selectBookmark(JwtTokenProvider.getUserId(token));
+        List<BookmarkResponse> responses = bookmarkService.selectBookmark(1L);
         log.info("즐겨찾기 조회 성공");
         return ResponseEntity.ok()
                 .body(responses);
     }
 
+    @ApiOperation(value = "즐겨찾기 사용자 조회", response = Object.class)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "즐겨찾기 사용자 조회 성공"),
+            @ApiResponse(responseCode = "404", description = "해당 유저를 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "404", description = "담긴 즐겨찾기가 없습니다."),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
     @GetMapping("/{programId}")
     public ResponseEntity<Object> selectUserBookmark(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId) {
         log.info("즐겨찾기 사용자 조회 API 호출");
