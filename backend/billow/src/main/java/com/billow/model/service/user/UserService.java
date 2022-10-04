@@ -66,7 +66,7 @@ public class UserService {
                 .build();
     }
 
-    public LoginResponse kakaoLogin(SignUpRequest signUpRequest, HttpServletResponse httpServletResponse) throws ParseException {
+    public LoginResponse kakaoLogin(SignUpRequest signUpRequest) {
         if (signUpRequest.getEmail() == null) {
             throw new NotFoundException(EMAIL_NOT_FOUND);
         } else {
@@ -78,14 +78,6 @@ public class UserService {
             String authToken = JwtTokenProvider.createAuthToken(user.getId(), user.getEmail(), user.getName());
             String refreshToken = JwtTokenProvider.createRefreshToken();
 
-            Cookie refreshCookie = new Cookie("refreshToken", refreshToken);
-            refreshCookie.setMaxAge(60 * 60 * 24); // 하루
-            refreshCookie.setSecure(true);
-            refreshCookie.setHttpOnly(true);
-            refreshCookie.setPath("/");
-
-            httpServletResponse.addCookie(refreshCookie);
-
             saveRefreshToken(user.getEmail(), refreshToken);
 
             return LoginResponse.builder()
@@ -93,6 +85,7 @@ public class UserService {
                     .name(user.getName())
                     .nickName(user.getNickName())
                     .authToken(authToken)
+                    .refreshToken(refreshToken)
                     .build();
         }
     }
