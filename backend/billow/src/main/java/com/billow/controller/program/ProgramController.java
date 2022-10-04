@@ -1,6 +1,7 @@
 package com.billow.controller.program;
 
 import com.billow.domain.dto.addtion.RatingRequest;
+import com.billow.domain.dto.addtion.RatingResponse;
 import com.billow.domain.dto.program.CastResponse;
 import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.domain.dto.program.RandomProgramResponse;
@@ -87,6 +88,21 @@ public class ProgramController {
         log.info("프로그램 평점 등록 API 호출");
         Message response = programService.postProgramRating(1L, programId, ratingRequest);
         log.info("프로그램 평점 등록 성공");
+        return ResponseEntity.ok()
+                .body(response);
+    }
+
+    @ApiOperation(value = "사용자 평점 조회", response = Object.class)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "사용자 평점 조회 성공"),
+            @ApiResponse(responseCode = "404", description = "해당 유저를 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+    })
+    @GetMapping("/rating/{programId}")
+    public ResponseEntity<Object> userSelectRating(@PathVariable("programId") Long programId) {
+        log.info("사용자 평점 조회 API 호출");
+        RatingResponse response = programService.userSelectRating(1L, programId);
+        log.info("사용자 평점 조회 성공");
         return ResponseEntity.ok()
                 .body(response);
     }
