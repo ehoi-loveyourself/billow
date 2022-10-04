@@ -6,8 +6,7 @@
   >
     <img class="poster" :src="rating.posterImg" alt="Image" />
   </router-link>
-  <br />
-  <div style="text-align: center; margin-top: 5%; margin-bottom: 8%">
+  <div style="text-align: center; margin-bottom: 18%; margin-top: 3%;">
     <!-- <span>
       <span v-for="index in 5" :key="index" @click="check(index)">
         <span v-if="index < rating.score"
@@ -71,20 +70,21 @@
       @click="setFlagTrue5"
       class="hearted"
       src="@/assets/grey_star_small.png"
+      style="margin-right:5%"
     />
     <img
       v-show="isTrue5"
       @click="setFlagFalse5"
       class="hearted"
       src="@/assets/blue_star_small.png"
+      style="margin-right:5%"
     />
-    &nbsp;
+
     <a
       href="#"
       @click="ratingDelete(rating.ratingId)"
-      class="button btnBorder btnRed"
-      ><span style="font-size: 0.8vw">삭제</span></a
-    >
+      class="button"
+      ><img src="@/assets/trash.png" style="width:8%"/></a>
   </div>
 </template>
 

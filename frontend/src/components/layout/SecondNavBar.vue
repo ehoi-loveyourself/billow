@@ -27,8 +27,8 @@
         ></router-link>
       </b-nav-item>
     </b-navbar-nav>
-    <a href="#" @click="logout()" class="button btnBorder btnRed"
-      ><span style="font-size: 0.8vw">로그아웃</span></a
+    <a href="#" @click="logout()" class="button"
+      ><span style="font-size: 0.8vw">LOGOUT</span></a
     >
   </b-navbar>
 </template>
@@ -63,17 +63,16 @@ export default {
 
 <style scoped>
 a.button {
-  padding: 0.02%;
+  /* padding: 0.02%; */
   font-weight: 500;
   text-align: center;
   /* line-height: 50px; */
   color: #fff;
   border-radius: 5px;
-  text-decoration: none;
   transition: all 0.2s;
 }
 
-.btnRed.btnBorder {
+/* .btnRed.btnBorder {
   box-shadow: 0px 0px 0px 0px #823021;
 }
 
@@ -83,7 +82,7 @@ a.button {
 
 .btnRed {
   background: #ae1d00;
-}
+} */
 
 nav .navbar-nav a.router-link-active {
   color: white;
