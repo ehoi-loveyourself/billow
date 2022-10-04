@@ -22,6 +22,8 @@ public class UserResponse {
 
     private String tvCarrier;
 
+    private Long profileId;
+
     private String profileImgUrl;
 
     private String mobile;
