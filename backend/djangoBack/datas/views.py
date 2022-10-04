@@ -139,18 +139,19 @@ def condition_recomm(request, program_id):
     program_id = program_id
     
     # 프로그램 아이디로 검색해서 나온 결과 받기
-    indi_condition_program = recomm.mf_condition_recomm(program_id)
+    indi_condition_program = recomm.mf_condition_recomm_prac(program_id)
+    print('리턴하는 값')
     print(indi_condition_program)
     
     # 값을 리스트로 받기
-    # indi_condition_program = indi_condition_program.values.tolist()    
+    indi_condition_program = indi_condition_program.values.tolist()    
     # lst = []
     # for i in indi_condition_program:
     #     lst.append(i[0])
     # print(lst)
     
     # 확인해보자
-    # print(indi_condition_program)
+    print(indi_condition_program)
     
     # indi_condition_program_list = []
     # for program_id in indi_condition_program:

@@ -11,6 +11,10 @@ import MySQLdb
 import warnings
 import requests
 import pickle
+from ast import literal_eval
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 warnings.filterwarnings("ignore")
 
 # 1 DB 커넥션 따로
@@ -179,8 +183,42 @@ def mf_condition_recomm(programId):
     coffey_hands = program_id_list.index(programId)
     corr_coffey_hands = corr[coffey_hands]
     print('##########추천 프로그램 ID##########')
-    print(list(program_id[(corr_coffey_hands >= 0.9)])[:10])
-    return list(program_id[(corr_coffey_hands >= 0.9)])[:10]
+    print(list(program_id[(corr_coffey_hands >= 0.9)])[:50])
+    return list(program_id[(corr_coffey_hands >= 0.9)])[:50]
 
 
-# mf_condition_recomm(100)
+# mf_condition_recomm(1)
+
+# 연습용
+def mf_condition_recomm_prac(programId):
+    # 사용자-평점 데이터와 프로그램 데이터가 필요하다
+    program_data = query_MySQL('SELECT program_id, title from tb_program')
+    rating_data = query_MySQL('SELECT score, program_id, user_id from tb_rating')
+
+    # 사용자-평점데이터와 영화 데이터가 따로 나뉘어져 있으므로 program_id라는 공통 기준을 가지고 합쳐보자
+    # 사용자-영화에 따른 평점 데이터를 만들 것이다.
+    user_program_rating = pd.merge(program_data, rating_data, on = 'program_id')
+
+    # row가 프로그램, col이 사용자인 테이블을 만들자
+    program_user_rating = user_program_rating.pivot_table('score', index = 'program_id', columns = 'user_id')
+
+    # 평점이 없는 NaN인 값을 0으로 바꿔주자
+    program_user_rating.fillna(0, inplace=True)
+
+    # 아이템 기반 협업 필터링은 ~ 프로그램을 본 고객은 다음 프로그램도 시청했다, 는 뜻이다.
+    # 그리고 그 기반은 평점이 비슷한 것을 기반으로 한다
+    # 평점이 비슷하다는 것을 코사인 유사도로 측정해서 보여주자
+    item_based_collabor = cosine_similarity(program_user_rating)
+
+    print(program_user_rating.shape)
+    print(item_based_collabor.shape)
+
+    item_based_collabor = pd.DataFrame(data= item_based_collabor, index= program_user_rating.index, columns= program_user_rating.index)
+    print(item_based_collabor.head())
+
+    print('#### 결과 ###')
+    print(item_based_collabor[programId].sort_values(ascending=False)[:30])
+    return item_based_collabor[programId].sort_values(ascending=False)[:30]
+
+mf_condition_recomm_prac(1)
+

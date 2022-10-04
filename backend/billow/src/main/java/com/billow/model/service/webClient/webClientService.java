@@ -98,10 +98,11 @@ public class webClientService {
                     .build();
             conditionRecommendRepository.save(conditionRecommend);
         }
+        log.info("유저가 고른 프로그램 : " + conditionRecommendRequest.getProgramList().toString());
 
         // 이제 db에서 해당 기분과 장르에 맞는 가장 상위 프로그램 3개를 가져온다
         List<Long> result = conditionRecommendRepository.findTop3ByWithWhomAndGenre(who, genre);
-        log.info("해당 기분과 장르에 맞는 상위 프로그램 3개 추출 : {}", result.toString());
+        log.info("해당 {}과 {}에 맞는 상위 프로그램 3개 추출 : {}", who, genre, result.toString());
 
         // 셋을 초기화 하고
         Set<Long> programIdSet = new HashSet<>();
@@ -154,7 +155,6 @@ public class webClientService {
 
             responses.add(build);
         }
-
         return responses;
     }
 
