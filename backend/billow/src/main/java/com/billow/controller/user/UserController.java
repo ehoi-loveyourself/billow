@@ -172,24 +172,24 @@ public class UserController {
                 .body(response);
     }
 
-    @ApiOperation(value = "평점 수정", response = Object.class)
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "평점 수정 성공"),
-            @ApiResponse(responseCode = "404", description = "해당 유저를 찾을 수 없습니다."),
-            @ApiResponse(responseCode = "404", description = "해당 평점을 찾을 수 없습니다."),
-            @ApiResponse(responseCode = "400", description = "잘못된 요청입니다."),
-            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
-    })
-    @PutMapping("/rating/{ratingId}")
-    public ResponseEntity<Object> updateRating(@RequestHeader("Auth-access") String token,
-                                               @PathVariable("ratingId") Long ratingId,
-                                               @RequestBody RatingRequest ratingRequest) {
-        log.info("평점 수정 API 호출");
-        Message response = userService.updateRating(JwtTokenProvider.getUserId(token), ratingId, ratingRequest);
-        log.info("평점 수정 성공");
-        return ResponseEntity.ok()
-                .body(response);
-    }
+//    @ApiOperation(value = "평점 수정", response = Object.class)
+//    @ApiResponses(value = {
+//            @ApiResponse(responseCode = "200", description = "평점 수정 성공"),
+//            @ApiResponse(responseCode = "404", description = "해당 유저를 찾을 수 없습니다."),
+//            @ApiResponse(responseCode = "404", description = "해당 평점을 찾을 수 없습니다."),
+//            @ApiResponse(responseCode = "400", description = "잘못된 요청입니다."),
+//            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+//    })
+//    @PutMapping("/rating/{ratingId}")
+//    public ResponseEntity<Object> updateRating(@RequestHeader("Auth-access") String token,
+//                                               @PathVariable("ratingId") Long ratingId,
+//                                               @RequestBody RatingRequest ratingRequest) {
+//        log.info("평점 수정 API 호출");
+//        Message response = userService.updateRating(JwtTokenProvider.getUserId(token), ratingId, ratingRequest);
+//        log.info("평점 수정 성공");
+//        return ResponseEntity.ok()
+//                .body(response);
+//    }
 
     @ApiOperation(value = "평점 삭제", response = Object.class)
     @ApiResponses(value = {
