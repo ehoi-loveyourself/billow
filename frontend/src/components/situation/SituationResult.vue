@@ -8,36 +8,26 @@
   <!-- </b-col> -->
   <!-- </b-row> -->
   <br />
-  <h2
-    style="color: white; margin-left: 67px; font-size: 1.1vw; font-weight: 300"
-  >
+  <h2 style="color: white; margin-left: 70px; font-size: 1.2vw; font-weight: 400">
     #{{ who }} #{{ genre }}
   </h2>
-  <h2
-    style="color: white; margin-left: 67px; font-size: 1.1vw; font-weight: 300"
-  >
+  <h2 style="color: white; margin-left: 70px; font-size: 1.1vw; font-weight: 300">
     딱 맞는 프로그램을 추천해드릴게요.
   </h2>
   <div style="padding-left: 70px; margin-top: 10px">
     <br />
-    <span v-for="condition in conditionRecommend">
-      <router-link
-        :to="{ name: 'detail' }"
-        @click="moveProgramDetail(condition.id)"
-        class="nav-link"
-      >
-        <img :src="condition.posterImg" alt="Image" />
-      </router-link>
-    </span>
+    <div class="flex">
+      <span v-for="condition in conditionRecommend">
+        <router-link :to="{ name: 'detail' }" @click="moveProgramDetail(condition.id)" class="nav-link">
+          <img :src="condition.posterImg" alt="Image" />
+        </router-link>
+      </span>
+    </div>
     <br /><br />
   </div>
   <p style="text-align: center">
     <a class="startButton" href="#" role="button" style="border-radius: 15px">
-      <router-link
-        :to="{ name: 'main' }"
-        class="nav-link"
-        style="font-size: 20px; padding: 10px; color: black"
-      >
+      <router-link :to="{ name: 'main' }" class="nav-link" style="font-size: 20px; padding: 10px; color: black">
         홈으로
       </router-link>
     </a>
@@ -47,7 +37,7 @@
 <script>
 import HeaderBar from "@/components/layout/HeaderNavBar.vue";
 import SecondBar from "@/components/layout/SecondNavBar.vue";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "SituationSelect",
@@ -58,7 +48,11 @@ export default {
   computed: {
     ...mapState(["who", "genre", "conditionRecommend"]),
   },
+  created() {
+    this.getConditionRecommendProgram();
+  },
   methods: {
+    ...mapActions(["getProgramDetail", "getConditionRecommendProgram"]),
     moveProgramDetail(programId) {
       this.getProgramDetail(programId);
     },
@@ -71,12 +65,14 @@ h2 {
   font-weight: 500;
   font-size: 1.4vw;
 }
+
 img {
-  padding-right: 0.5%;
-  padding-bottom: 0.5%;
-  margin-right: 0;
-  width: 16.1%;
+  padding-right: 3%;
+  width: 15vw;
+  height: 22.5vw;
+  padding-bottom: 3%;
 }
+
 .startButton {
   background-color: #ffffff;
   padding: 3px 30px;
@@ -84,5 +80,14 @@ img {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: stretch;
+}
+img:hover{
+  filter:brightness(0.5)
 }
 </style>

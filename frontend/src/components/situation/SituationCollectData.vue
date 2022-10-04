@@ -8,36 +8,31 @@
   <!-- </b-col> -->
   <!-- </b-row> -->
   <br />
-  <h2
-    style="color: white; margin-left: 67px; font-size: 1.1vw; font-weight: 300"
-  >
+  <div style="margin-left:70px">
+  <h2 style="color: white; font-size: 1.2vw; font-weight: 400">
     #{{ who }} #{{ genre }}
   </h2>
-  <h2
-    style="color: white; margin-left: 67px; font-size: 1.1vw; font-weight: 300"
-  >
+  <h2 style="color: white; font-size: 1.1vw; font-weight: 300">
     위와 같은 상황일 때 ㅇㅇ님은 어떤 프로그램을 보셨나요? 다른 사용자들을 위해
     회원님의 취향을 알려주세요!
   </h2>
-  <div style="padding-left: 70px; margin-top: 10px">
-    <br />
-    <span v-for="random in randomProgram">
+  <br />
+  <div class="container" >
+    <div class="wrap" v-for="random in randomProgram">
       <SituationRandom v-bind:random="random" />
-    </span>
-    <br /><br />
-  </div>
+    </div>
+  </div><br />
+</div>
+<br/><br/><br/>
   <p style="text-align: center">
     <a class="startButton" href="#" role="button" style="border-radius: 15px">
-      <router-link
-        :to="{ name: 'situationresult' }"
-        class="nav-link"
-        style="font-size: 20px; padding: 10px; color: black"
-        @click="coditionRecommend()"
-      >
-        NEXT
+      <router-link :to="{ name: 'situationresult' }" class="nav-link"
+        style="font-size: 20px; padding: 10px; color: black" @click="coditionRecommend()">
+        추천 프로그램 확인하기
       </router-link>
     </a>
   </p>
+  <br /><br /><br />
 </template>
 
 <script>
@@ -76,17 +71,19 @@ h2 {
   font-weight: 500;
   font-size: 1.4vw;
 }
+
 img {
-  padding-right: 0.5%;
-  padding-bottom: 0.5%;
   margin-right: 0;
-  width: 16.1%;
+  margin-bottom: 0;
 }
+
 img:hover {
-  filter: brightness(0.6);
-  transition: all 0.5s linear;
-  transform: scale(1.2);
+  filter: brightness(0.3);
+  /* transition: all 0.5s linear;
+  transform: scale(1.2); */
+  cursor: pointer;
 }
+
 .startButton {
   background-color: #ffffff;
   padding: 3px 30px;
@@ -94,5 +91,13 @@ img:hover {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+}
+
+.container {
+  display:inline-flex;
+  flex-wrap:wrap;
+  align-content:stretch;
+  padding:0;
+  margin:0
 }
 </style>

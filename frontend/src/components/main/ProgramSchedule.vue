@@ -6,11 +6,7 @@
     </div> -->
     <br />
     <div class="flex">
-      <b-table-simple
-        bordered
-        fixed
-        style="border-color: #ffffff; color: #ffffff; font-weight: 400"
-      >
+      <b-table-simple bordered fixed style="border-color: #ffffff; color: #ffffff; font-weight: 400">
         <b-thead style="background-color: #5a5a5a">
           <b-tr>
             <b-th v-for="schedule in programSchedule">
@@ -22,23 +18,12 @@
           <b-tr style="padding: 5">
             <b-td v-for="schedule in programSchedule">
               <div v-if="schedule.organizationResponseList != null">
-                <div
-                  v-for="organization in schedule.organizationResponseList"
-                  style="white-space: nowrap"
-                >
-                  <span class="time"
-                    >{{ organization.broadcastingTime }}&nbsp;</span
-                  ><span class="station"
-                    >{{ organization.broadcastingStation }}&nbsp;</span
-                  >
-                  <span
-                    class="episode"
-                    v-if="organization.broadcastingEpisode"
-                    >{{ organization.broadcastingEpisode }}&nbsp;</span
-                  >
-                  <span class="box" v-if="organization.broadcastingRerun"
-                    ><span class="box_design">재</span>&nbsp;</span
-                  >
+                <div v-for="organization in schedule.organizationResponseList" style="white-space: nowrap">
+                  <span class="time">{{ organization.broadcastingTime }}&nbsp;</span><span class="station">{{
+                  organization.broadcastingStation }}&nbsp;</span>
+                  <span class="episode" v-if="organization.broadcastingEpisode">{{ organization.broadcastingEpisode
+                  }}&nbsp;</span>
+                  <span class="box" v-if="organization.broadcastingRerun"><span class="box_design">재</span>&nbsp;</span>
                   <span @click="alarm(organization.programOrganizationId)">
                     <img src="@/assets/alarm.png" style="cursor: pointer" />
                   </span>
@@ -130,7 +115,7 @@ export default {
   /* height: 600px; */
   /* flex-wrap: wrap;
   align-content: stretch; */
-  /* overflow-x: scroll; */
+  overflow-x: auto;
 }
 
 .station {
@@ -146,5 +131,4 @@ th {
   font-weight: 400;
   text-align: center;
 }
-
 </style>

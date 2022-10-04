@@ -1,5 +1,8 @@
 <template>
-  <img :src="this.random.posterImg" alt="Image" @click="select()" />
+  <input @click="select()" type="checkbox" name="choice" class="checkbox" :id="this.random.programId" />
+  <label for="this.random.programId">
+    <img :src="this.random.posterImg" alt="Image" />
+  </label>
 </template>
 
 <script>
@@ -33,17 +36,14 @@ h2 {
   font-weight: 500;
   font-size: 1.4vw;
 }
+
 img {
-  padding-right: 0.5%;
-  padding-bottom: 0.5%;
-  margin-right: 0;
-  width: 16.1%;
+  width: 14.3vw;
+  height: 21vw;
+  margin-bottom: 5%;
+  padding-right: 5%;
 }
-img:hover {
-  filter: brightness(0.2);
-  transition: all 0s linear;
-  transform: scale(1);
-}
+
 .startButton {
   background-color: #ffffff;
   padding: 3px 30px;
@@ -51,5 +51,22 @@ img:hover {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+}
+
+/* img:active{
+  border:3px solid yellow;
+} */
+
+.checkbox {
+  position: absolute;
+}
+
+input[type="checkbox"] {
+  /* display: inline-block; */
+  width: 1.8vw;
+  height: 1.8vw; 
+  /* border: 3px solid gray; */
+  cursor: pointer;
+  background-color: transparent;
 }
 </style>
