@@ -62,6 +62,7 @@ public class UserService {
                 .region(user.getRegion().getRegion())
                 .tvCarrier(user.getTvCarrier().getCompany())
                 .mobile(user.getMobile())
+                .profileId(user.getProfileImg().getId())
                 .profileImgUrl(user.getProfileImg().getUrl())
                 .build();
     }

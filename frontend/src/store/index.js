@@ -7,6 +7,8 @@ import axios from "axios";
 
 export default new Vuex.Store({
   state: {
+    authToken: "",
+    userInfo: null,
     randomProgram: null,
     userRecommend: null,
     conditionRecommend: null,
@@ -45,6 +47,12 @@ export default new Vuex.Store({
   },
   getters: {},
   mutations: {
+    // SET_AUTH_TOKEN(state, authToken) {
+    //   state.authToken = authToken;
+    // },
+    SET_USER_INFO(state, userInfo) {
+      state.userInfo = userInfo;
+    },
     SET_RANDOM_PROGRAM(state, randomProgram) {
       state.randomProgram = randomProgram;
     },
@@ -195,6 +203,64 @@ export default new Vuex.Store({
     getAuthError({ commit }) {
       alert("로그인이 필요한 서비스입니다.");
       // router.push("/loginmain");
+    },
+    getUserInfo({ commit, dispatch }) {
+      axios
+        .get("/api/users", {
+          headers: {
+            "Auth-access": localStorage.getItem("authToken"),
+          },
+        })
+        .then((res) => {
+          // 사용자 정보 데이터 GET
+          console.log(res.data);
+          commit("SET_USER_INFO", res.data);
+        })
+        .catch((ex) => {
+          dispatch("getAuthError");
+        });
+    },
+    modifyUserInfo({ commit, dispatch, state }) {
+      console.log(state.userInfo);
+      axios
+        .put("/api/users", {
+          headers: {
+            "Auth-access": localStorage.getItem("authToken"),
+          },
+          nickName: state.userInfo.nickName,
+          gender: state.userInfo.gender,
+          age: state.userInfo.age,
+          region: state.userInfo.region,
+          tvCarrier: state.userInfo.tvCarrier,
+          profileImgId: state.userInfo.profileId,
+          mobile: state.userInfo.mobile,
+        })
+        .then((res) => {
+          // 사용자 정보 수정 PUT
+          console.log(res.data);
+        })
+        .catch((ex) => {
+          dispatch("getAuthError");
+        });
+    },
+    deleteUserInfo({ commit, dispatch }) {
+      axios
+        .delete("/api/users", {
+          headers: {
+            "Auth-access": localStorage.getItem("authToken"),
+          },
+        })
+        .then((res) => {
+          // 사용자 정보 삭제 DELETE
+          console.log(res.data);
+          window.localStorage.removeItem("authToken");
+          window.localStorage.removeItem("name");
+          window.localStorage.removeItem("email");
+          router.push("/loginmain");
+        })
+        .catch((ex) => {
+          dispatch("getAuthError");
+        });
     },
     getRandomProgram({ commit, dispatch }) {
       axios
@@ -434,9 +500,7 @@ export default new Vuex.Store({
           console.log(res.data);
           commit("SET_ALARM_LIST", res.data);
         })
-        .catch((ex) => {
-          dispatch("getAuthError");
-        });
+        .catch((ex) => {});
     },
     deleteAlarm({ commit, dispatch, state }, broadcastingAlarmId) {
       axios
@@ -458,9 +522,7 @@ export default new Vuex.Store({
           console.log(res.data);
           commit("SET_RATING_LIST", res.data);
         })
-        .catch((ex) => {
-          dispatch("getAuthError");
-        });
+        .catch((ex) => {});
     },
     getUserRating({ commit }, programId) {
       axios
