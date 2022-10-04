@@ -162,6 +162,10 @@ export default {
                 "email",
                 JSON.stringify(response.data.email).replace(/\"/gi, "")
               );
+              // alert(response.data.authToken);
+              // alert(response.data.refreshToken);
+              this.$cookies.set("refreshToken", response.data.refreshToken);
+              // this.$cookies.remove("refreshToken");
               // localStorage.clear();
               if (response.data.nickName == null) {
                 // alert("회원정보가 없어 회원가입 페이지로 이동합니다.");
