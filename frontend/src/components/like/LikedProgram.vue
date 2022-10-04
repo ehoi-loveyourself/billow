@@ -1,9 +1,23 @@
 <template>
   <div style="padding-left: 70px; margin-top: 10px">
     <div class="flex">
-      <div id="Img" v-for="like in state.likeList">
-        <LikedItem v-bind:like="like" />
-      </div>
+      <template v-if="likeList.length > 0">
+        <div id="Img" v-for="like in this.likeList">
+          <LikedItem v-bind:like="like" />
+        </div>
+      </template>
+      <template v-else>
+        <h2
+          style="
+            color: white;
+            padding-left: 70px;
+            font-size: 1.1vw;
+            font-weight: 300;
+          "
+        >
+          찜한 콘텐츠가 없습니다.
+        </h2></template
+      >
     </div>
   </div>
 </template>
@@ -20,15 +34,25 @@ export default {
   components: {
     LikedItem,
   },
-  setup() {
-    const state = reactive({
+  data() {
+    return {
       likeList: [],
-    });
-    axios.get(`/api/bookmark`).then((res) => {
-      console.log(res.data);
-      state.likeList = res.data;
-    });
-    return { state };
+    };
+  },
+  created() {
+    axios
+      .get(`/api/bookmark`)
+      .then((res) => {
+        console.log(res.data);
+        this.likeList = res.data;
+      })
+      .catch((ex) => {
+        if (ex.response.status == 404) {
+          this.likeList = [];
+        } else {
+          alert("로그인이 필요한 서비스입니다.");
+        }
+      });
   },
 };
 </script>
