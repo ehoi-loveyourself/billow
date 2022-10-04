@@ -194,7 +194,7 @@ export default new Vuex.Store({
     },
     getAuthError({ commit }) {
       alert("로그인이 필요한 서비스입니다.");
-      router.push("/loginmain");
+      // router.push("/loginmain");
     },
     getRandomProgram({ commit, dispatch }) {
       axios
