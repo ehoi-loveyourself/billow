@@ -459,6 +459,9 @@ export default {
       })
       .then((res) => {
         // 데이터 가져오는 axios 테스트
+        alert("axios 바로 테스트");
+        alert(this.$cookies.get("refreshToken"));
+        this.$cookies.set("testcookies", "test");
         console.log(res.data);
         console.log(res.data.age);
         console.log(res.data.email);
@@ -480,7 +483,7 @@ export default {
         console.log(state.data.mobile);
       });
 
-      console.log(state.data.mobile);
+    console.log(state.data.mobile);
 
     return { state };
   },
@@ -496,6 +499,7 @@ export default {
       selected_region: "",
       selected_tv_carrier: "",
       profileImgId: null,
+      cookie: this.$cookies.get("refreshToken"),
       options_age: [
         { value: null, text: "연령대를 선택하세요" },
         { value: "10", text: "10대" },
@@ -563,6 +567,49 @@ export default {
       //     state.data = res.data[0].title;
       //     console.log(state.data);
       //   });
+
+      // this.cookie = this.$cookies.get("refreshToken");
+      alert("쿠키 테스트");
+      alert(this.cookie);
+      alert(this.$cookies.get("refreshToken"));
+      this.$cookies.set("testcookies", "test");
+      alert(this.$cookies.get("testcookies"));
+      // this.$cookies.remove("testcookies");
+      // alert(state.data.age);
+      // this.$cookies.set("test", this.cookie); // 쿠키는 잘 동작하는데 get으로 가져오는 값이 null이다.
+
+      axios
+        .get("/api/users", {
+          headers: {
+            "Auth-access": localStorage.getItem("authToken"),
+          },
+        })
+        .then((res) => {
+          // 데이터 가져오는 axios 테스트
+          console.log(res.data);
+          console.log(res.data.age);
+          console.log(res.data.email);
+          console.log(res.data.gender);
+          console.log(res.data.mobile);
+          console.log(res.data.name);
+          console.log(res.data.nickName);
+          console.log(res.data.profileImgUrl);
+          console.log(res.data.region);
+          console.log(res.data.tvCarrier);
+
+          state.data = res.data;
+
+          // console.log(state.data);
+          // console.log(state.data.age);
+          // console.log(state.data.email);
+          // // this.phonenum = res.data.mobile;
+          // // console.log(this.phonenum);
+          // console.log(state.data.mobile);
+        })
+        .catch((error) => {
+          console.log(error.response);
+          alert("토큰이 만료되었습니다. RefreshToken을 사용해주세요.");
+        });
     },
     signUp() {
       if (
