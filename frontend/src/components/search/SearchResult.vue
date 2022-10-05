@@ -2,11 +2,11 @@
     <header-bar />
     <SecondBar />
     <br />
-    <h2 style="color: white; padding-left: 70px; font-size: 1.1vw; font-weight: 300">
+    <h2 style="color: white; padding-left: 70px; padding-right: 70px; font-size: 1.1vw; font-weight: 300">
         "{{ searchWord }}" 검색 결과입니다.
     </h2>
     <br />
-    <div style="padding-left: 70px; padding-right:70px">
+    <div style="padding-left:70px; padding-right:70px">
         <div class="flex" v-if="searchProgram != null">
             <span id="Img" v-for="search in searchProgram">
                 <router-link :to="{ name: 'detail' }" @click="moveProgramDetail(search.id)" class="nav-link">
@@ -17,8 +17,9 @@
         <div v-else>
             <h2 style="
           color: white;
-          margin-left: 70px;
-          font-size: 1.1vw;
+          margin-left: 45px;
+          margin-top: 10px;
+          font-size: 1.2vw;
           font-weight: 300;
         ">
                 검색 결과가 없습니다.

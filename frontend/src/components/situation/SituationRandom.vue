@@ -53,10 +53,6 @@ img {
   font-size: 16px;
 }
 
-/* img:active{
-  border:3px solid yellow;
-} */
-
 .checkbox {
   position: absolute;
 }

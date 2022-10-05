@@ -104,7 +104,10 @@
     <br /><br /><br />
 
     <b-tabs id="tabs" style="align-items: center">
-      <b-tab title="SCHEDULE" active>
+      <b-tab title="CAST" active>
+        <Cast />
+      </b-tab>
+      <b-tab title="SCHEDULE">
         <Schedule />
       </b-tab>
       <b-tab title="TALK">
@@ -112,9 +115,6 @@
       </b-tab>
       <b-tab title="REVIEW">
         <Review />
-      </b-tab>
-      <b-tab title="CAST">
-        <Cast />
       </b-tab>
       <!-- <b-tab title="RELATED">
                     <LikedProgram />
@@ -239,6 +239,8 @@ section {
   color: white;
   font-family: Noto Sans KR, -apple-system, BlinkMacSystemFont, Roboto, Segoe UI,
     Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
+  max-height: 22vh;
+  overflow-y: auto;
 }
 
 .box_design {
@@ -344,6 +346,25 @@ body {
   20% {
     transform: translateY(-10px);
   }
+}
+
+.blabla::-webkit-scrollbar {
+  width: 10px;
+  /* padding-left: 1%; */
+}
+
+.blabla::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.blabla::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #E4DADA;
+}
+
+.blabla::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
 }
 </style>
 

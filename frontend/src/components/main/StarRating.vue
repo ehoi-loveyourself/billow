@@ -1,65 +1,15 @@
 <template>
   <div class="star-rating space-x-4 mx-auto">
-    <img
-      v-show="!isTrue5"
-      @click="setFlagTrue5"
-      class="hearted"
-      src="@/assets/grey_star_big.png"
-    />
-    <img
-      v-show="isTrue5"
-      @click="setFlagFalse5"
-      class="hearted"
-      src="@/assets/blue_star_big.png"
-    />
-    <img
-      v-show="!isTrue4"
-      @click="setFlagTrue4"
-      class="hearted"
-      src="@/assets/grey_star_big.png"
-    />
-    <img
-      v-show="isTrue4"
-      @click="setFlagFalse4"
-      class="hearted"
-      src="@/assets/blue_star_big.png"
-    />
-    <img
-      v-show="!isTrue3"
-      @click="setFlagTrue3"
-      class="hearted"
-      src="@/assets/grey_star_big.png"
-    />
-    <img
-      v-show="isTrue3"
-      @click="setFlagFalse3"
-      class="hearted"
-      src="@/assets/blue_star_big.png"
-    />
-    <img
-      v-show="!isTrue2"
-      @click="setFlagTrue2"
-      class="hearted"
-      src="@/assets/grey_star_big.png"
-    />
-    <img
-      v-show="isTrue2"
-      @click="setFlagFalse2"
-      class="hearted"
-      src="@/assets/blue_star_big.png"
-    />
-    <img
-      v-show="!isTrue1"
-      @click="setFlagTrue1"
-      class="hearted"
-      src="@/assets/grey_star_big.png"
-    />
-    <img
-      v-show="isTrue1"
-      @click="setFlagFalse1"
-      class="hearted"
-      src="@/assets/blue_star_big.png"
-    />
+    <img v-show="!isTrue5" @click="setFlagTrue5" class="hearted" src="@/assets/grey_star_big.png" />
+    <img v-show="isTrue5" @click="setFlagFalse5" class="hearted" src="@/assets/blue_star_big.png" />
+    <img v-show="!isTrue4" @click="setFlagTrue4" class="hearted" src="@/assets/grey_star_big.png" />
+    <img v-show="isTrue4" @click="setFlagFalse4" class="hearted" src="@/assets/blue_star_big.png" />
+    <img v-show="!isTrue3" @click="setFlagTrue3" class="hearted" src="@/assets/grey_star_big.png" />
+    <img v-show="isTrue3" @click="setFlagFalse3" class="hearted" src="@/assets/blue_star_big.png" />
+    <img v-show="!isTrue2" @click="setFlagTrue2" class="hearted" src="@/assets/grey_star_big.png" />
+    <img v-show="isTrue2" @click="setFlagFalse2" class="hearted" src="@/assets/blue_star_big.png" />
+    <img v-show="!isTrue1" @click="setFlagTrue1" class="hearted" src="@/assets/grey_star_big.png" />
+    <img v-show="isTrue1" @click="setFlagFalse1" class="hearted" src="@/assets/blue_star_big.png" />
   </div>
 </template>
 
@@ -150,12 +100,12 @@ export default {
   cursor: pointer;
 }
 
-.star-rating :checked ~ label {
+.star-rating :checked~label {
   -webkit-text-fill-color: gold;
 }
 
 .star-rating label:hover,
-.star-rating label:hover ~ label {
+.star-rating label:hover~label {
   -webkit-text-fill-color: #fff58c;
 }
 

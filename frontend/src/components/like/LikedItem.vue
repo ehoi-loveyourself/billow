@@ -84,7 +84,7 @@ export default {
   cursor: pointer;
 }
 
-img:hover {
+.liked_2:hover {
   filter: brightness(0.5);
 }
 
@@ -98,47 +98,12 @@ img:hover {
   margin-bottom: 0.5%;
 }
 
-img:hover+.button,
+.liked_2:hover+.button,
 .button:hover {
   display: inline-block;
   position: absolute;
   top: 1vw;
-  left: 1vw;
-}
-
-.favoriting {
-  display: inline-block;
-}
-
-.favorite__heart {
-  display: inline-block;
-  padding: 3px;
-  vertical-align: middle;
-  line-height: 1;
-  font-size: 16px;
-  color: #ababab;
-  cursor: pointer;
-  -webkit-transition: color 0.2s ease-out;
-  transition: color 0.2s ease-out;
-}
-
-.favorite__heart.is-disabled:hover {
-  cursor: default;
-}
-
-.favorite__checkbox {
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  width: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0;
-}
-
-.favorite__heart__selected {
-  color: #df470b;
+  right: 1vw;
 }
 
 .flex {
@@ -219,7 +184,7 @@ img:hover+.button,
 }
 
 .box:hover img {
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .box:hover:before {

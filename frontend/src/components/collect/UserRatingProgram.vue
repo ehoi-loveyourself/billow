@@ -107,20 +107,4 @@ export default {
   flex-wrap: wrap;
   align-content: stretch;
 }
-
-/* .poster:hover {
-  filter: brightness(0.5);
-} */
-
-/* .explain {
-  display: none;
-}
-
-.poster:hover+.explain,
-.explain:hover {
-  display: inline-block;
-  position: absolute;
-  top: 1vw;
-  left: 1vw;
-} */
 </style>

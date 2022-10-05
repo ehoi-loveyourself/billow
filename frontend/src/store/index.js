@@ -273,10 +273,10 @@ export default new Vuex.Store({
     SET_FLAG_FALSE1(state) {
       state.isTrue1 = false;
     },
-    SET_IS_LOADING_FALSE(state){
+    SET_IS_LOADING_FALSE(state) {
       state.isLoading = false;
     },
-    SET_IS_LOADING_TRUE(state){
+    SET_IS_LOADING_TRUE(state) {
       state.isLoading = true;
     }
   },
@@ -314,7 +314,7 @@ export default new Vuex.Store({
         // window.localStorage.removeItem("name");
         // window.localStorage.removeItem("email");
         localStorage.clear();
-        
+
         router.push("/loginmain");
       });
     },
@@ -326,10 +326,12 @@ export default new Vuex.Store({
       });
     },
     getUserRecommendProgram({ commit }) {
+      commit("SET_IS_LOADING_TRUE");
       axios.get("/api/mf/user-recommend").then((res) => {
         // 사용자 맞춤 프로그램 추천 데이터 GET
         console.log(res.data);
         commit("SET_USER_RECOMMEND_PROGRAM", res.data);
+        commit("SET_IS_LOADING_FALSE");
       });
     },
     getConditionRecommendProgram({ commit, state }) {

@@ -8,14 +8,12 @@
     </b-col>
   </b-row>
   <br />
-  <div
-    style="
+  <div style="
       padding-left: 70px;
       padding-right: 70px;
       color: white;
       margin-top: 10px;
-    "
-  >
+    ">
     <b-tabs content-class="mt-3" id="tabs" style="align-items: center">
       <b-tab title="회원 정보 수정" active>
         <UserInfoConfirm />
