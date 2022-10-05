@@ -3,8 +3,39 @@ import Vuex from "vuex";
 import router from "@/router";
 import axios from "axios";
 
-// Vue.use(Vuex);
+axios.interceptors.request.use(
+  function (config) {
+    // 요청을 보내기 전에 수행할 일
+    config.headers["Auth-access"] = localStorage.getItem("");
+    console.log("인터셉터");
+    return config;
+  },
+  function (error) {
+    // // 오류 요청을 보내기전 수행할 일
+    // // ...
+    // return Promise.reject(error);
+  }
+);
 
+// 응답 인터셉터 추가
+axios.interceptors.response.use(
+  function (response) {
+    // 응답 데이터를 가공
+    // ...
+    alert("dd");
+
+    return response;
+  },
+  function (error) {
+    // 오류 응답을 처리
+    // ...
+    alert("ddddddddd");
+
+    // return Promise.reject(error);
+  }
+);
+
+// Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     authToken: "",
@@ -209,11 +240,7 @@ export default new Vuex.Store({
     },
     getUserInfo({ commit, dispatch }) {
       axios
-        .get("/api/users", {
-          headers: {
-            "Auth-access": localStorage.getItem("authToken"),
-          },
-        })
+        .get("/api/users")
         .then((res) => {
           // 사용자 정보 데이터 GET
           console.log(res.data);
