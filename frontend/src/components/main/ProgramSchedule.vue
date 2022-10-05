@@ -145,6 +145,7 @@ export default {
   /* flex-wrap: wrap;
   align-content: stretch; */
   overflow-x: auto;
+  position: relative;
 }
 
 .station {
@@ -159,5 +160,24 @@ export default {
 th {
   font-weight: 400;
   text-align: center;
+}
+
+.flex::-webkit-scrollbar {
+  height: 10px;
+  /* padding-left: 1%; */
+}
+
+.flex::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.flex::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #E4DADA;
+}
+
+.flex::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
 }
 </style>

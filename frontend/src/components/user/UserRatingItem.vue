@@ -1,26 +1,19 @@
 <template>
-  <router-link :to="{ name: 'detail' }" @click="moveProgramDetail(rating.id)" class="nav-link">
     <div class="box-wrap">
       <div class="box">
-        <img class="poster" :src="rating.posterImg" alt="Image" />
+        <img class="poster" :src="rating.posterImg" alt="Image" @click="moveProgramDetail(rating.id)"/>
+        <div class="button">
+            <button @click="ratingDelete(rating.id)" style="border: none; background: none">
+              <img class="trash"
+              src="@/assets/trash.png" style="width:50%" />
+            </button>
+            </div>
         <div class="info">
           <h3>{{ rating.title }}</h3>
         </div>
       </div>
     </div>
-
-  </router-link>
   <div style="text-align: center; margin-bottom: 18%; margin-top: 3%">
-    <!-- <span>
-      <span v-for="index in 5" :key="index" @click="check(index)">
-        <span v-if="index < rating.score"
-          ><img src="@/assets/blue_star_small.png" style="width: 8%"
-        /></span>
-        <span v-if="index >= rating.score"
-          ><img src="@/assets/grey_star_small.png" style="width: 8%"
-        /></span>
-      </span>
-    </span> -->
     <img v-show="!isTrue1" @click="setFlagTrue1" class="hearted" src="@/assets/grey_star_small.png" />
     <img v-show="isTrue1" @click="setFlagFalse1" class="hearted" src="@/assets/blue_star_small.png" />
     <img v-show="!isTrue2" @click="setFlagTrue2" class="hearted" src="@/assets/grey_star_small.png" />
@@ -84,7 +77,7 @@ export default {
     //   this.score = index + 1;
     // },
     ratingDelete(ratingId) {
-      if (confirm("평점을 삭제하시겠습니까?") == true) {
+      if (confirm("평점을 삭제하시겠습니까?") == true || ratingId==null) {
         this.deleteRating(ratingId);
       } else {
         return;
@@ -92,6 +85,7 @@ export default {
     },
     moveProgramDetail(programId) {
       this.getProgramDetail(programId);
+      this.$router.push({ name: 'detail' });
     },
     setFlagTrue5() {
       this.isTrue1 = true;
@@ -324,7 +318,7 @@ img:hover {
 }
 
 .box:hover img {
-  opacity: 0.2;
+  opacity: 1;
 }
 
 .box:hover:before {
@@ -345,5 +339,17 @@ img:hover {
 body {
   background-color: #1a237e;
   font-family: "GoyangIlsan";
+}
+
+.button {
+  display: none;
+}
+
+.poster:hover+.button,
+.button:hover {
+  display: inline-block;
+  position: absolute;
+  top: 1.3vw;
+  right: 0;
 }
 </style>

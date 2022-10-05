@@ -2,28 +2,7 @@
   <div style="margin-top: 10px">
     <br />
     <b-row style="margin-top: 20px">
-      <!-- <b-col cols="2">
-        <span class="inner">
-          <span>
-            <span v-for="index in 5" :key="index" @click="check(index)">
-              <span v-if="index < score"
-                ><img src="@/assets/blue_star_big.png"
-              /></span>
-              <span v-if="index >= score"
-                ><img src="@/assets/grey_star_big.png"
-              /></span>
-            </span>
-          </span>
-        </span>
-      </b-col> -->
-      <b-col cols="12" style="padding-left: 4.8%; padding-right: 4.8%">
-        <!-- <b-form-input
-          v-model="review"
-          placeholder="리뷰를 작성해주세요."
-          required
-          style="border-color: #a48282"
-        >
-        </b-form-input> -->
+      <b-col cols="10" style="padding-right:0; margin-left: 4.2%;">
         <input
           v-model="message"
           class="form-control"
@@ -34,11 +13,11 @@
           @keyup.enter="onSubmit()"
         />
       </b-col>
-      <!-- <b-col cols="1">
-        <b-button size="md" type="submit" @click="reviewRegist()">
+      <b-col cols="1">
+        <b-button size="md" type="text" @click="onSubmit()" style="text-align:left">
           <span>등록</span>
         </b-button>
-      </b-col> -->
+      </b-col>
     </b-row>
     <br />
 
@@ -56,7 +35,8 @@
           <b-col cols="11">
             <span class="username">{{ review.userNickName }}</span
             >&nbsp;&nbsp;
-            <span class="time"> {{ review.regDateTime }}&nbsp; </span>
+            <span class="time"> {{ review.regDateTime }}&nbsp;&nbsp;&nbsp;</span>
+            <span v-if="userInfo.nickName==review.userNickName">
             <a
               href="#"
               @click="setReviewId(review.reviewId)"
@@ -67,9 +47,9 @@
             <a
               href="#"
               @click="reviewDelete(review.reviewId)"
-              class="button btnBorder btnRed"
+              class="button btnBorder btnRed" style="background-color:#990000"
               ><span style="font-size: 0.8vw">삭제</span></a
-            >
+            ></span>
             <p>{{ review.content }}</p>
           </b-col>
         </b-row>
@@ -98,7 +78,7 @@
     centered
     no-stacking
     title="리뷰 수정하기"
-    style="text-align: center"
+    style="text-align: center; color: #ffffff;"
   >
     <div style="margin-bottom: 5%">
       <input
@@ -111,14 +91,14 @@
       />
     </div>
     <b-button
-      size="m"
+      size="sm"
       type="submit"
       @click="reviewModify()"
-      style="background-color: blue"
+      style="background-color: #ffffff"
       data-bs-dismiss="modal"
       aria-label="Close"
     >
-      <span>수정</span>
+      <span style="color:#141414">수정</span>
     </b-button>
   </b-modal>
 </template>
@@ -131,7 +111,7 @@ import { mapState, mapActions, mapMutations } from "vuex";
 export default {
   name: "ProgramReview",
   computed: {
-    ...mapState(["programReview"]),
+    ...mapState(["programReview", "userInfo"]),
   },
   setup() {
     const state = reactive({
@@ -233,6 +213,7 @@ export default {
 
 a.button {
   padding: 0.2%;
+  padding-top: 0;
   /* margin: 10px 20px 10px 0; */
   font-weight: 600;
   text-align: center;
@@ -248,7 +229,7 @@ a.button {
 }
 
 .btnBlue.btnBorder:hover {
-  box-shadow: 0px 0px 0px 5px #212682;
+  box-shadow: 0px 0px 0px 3px #212682;
 }
 
 .btnBlue {
@@ -260,16 +241,22 @@ a.button {
 }
 
 .btnRed.btnBorder:hover {
-  box-shadow: 0px 0px 0px 5px #823621;
+  box-shadow: 0px 0px 0px 3px #823621;
 }
 
-.btnRed {
-  background: #ae2b00;
-}
 .username {
   font-weight: 600;
   font-size: 0.9rem;
   margin: 0;
   color: #f1f1f1;
+}
+</style>
+<style>
+  .modal-content{
+  background-color: #1f1f1f;
+}
+.modal-header{
+  border-bottom:#1f1f1f;
+  text-align:center;
 }
 </style>

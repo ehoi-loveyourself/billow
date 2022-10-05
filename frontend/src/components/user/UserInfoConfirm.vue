@@ -328,7 +328,7 @@
           </label>
         </b-col>
       </b-row>
-      <b-row style="margin-bottom: 3%">
+      <b-row style="margin-bottom: 2%">
         <b-col cols="1" style="text-align: right"> 성별 </b-col>
         <b-col cols="11" style="padding-left: 1%">
           <b-row>
@@ -353,7 +353,7 @@
           </b-row>
         </b-col>
       </b-row>
-      <b-row style="margin-bottom: 3%">
+      <b-row style="margin-bottom: 2%">
         <b-col cols="1" style="text-align: right"> 연령대 </b-col>
         <b-col cols="11" style="padding-left: 1%">
           <b-form-select
@@ -363,7 +363,7 @@
           ></b-form-select>
         </b-col>
       </b-row>
-      <b-row style="margin-bottom: 3%">
+      <b-row style="margin-bottom: 2%">
         <b-col cols="1" style="text-align: right"> 닉네임 </b-col>
         <b-col cols="11" style="padding-left: 1%">
           <b-form-input
@@ -373,7 +373,7 @@
           ></b-form-input>
         </b-col>
       </b-row>
-      <b-row style="margin-bottom: 3%">
+      <b-row style="margin-bottom: 2%">
         <b-col cols="1" style="text-align: right"> 지역 </b-col>
         <b-col cols="11" style="padding-left: 1%">
           <b-form-select
@@ -383,7 +383,7 @@
           ></b-form-select>
         </b-col>
       </b-row>
-      <b-row style="margin-bottom: 3%">
+      <b-row style="margin-bottom: 2%">
         <b-col cols="1" style="text-align: right"> 통신사 </b-col>
         <b-col cols="11" style="padding-left: 1%">
           <b-form-select
@@ -393,7 +393,7 @@
           ></b-form-select>
         </b-col>
       </b-row>
-      <b-row style="margin-bottom: 3%">
+      <b-row style="margin-bottom: 2%">
         <b-col cols="1" style="text-align: right"> 휴대폰 번호 </b-col>
         <b-col cols="11" style="padding-left: 1%">
           <b-form-input
@@ -401,15 +401,16 @@
             placeholder="000-0000-0000"
             style="width: 21%"
           ></b-form-input>
-          <br /><br />
-        </b-col>
-      </b-row>
-      <a href="#" @click="modifyUser()" class="button btnBorder btnBlue"
+          <br /><br /><br />
+          <a href="#" @click="modifyUser()" class="button btnBorder btnBlue"
         ><span style="font-size: 1vw">수정</span></a
       >&nbsp;
       <a href="#" @click="deleteUser()" class="button btnBorder btnRed"
         ><span style="font-size: 1vw">탈퇴</span></a
       >
+        </b-col>
+      </b-row>
+      
     </section>
   </div>
   <br /><br /><br /><br /><br />
@@ -487,9 +488,13 @@ export default {
         return;
       }
       this.modifyUserInfo();
+      alert("회원님의 정보 수정이 완료되었습니다.")
     },
     deleteUser() {
-      this.deleteUserInfo();
+      if (confirm("정말 탈퇴하시겠습니까?") == true){
+        this.deleteUserInfo();
+        alert("그동안 BILLOW를 이용해주셔서 감사합니다. 다음 기회에 만나요!")
+      }
     },
   },
 };
@@ -554,15 +559,16 @@ input[type="radio"]:checked + label > .avatar {
 }
 
 a.button {
-  padding: 1%;
+  padding: 0.5%;
   /* margin: 10px 20px 10px 0; */
-  font-weight: 550;
+  font-weight: 400;
   text-align: center;
   /* line-height: 50px; */
   color: #fff;
   border-radius: 5px;
   text-decoration: none;
   transition: all 0.2s;
+  font-size:0.8vw;
 }
 
 .btnBlue.btnBorder {

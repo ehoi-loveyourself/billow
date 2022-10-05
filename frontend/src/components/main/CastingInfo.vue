@@ -42,7 +42,6 @@
 import { mapState } from "vuex";
 
 export default {
-  // name: "App",
   name: "Star",
   computed: {
     ...mapState(["castInfoList"]),
@@ -67,7 +66,6 @@ export default {
 
 .flex {
   display: flex;
-  /* height: 600px; */
   flex-wrap: wrap;
   align-content: stretch;
 }

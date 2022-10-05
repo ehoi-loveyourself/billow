@@ -9,7 +9,7 @@
     딱 맞는 프로그램을 추천해드릴게요.
   </h2>
   <LoadingSpinner v-if="isLoading" />
-  <div v-else style="padding-left: 70px; margin-top: 10px">
+  <div v-else style="padding-left: 70px; padding-right: 70px; margin-top: 10px">
     <br />
     <div class="flex">
       <span v-for="condition in conditionRecommend">
@@ -57,7 +57,7 @@
 import HeaderBar from "@/components/layout/HeaderNavBar.vue";
 import SecondBar from "@/components/layout/SecondNavBar.vue";
 import { mapState, mapActions } from "vuex";
-import LoadingSpinner from "@/components/LoadingSpinner.vue";
+import LoadingSpinner from "@/components/load/LoadingSpinner.vue";
 
 export default {
   name: "App",
@@ -66,32 +66,12 @@ export default {
     SecondBar,
     LoadingSpinner
   },
-  // data() {
-  //   return {
-  //     isLoading: true
-  //   };
-  // },
   computed: {
     ...mapState(["who", "genre", "conditionRecommend", "isLoading"]),
   },
-  // beforeUpdate(){
-  //   this.isLoading = false;
-  // },
-  // updated(){
-  //   this.isLoading = false;
-  // },
   async created() {
     await this.getConditionRecommendProgram();
-    // await function () {
-    //   this.isLoading = false;
-    // }
   },
-  // mounted() {
-  //   if (this.conditionRecommend) {
-  //     this.isLoading = false;
-  //   }
-  // },
-  // 어떤 방식으로 isLoading이 false가 되는 시점을 만들 것이냐가 관건
   methods: {
     ...mapActions(["getProgramDetail", "getConditionRecommendProgram"]),
     moveProgramDetail(programId) {

@@ -1,5 +1,5 @@
 <template>
-  <div style="padding-left: 70px; margin-top: 10px">
+  <div style="padding-left: 70px; margin-top: 10px; padding-right: 70px;">
     <div class="flex">
       <template v-if="likeList.length > 0">
         <div id="Img" v-for="like in this.likeList">
@@ -13,6 +13,7 @@
             padding-left: 70px;
             font-size: 1.1vw;
             font-weight: 300;
+            padding-top: 3%;
           "
         >
           찜한 콘텐츠가 없습니다.

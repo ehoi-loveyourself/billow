@@ -36,13 +36,6 @@
 </template>
   
 <script>
-// export default{
-//     method:{
-//         gotoPage(link) {
-//             this.$router.push(link);
-//         },
-//     }
-// }
 </script>
 
 <style scoped>

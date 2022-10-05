@@ -1,18 +1,7 @@
 <template>
-  <!-- <b-row> -->
-  <!-- <b-col cols="8"> -->
   <header-bar />
-  <!-- </b-col> -->
-  <!-- <b-col cols="4">  -->
   <SecondBar />
-  <!-- </b-col> -->
-  <!-- </b-row> -->
   <br />
-  <!-- <h2
-    style="color: white; margin-left: 70px; font-size: 1.1vw; font-weight: 300"
-  >
-    중복 선택이 가능합니다!
-  </h2> -->
   <br />
   <div>
     <div class="left" style="border-right: 1px solid #ffffff">
