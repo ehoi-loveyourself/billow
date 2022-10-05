@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <!-- <PageLoader /> -->
+    <PageLoader />
     <router-view />
     <footer-bar />
   </div>
