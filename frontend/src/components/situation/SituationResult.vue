@@ -29,8 +29,10 @@
                   condition.broadcastingDay
                   }}</span><span class="detailbox_design" v-if="condition.genres[0]">{{
                   condition.genres[0]
-                  }}</span><span class="detailbox_design" v-if="condition.broadcastingStation">{{ condition.broadcastingStation
-                  }}</span><span class="detailbox_design" v-if="condition.broadcastingTime">{{ condition.broadcastingTime }}
+                  }}</span><span class="detailbox_design" v-if="condition.broadcastingStation">{{
+                  condition.broadcastingStation
+                  }}</span><span class="detailbox_design" v-if="condition.broadcastingTime">{{
+                  condition.broadcastingTime }}
                   ~</span>
               </div>
             </div>
@@ -64,22 +66,30 @@ export default {
     SecondBar,
     LoadingSpinner
   },
-  data() {
-    return {
-      isLoading: false,
-      // isLoading: true
-    };
-  },
+  // data() {
+  //   return {
+  //     isLoading: true
+  //   };
+  // },
   computed: {
-    ...mapState(["who", "genre", "conditionRecommend"]),
+    ...mapState(["who", "genre", "conditionRecommend", "isLoading"]),
   },
-  created() {
-    this.getConditionRecommendProgram();
+  // beforeUpdate(){
+  //   this.isLoading = false;
+  // },
+  // updated(){
+  //   this.isLoading = false;
+  // },
+  async created() {
+    await this.getConditionRecommendProgram();
+    // await function () {
+    //   this.isLoading = false;
+    // }
   },
   // mounted() {
-  //     if (this.getConditionRecommendProgram) {
-  //       this.isLoading = false;
-  //     }
+  //   if (this.conditionRecommend) {
+  //     this.isLoading = false;
+  //   }
   // },
   // 어떤 방식으로 isLoading이 false가 되는 시점을 만들 것이냐가 관건
   methods: {
@@ -126,6 +136,7 @@ img:hover {
 .box .info .detailbox {
   font-size: 12px;
 }
+
 .box .info .detailbox_design {
   display: inline-block;
   background: rgb(46, 47, 49);
@@ -151,6 +162,7 @@ img:hover {
   flex-wrap: wrap;
   align-content: stretch;
 }
+
 .box {
   position: relative;
   /* background: #000; */
@@ -160,9 +172,11 @@ img:hover {
   overflow: hidden;
   /* box-shadow: 1px 1px 3px rgba(0,0,0,0.4); */
 }
+
 .box img {
   transition: all 0.3s ease-in-out;
 }
+
 .box .info {
   position: absolute;
   left: 5px;
@@ -174,6 +188,7 @@ img:hover {
   opacity: 0;
   transition: all 0.3s ease-in-out;
 }
+
 .box .info h3 {
   font-size: 12px;
   font-weight: 600;
@@ -188,19 +203,22 @@ img:hover {
 .box:hover .info {
   opacity: 1;
 }
+
 .box:hover img {
   opacity: 0.2;
 }
+
 .box:hover:before {
   width: 60px;
 }
+
 .box:hover:after {
   height: 60px;
 }
+
 @font-face {
   font-family: "GoyangIlsan";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff")
-    format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }

@@ -1,22 +1,23 @@
 <template>
   <br />
-  <div>
-    <div class="flex">
-      <div v-if="ratingList != null">
-        <div id="Img" v-for="rating in ratingList">
-          <UserRatingItem v-bind:rating="rating" />
-        </div>
+  <div v-if="ratingList != null">
+    <span class="flex">
+      <div id="Img" v-for="rating in ratingList">
+        <UserRatingItem v-bind:rating="rating" />
       </div>
-      <div v-else>평점 내역이 없습니다.</div>
-    </div>
-    <br /><br /><br /><br />
+    </span>
+    <br /><br /><br /><br /><br /><br />
   </div>
-  <p style="text-align: center">
-    <a class="saveButton" href="#" role="button" style="border-radius: 15px">
-      저장
-    </a>
-  </p>
-  <br /><br /><br /><br />
+  <div v-else>
+    <h2 style="
+            color: white;
+            margin-left: 70px;
+            font-size: 1.1vw;
+            font-weight: 300;
+          ">
+      평점 내역이 없습니다.
+    </h2>
+  </div>
 </template>
 
 <script>
@@ -140,6 +141,7 @@ img:hover {
 .box .info .detailbox {
   font-size: 12px;
 }
+
 .box .info .detailbox_design {
   display: inline-block;
   background: rgb(46, 47, 49);
@@ -165,6 +167,7 @@ img:hover {
   flex-wrap: wrap;
   align-content: stretch;
 }
+
 .box {
   position: relative;
   /* background: #000; */
@@ -174,9 +177,11 @@ img:hover {
   overflow: hidden;
   /* box-shadow: 1px 1px 3px rgba(0,0,0,0.4); */
 }
+
 .box img {
   transition: all 0.3s ease-in-out;
 }
+
 .box .info {
   position: absolute;
   left: 5px;
@@ -188,6 +193,7 @@ img:hover {
   opacity: 0;
   transition: all 0.3s ease-in-out;
 }
+
 .box .info h3 {
   font-size: 12px;
   font-weight: 600;
@@ -202,19 +208,22 @@ img:hover {
 .box:hover .info {
   opacity: 1;
 }
+
 .box:hover img {
   opacity: 0.2;
 }
+
 .box:hover:before {
   width: 60px;
 }
+
 .box:hover:after {
   height: 60px;
 }
+
 @font-face {
   font-family: "GoyangIlsan";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff")
-    format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
