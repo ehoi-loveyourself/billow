@@ -1,54 +1,45 @@
 <template>
   <br />
-  <div>
-    <div class="flex">
-      <section v-if="alarmList != null && alarmList.length > 0">
-        <div id="Img" v-for="alarm in alarmList">
-          <router-link :to="{ name: 'detail' }" @click="moveProgramDetail(alarm.id)" class="nav-link">
-            <div class="box-wrap">
-              <div class="box">
-                <img class="poster" :src="alarm.posterImg" alt="Image" />
-                <div class="info">
-                  <h3>{{ alarm.title }}</h3>
-                </div>
-              </div>
+  <div class="flex" v-if="alarmList != null && alarmList.length > 0">
+    <div id="Img" v-for="alarm in alarmList">
+      <router-link :to="{ name: 'detail' }" @click="moveProgramDetail(alarm.id)" class="nav-link">
+        <div class="box-wrap">
+          <div class="box">
+            <img class="poster" :src="alarm.posterImg" alt="Image" />
+            <div class="info">
+              <h3>{{ alarm.title }}</h3>
             </div>
-          </router-link>
-          <span>
-            <!-- <img src="@/assets/alarm.png" style="cursor: pointer" />&nbsp; -->
-            <div>
-              <span class="station">{{ alarm.alarmStation }}</span>&nbsp;
-              <span class="episode" v-if="alarm.alarmEpisode">{{
-              alarm.alarmEpisode
-              }}</span>&nbsp;&nbsp;<a href="#" @click="alarmDelete(alarm.broadcastingAlarmId)" class="button"><img
-                  src="@/assets/trash.png" style="width:8%" /></a>
-            </div>
-            <div style="margin-bottom: 10%">
-              <span class="day">{{ alarm.alarmDay }} </span>&nbsp;&nbsp;<span class="time"> {{ alarm.alarmTime
-              }}</span>&nbsp;
-            </div>
-          </span>
+          </div>
         </div>
-      </section>
-      <section v-else>
-        <h2 style="
+      </router-link>
+      <span>
+        <!-- <img src="@/assets/alarm.png" style="cursor: pointer" />&nbsp; -->
+        <div>
+          <span class="station">{{ alarm.alarmStation }}</span>&nbsp;
+          <span class="episode" v-if="alarm.alarmEpisode">{{
+          alarm.alarmEpisode
+          }}</span>&nbsp;&nbsp;<a href="#" @click="alarmDelete(alarm.broadcastingAlarmId)" class="button"><img
+              src="@/assets/trash.png" style="width:8%" /></a>
+        </div>
+        <div style="margin-bottom: 10%">
+          <span class="day">{{ alarm.alarmDay }} </span>&nbsp;&nbsp;<span class="time"> {{ alarm.alarmTime
+          }}</span>&nbsp;
+        </div>
+      </span>
+    </div>
+
+    <br /><br /><br /><br />
+  </div>
+  <div v-else>
+    <h2 style="
             color: white;
             margin-left: 70px;
             font-size: 1.1vw;
             font-weight: 300;
           ">
-          예약된 방영 알림이 없습니다.
-        </h2>
-      </section>
-    </div>
-    <br /><br /><br /><br />
+      예약된 방영 알림이 없습니다.
+    </h2>
   </div>
-  <p style="text-align: center">
-    <a class="saveButton" href="#" role="button" style="border-radius: 15px">
-      저장
-    </a>
-  </p>
-  <br /><br /><br /><br />
 </template>
 
 <script>

@@ -114,6 +114,7 @@ export default new Vuex.Store({
     isTrue3: false,
     isTrue4: false,
     isTrue5: false,
+    isLoading: true
   },
   getters: {},
   mutations: {
@@ -267,6 +268,12 @@ export default new Vuex.Store({
     SET_FLAG_FALSE1(state) {
       state.isTrue1 = false;
     },
+    SET_IS_LOADING_FALSE(state){
+      state.isLoading = false;
+    },
+    SET_IS_LOADING_TRUE(state){
+      state.isLoading = true;
+    }
   },
   actions: {
     getUserInfo({ commit }) {
@@ -318,6 +325,7 @@ export default new Vuex.Store({
       });
     },
     getConditionRecommendProgram({ commit, state }) {
+      commit("SET_IS_LOADING_TRUE");
       axios
         .post("/api/mf/condition-recommend", {
           who: state.who,
@@ -328,6 +336,7 @@ export default new Vuex.Store({
           // 상황별 프로그램 추천 데이터 GET
           console.log(res.data);
           commit("SET_CONDITION_RECOMMEND_PROGRAM", res.data);
+          commit("SET_IS_LOADING_FALSE");
         });
     },
     getRecommendProgram({ commit }) {
