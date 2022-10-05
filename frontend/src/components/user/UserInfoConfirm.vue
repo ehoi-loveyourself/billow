@@ -18,7 +18,7 @@
             <b-avatar
               class="avatar"
               variant="info"
-              src="https://j7b309.p.ssafy.io/api/profile/12"
+              src="https://j7b309.p.ssafy.io/api/profile/1"
               size="4rem"
             ></b-avatar>
           </label>
@@ -34,7 +34,7 @@
             <b-avatar
               class="avatar"
               variant="info"
-              src="https://j7b309.p.ssafy.io/api/profile/11"
+              src="https://j7b309.p.ssafy.io/api/profile/12"
               size="4rem"
             ></b-avatar>
           </label>
@@ -50,7 +50,7 @@
             <b-avatar
               class="avatar"
               variant="info"
-              src="https://j7b309.p.ssafy.io/api/profile/15"
+              src="https://j7b309.p.ssafy.io/api/profile/3"
               size="4rem"
             ></b-avatar>
           </label>
@@ -66,7 +66,7 @@
             <b-avatar
               class="avatar"
               variant="info"
-              src="https://j7b309.p.ssafy.io/api/profile/13"
+              src="https://j7b309.p.ssafy.io/api/profile/4"
               size="4rem"
             ></b-avatar>
           </label>
@@ -82,7 +82,7 @@
             <b-avatar
               class="avatar"
               variant="info"
-              src="https://j7b309.p.ssafy.io/api/profile/16"
+              src="https://j7b309.p.ssafy.io/api/profile/5"
               size="4rem"
             ></b-avatar>
           </label>
@@ -98,7 +98,7 @@
             <b-avatar
               class="avatar"
               variant="info"
-              src="https://j7b309.p.ssafy.io/api/profile/17"
+              src="https://j7b309.p.ssafy.io/api/profile/6"
               size="4rem"
             ></b-avatar>
           </label>
@@ -114,7 +114,7 @@
             <b-avatar
               class="avatar"
               variant="info"
-              src="https://j7b309.p.ssafy.io/api/profile/18"
+              src="https://j7b309.p.ssafy.io/api/profile/7"
               size="4rem"
             ></b-avatar>
           </label>
@@ -130,7 +130,7 @@
             <b-avatar
               class="avatar"
               variant="info"
-              src="https://j7b309.p.ssafy.io/api/profile/19"
+              src="https://j7b309.p.ssafy.io/api/profile/8"
               size="4rem"
             ></b-avatar>
           </label>
@@ -146,7 +146,7 @@
             <b-avatar
               class="avatar"
               variant="info"
-              src="https://j7b309.p.ssafy.io/api/profile/20"
+              src="https://j7b309.p.ssafy.io/api/profile/9"
               size="4rem"
             ></b-avatar>
           </label>
@@ -162,7 +162,7 @@
             <b-avatar
               class="avatar"
               variant="info"
-              src="https://j7b309.p.ssafy.io/api/profile/14"
+              src="https://j7b309.p.ssafy.io/api/profile/10"
               size="4rem"
             ></b-avatar>
           </label>
@@ -178,7 +178,7 @@
             <b-avatar
               class="avatar"
               variant="info"
-              src="https://j7b309.p.ssafy.io/api/profile/1"
+              src="https://j7b309.p.ssafy.io/api/profile/11"
               size="4rem"
             ></b-avatar>
           </label>
@@ -194,7 +194,7 @@
             <b-avatar
               class="avatar"
               variant="info"
-              src="https://j7b309.p.ssafy.io/api/profile/2"
+              src="https://j7b309.p.ssafy.io/api/profile/12"
               size="4rem"
             ></b-avatar>
           </label>
@@ -210,7 +210,7 @@
             <b-avatar
               class="avatar"
               variant="info"
-              src="https://j7b309.p.ssafy.io/api/profile/3"
+              src="https://j7b309.p.ssafy.io/api/profile/13"
               size="4rem"
             ></b-avatar>
           </label>
@@ -226,7 +226,7 @@
             <b-avatar
               class="avatar"
               variant="info"
-              src="https://j7b309.p.ssafy.io/api/profile/4"
+              src="https://j7b309.p.ssafy.io/api/profile/14"
               size="4rem"
             ></b-avatar>
           </label>
@@ -242,7 +242,7 @@
             <b-avatar
               class="avatar"
               variant="info"
-              src="https://j7b309.p.ssafy.io/api/profile/5"
+              src="https://j7b309.p.ssafy.io/api/profile/15"
               size="4rem"
             ></b-avatar>
           </label>
@@ -258,7 +258,7 @@
             <b-avatar
               class="avatar"
               variant="info"
-              src="https://j7b309.p.ssafy.io/api/profile/6"
+              src="https://j7b309.p.ssafy.io/api/profile/16"
               size="4rem"
             ></b-avatar>
           </label>
@@ -274,7 +274,7 @@
             <b-avatar
               class="avatar"
               variant="info"
-              src="https://j7b309.p.ssafy.io/api/profile/7"
+              src="https://j7b309.p.ssafy.io/api/profile/17"
               size="4rem"
             ></b-avatar>
           </label>
@@ -290,7 +290,7 @@
             <b-avatar
               class="avatar"
               variant="info"
-              src="https://j7b309.p.ssafy.io/api/profile/8"
+              src="https://j7b309.p.ssafy.io/api/profile/18"
               size="4rem"
             ></b-avatar>
           </label>
@@ -306,7 +306,7 @@
             <b-avatar
               class="avatar"
               variant="info"
-              src="https://j7b309.p.ssafy.io/api/profile/9"
+              src="https://j7b309.p.ssafy.io/api/profile/19"
               size="4rem"
             ></b-avatar>
           </label>
@@ -322,7 +322,7 @@
             <b-avatar
               class="avatar"
               variant="info"
-              src="https://j7b309.p.ssafy.io/api/profile/10"
+              src="https://j7b309.p.ssafy.io/api/profile/20"
               size="4rem"
             ></b-avatar>
           </label>
