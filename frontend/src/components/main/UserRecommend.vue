@@ -1,10 +1,6 @@
 <template>
-  <div id="mainslider" style="text-align: center; margin-top: 10px">
-    <!-- <splide id="carousel_user_recommend" :options="options">
-      <splide-slide>
-        <img src="@/assets/image_1.png"/>
-      </splide-slide>
-    </splide> -->
+  <FullPageLoader v-if="isLoading"/>
+  <div v-else id="mainslider" style="text-align: center; margin-top: 10px">
     <splide id="carousel_user_recommend" :options="options">
       <splide-slide v-for="recommend in userRecommend">
         <figure>
@@ -17,7 +13,6 @@
         </figure>
       </splide-slide>
     </splide>
-
   </div>
   <br /><br /><br />
 </template>
@@ -26,18 +21,20 @@
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import { mapState, mapActions } from "vuex";
+import FullPageLoader from "@/components/load/FullPageLoader.vue";
 
 export default {
   name: "MainSlider",
   components: {
     Splide,
     SplideSlide,
-  },
-  data: () => {
-    isLoaded: false;
-  },
+    FullPageLoader
+},
   computed: {
-    ...mapState(["userRecommend"]),
+    ...mapState(["userRecommend", "isLoading"]),
+  },
+  async created() {
+    await this.getUserRecommendProgram();
   },
   created() {
     this.getUserRecommendProgram();

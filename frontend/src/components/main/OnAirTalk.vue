@@ -5,13 +5,13 @@
       <!-- list size -->
       <div>
         <template v-if="onairTalk != null && onairTalk.length > 0"
-          >{{ onairTalk.length }}
+          >&nbsp;{{ onairTalk.length }}
         </template>
-        <template v-else> 0 </template>
+        <template v-else> &nbsp;0 </template>
         개의 TALK
       </div>
-      <b-row style="margin-top: 20px">
-        <b-col cols="12">
+      <b-row style="margin-top: 20px;">
+        <b-col cols="11" style="padding-right:0">
           <!-- <b-form-input
           v-model="message"
           placeholder="주제와 무관한 톡은 삭제될 수 있습니다."
@@ -29,11 +29,11 @@
             @keyup.enter="onSubmit()"
           />
         </b-col>
-        <!-- <b-col cols="1">
-        <b-button size="md" type="submit" onclick="onSubmit">
+        <b-col cols="1">
+        <b-button size="md" type="submit" @click="onSubmit()">
           <span>등록</span>
         </b-button>
-      </b-col> -->
+      </b-col>
       </b-row>
     </div>
     <br />

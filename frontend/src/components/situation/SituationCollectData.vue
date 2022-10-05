@@ -1,14 +1,8 @@
 <template>
-  <!-- <b-row> -->
-  <!-- <b-col cols="8"> -->
   <header-bar />
-  <!-- </b-col> -->
-  <!-- <b-col cols="4">  -->
   <SecondBar />
-  <!-- </b-col> -->
-  <!-- </b-row> -->
   <br />
-  <div style="margin-left:70px">
+  <div style="padding-left:70px; padding-right:70px">
   <h2 style="color: white; font-size: 1.2vw; font-weight: 400; margin-bottom: 1%;">
     #{{ who }} #{{ genre }}
   </h2>

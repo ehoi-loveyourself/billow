@@ -25,7 +25,7 @@
   </script>
   
   <style lang="scss" scoped>
-     $colors: #8CC271, #69BEEB, #F5AA39, #E9643B;
+     $colors: #8696bc, #82a0ff, #adccf3,	#e7f2f6;
     // -----------------------------------------------------
     .page-loader {
       display: flex;
@@ -41,9 +41,9 @@
     }
     // -----------------------------------------------------
     .cube{
-      width: 40px;
-      height: 40px;
-      margin-right: 10px;
+      width: 50px;
+      height: 50px;
+      margin-right: 20px;
       @for $i from 1 through length($colors) {
         &:nth-child(#{$i}) {
           background-color: nth($colors, $i);

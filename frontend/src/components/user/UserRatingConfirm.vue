@@ -83,7 +83,6 @@ export default {
 }
 
 #Img {
-  /* text-align: center; */
   padding-right: 0.5%;
   padding-bottom: 2%;
   position: relative;
@@ -91,26 +90,9 @@ export default {
 
 .flex {
   display: flex;
-  /* height: 600px; */
   flex-wrap: wrap;
   align-content: stretch;
 }
-
-/* .poster:hover {
-    filter: brightness(0.5);
-  } */
-
-/* .explain {
-    display: none;
-  }
-  
-  .poster:hover+.explain,
-  .explain:hover {
-    display: inline-block;
-    position: absolute;
-    top: 1vw;
-    left: 1vw;
-  } */
 
 .btnRed.btnBorder:hover {
   box-shadow: 0px 0px 0px 5px #823621;
@@ -122,10 +104,8 @@ export default {
 
 a.button {
   padding: 1%;
-  /* margin: 10px 20px 10px 0; */
   font-weight: 600;
   text-align: center;
-  /* line-height: 50px; */
   color: #fff;
   border-radius: 5px;
   text-decoration: none;
@@ -160,7 +140,6 @@ img:hover {
 
 
 .box-wrap {
-  /* width: 100vw; height: 100vh; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -170,12 +149,10 @@ img:hover {
 
 .box {
   position: relative;
-  /* background: #000; */
   width: 100%;
   border: none;
   cursor: pointer;
   overflow: hidden;
-  /* box-shadow: 1px 1px 3px rgba(0,0,0,0.4); */
 }
 
 .box img {
@@ -188,7 +165,6 @@ img:hover {
   bottom: 10px;
   color: #fff;
   width: 100%;
-  /* padding: 15px; */
   box-sizing: border-box;
   opacity: 0;
   transition: all 0.3s ease-in-out;

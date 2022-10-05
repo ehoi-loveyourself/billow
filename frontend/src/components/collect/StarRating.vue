@@ -198,6 +198,7 @@ export default {
   height: 21vw;
   padding-right: 0.5%;
   padding-bottom: 0.5%;
+  margin-bottom: 2.5%;
 }
 
 #Img {

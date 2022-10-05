@@ -2,24 +2,29 @@
   <br />
   <div class="flex" v-if="alarmList != null && alarmList.length > 0">
     <div id="Img" v-for="alarm in alarmList">
-      <router-link :to="{ name: 'detail' }" @click="moveProgramDetail(alarm.id)" class="nav-link">
         <div class="box-wrap">
           <div class="box">
-            <img class="poster" :src="alarm.posterImg" alt="Image" />
+            <img class="poster" :src="alarm.posterImg" alt="Image" @click="moveProgramDetail(alarm.id)"/>
+            <div class="button">
+            <button @click="alarmDelete(alarm.broadcastingAlarmId)" style="border: none; background: none">
+              <img class="trash"
+              src="@/assets/trash.png" style="width:40%" />
+            </button>
+          </div>
             <div class="info">
               <h3>{{ alarm.title }}</h3>
             </div>
           </div>
         </div>
-      </router-link>
       <span>
         <!-- <img src="@/assets/alarm.png" style="cursor: pointer" />&nbsp; -->
         <div>
           <span class="station">{{ alarm.alarmStation }}</span>&nbsp;
           <span class="episode" v-if="alarm.alarmEpisode">{{
           alarm.alarmEpisode
-          }}</span>&nbsp;&nbsp;<a href="#" @click="alarmDelete(alarm.broadcastingAlarmId)" class="button"><img
-              src="@/assets/trash.png" style="width:8%" /></a>
+          }}&nbsp;&nbsp;</span>
+          <!-- <a href="#" @click="alarmDelete(alarm.broadcastingAlarmId)" class="button"><img
+              src="@/assets/trash.png" style="width:8%" /></a> -->
         </div>
         <div style="margin-bottom: 10%">
           <span class="day">{{ alarm.alarmDay }} </span>&nbsp;&nbsp;<span class="time"> {{ alarm.alarmTime
@@ -66,14 +71,16 @@ export default {
       this.score = index + 1;
     },
     alarmDelete(broadcastingAlarmId) {
-      if (confirm("알림을 삭제하시겠습니까?") == true) {
+      if (confirm("알림을 삭제하시겠습니까?") == true || broadcastingAlarmId==null) {
         this.deleteAlarm(broadcastingAlarmId);
-      } else {
+      }
+      else {
         return;
       }
     },
     moveProgramDetail(programId) {
       this.getProgramDetail(programId);
+      this.$router.push({ name: 'detail' });
     },
   },
 };
@@ -97,7 +104,7 @@ export default {
 .poster {
   width: 12vw;
   height: 18vw;
-  padding-right: 0.2;
+  padding-right: 0.2%;
   padding-bottom: 0.2%;
   margin-bottom: 3%;
 }
@@ -131,14 +138,14 @@ export default {
     top: 1vw;
     left: 1vw;
   } */
-.saveButton {
+/* .saveButton {
   background-color: #ffffff;
   padding: 3px 30px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-}
+} */
 
 .btnRed.btnBorder {
   box-shadow: 0px 0px 0px 0px #823621;
@@ -152,19 +159,16 @@ export default {
   background: #ae2b00;
 }
 
-a.button {
+/* a.button {
   padding: 1%;
-  /* margin: 10px 20px 10px 0; */
   font-weight: 600;
   text-align: center;
-  /* line-height: 50px; */
   color: #fff;
   border-radius: 5px;
   text-decoration: none;
   transition: all 0.1s;
   padding-top: 0;
-}
-
+} */
 .day {
   color: #a0a0a0;
   font-size: 1vw;
@@ -208,7 +212,6 @@ a.button {
   margin: 0px 10px 0px 0px;
   margin-bottom: 5px;
 }
-
 
 .box-wrap {
   /* width: 100vw; height: 100vh; */
@@ -261,7 +264,7 @@ a.button {
 }
 
 .box:hover img {
-  opacity: 0.2;
+  opacity: 1;
 }
 
 .box:hover:before {
@@ -282,5 +285,17 @@ a.button {
 body {
   background-color: #1a237e;
   font-family: "GoyangIlsan";
+}
+
+.button {
+  display: none;
+}
+
+.poster:hover+.button,
+.button:hover {
+  display: inline-block;
+  position: absolute;
+  top: 1vw;
+  right: 0;
 }
 </style>

@@ -14,7 +14,7 @@
       />
     </svg>
   </div>
-  <br />
+  <br /><br/>
   <h2
     style="color: white; margin-left: 70px; font-size: 1.1vw; font-weight: 300"
   >
@@ -38,7 +38,7 @@
           <b-avatar
             class="avatar"
             variant="info"
-            src="https://j7b309.p.ssafy.io/api/profile/12"
+            src="https://j7b309.p.ssafy.io/api/profile/1"
             size="4rem"
           ></b-avatar>
         </label>
@@ -54,7 +54,7 @@
           <b-avatar
             class="avatar"
             variant="info"
-            src="https://j7b309.p.ssafy.io/api/profile/11"
+            src="https://j7b309.p.ssafy.io/api/profile/2"
             size="4rem"
           ></b-avatar>
         </label>
@@ -70,7 +70,7 @@
           <b-avatar
             class="avatar"
             variant="info"
-            src="https://j7b309.p.ssafy.io/api/profile/15"
+            src="https://j7b309.p.ssafy.io/api/profile/3"
             size="4rem"
           ></b-avatar>
         </label>
@@ -86,7 +86,7 @@
           <b-avatar
             class="avatar"
             variant="info"
-            src="https://j7b309.p.ssafy.io/api/profile/13"
+            src="https://j7b309.p.ssafy.io/api/profile/4"
             size="4rem"
           ></b-avatar>
         </label>
@@ -102,7 +102,7 @@
           <b-avatar
             class="avatar"
             variant="info"
-            src="https://j7b309.p.ssafy.io/api/profile/16"
+            src="https://j7b309.p.ssafy.io/api/profile/5"
             size="4rem"
           ></b-avatar>
         </label>
@@ -118,7 +118,7 @@
           <b-avatar
             class="avatar"
             variant="info"
-            src="https://j7b309.p.ssafy.io/api/profile/17"
+            src="https://j7b309.p.ssafy.io/api/profile/6"
             size="4rem"
           ></b-avatar>
         </label>
@@ -134,7 +134,7 @@
           <b-avatar
             class="avatar"
             variant="info"
-            src="https://j7b309.p.ssafy.io/api/profile/18"
+            src="https://j7b309.p.ssafy.io/api/profile/7"
             size="4rem"
           ></b-avatar>
         </label>
@@ -150,7 +150,7 @@
           <b-avatar
             class="avatar"
             variant="info"
-            src="https://j7b309.p.ssafy.io/api/profile/19"
+            src="https://j7b309.p.ssafy.io/api/profile/8"
             size="4rem"
           ></b-avatar>
         </label>
@@ -166,7 +166,7 @@
           <b-avatar
             class="avatar"
             variant="info"
-            src="https://j7b309.p.ssafy.io/api/profile/20"
+            src="https://j7b309.p.ssafy.io/api/profile/9"
             size="4rem"
           ></b-avatar>
         </label>
@@ -182,7 +182,7 @@
           <b-avatar
             class="avatar"
             variant="info"
-            src="https://j7b309.p.ssafy.io/api/profile/14"
+            src="https://j7b309.p.ssafy.io/api/profile/10"
             size="4rem"
           ></b-avatar>
         </label>
@@ -198,7 +198,7 @@
           <b-avatar
             class="avatar"
             variant="info"
-            src="https://j7b309.p.ssafy.io/api/profile/1"
+            src="https://j7b309.p.ssafy.io/api/profile/11"
             size="4rem"
           ></b-avatar>
         </label>
@@ -214,7 +214,7 @@
           <b-avatar
             class="avatar"
             variant="info"
-            src="https://j7b309.p.ssafy.io/api/profile/2"
+            src="https://j7b309.p.ssafy.io/api/profile/12"
             size="4rem"
           ></b-avatar>
         </label>
@@ -230,7 +230,7 @@
           <b-avatar
             class="avatar"
             variant="info"
-            src="https://j7b309.p.ssafy.io/api/profile/3"
+            src="https://j7b309.p.ssafy.io/api/profile/13"
             size="4rem"
           ></b-avatar>
         </label>
@@ -246,7 +246,7 @@
           <b-avatar
             class="avatar"
             variant="info"
-            src="https://j7b309.p.ssafy.io/api/profile/4"
+            src="https://j7b309.p.ssafy.io/api/profile/14"
             size="4rem"
           ></b-avatar>
         </label>
@@ -262,7 +262,7 @@
           <b-avatar
             class="avatar"
             variant="info"
-            src="https://j7b309.p.ssafy.io/api/profile/5"
+            src="https://j7b309.p.ssafy.io/api/profile/15"
             size="4rem"
           ></b-avatar>
         </label>
@@ -278,7 +278,7 @@
           <b-avatar
             class="avatar"
             variant="info"
-            src="https://j7b309.p.ssafy.io/api/profile/6"
+            src="https://j7b309.p.ssafy.io/api/profile/16"
             size="4rem"
           ></b-avatar>
         </label>
@@ -294,7 +294,7 @@
           <b-avatar
             class="avatar"
             variant="info"
-            src="https://j7b309.p.ssafy.io/api/profile/7"
+            src="https://j7b309.p.ssafy.io/api/profile/17"
             size="4rem"
           ></b-avatar>
         </label>
@@ -310,7 +310,7 @@
           <b-avatar
             class="avatar"
             variant="info"
-            src="https://j7b309.p.ssafy.io/api/profile/8"
+            src="https://j7b309.p.ssafy.io/api/profile/18"
             size="4rem"
           ></b-avatar>
         </label>
@@ -326,7 +326,7 @@
           <b-avatar
             class="avatar"
             variant="info"
-            src="https://j7b309.p.ssafy.io/api/profile/9"
+            src="https://j7b309.p.ssafy.io/api/profile/19"
             size="4rem"
           ></b-avatar>
         </label>
@@ -342,7 +342,7 @@
           <b-avatar
             class="avatar"
             variant="info"
-            src="https://j7b309.p.ssafy.io/api/profile/10"
+            src="https://j7b309.p.ssafy.io/api/profile/20"
             size="4rem"
           ></b-avatar>
         </label>
@@ -406,7 +406,7 @@
       </b-col>
     </b-row>
     <b-row style="margin-bottom: 2%">
-      <b-col cols="2" style="text-align: right"> 통신사 </b-col>
+      <b-col cols="2" style="text-align: right"> TV 통신사 </b-col>
       <b-col cols="10" style="padding-left: 1%">
         <b-form-select
           v-model="selected_tv_carrier"
@@ -480,7 +480,7 @@ export default {
         { value: "제주", text: "제주" },
       ],
       options_tv_carrier: [
-        { value: null, text: "통신사를 선택하세요" },
+        { value: null, text: "TV 통신사를 선택하세요" },
         { value: "SK 브로드밴드", text: "SK 브로드밴드" },
         { value: "KT olleh", text: "KT olleh" },
         { value: "LG U+", text: "LG U+" },
@@ -516,7 +516,7 @@ export default {
         if (this.signUpCheck == "cant") {
           alert("이미 등록된 닉네임입니다. 다시 입력해주세요.");
         } else {
-          alert("회원가입을 성공했습니다.");
+          alert("회원가입에 성공했습니다.");
 
           this.email = localStorage.getItem("email");
           this.name = localStorage.getItem("name");
