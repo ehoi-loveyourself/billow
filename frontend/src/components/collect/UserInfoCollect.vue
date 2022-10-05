@@ -390,7 +390,9 @@
           v-model="nickname"
           placeholder="닉네임을 입력하세요."
           style="width: 20%"
+          @keyup="onKeyUp"
         ></b-form-input>
+        <span id="nicknameCheck" style="font-size: 15px"></span>
       </b-col>
     </b-row>
     <b-row style="margin-bottom: 2%">
@@ -454,6 +456,7 @@ export default {
       selected_region: "",
       selected_tv_carrier: "",
       profileImgId: null,
+      signUpCheck: "",
       options_age: [
         { value: null, text: "연령대를 선택하세요" },
         { value: "10", text: "10대" },
@@ -510,48 +513,64 @@ export default {
       ) {
         alert("모든 정보를 입력해주세요.");
       } else {
-        alert("모든 정보가 채워졌으니 포스트실행");
-      // 회원가입
-      // alert("post 테스트");
-      // alert(localStorage.getItem("email"));
-      // alert(localStorage.getItem("name"));
-      // alert(localStorage.getItem("authToken"));
-      // localStorage.clear();
-      // alert(this.nickname);
-      // alert(this.selected_gender);
-      // alert(this.selected_age);
-      // alert(this.selected_region);
-      // alert(this.selected_tv_carrier);
-      // alert(this.profileImgId);
-      // alert(this.phonenum);
-      // this.$router.push("/main");
-      this.email = localStorage.getItem("email");
-      this.name = localStorage.getItem("name");
-      // alert(this.email);
-      // this.email.replace(/\"/gi, "");
-      // alert(this.name);
-      // alert(this.email);
+        if (this.signUpCheck == "cant") {
+          alert("이미 등록된 닉네임입니다. 다시 입력해주세요.");
+        } else {
+          alert("회원가입을 성공했습니다.");
+
+          this.email = localStorage.getItem("email");
+          this.name = localStorage.getItem("name");
+
+          axios
+            .post(`/api/users/signup`, {
+              email: this.email,
+              name: this.name,
+              nickName: this.nickname,
+              gender: this.selected_gender,
+              age: this.selected_age,
+              region: this.selected_region,
+              tvCarrier: this.selected_tv_carrier,
+              profileImgId: this.profileImgId,
+              mobile: this.phonenum,
+            })
+            .then((response) => {
+              console.warn(response);
+              this.$router.push("/userratingprogram");
+            })
+            .catch((ex) => {
+              console.warn("ERROR!!!!! : ", ex);
+            });
+        }
+      } // else
+    }, // signUp
+
+    onKeyUp(e) {
       axios
-        .post(`/api/users/signup`, {
-          email: this.email,
-          name: this.name,
-          nickName: this.nickname,
-          gender: this.selected_gender,
-          age: this.selected_age,
-          region: this.selected_region,
-          tvCarrier: this.selected_tv_carrier,
-          profileImgId: this.profileImgId,
-          mobile: this.phonenum,
+        .get("/api/users/validation/nickname", {
+          params: { nickname: this.nickname },
         })
-        .then((response) => {
-          console.warn(response);
-          alert("post 성공");
-          this.$router.push("/userratingprogram");
+        .then((res) => {
+          document.getElementById("nicknameCheck").innerHTML =
+            "<label style=color:#0077ff>" +
+            "사용 가능한 닉네임입니다." +
+            "</label>";
+
+          this.signUpCheck = "can";
         })
         .catch((ex) => {
-          console.warn("ERROR!!!!! : ", ex);
+          if (this.nickname == "") {
+            document.getElementById("nicknameCheck").innerHTML = "";
+
+            this.signUpCheck = "cant";
+          } else {
+            document.getElementById("nicknameCheck").innerHTML =
+              "<label style=color:#ae2b00>" +
+              "이미 등록된 닉네임입니다." +
+              "</label>";
+
+            this.signUpCheck = "cant";
+          }
         });
-      }
     },
   },
 };
