@@ -167,6 +167,10 @@ export default {
               this.$cookies.set("refreshToken", response.data.refreshToken);
               // this.$cookies.remove("refreshToken");
               // localStorage.clear();
+              localStorage.setItem(
+                "refreshToken",
+                JSON.stringify(response.data.refreshToken).replace(/\"/gi, "")
+              );
               if (response.data.nickName == null) {
                 // alert("회원정보가 없어 회원가입 페이지로 이동합니다.");
                 this.$router.push("/userinfocollect");
