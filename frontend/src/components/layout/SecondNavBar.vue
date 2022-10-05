@@ -21,7 +21,7 @@
           <b-avatar
             class="avatar"
             variant="info"
-            src="https://j7b309.p.ssafy.io/api/profile/11"
+            :src="profileUrl"
             size="2.4vw"
           ></b-avatar
         ></router-link>
@@ -34,15 +34,21 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
       searchValue: "",
     };
   },
+  computed: {
+    ...mapState(["userInfo", "profileUrl"]),
+  },
+  created() {
+    this.getUserInfo();
+  },
   methods: {
-    ...mapActions(["getSearchProgram"]),
+    ...mapActions(["getSearchProgram", "getUserInfo"]),
     onSubmit() {
       if (this.searchValue == "") {
         alert("검색어를 입력하세요.");

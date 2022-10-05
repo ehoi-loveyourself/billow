@@ -79,6 +79,7 @@ export default new Vuex.Store({
   state: {
     authToken: "",
     userInfo: null,
+    userProfileImgId: 0,
     randomProgram: null,
     userRecommend: null,
     conditionRecommend: null,
@@ -122,6 +123,10 @@ export default new Vuex.Store({
     // },
     SET_USER_INFO(state, userInfo) {
       state.userInfo = userInfo;
+      state.profileUrl =
+        "https://j7b309.p.ssafy.io/api/profile/" + userInfo.profileId;
+      console.log("===================");
+      console.log(userInfo.profileId);
     },
     SET_RANDOM_PROGRAM(state, randomProgram) {
       state.randomProgram = randomProgram;
@@ -276,7 +281,7 @@ export default new Vuex.Store({
         commit("SET_USER_INFO", res.data);
       });
     },
-    modifyUserInfo({ commit, state }) {
+    modifyUserInfo({ commit, dispatch, state }) {
       console.log(state.userInfo);
       axios
         .put("/api/users", {
@@ -291,6 +296,7 @@ export default new Vuex.Store({
         .then((res) => {
           // 사용자 정보 수정 PUT
           console.log(res.data);
+          dispatch("getUserInfo");
         });
     },
     deleteUserInfo({ commit }) {
