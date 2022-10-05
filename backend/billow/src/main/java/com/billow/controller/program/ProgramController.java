@@ -82,7 +82,7 @@ public class ProgramController {
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
     @PostMapping("/{programId}")
-    public ResponseEntity<Object> postProgramRating(@RequestHeader("Auth-access") String token,@PathVariable("programId") Long programId, @RequestBody RatingRequest ratingRequest) {
+    public ResponseEntity<Object> postProgramRating(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId, @RequestBody RatingRequest ratingRequest) {
         log.info("프로그램 평점 등록 API 호출");
         Message response = programService.postProgramRating(JwtTokenProvider.getUserId(token), programId, ratingRequest);
         log.info("프로그램 평점 등록 성공");
@@ -97,9 +97,9 @@ public class ProgramController {
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
     @GetMapping("/rating/{programId}")
-    public ResponseEntity<Object> userSelectRating( @PathVariable("programId") Long programId) {
+    public ResponseEntity<Object> userSelectRating(@RequestHeader("Auth-access") String token, @PathVariable("programId") Long programId) {
         log.info("사용자 평점 조회 API 호출");
-        RatingResponse response = programService.userSelectRating(1L, programId);
+        RatingResponse response = programService.userSelectRating(JwtTokenProvider.getUserId(token), programId);
         log.info("사용자 평점 조회 성공");
         return ResponseEntity.ok()
                 .body(response);

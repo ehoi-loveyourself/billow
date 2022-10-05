@@ -31,9 +31,9 @@ public class BookmarkController {
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
     @GetMapping
-    public ResponseEntity<Object> selectBookmark() {
+    public ResponseEntity<Object> selectBookmark(@RequestHeader("Auth-access") String token) {
         log.info("즐겨찾기 조회 API 호출");
-        List<BookmarkResponse> responses = bookmarkService.selectBookmark(1L);
+        List<BookmarkResponse> responses = bookmarkService.selectBookmark(JwtTokenProvider.getUserId(token));
         log.info("즐겨찾기 조회 성공");
         return ResponseEntity.ok()
                 .body(responses);
