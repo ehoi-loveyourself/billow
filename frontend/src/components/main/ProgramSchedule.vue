@@ -1,9 +1,6 @@
 <template>
   <div style="margin-top: 10px">
     <br />
-    <!-- <div style="text-align: center">
-      지금은 9월 26일 월요일 11시 55분 입니다.
-    </div> -->
     <br />
     <div class="flex">
       <div v-if="programSchedule != null && programSchedule.length > 0">
@@ -65,29 +62,6 @@
       </div>
     </div>
   </div>
-
-  <!-- <b-modal
-    size="sm"
-    hide-footer
-    id="modal-1"
-    centered
-    no-stacking
-    title="알림 설정"
-    style="text-align: center"
-  >
-    <div style="margin-bottom: 5%">
-      <img src="@/assets/alarm_md.png" /><span class="alarm-info"
-        >15분 전에 알림을 드립니다.</span
-      >
-    </div>
-    <b-button
-      @click="registAlarm"
-      style="background-color: blue"
-      data-bs-dismiss="modal"
-      aria-label="Close"
-      >좋아요!</b-button
-    >
-  </b-modal> -->
 </template>
 
 <script>
@@ -120,8 +94,6 @@ export default {
   font-size: 0.7vw;
   font-weight: 600;
   vertical-align: middle;
-  /* line-height: 18px; */
-  /* padding: 1px 5px; */
   border-radius: 3px;
   padding-left: 1%;
   padding-right: 1%;
@@ -141,11 +113,7 @@ export default {
 
 .flex {
   display: flex;
-  /* height: 600px; */
-  /* flex-wrap: wrap;
-  align-content: stretch; */
   overflow-x: auto;
-  position: relative;
 }
 
 .station {
@@ -164,7 +132,6 @@ th {
 
 .flex::-webkit-scrollbar {
   height: 10px;
-  /* padding-left: 1%; */
 }
 
 .flex::-webkit-scrollbar-track {

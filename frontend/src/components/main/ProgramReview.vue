@@ -193,31 +193,11 @@ export default {
   color: #a1a1a1;
 }
 
-/* .star-rating {
-  width: 100px;
-}
-
-.star-rating,
-.star-rating span {
-  display: inline-block;
-  height: 18px;
-  overflow: hidden;
-  background: url(@/assets/star_1.png) no-repeat;
-}
-
-.star-rating span {
-  background-position: left bottom;
-  line-height: 0;
-  vertical-align: top;
-} */
-
 a.button {
   padding: 0.2%;
   padding-top: 0;
-  /* margin: 10px 20px 10px 0; */
   font-weight: 600;
   text-align: center;
-  /* line-height: 50px; */
   color: #fff;
   border-radius: 5px;
   text-decoration: none;
@@ -257,6 +237,5 @@ a.button {
 }
 .modal-header{
   border-bottom:#1f1f1f;
-  text-align:center;
 }
 </style>
