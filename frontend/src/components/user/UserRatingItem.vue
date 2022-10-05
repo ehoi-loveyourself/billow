@@ -1,10 +1,14 @@
 <template>
-  <router-link
-    :to="{ name: 'detail' }"
-    @click="moveProgramDetail(rating.id)"
-    class="nav-link"
-  >
-    <img class="poster" :src="rating.posterImg" alt="Image" />
+  <router-link :to="{ name: 'detail' }" @click="moveProgramDetail(rating.id)" class="nav-link">
+    <div class="box-wrap">
+      <div class="box">
+        <img class="poster" :src="rating.posterImg" alt="Image" />
+        <div class="info">
+          <h3>{{ rating.title }}</h3>
+        </div>
+      </div>
+    </div>
+
   </router-link>
   <div style="text-align: center; margin-bottom: 18%; margin-top: 3%;">
     <!-- <span>
@@ -17,74 +21,21 @@
         /></span>
       </span>
     </span> -->
-    <img
-      v-show="!isTrue1"
-      @click="setFlagTrue1"
-      class="hearted"
-      src="@/assets/grey_star_small.png"
-    />
-    <img
-      v-show="isTrue1"
-      @click="setFlagFalse1"
-      class="hearted"
-      src="@/assets/blue_star_small.png"
-    />
-    <img
-      v-show="!isTrue2"
-      @click="setFlagTrue2"
-      class="hearted"
-      src="@/assets/grey_star_small.png"
-    />
-    <img
-      v-show="isTrue2"
-      @click="setFlagFalse2"
-      class="hearted"
-      src="@/assets/blue_star_small.png"
-    />
-    <img
-      v-show="!isTrue3"
-      @click="setFlagTrue3"
-      class="hearted"
-      src="@/assets/grey_star_small.png"
-    />
-    <img
-      v-show="isTrue3"
-      @click="setFlagFalse3"
-      class="hearted"
-      src="@/assets/blue_star_small.png"
-    />
-    <img
-      v-show="!isTrue4"
-      @click="setFlagTrue4"
-      class="hearted"
-      src="@/assets/grey_star_small.png"
-    />
-    <img
-      v-show="isTrue4"
-      @click="setFlagFalse4"
-      class="hearted"
-      src="@/assets/blue_star_small.png"
-    />
-    <img
-      v-show="!isTrue5"
-      @click="setFlagTrue5"
-      class="hearted"
-      src="@/assets/grey_star_small.png"
-      style="margin-right:5%"
-    />
-    <img
-      v-show="isTrue5"
-      @click="setFlagFalse5"
-      class="hearted"
-      src="@/assets/blue_star_small.png"
-      style="margin-right:5%"
-    />
+    <img v-show="!isTrue1" @click="setFlagTrue1" class="hearted" src="@/assets/grey_star_small.png" />
+    <img v-show="isTrue1" @click="setFlagFalse1" class="hearted" src="@/assets/blue_star_small.png" />
+    <img v-show="!isTrue2" @click="setFlagTrue2" class="hearted" src="@/assets/grey_star_small.png" />
+    <img v-show="isTrue2" @click="setFlagFalse2" class="hearted" src="@/assets/blue_star_small.png" />
+    <img v-show="!isTrue3" @click="setFlagTrue3" class="hearted" src="@/assets/grey_star_small.png" />
+    <img v-show="isTrue3" @click="setFlagFalse3" class="hearted" src="@/assets/blue_star_small.png" />
+    <img v-show="!isTrue4" @click="setFlagTrue4" class="hearted" src="@/assets/grey_star_small.png" />
+    <img v-show="isTrue4" @click="setFlagFalse4" class="hearted" src="@/assets/blue_star_small.png" />
+    <img v-show="!isTrue5" @click="setFlagTrue5" class="hearted" src="@/assets/grey_star_small.png"
+      style="margin-right:5%" />
+    <img v-show="isTrue5" @click="setFlagFalse5" class="hearted" src="@/assets/blue_star_small.png"
+      style="margin-right:5%" />
 
-    <a
-      href="#"
-      @click="ratingDelete(rating.ratingId)"
-      class="button"
-      ><img src="@/assets/trash.png" style="width:8%"/></a>
+    <a href="#" @click="ratingDelete(rating.ratingId)" class="button"><img src="@/assets/trash.png"
+        style="width:8%" /></a>
   </div>
 </template>
 
@@ -106,7 +57,11 @@ export default {
       isTrue5: false,
     };
   },
+  computed: {
+    ...mapState(["ratingList"]),
+  },
   created() {
+    this.getRating();
     if (this.rating.score >= 2) {
       this.isTrue1 = true;
     }
@@ -124,7 +79,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["deleteRating", "getProgramDetail", "registRating"]),
+    ...mapActions(["deleteRating", "getProgramDetail", "registRating", "getRating"]),
     // check(index) {
     //   this.score = index + 1;
     // },
@@ -290,5 +245,105 @@ a.button {
   text-decoration: none;
   transition: all 0.1s;
   padding-top: 0;
+}
+
+
+img:hover {
+  filter: brightness(0.5)
+}
+
+.box .info .detailbox {
+  font-size: 12px;
+}
+
+.box .info .detailbox_design {
+  display: inline-block;
+  background: rgb(46, 47, 49);
+  color: rgb(255, 255, 255);
+  font-family: "Watcha Sans", Roboto, "Noto Sans KR", "Apple SD Gothic Neo",
+    "Nanum Gothic", "Malgun Gothic", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  vertical-align: top;
+  line-height: 18px;
+  padding: 1px 5px;
+  border: none;
+  margin: 0px 10px 0px 0px;
+  margin-bottom: 5px;
+}
+
+
+.box-wrap {
+  /* width: 100vw; height: 100vh; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: stretch;
+}
+
+.box {
+  position: relative;
+  /* background: #000; */
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  /* box-shadow: 1px 1px 3px rgba(0,0,0,0.4); */
+}
+
+.box img {
+  transition: all 0.3s ease-in-out;
+}
+
+.box .info {
+  position: absolute;
+  left: 5px;
+  bottom: 10px;
+  color: #fff;
+  width: 100%;
+  /* padding: 15px; */
+  box-sizing: border-box;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.box .info h3 {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-bottom: 3px;
+  text-align: left;
+}
+
+.box:hover .info {
+  opacity: 1;
+}
+
+.box:hover img {
+  opacity: 0.2;
+}
+
+.box:hover:before {
+  width: 60px;
+}
+
+.box:hover:after {
+  height: 60px;
+}
+
+@font-face {
+  font-family: "GoyangIlsan";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background-color: #1a237e;
+  font-family: "GoyangIlsan";
 }
 </style>

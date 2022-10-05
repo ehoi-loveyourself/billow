@@ -1,23 +1,26 @@
 <template>
-  <router-link :to="{ name: 'detail' }" @click="moveProgramDetail(like.programId)" class="nav-link">
-    <img class="liked_2" :src="like.posterImg" alt="Image" />
-
-    <!-- 원래는 /template 위이나 라우터 링크가 우선적으로 되야 하므로 티빙과 같은 형식으로 임시 조치 -->
-  </router-link>
-
-  <div class="button">
-    <button @click="addToFavorites(like.programId)" :id="like.programId" v-show="!isFavorite"
-      style="border: none; background: none">
-      <img class="hearted" src="@/assets/white_heart.png" />
-    </button>
-    <button @click="deleteFromFavorites(like.programId)" :id="like.programId" v-show="isFavorite"
-      style="background: none; border: none">
-      <img class="hearted" src="@/assets/red_heart.png" />
-    </button>
+  <div class="box-wrap">
+    <div class="box">
+      <img class="liked_2" :src="like.posterImg" alt="Image" @click="moveProgramDetail(like.programId)" />
+      <div class="info">
+        <h3>{{ like.title }}</h3>
+      </div>
+      <div class="button">
+        <button @click="addToFavorites(like.programId)" :id="like.programId" v-show="!isFavorite"
+          style="border: none; background: none">
+          <img class="hearted" src="@/assets/white_heart.png" />
+        </button>
+        <button @click="deleteFromFavorites(like.programId)" :id="like.programId" v-show="isFavorite"
+          style="background: none; border: none">
+          <img class="hearted" src="@/assets/red_heart.png" />
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import router from "@/router";
 import { reactive } from "@vue/reactivity";
 import axios from "axios";
 import { mapActions } from "vuex";
@@ -62,6 +65,7 @@ export default {
     },
     moveProgramDetail(programId) {
       this.getProgramDetail(programId);
+      this.$router.push({ name: 'detail' })
     },
   },
 };
@@ -78,6 +82,7 @@ export default {
   height: 21vw;
   margin-right: 0.5%;
   margin-bottom: 0.5%;
+  cursor: pointer;
 }
 
 img:hover {
@@ -141,5 +146,105 @@ img:hover+.button,
   display: flex;
   flex-wrap: wrap;
   align-content: stretch;
+}
+
+
+img:hover {
+  filter: brightness(0.5)
+}
+
+.box .info .detailbox {
+  font-size: 12px;
+}
+
+.box .info .detailbox_design {
+  display: inline-block;
+  background: rgb(46, 47, 49);
+  color: rgb(255, 255, 255);
+  font-family: "Watcha Sans", Roboto, "Noto Sans KR", "Apple SD Gothic Neo",
+    "Nanum Gothic", "Malgun Gothic", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  vertical-align: top;
+  line-height: 18px;
+  padding: 1px 5px;
+  border: none;
+  margin: 0px 10px 0px 0px;
+  margin-bottom: 5px;
+}
+
+
+.box-wrap {
+  /* width: 100vw; height: 100vh; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: stretch;
+}
+
+.box {
+  position: relative;
+  /* background: #000; */
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  /* box-shadow: 1px 1px 3px rgba(0,0,0,0.4); */
+}
+
+.box img {
+  transition: all 0.3s ease-in-out;
+}
+
+.box .info {
+  position: absolute;
+  left: 5px;
+  bottom: 10px;
+  color: #fff;
+  width: 100%;
+  /* padding: 15px; */
+  box-sizing: border-box;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.box .info h3 {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-bottom: 3px;
+  text-align: left;
+}
+
+.box:hover .info {
+  opacity: 1;
+}
+
+.box:hover img {
+  opacity: 0.2;
+}
+
+.box:hover:before {
+  width: 60px;
+}
+
+.box:hover:after {
+  height: 60px;
+}
+
+@font-face {
+  font-family: "GoyangIlsan";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background-color: #1a237e;
+  font-family: "GoyangIlsan";
 }
 </style>

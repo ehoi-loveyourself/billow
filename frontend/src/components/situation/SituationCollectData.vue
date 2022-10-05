@@ -17,10 +17,10 @@
     회원님의 취향을 알려주세요!
   </h2>
   <br />
-  <div class="container" >
+
     <div class="wrap" v-for="random in randomProgram">
       <SituationRandom v-bind:random="random" />
-    </div>
+
   </div><br />
 </div>
 <br/><br/><br/>
@@ -93,11 +93,9 @@ img:hover {
   font-size: 16px;
 }
 
-.container {
+.wrap {
   display:inline-flex;
   flex-wrap:wrap;
   align-content:stretch;
-  padding:0;
-  margin:0
 }
 </style>

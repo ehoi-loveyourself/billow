@@ -62,10 +62,8 @@ img {
 }
 
 input[type="checkbox"] {
-  /* display: inline-block; */
   width: 1.8vw;
-  height: 1.8vw; 
-  /* border: 3px solid gray; */
+  height: 1.8vw;
   cursor: pointer;
   background-color: transparent;
 }
