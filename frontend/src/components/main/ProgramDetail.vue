@@ -141,7 +141,7 @@ export default {
   // name: "App",
   name: "Star",
   computed: {
-    ...mapState(["programDetail", "programId"]),
+    ...mapState(["programDetail", "programId", "isFavorite"]),
   },
   data() {
     return {

@@ -223,9 +223,12 @@
       >
     </splide>
 
-    <h2 style="color: white">혹시 {{ actorName }}님에게 관심이 있으신가요?</h2>
-    <splide id="carousel_recommend" :options="options">
-      <template v-if="actorProgram != null && actorProgram.length > 0">
+    <div v-if="actorProgram != null && actorProgram.length > 0">
+      <h2 style="color: white">
+        혹시 {{ actorProgram[0].actorName }}
+        님에게 관심이 있으신가요?
+      </h2>
+      <splide id="carousel_recommend" :options="options">
         <splide-slide v-for="actor in actorProgram">
           <div class="box-wrap">
             <div class="box">
@@ -263,20 +266,8 @@
             </div>
           </div>
         </splide-slide>
-      </template>
-      <template v-else>
-        <h2
-          style="
-            color: white;
-            margin-left: 70px;
-            font-size: 1.1vw;
-            font-weight: 300;
-          "
-        >
-          출연진 추천 프로그램이 없습니다.
-        </h2></template
-      >
-    </splide>
+      </splide>
+    </div>
   </div>
 </template>
 

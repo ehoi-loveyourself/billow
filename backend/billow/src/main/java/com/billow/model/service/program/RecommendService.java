@@ -83,6 +83,7 @@ public class RecommendService {
 
     public List<CastResponse> recommendActor(Long userId) {
         List<String> actor = castRepository.findActorName(userId);
+        if (actor.size() == 0) return null;
         List<Cast> castList = castRepository.findByActorName(userId, actor.get(0));
         return castList
                 .stream()

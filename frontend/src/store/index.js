@@ -3,8 +3,78 @@ import Vuex from "vuex";
 import router from "@/router";
 import axios from "axios";
 
-// Vue.use(Vuex);
+let isTokenRefreshing = false;
+let refreshSubscribers = [];
 
+const onTokenRefreshed = (accessToken) => {
+  refreshSubscribers.map((callback) => callback(accessToken));
+};
+const addRefreshSubscriber = (callback) => {
+  refreshSubscribers.push(callback);
+};
+
+axios.interceptors.request.use(
+  function (config) {
+    config.headers["Auth-access"] = localStorage.getItem("authToken");
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
+
+axios.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    const {
+      config,
+      response: { status },
+    } = error;
+    const originalRequest = config;
+    if (status === 401) {
+      if (!isTokenRefreshing) {
+        isTokenRefreshing = true;
+        axios
+          .post("/api/users/refresh", {
+            email: localStorage.getItem("email"),
+            refreshToken: localStorage.getItem("refreshToken"),
+          })
+          .then((response) => {
+            isTokenRefreshing = false;
+            localStorage.setItem(
+              "authToken",
+              JSON.stringify(response.data.authToken).replace(/\"/gi, "")
+            );
+            onTokenRefreshed(localStorage.getItem("authToken"));
+          })
+          .catch((err) => {
+            alert("재로그인이 필요합니다.");
+            console.log(err);
+          });
+      }
+      const retryOriginalRequest = new Promise((resolve) => {
+        addRefreshSubscriber((accessToken) => {
+          originalRequest.headers["Auth-access"] = accessToken;
+          resolve(axios(originalRequest));
+        });
+      });
+      return retryOriginalRequest;
+    }
+    if (status === 403) {
+      alert("재로그인이 필요합니다.");
+      router.push("/loginmain");
+    }
+    if (status === 400) {
+      alert("오류가 발생하여 로그인 페이지로 이동합니다.");
+      router.push("/loginmain");
+    }
+    return Promise.reject(error);
+  }
+);
+
+// Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     authToken: "",
@@ -89,11 +159,11 @@ export default new Vuex.Store({
     SET_GENDERAGE_PROGRAM(state, genderAgeProgram) {
       state.genderAgeProgram = genderAgeProgram;
       state.userAge = genderAgeProgram[0].userAge;
-      staet.userGender = genderAgeProgram[0].userGender;
+      state.userGender = genderAgeProgram[0].userGender;
     },
     SET_ACTOR_PROGRAM(state, actorProgram) {
+      console.log(actorProgram);
       state.actorProgram = actorProgram;
-      state.actorName = actorProgram[0].actorName;
     },
     SET_ONAIR_PROGRAM(state, onairProgram) {
       state.onairProgram = onairProgram;
@@ -199,62 +269,17 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    getError({ commit }) {
-      alert("오류가 발생하였습니다.");
-      router.push("/loginmain");
+    getUserInfo({ commit }) {
+      axios.get("/api/users").then((res) => {
+        // 사용자 정보 데이터 GET
+        console.log(res.data);
+        commit("SET_USER_INFO", res.data);
+      });
     },
-    getAuthError({ commit }) {
-      alert("로그인이 필요한 서비스입니다.");
-      // router.push("/loginmain");
-    },
-    getUserInfo({ commit, dispatch }) {
-      axios
-        .get("/api/users", {
-          headers: {
-            "Auth-access": localStorage.getItem("authToken"),
-          },
-        })
-        .then((res) => {
-          // 사용자 정보 데이터 GET
-          console.log(res.data);
-          commit("SET_USER_INFO", res.data);
-        })
-        .catch((ex) => { // authToken 만료 시
-          dispatch("getAuthError");
-
-          axios
-            .post("/api/users/refresh", {
-              email: localStorage.getItem("email"),
-              refreshToken: localStorage.getItem("refreshToken"),
-            })
-            .then((response) => {
-              axios
-              .get("/api/users", {
-                headers: {
-                "Auth-access": response.data.authToken,
-            },
-            })
-              .then((res) => {
-                // GET 성공 시
-                alert(response.data.authToken);
-                console.log(res.data);
-                commit("SET_USER_INFO", res.data);
-
-                localStorage.setItem(
-                  "authToken",
-                  JSON.stringify(response.data.authToken).replace(/\"/gi, "")
-                );
-              })
-        })
-        });
-    },
-    modifyUserInfo({ commit, dispatch, state }) {
+    modifyUserInfo({ commit, state }) {
       console.log(state.userInfo);
       axios
         .put("/api/users", {
-          headers: {
-            "Auth-access": localStorage.getItem("authToken"),
-          },
           nickName: state.userInfo.nickName,
           gender: state.userInfo.gender,
           age: state.userInfo.age,
@@ -266,55 +291,33 @@ export default new Vuex.Store({
         .then((res) => {
           // 사용자 정보 수정 PUT
           console.log(res.data);
-        })
-        .catch((ex) => {
-          dispatch("getAuthError");
         });
     },
-    deleteUserInfo({ commit, dispatch }) {
-      axios
-        .delete("/api/users", {
-          headers: {
-            "Auth-access": localStorage.getItem("authToken"),
-          },
-        })
-        .then((res) => {
-          // 사용자 정보 삭제 DELETE
-          console.log(res.data);
-          window.localStorage.removeItem("authToken");
-          window.localStorage.removeItem("name");
-          window.localStorage.removeItem("email");
-          router.push("/loginmain");
-        })
-        .catch((ex) => {
-          dispatch("getAuthError");
-        });
+    deleteUserInfo({ commit }) {
+      axios.delete("/api/users").then((res) => {
+        // 사용자 정보 삭제 DELETE
+        console.log(res.data);
+        window.localStorage.removeItem("authToken");
+        window.localStorage.removeItem("name");
+        window.localStorage.removeItem("email");
+        router.push("/loginmain");
+      });
     },
-    getRandomProgram({ commit, dispatch }) {
-      axios
-        .get("/api/program/random")
-        .then((res) => {
-          // 랜덤 프로그램 추천 데이터 GET
-          console.log(res.data);
-          commit("SET_RANDOM_PROGRAM", res.data);
-        })
-        .catch((ex) => {
-          dispatch("getError");
-        });
+    getRandomProgram({ commit }) {
+      axios.get("/api/program/random").then((res) => {
+        // 랜덤 프로그램 추천 데이터 GET
+        console.log(res.data);
+        commit("SET_RANDOM_PROGRAM", res.data);
+      });
     },
-    getUserRecommendProgram({ commit, dispatch }) {
-      axios
-        .get("/api/mf/user-recommend")
-        .then((res) => {
-          // 사용자 맞춤 프로그램 추천 데이터 GET
-          console.log(res.data);
-          commit("SET_USER_RECOMMEND_PROGRAM", res.data);
-        })
-        .catch((ex) => {
-          dispatch("getAuthError");
-        });
+    getUserRecommendProgram({ commit }) {
+      axios.get("/api/mf/user-recommend").then((res) => {
+        // 사용자 맞춤 프로그램 추천 데이터 GET
+        console.log(res.data);
+        commit("SET_USER_RECOMMEND_PROGRAM", res.data);
+      });
     },
-    getConditionRecommendProgram({ commit, dispatch, state }) {
+    getConditionRecommendProgram({ commit, state }) {
       axios
         .post("/api/mf/condition-recommend", {
           who: state.who,
@@ -325,122 +328,76 @@ export default new Vuex.Store({
           // 상황별 프로그램 추천 데이터 GET
           console.log(res.data);
           commit("SET_CONDITION_RECOMMEND_PROGRAM", res.data);
-        })
-        .catch((ex) => {
-          dispatch("getAuthError");
         });
     },
-    getRecommendProgram({ commit, dispatch }) {
-      axios
-        .get("/api/recommend/popular")
-        .then((res) => {
-          // 인기 프로그램 추천 데이터 GET
-          console.log(res.data);
-          commit("SET_HOT_PROGRAM", res.data);
-        })
-        .catch((ex) => {
-          dispatch("getError");
-        });
+    getRecommendProgram({ commit }) {
+      axios.get("/api/recommend/popular").then((res) => {
+        // 인기 프로그램 추천 데이터 GET
+        console.log(res.data);
+        commit("SET_HOT_PROGRAM", res.data);
+      });
 
-      axios
-        .get("/api/recommend/new")
-        .then((res) => {
-          // 신규 프로그램 추천 데이터 GET
-          console.log(res.data);
-          commit("SET_NEW_PROGRAM", res.data);
-        })
-        .catch((ex) => {
-          dispatch("getError");
-        });
+      axios.get("/api/recommend/new").then((res) => {
+        // 신규 프로그램 추천 데이터 GET
+        console.log(res.data);
+        commit("SET_NEW_PROGRAM", res.data);
+      });
 
-      axios
-        .get("/api/recommend/gender-age")
-        .then((res) => {
-          // 성연령별 프로그램 추천 데이터 GET
-          console.log(res.data);
-          commit("SET_GENDERAGE_PROGRAM", res.data);
-        })
-        .catch((ex) => {
-          // dispatch("getAuthError");
-        });
+      axios.get("/api/recommend/gender-age").then((res) => {
+        // 성연령별 프로그램 추천 데이터 GET
+        console.log(res.data);
+        commit("SET_GENDERAGE_PROGRAM", res.data);
+      });
 
-      axios
-        .get("/api/recommend/actor")
-        .then((res) => {
-          // 출연진 프로그램 추천 데이터 GET
-          console.log(res.data);
-          commit("SET_ACTOR_PROGRAM", res.data);
-        })
-        .catch((ex) => {});
+      axios.get("/api/recommend/actor").then((res) => {
+        // 출연진 프로그램 추천 데이터 GET
+        console.log(res.data);
+        commit("SET_ACTOR_PROGRAM", res.data);
+      });
 
-      axios
-        .get("/api/recommend/onair")
-        .then((res) => {
-          // 온에어 프로그램 추천 데이터 GET
-          console.log(res.data);
-          commit("SET_ONAIR_PROGRAM", res.data);
-        })
-        .catch((ex) => {
-          dispatch("getError");
-        });
+      axios.get("/api/recommend/onair").then((res) => {
+        // 온에어 프로그램 추천 데이터 GET
+        console.log(res.data);
+        commit("SET_ONAIR_PROGRAM", res.data);
+      });
     },
 
     getProgramDetail({ commit, dispatch }, programId) {
       commit("SET_PROGRAM_ID", programId);
-      axios
-        .get(`/api/program/${programId}`)
-        .then((res) => {
-          //프로그램 정보 조회 GET
-          console.log(res.data);
-          commit("SET_PROGRAM_DETAIL", res.data);
-          commit("CLEAR_USER_RATING");
-          commit("CLEAR_PROGRAM_SCHEDULE");
-          dispatch("getProgramOrganization", programId);
-          dispatch("getProgramReview", programId);
-          dispatch("getProgramOnairTalk", programId);
-          dispatch("getProgramCastInfo", programId);
-          dispatch("getBookmark", programId);
-          dispatch("getUserRating", programId);
-        })
-        .catch((ex) => {
-          dispatch("getError");
-        });
+      axios.get(`/api/program/${programId}`).then((res) => {
+        //프로그램 정보 조회 GET
+        console.log(res.data);
+        commit("SET_PROGRAM_DETAIL", res.data);
+        commit("CLEAR_USER_RATING");
+        commit("CLEAR_PROGRAM_SCHEDULE");
+        dispatch("getProgramOrganization", programId);
+        dispatch("getProgramReview", programId);
+        dispatch("getProgramOnairTalk", programId);
+        dispatch("getProgramCastInfo", programId);
+        dispatch("getUserBookmark", programId);
+        dispatch("getUserRating", programId);
+      });
     },
-    getProgramOrganization({ commit, dispatch }, programId) {
-      axios
-        .get(`/api/organization/${programId}`)
-        .then((res) => {
-          //편성표 정보 조회 GET
-          console.log(res.data);
-          commit("SET_PROGRAM_SCHEDULE", res.data);
-        })
-        .catch((ex) => {
-          dispatch("getError");
-        });
+    getProgramOrganization({ commit }, programId) {
+      axios.get(`/api/organization/${programId}`).then((res) => {
+        //편성표 정보 조회 GET
+        console.log(res.data);
+        commit("SET_PROGRAM_SCHEDULE", res.data);
+      });
     },
-    getProgramCastInfo({ commit, dispatch }, programId) {
-      axios
-        .get(`/api/program/cast/${programId}`)
-        .then((res) => {
-          //출연진 정보 조회 GET
-          console.log(res.data);
-          commit("SET_CAST_INFO", res.data);
-        })
-        .catch((ex) => {
-          dispatch("getError");
-        });
+    getProgramCastInfo({ commit }, programId) {
+      axios.get(`/api/program/cast/${programId}`).then((res) => {
+        //출연진 정보 조회 GET
+        console.log(res.data);
+        commit("SET_CAST_INFO", res.data);
+      });
     },
-    getProgramReview({ commit, dispatch }, programId) {
-      axios
-        .get(`/api/review/${programId}`)
-        .then((res) => {
-          //리뷰 정보 조회 GET
-          console.log(res.data);
-          commit("SET_PROGRAM_REVIEW", res.data);
-        })
-        .catch((ex) => {
-          dispatch("getError");
-        });
+    getProgramReview({ commit }, programId) {
+      axios.get(`/api/review/${programId}`).then((res) => {
+        //리뷰 정보 조회 GET
+        console.log(res.data);
+        commit("SET_PROGRAM_REVIEW", res.data);
+      });
     },
     registReview({ commit, dispatch, state }, review) {
       //리뷰 등록 POST
@@ -466,35 +423,22 @@ export default new Vuex.Store({
           console.log(res.data);
           alert("리뷰를 수정했습니다.");
           dispatch("getProgramReview", state.programId);
-        })
-        .catch((ex) => {
-          dispatch("getAuthError");
         });
     },
     deleteProgramReview({ commit, dispatch, state }, reviewId) {
-      axios
-        .delete(`/api/review/${reviewId}`)
-        .then((res) => {
-          //리뷰 삭제 DELETE
-          console.log(res.data);
-          alert("리뷰를 삭제했습니다.");
-          dispatch("getProgramReview", state.programId);
-        })
-        .catch((ex) => {
-          dispatch("getAuthError");
-        });
+      axios.delete(`/api/review/${reviewId}`).then((res) => {
+        //리뷰 삭제 DELETE
+        console.log(res.data);
+        alert("리뷰를 삭제했습니다.");
+        dispatch("getProgramReview", state.programId);
+      });
     },
-    getProgramOnairTalk({ commit, dispatch }, programId) {
-      axios
-        .get(`/api/chat/${programId}`)
-        .then((res) => {
-          //온에어톡 조회 GET
-          console.log(res.data);
-          commit("SET_ONAIR_TALK", res.data);
-        })
-        .catch((ex) => {
-          dispatch("getError");
-        });
+    getProgramOnairTalk({ commit }, programId) {
+      axios.get(`/api/chat/${programId}`).then((res) => {
+        //온에어톡 조회 GET
+        console.log(res.data);
+        commit("SET_ONAIR_TALK", res.data);
+      });
     },
     sendMessage({ commit, dispatch, state }, message) {
       axios
@@ -521,37 +465,26 @@ export default new Vuex.Store({
           alert("로그인이 필요한 서비스입니다.");
         });
     },
-    getAlarm({ commit, dispatch }) {
-      axios
-        .get(`/api/alarm`)
-        .then((res) => {
-          //방영 알림 조회 GET
-          console.log(res.data);
-          commit("SET_ALARM_LIST", res.data);
-        })
-        .catch((ex) => {});
+    getAlarm({ commit }) {
+      axios.get(`/api/alarm`).then((res) => {
+        //방영 알림 조회 GET
+        console.log(res.data);
+        commit("SET_ALARM_LIST", res.data);
+      });
     },
     deleteAlarm({ commit, dispatch, state }, broadcastingAlarmId) {
-      axios
-        .delete(`/api/alarm/${broadcastingAlarmId}`)
-        .then((res) => {
-          //방영 알림 삭제 DELETE
-          console.log(res.data);
-          dispatch("getAlarm", state.programId);
-        })
-        .catch((ex) => {
-          dispatch("getAuthError");
-        });
+      axios.delete(`/api/alarm/${broadcastingAlarmId}`).then((res) => {
+        //방영 알림 삭제 DELETE
+        console.log(res.data);
+        dispatch("getAlarm", state.programId);
+      });
     },
-    getRating({ commit, dispatch }) {
-      axios
-        .get(`/api/users/rating`)
-        .then((res) => {
-          //평점 조회 GET
-          console.log(res.data);
-          commit("SET_RATING_LIST", res.data);
-        })
-        .catch((ex) => {});
+    getRating({ commit }) {
+      axios.get(`/api/users/rating`).then((res) => {
+        //평점 조회 GET
+        console.log(res.data);
+        commit("SET_RATING_LIST", res.data);
+      });
     },
     getUserRating({ commit }, programId) {
       axios
@@ -566,16 +499,11 @@ export default new Vuex.Store({
         });
     },
     deleteRating({ commit, dispatch, state }, ratingId) {
-      axios
-        .delete(`/api/users/rating/${ratingId}`)
-        .then((res) => {
-          //평점 삭제 DELETE
-          console.log(res.data);
-          dispatch("getRating", state.programId);
-        })
-        .catch((ex) => {
-          dispatch("getAuthError");
-        });
+      axios.delete(`/api/users/rating/${ratingId}`).then((res) => {
+        //평점 삭제 DELETE
+        console.log(res.data);
+        dispatch("getRating", state.programId);
+      });
     },
     registRating({ commit }, rating) {
       axios
@@ -619,7 +547,7 @@ export default new Vuex.Store({
           alert("로그인이 필요한 서비스입니다.");
         });
     },
-    getSearchProgram({ commit, dispatch }, word) {
+    getSearchProgram({ commit }, word) {
       commit("SET_SEARCH_WORD", word);
       axios
         .get("/api/program", { params: { word: word } })
@@ -630,7 +558,6 @@ export default new Vuex.Store({
         })
         .catch((ex) => {
           commit("SET_SEARCH_PROGRAM", null);
-          dispatch("getError");
         });
     },
     getUserBookmark({ commit }, programId) {
@@ -644,29 +571,19 @@ export default new Vuex.Store({
           commit("SET_BOOKMARK_FALSE");
         });
     },
-    registBookmark({ commit, dispatch, state }) {
-      axios
-        .post(`/api/bookmark/${state.programId}`)
-        .then((res) => {
-          //즐겨찾기 등록 POST
-          console.log(res.data);
-          commit("SET_BOOKMARK_TRUE");
-        })
-        .catch((ex) => {
-          dispatch("getAuthError");
-        });
+    registBookmark({ commit, state }) {
+      axios.post(`/api/bookmark/${state.programId}`).then((res) => {
+        //즐겨찾기 등록 POST
+        console.log(res.data);
+        commit("SET_BOOKMARK_TRUE");
+      });
     },
-    deleteBookmark({ commit, dispatch, state }) {
-      axios
-        .delete(`/api/bookmark/${state.programId}`)
-        .then((res) => {
-          //즐겨찾기 삭제 DELETE
-          console.log(res.data);
-          commit("SET_BOOKMARK_FALSE");
-        })
-        .catch((ex) => {
-          dispatch("getAuthError");
-        });
+    deleteBookmark({ commit, state }) {
+      axios.delete(`/api/bookmark/${state.programId}`).then((res) => {
+        //즐겨찾기 삭제 DELETE
+        console.log(res.data);
+        commit("SET_BOOKMARK_FALSE");
+      });
     },
     userRegistBookmark({ commit }, programId) {
       axios

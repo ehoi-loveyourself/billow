@@ -52,9 +52,9 @@ public class WebClientController {
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
     @PostMapping("/condition-recommend")
-    public ResponseEntity<Object> conditionRecommend(@RequestBody ConditionRecommendRequest conditionRecommendRequest) {
+    public ResponseEntity<Object> conditionRecommend(@RequestHeader("Auth-access") String token, @RequestBody ConditionRecommendRequest conditionRecommendRequest) {
         log.info("상황별 프로그램 추천 API 호출");
-        List<ProgramResponse> responses = webClientService.conditionRecommend(1L, conditionRecommendRequest);
+        List<ProgramResponse> responses = webClientService.conditionRecommend(JwtTokenProvider.getUserId(token), conditionRecommendRequest);
         log.info("상황별 프로그램 추천 성공");
         return ResponseEntity.ok()
                 .body(responses);

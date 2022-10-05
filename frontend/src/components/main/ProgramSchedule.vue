@@ -6,7 +6,7 @@
     </div> -->
     <br />
     <div class="flex">
-      <template v-if="programSchedule.length > 0">
+      <div v-if="programSchedule != null && programSchedule.length > 0">
         <b-table-simple
           bordered
           fixed
@@ -50,8 +50,8 @@
             </b-tr>
           </tbody>
         </b-table-simple>
-      </template>
-      <template v-else>
+      </div>
+      <div v-else>
         <h2
           style="
             color: white;
@@ -61,8 +61,8 @@
           "
         >
           편성 정보가 없습니다.
-        </h2></template
-      >
+        </h2>
+      </div>
     </div>
   </div>
 
