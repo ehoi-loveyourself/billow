@@ -31,22 +31,12 @@
         </b-col>
         <b-col cols="1">
         <b-button size="md" type="submit" @click="onSubmit()">
-          <span>등록</span>
+          <span>전송</span>
         </b-button>
       </b-col>
       </b-row>
     </div>
     <br />
-    <!-- <section>
-      <article class="review_set">
-        <article class="reviews" v-for="talk in onairTalk" track-by="id">
-          <span class="username">
-            {{ talk.userNickName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span
-          ><span class="time">{{ talk.regDateTime }}</span>
-          <p>{{ talk.content }}</p>
-        </article>
-      </article>
-    </section> -->
     <article class="review_set">
       <template v-if="onairTalk != null && onairTalk.length > 0">
         <b-row class="reviews" v-for="talk in onairTalk" track-by="id">
