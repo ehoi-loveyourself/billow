@@ -1,40 +1,34 @@
 <template>
   <br />
   <div>
-    <br />
     <div class="flex">
-      <template v-if="alarmList != null && alarmList.length > 0">
-        <div id="Img" v-for="alarm in alarmList">
-          <router-link
-            :to="{ name: 'detail' }"
-            @click="moveProgramDetail(alarm.id)"
-            class="nav-link"
-          >
-            <img class="poster" :src="alarm.posterImg" alt="Image" />
-          </router-link>
-          <br />
-          <span>
-            <!-- <img src="@/assets/alarm.png" style="cursor: pointer" />&nbsp; -->
-            <div style="margin-bottom: 4%">
-              <span class="station">{{ alarm.alarmStation }}</span
-              >&nbsp;
-              <span class="episode" v-if="alarm.alarmEpisode">{{
-                alarm.alarmEpisode
-              }}</span>
-            </div>
-            <div style="margin-bottom: 10%">
-              <span class="time"
-                >{{ alarm.alarmDay }} {{ alarm.alarmTime }}</span
-              >&nbsp;
-              <a
-                href="#"
-                @click="alarmDelete(alarm.broadcastingAlarmId)"
-                class="button btnBorder btnRed"
-                ><span style="font-size: 0.8vw">삭제</span></a
-              >
-            </div>
-          </span>
+<<<<<<< frontend/src/components/user/UserAlarmConfirm.vue
+      <div id="Img" v-for="alarm in alarmList">
+        <router-link :to="{ name: 'detail' }" @click="moveProgramDetail(alarm.id)" class="nav-link">
+          <div class="box-wrap">
+            <div class="box">
+              <img class="poster" :src="alarm.posterImg" alt="Image" />
+              <div class="info">
+          <h3>{{ alarm.title }}</h3>
         </div>
+            </div>
+          </div>
+        </router-link>
+        <span>
+          <!-- <img src="@/assets/alarm.png" style="cursor: pointer" />&nbsp; -->
+          <div>
+            <span class="station">{{ alarm.alarmStation }}</span>&nbsp;
+            <span class="episode" v-if="alarm.alarmEpisode">{{
+            alarm.alarmEpisode
+            }}</span>&nbsp;&nbsp;<a href="#" @click="alarmDelete(alarm.broadcastingAlarmId)" class="button"><img
+                src="@/assets/trash.png" style="width:8%" /></a>
+          </div>
+          <div style="margin-bottom: 10%">
+            <span class="day">{{ alarm.alarmDay }} </span>&nbsp;&nbsp;<span class="time"> {{ alarm.alarmTime
+            }}</span>&nbsp;
+          </div>
+        </span>
+      </div>
       </template>
       <template v-else>
         <h2
@@ -48,6 +42,7 @@
           예약된 방영 알림이 없습니다.
         </h2></template
       >
+
 
       <!-- <div id="Img">
           <img class="poster" src="@/assets/sign.png" alt="Image" />
@@ -205,8 +200,13 @@ a.button {
   padding-top: 0;
 }
 
+.day {
+  color: #a0a0a0;
+  font-size: 1vw;
+}
+
 .time {
-  color: #a1a1a1;
+  color: #a0a0a0;
   font-size: 1.1vw;
 }
 
@@ -217,5 +217,105 @@ a.button {
 
 .episode {
   font-size: 0.9vw;
+}
+
+
+.poster:hover {
+  filter: brightness(0.5)
+}
+
+.box .info .detailbox {
+  font-size: 12px;
+}
+
+.box .info .detailbox_design {
+  display: inline-block;
+  background: rgb(46, 47, 49);
+  color: rgb(255, 255, 255);
+  font-family: "Watcha Sans", Roboto, "Noto Sans KR", "Apple SD Gothic Neo",
+    "Nanum Gothic", "Malgun Gothic", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  vertical-align: top;
+  line-height: 18px;
+  padding: 1px 5px;
+  border: none;
+  margin: 0px 10px 0px 0px;
+  margin-bottom: 5px;
+}
+
+
+.box-wrap {
+  /* width: 100vw; height: 100vh; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: stretch;
+}
+
+.box {
+  position: relative;
+  /* background: #000; */
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  /* box-shadow: 1px 1px 3px rgba(0,0,0,0.4); */
+}
+
+.box .poster {
+  transition: all 0.3s ease-in-out;
+}
+
+.box .info {
+  position: absolute;
+  left: 5px;
+  bottom: 10px;
+  color: #fff;
+  width: 100%;
+  /* padding: 15px; */
+  box-sizing: border-box;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.box .info h3 {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-bottom: 3px;
+  text-align: left;
+}
+
+.box:hover .info {
+  opacity: 1;
+}
+
+.box:hover img {
+  opacity: 0.2;
+}
+
+.box:hover:before {
+  width: 60px;
+}
+
+.box:hover:after {
+  height: 60px;
+}
+
+@font-face {
+  font-family: "GoyangIlsan";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background-color: #1a237e;
+  font-family: "GoyangIlsan";
 }
 </style>
