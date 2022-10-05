@@ -69,7 +69,6 @@ public class ProgramOrganozationService {
                     .organizationResponseList(organizationResponseList)
                     .build());
         }
-        System.out.println(list);
         for (OrganizationListResponse organization : list) {
             if (organization.getOrganizationResponseList() != null) {
                 return list;
