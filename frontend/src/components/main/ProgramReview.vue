@@ -43,35 +43,49 @@
     <br />
 
     <article class="review_set">
-      <b-row class="reviews" v-for="review in programReview" track-by="id">
-        <b-col cols="1" style="text-align: right; padding-right: 0.1%">
-          <b-avatar
-            class="avatar"
-            variant="info"
-            :src="review.userProfile"
-            size="3rem"
-          ></b-avatar>
-        </b-col>
-        <b-col cols="11">
-          <span class="username">{{ review.userNickName }}</span
-          >&nbsp;&nbsp;
-          <span class="time"> {{ review.regDateTime }}&nbsp; </span>
-          <a
-            href="#"
-            @click="setReviewId(review.reviewId)"
-            class="button btnBorder btnBlue"
-            v-b-modal.modal-5
-            ><span style="font-size: 0.8vw">수정</span></a
-          >&nbsp;
-          <a
-            href="#"
-            @click="reviewDelete(review.reviewId)"
-            class="button btnBorder btnRed"
-            ><span style="font-size: 0.8vw">삭제</span></a
-          >
-          <p>{{ review.content }}</p>
-        </b-col>
-      </b-row>
+      <template v-if="programReview != null && programReview.length > 0">
+        <b-row class="reviews" v-for="review in programReview" track-by="id">
+          <b-col cols="1" style="text-align: right; padding-right: 0.1%">
+            <b-avatar
+              class="avatar"
+              variant="info"
+              :src="review.userProfile"
+              size="3rem"
+            ></b-avatar>
+          </b-col>
+          <b-col cols="11">
+            <span class="username">{{ review.userNickName }}</span
+            >&nbsp;&nbsp;
+            <span class="time"> {{ review.regDateTime }}&nbsp; </span>
+            <a
+              href="#"
+              @click="setReviewId(review.reviewId)"
+              class="button btnBorder btnBlue"
+              v-b-modal.modal-5
+              ><span style="font-size: 0.8vw">수정</span></a
+            >&nbsp;
+            <a
+              href="#"
+              @click="reviewDelete(review.reviewId)"
+              class="button btnBorder btnRed"
+              ><span style="font-size: 0.8vw">삭제</span></a
+            >
+            <p>{{ review.content }}</p>
+          </b-col>
+        </b-row>
+      </template>
+      <template v-else>
+        <h2
+          style="
+            color: white;
+            margin-left: 70px;
+            font-size: 1.1vw;
+            font-weight: 300;
+          "
+        >
+          등록된 리뷰가 없습니다.
+        </h2></template
+      >
     </article>
 
     <br />

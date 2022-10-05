@@ -3,7 +3,13 @@
     <br />
     <div style="padding-left: 4%; padding-right: 4%">
       <!-- list size -->
-      <div>{{ onairTalkCount }}개의 TALK</div>
+      <div>
+        <template v-if="onairTalk != null && onairTalk.length > 0"
+          >{{ onairTalk.length }}
+        </template>
+        <template v-else> 0 </template>
+        개의 TALK
+      </div>
       <b-row style="margin-top: 20px">
         <b-col cols="12">
           <!-- <b-form-input
@@ -42,24 +48,38 @@
       </article>
     </section> -->
     <article class="review_set">
-      <b-row class="reviews" v-for="talk in onairTalk" track-by="id">
-        <b-col cols="1" style="text-align: right; padding-right: 0.1%">
-          <b-avatar
-            class="avatar"
-            variant="info"
-            :src="talk.userProfile"
-            size="3rem"
-          ></b-avatar>
-        </b-col>
-        <b-col cols="11">
-          <span class="username">
-            {{
-              talk.userNickName
-            }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span
-          ><span class="time">{{ talk.regDateTime }}</span>
-          <p>{{ talk.content }}</p>
-        </b-col>
-      </b-row>
+      <template v-if="onairTalk != null && onairTalk.length > 0">
+        <b-row class="reviews" v-for="talk in onairTalk" track-by="id">
+          <b-col cols="1" style="text-align: right; padding-right: 0.1%">
+            <b-avatar
+              class="avatar"
+              variant="info"
+              :src="talk.userProfile"
+              size="3rem"
+            ></b-avatar>
+          </b-col>
+          <b-col cols="11">
+            <span class="username">
+              {{
+                talk.userNickName
+              }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span
+            ><span class="time">{{ talk.regDateTime }}</span>
+            <p>{{ talk.content }}</p>
+          </b-col>
+        </b-row>
+      </template>
+      <template v-else>
+        <h2
+          style="
+            color: white;
+            margin-left: 70px;
+            font-size: 1.1vw;
+            font-weight: 300;
+          "
+        >
+          온에어톡 내용이 없습니다.
+        </h2></template
+      >
     </article>
     <br />
   </div>

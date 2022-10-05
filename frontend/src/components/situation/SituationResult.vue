@@ -1,34 +1,55 @@
 <template>
   <!-- <div id="app">
     <PageLoader/> -->
-    <header-bar />
-    <SecondBar />
+  <header-bar />
+  <SecondBar />
+  <br />
+  <h2
+    style="
+      color: white;
+      margin-left: 70px;
+      font-size: 1.2vw;
+      font-weight: 400;
+      margin-bottom: 1%;
+    "
+  >
+    #{{ who }} #{{ genre }}
+  </h2>
+  <h2
+    style="color: white; margin-left: 70px; font-size: 1.1vw; font-weight: 300"
+  >
+    딱 맞는 프로그램을 추천해드릴게요.
+  </h2>
+  <div style="padding-left: 70px; margin-top: 10px">
     <br />
-    <h2 style="color: white; margin-left: 70px; font-size: 1.2vw; font-weight: 400; margin-bottom: 1%;">
-      #{{ who }} #{{ genre }}
-    </h2>
-    <h2 style="color: white; margin-left: 70px; font-size: 1.1vw; font-weight: 300">
-      딱 맞는 프로그램을 추천해드릴게요.
-    </h2>
-    <div style="padding-left: 70px; margin-top: 10px">
-      <br />
-      <div class="flex">
+    <div class="flex">
+      <template v-if="conditionRecommend != null">
         <span v-for="condition in conditionRecommend">
-          <router-link :to="{ name: 'detail' }" @click="moveProgramDetail(condition.id)" class="nav-link">
+          <router-link
+            :to="{ name: 'detail' }"
+            @click="moveProgramDetail(condition.id)"
+            class="nav-link"
+          >
             <img :src="condition.posterImg" alt="Image" />
           </router-link>
         </span>
-      </div>
-      <br /><br /><br/><br/><br/>
+      </template>
+      <template v-else>추천 내역이 없습니다.</template>
     </div>
-    <p style="text-align: center">
-      <a class="startButton" href="#" role="button" style="border-radius: 15px">
-        <router-link :to="{ name: 'main' }" class="nav-link" style="font-size: 20px; padding: 10px; color: black">
-          홈으로
-        </router-link>
-      </a>
-    </p>
-    <br /><br /><br/><br/><br/>
+    <br /><br /><br /><br /><br />
+  </div>
+  <p style="text-align: center">
+    <a class="startButton" href="#" role="button" style="border-radius: 15px">
+      <router-link
+        :to="{ name: 'main' }"
+        class="nav-link"
+        style="font-size: 20px; padding: 10px; color: black"
+      >
+        홈으로
+      </router-link>
+    </a>
+  </p>
+  <br /><br /><br /><br /><br />
   <!-- </div> -->
 </template>
 
@@ -44,7 +65,7 @@ export default {
     HeaderBar,
     SecondBar,
     // PageLoader,
-},
+  },
   computed: {
     ...mapState(["who", "genre", "conditionRecommend"]),
   },
@@ -89,6 +110,6 @@ img {
 }
 
 img:hover {
-  filter: brightness(0.5)
+  filter: brightness(0.5);
 }
 </style>
