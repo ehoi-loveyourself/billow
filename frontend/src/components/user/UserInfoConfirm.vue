@@ -412,10 +412,6 @@
       >
     </section>
   </div>
-  <a href="#" @click="test()" class="button btnBorder btnRed"
-    ><span style="font-size: 1vw">테스트 버튼</span></a
-  >
-
   <br /><br /><br /><br /><br />
 </template>
 

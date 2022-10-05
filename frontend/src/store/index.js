@@ -310,9 +310,11 @@ export default new Vuex.Store({
       axios.delete("/api/users").then((res) => {
         // 사용자 정보 삭제 DELETE
         console.log(res.data);
-        window.localStorage.removeItem("authToken");
-        window.localStorage.removeItem("name");
-        window.localStorage.removeItem("email");
+        // window.localStorage.removeItem("authToken");
+        // window.localStorage.removeItem("name");
+        // window.localStorage.removeItem("email");
+        localStorage.clear();
+        
         router.push("/loginmain");
       });
     },
