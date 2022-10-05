@@ -2,12 +2,12 @@
   <br />
   <div>
     <div class="flex">
-      <template v-if="ratingList != null">
+      <div v-if="ratingList != null">
         <div id="Img" v-for="rating in ratingList">
           <UserRatingItem v-bind:rating="rating" />
         </div>
-      </template>
-      <template v-else>평점 내역이 없습니다.</template>
+      </div>
+      <div v-else>평점 내역이 없습니다.</div>
     </div>
     <br /><br /><br /><br />
   </div>

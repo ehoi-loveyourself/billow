@@ -1,6 +1,7 @@
 package com.billow.controller.user;
 
 import com.billow.exception.BadRequestException;
+import com.billow.jwt.JwtTokenProvider;
 import com.billow.model.service.user.ProfileImageService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,7 +31,7 @@ public class ProfileImageController {
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
     @GetMapping("/{profileId}")
-    public  ResponseEntity<Resource> initialSelectProfile(@PathVariable("profileId") Long profileId) {
+    public ResponseEntity<Resource> initialSelectProfile(@PathVariable("profileId") Long profileId) {
         try {
             log.info("초기 프로필 조회 API 호출");
             ResponseEntity<Resource> resource = profileImageService.initialSelectProfile(profileId);
