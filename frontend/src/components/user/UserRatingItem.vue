@@ -10,7 +10,7 @@
     </div>
 
   </router-link>
-  <div style="text-align: center; margin-bottom: 18%; margin-top: 3%;">
+  <div style="text-align: center; margin-bottom: 18%; margin-top: 3%">
     <!-- <span>
       <span v-for="index in 5" :key="index" @click="check(index)">
         <span v-if="index < rating.score"

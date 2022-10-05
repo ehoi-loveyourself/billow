@@ -1,4 +1,4 @@
-<template>
+      <template v-if="conditionRecommend != null">
   <header-bar />
   <SecondBar />
   <br />
@@ -37,12 +37,12 @@
           </div>
         </div>
       </span>
-
     </div>
     <br /><br /><br /><br /><br />
   </div>
   <p style="text-align: center">
     <a class="startButton" href="#" role="button" style="border-radius: 15px">
+
       <router-link :to="{ name: 'main' }" class="nav-link" style="font-size: 20px; padding: 10px; color: black">
         홈으로
       </router-link>
@@ -50,6 +50,7 @@
   </p>
   <br /><br /><br /><br /><br />
 </template>
+<template v-else>추천 내역이 없습니다.</template>
 
 <script>
 import HeaderBar from "@/components/layout/HeaderNavBar.vue";
@@ -120,7 +121,7 @@ img {
 }
 
 img:hover {
-  filter: brightness(0.5)
+  filter: brightness(0.5);
 }
 
 .box .info .detailbox {

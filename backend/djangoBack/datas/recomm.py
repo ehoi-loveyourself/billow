@@ -11,23 +11,26 @@ import MySQLdb
 import warnings
 import requests
 import pickle
+from ast import literal_eval
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 warnings.filterwarnings("ignore")
 
 # 1 DB 커넥션 따로
-# CONN = MySQLdb.connect(
-#     host = 'localhost',
-#     user = 'B309',
-#     password = 'B309Billow',
-#     db = 'billow'
-# )
-
-
 CONN = MySQLdb.connect(
     host = 'j7b309.p.ssafy.io',
     user = 'B309',
     password = 'B309Billow',
     db = 'billow'
 )
+
+# CONN = MySQLdb.connect(
+#     host = 'localhost',
+#     user = 'B309',
+#     password = 'B309Billow',
+#     db = 'billow'
+# )
 
 def query_MySQL(query):
     # 2. 쿼리 로그 찍기
@@ -134,53 +137,36 @@ def mf_algo_individual(request):
 
     return indi_predict_result
 
-# 상황 추천 알고리즘을 위한 pivot_table
-def mf_condition_recomm(programId):
+# 상황 추천 알고리즘
+def mf_condition_recomm_prac(programId):
+    # 사용자-평점 데이터와 프로그램 데이터가 필요하다
     program_data = query_MySQL('SELECT program_id, title from tb_program')
     rating_data = query_MySQL('SELECT score, program_id, user_id from tb_rating')
 
-    user_program_data = pd.merge(rating_data, program_data, on = 'program_id')
-    # print('##################user_program_data################')
-    # print(user_program_data)
+    # 사용자-평점데이터와 영화 데이터가 따로 나뉘어져 있으므로 program_id라는 공통 기준을 가지고 합쳐보자
+    # 사용자-영화에 따른 평점 데이터를 만들 것이다.
+    user_program_rating = pd.merge(program_data, rating_data, on = 'program_id')
 
-    # pivot 테이블을 만들자! value에는 score값을, column에는 program_id를, index에는 user id를 넣자
-    user_program_rating = user_program_data.pivot_table('score', index = 'user_id', columns = 'program_id').fillna(0)
+    # row가 프로그램, col이 사용자인 테이블을 만들자
+    program_user_rating = user_program_rating.pivot_table('score', index = 'program_id', columns = 'user_id')
 
-    # 이제 사용자-프로그램 기준의 데이터를 프로그램-사용자 기준으로 만들어서 특정 '프로그램'과 비슷한 프로그램을 추천해주는 로직을 구현합시다!
-    program_user_rating = user_program_rating.T
+    # 평점이 없는 NaN인 값을 0으로 바꿔주자
+    program_user_rating.fillna(0, inplace=True)
 
-    # print('##################user_program_rating################')
-    # print(program_user_rating)
+    # 아이템 기반 협업 필터링은 ~ 프로그램을 본 고객은 다음 프로그램도 시청했다, 는 뜻이다.
+    # 그리고 그 기반은 평점이 비슷한 것을 기반으로 한다
+    # 평점이 비슷하다는 것을 코사인 유사도로 측정해서 보여주자
+    item_based_collabor = cosine_similarity(program_user_rating)
 
-    SVD = TruncatedSVD(n_components=12)
-    matrix = SVD.fit_transform(program_user_rating)
-    matrix.shape
+    # print(program_user_rating.shape)
+    # print(item_based_collabor.shape)
 
-    matrix[0]
+    item_based_collabor = pd.DataFrame(data= item_based_collabor, index= program_user_rating.index, columns= program_user_rating.index)
+    # print(item_based_collabor.head())
 
-    print('#########matrix[0]###########')
-    print(matrix[0])
+    print('#### 결과 ###')
+    print(item_based_collabor[programId].sort_values(ascending=False)[:5].index.tolist())
+    return item_based_collabor[programId].sort_values(ascending=False)[:5].index.tolist()
 
-    # 이제 이렇게 나온 데이터를 활용해서 피어슨 상관계수(corr)를 구합니다.
-    corr = np.corrcoef(matrix)
-    corr.shape
+# mf_condition_recomm_prac(6)
 
-    corr2 = corr[:200, :200]
-    corr2.shape
-
-    plt.figure(figsize=(16, 10))
-    sns.heatmap(corr2)
-
-    program_id = user_program_rating.columns
-    program_id_list = list(program_id)
-    if programId not in program_id_list:
-        return []
-    print(program_id_list) 
-    coffey_hands = program_id_list.index(programId)
-    corr_coffey_hands = corr[coffey_hands]
-    print('##########추천 프로그램 ID##########')
-    print(list(program_id[(corr_coffey_hands >= 0.9)])[:10])
-    return list(program_id[(corr_coffey_hands >= 0.9)])[:10]
-
-
-# mf_condition_recomm(100)

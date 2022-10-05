@@ -64,122 +64,63 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 import axios from "axios";
 export default {
-  data() {
-    return {
-      userRating: null,
-      isTrue1: false,
-      isTrue2: false,
-      isTrue3: false,
-      isTrue4: false,
-      isTrue5: false,
-    };
-  },
   computed: {
-    ...mapState(["programId"]),
-  },
-  created() {
-    axios.get(`/api/program/rating/${this.programId}`).then((res) => {
-      //사용자 평점 조회 GET
-      console.log(res.data);
-      this.userRating = res.data;
-      if (this.userRating != null) {
-        if (this.userRating.score >= 2) {
-          this.isTrue1 = true;
-        }
-        if (this.userRating.score >= 4) {
-          this.isTrue2 = true;
-        }
-        if (this.userRating.score >= 6) {
-          this.isTrue3 = true;
-        }
-        if (this.userRating.score >= 8) {
-          this.isTrue4 = true;
-        }
-        if (this.userRating.score >= 10) {
-          this.isTrue5 = true;
-        }
-      }
-    });
+    ...mapState([
+      "programId",
+      "userRating",
+      "isTrue1",
+      "isTrue2",
+      "isTrue3",
+      "isTrue4",
+      "isTrue5",
+    ]),
   },
   methods: {
     ...mapActions(["registRating"]),
+    ...mapMutations([
+      "SET_FLAG_TRUE5",
+      "SET_FLAG_TRUE4",
+      "SET_FLAG_TRUE3",
+      "SET_FLAG_TRUE2",
+      "SET_FLAG_TRUE1",
+      "SET_FLAG_FALSE5",
+      "SET_FLAG_FALSE4",
+      "SET_FLAG_FALSE3",
+      "SET_FLAG_FALSE2",
+      "SET_FLAG_FALSE1",
+    ]),
+
     setFlagTrue5() {
-      this.isTrue1 = true;
-      this.isTrue2 = true;
-      this.isTrue3 = true;
-      this.isTrue4 = true;
-      this.isTrue5 = true;
       this.registRating({ programId: this.programId, score: 10 });
     },
     setFlagFalse5() {
-      this.isTrue5 = false;
       this.registRating({ programId: this.programId, score: 8 });
     },
     setFlagTrue4() {
-      this.isTrue1 = true;
-      this.isTrue2 = true;
-      this.isTrue3 = true;
-      this.isTrue4 = true;
-      this.isTrue5 = false;
       this.registRating({ programId: this.programId, score: 8 });
     },
     setFlagFalse4() {
-      //   this.isTrue1 = false;
-      //   this.isTrue2 = false;
-      //   this.isTrue3 = false;
-      //   this.isTrue4 = false;
-      this.isTrue5 = false;
       this.registRating({ programId: this.programId, score: 8 });
     },
     setFlagTrue3() {
-      this.isTrue1 = true;
-      this.isTrue2 = true;
-      this.isTrue3 = true;
-      //   this.isTrue4 = false;
-      //   this.isTrue5 = false;
       this.registRating({ programId: this.programId, score: 6 });
     },
     setFlagFalse3() {
-      //   this.isTrue1 = false;
-      //   this.isTrue2 = false;
-      //   this.isTrue3 = false;
-      this.isTrue4 = false;
-      this.isTrue5 = false;
       this.registRating({ programId: this.programId, score: 6 });
     },
     setFlagTrue2() {
-      this.isTrue1 = true;
-      this.isTrue2 = true;
-      this.isTrue3 = false;
-      this.isTrue4 = false;
-      this.isTrue5 = false;
       this.registRating({ programId: this.programId, score: 4 });
     },
     setFlagFalse2() {
-      //   this.isTrue1 = false;
-      //   this.isTrue2 = false;
-      this.isTrue3 = false;
-      this.isTrue4 = false;
-      this.isTrue5 = false;
       this.registRating({ programId: this.programId, score: 4 });
     },
     setFlagTrue1() {
-      this.isTrue1 = true;
-      this.isTrue2 = false;
-      this.isTrue3 = false;
-      this.isTrue4 = false;
-      this.isTrue5 = false;
       this.registRating({ programId: this.programId, score: 2 });
     },
     setFlagFalse1() {
-      this.isTrue1 = true;
-      this.isTrue2 = false;
-      this.isTrue3 = false;
-      this.isTrue4 = false;
-      this.isTrue5 = false;
       this.registRating({ programId: this.programId, score: 2 });
     },
   },

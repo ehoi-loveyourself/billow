@@ -52,9 +52,9 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
     @PostMapping("/oauth")
-    public ResponseEntity<Object> kakaoLogin(@RequestBody SignUpRequest signUpRequest, HttpServletResponse httpServletResponse) throws ParseException {
+    public ResponseEntity<Object> kakaoLogin(@RequestBody SignUpRequest signUpRequest) {
         log.info("카카오 로그인 API 호출");
-        LoginResponse response = userService.kakaoLogin(signUpRequest, httpServletResponse);
+        LoginResponse response = userService.kakaoLogin(signUpRequest);
         log.info("카카오 로그인 API 성공");
         return ResponseEntity.ok()
                 .body(response);
@@ -164,32 +164,32 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
     })
     @GetMapping("/rating")
-    public ResponseEntity<Object> selectRating() {
+    public ResponseEntity<Object> selectRating(@RequestHeader("Auth-access") String token) {
         log.info("평점 조회 API 호출");
-        List<RatingResponse> response = userService.selectRating(1L);
+        List<RatingResponse> response = userService.selectRating(JwtTokenProvider.getUserId(token));
         log.info("평점 조회 성공");
         return ResponseEntity.ok()
                 .body(response);
     }
 
-    @ApiOperation(value = "평점 수정", response = Object.class)
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "평점 수정 성공"),
-            @ApiResponse(responseCode = "404", description = "해당 유저를 찾을 수 없습니다."),
-            @ApiResponse(responseCode = "404", description = "해당 평점을 찾을 수 없습니다."),
-            @ApiResponse(responseCode = "400", description = "잘못된 요청입니다."),
-            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
-    })
-    @PutMapping("/rating/{ratingId}")
-    public ResponseEntity<Object> updateRating(@RequestHeader("Auth-access") String token,
-                                               @PathVariable("ratingId") Long ratingId,
-                                               @RequestBody RatingRequest ratingRequest) {
-        log.info("평점 수정 API 호출");
-        Message response = userService.updateRating(JwtTokenProvider.getUserId(token), ratingId, ratingRequest);
-        log.info("평점 수정 성공");
-        return ResponseEntity.ok()
-                .body(response);
-    }
+//    @ApiOperation(value = "평점 수정", response = Object.class)
+//    @ApiResponses(value = {
+//            @ApiResponse(responseCode = "200", description = "평점 수정 성공"),
+//            @ApiResponse(responseCode = "404", description = "해당 유저를 찾을 수 없습니다."),
+//            @ApiResponse(responseCode = "404", description = "해당 평점을 찾을 수 없습니다."),
+//            @ApiResponse(responseCode = "400", description = "잘못된 요청입니다."),
+//            @ApiResponse(responseCode = "400", description = "오류가 발생하였습니다.")
+//    })
+//    @PutMapping("/rating/{ratingId}")
+//    public ResponseEntity<Object> updateRating(@RequestHeader("Auth-access") String token,
+//                                               @PathVariable("ratingId") Long ratingId,
+//                                               @RequestBody RatingRequest ratingRequest) {
+//        log.info("평점 수정 API 호출");
+//        Message response = userService.updateRating(JwtTokenProvider.getUserId(token), ratingId, ratingRequest);
+//        log.info("평점 수정 성공");
+//        return ResponseEntity.ok()
+//                .body(response);
+//    }
 
     @ApiOperation(value = "평점 삭제", response = Object.class)
     @ApiResponses(value = {

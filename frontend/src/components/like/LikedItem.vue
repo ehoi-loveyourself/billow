@@ -2,9 +2,6 @@
   <div class="box-wrap">
     <div class="box">
       <img class="liked_2" :src="like.posterImg" alt="Image" @click="moveProgramDetail(like.programId)" />
-      <div class="info">
-        <h3>{{ like.title }}</h3>
-      </div>
       <div class="button">
         <button @click="addToFavorites(like.programId)" :id="like.programId" v-show="!isFavorite"
           style="border: none; background: none">
@@ -15,12 +12,14 @@
           <img class="hearted" src="@/assets/red_heart.png" />
         </button>
       </div>
+      <div class="info">
+        <h3>{{ like.title }}</h3>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import router from "@/router";
 import { reactive } from "@vue/reactivity";
 import axios from "axios";
 import { mapActions } from "vuex";
@@ -148,11 +147,6 @@ img:hover+.button,
   align-content: stretch;
 }
 
-
-img:hover {
-  filter: brightness(0.5)
-}
-
 .box .info .detailbox {
   font-size: 12px;
 }
@@ -225,7 +219,7 @@ img:hover {
 }
 
 .box:hover img {
-  opacity: 0.2;
+  opacity: 0.8;
 }
 
 .box:hover:before {

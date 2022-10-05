@@ -2,59 +2,12 @@
   <br />
   <div>
     <div class="flex">
-      <div id="Img" v-for="rating in ratingList">
-        <UserRatingItem v-bind:rating="rating" />
-        <!-- <router-link
-          :to="{ name: 'detail' }"
-          @click="moveProgramDetail(rating.id)"
-          class="nav-link"
-        >
-          <img class="poster" :src="rating.posterImg" alt="Image" />
-        </router-link>
-        <br />
-        <div style="text-align: center; margin-top: 5%; margin-bottom: 8%">
-          <span>
-            <span v-for="index in 5" :key="index" @click="check(index)">
-              <span v-if="index < score"
-                ><img src="@/assets/blue_star_small.png" style="width: 8%"
-              /></span>
-              <span v-if="index >= score"
-                ><img src="@/assets/grey_star_small.png" style="width: 8%"
-              /></span>
-            </span>
-          </span>
-          &nbsp;
-          <a
-            href="#"
-            @click="ratingDelete(rating.ratingId)"
-            class="button btnBorder btnRed"
-            ><span style="font-size: 0.8vw">삭제</span></a
-          >
-        </div> -->
-      </div>
-
-      <!-- <div id="Img">
-          <img class="poster" src="@/assets/sign.png" alt="Image" />
-          <br />
-          <span class="explain">
-            <span v-for="index in 5" :key="index" @click="check(index)">
-              <span v-if="index < score"><img src="@/assets/blue_star_small.png" style="width:13%" /></span>
-              <span v-if="index >= score"><img src="@/assets/grey_star_small.png" style="width:13%" /></span>
-            </span>
-          </span>
-        </div> -->
-
-      <!-- <div id="Img">
-          <img class="poster" v-for="(d, idx) in state.newProgramPosterImg" :key="idx"
-            :src="state.newProgramPosterImg[idx]" alt="Image" />
-          <br />
-          <span v-for="(d, idx) in state.newProgramId" :key="idx" class="explain">
-            <span v-for="index[idx] in 5" :key="index" @click="check(index[idx])">
-              <span v-if="index[idx] < score[idx]"><img src="@/assets/blue_star_small.png" style="width:13%" /></span>
-              <span v-if="index >= score"><img src="@/assets/grey_star_small.png" style="width:13%" /></span>
-            </span>
-          </span>
-        </div> -->
+      <template v-if="ratingList != null">
+        <div id="Img" v-for="rating in ratingList">
+          <UserRatingItem v-bind:rating="rating" />
+        </div>
+      </template>
+      <template v-else>평점 내역이 없습니다.</template>
     </div>
     <br /><br /><br /><br />
   </div>
@@ -67,8 +20,6 @@
 </template>
 
 <script>
-import { reactive } from "@vue/reactivity";
-import axios from "axios";
 import { mapActions, mapState } from "vuex";
 import UserRatingItem from "./UserRatingItem.vue";
 

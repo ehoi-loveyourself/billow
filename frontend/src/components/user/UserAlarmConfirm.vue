@@ -2,6 +2,7 @@
   <br />
   <div>
     <div class="flex">
+<<<<<<< frontend/src/components/user/UserAlarmConfirm.vue
       <div id="Img" v-for="alarm in alarmList">
         <router-link :to="{ name: 'detail' }" @click="moveProgramDetail(alarm.id)" class="nav-link">
           <div class="box-wrap">
@@ -28,6 +29,20 @@
           </div>
         </span>
       </div>
+      </template>
+      <template v-else>
+        <h2
+          style="
+            color: white;
+            margin-left: 70px;
+            font-size: 1.1vw;
+            font-weight: 300;
+          "
+        >
+          예약된 방영 알림이 없습니다.
+        </h2></template
+      >
+
 
       <!-- <div id="Img">
           <img class="poster" src="@/assets/sign.png" alt="Image" />
