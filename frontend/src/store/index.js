@@ -110,6 +110,9 @@ export default new Vuex.Store({
     SET_PROGRAM_SCHEDULE(state, programSchedule) {
       state.programSchedule = programSchedule;
     },
+    CLEAR_PROGRAM_SCHEDULE(state) {
+      state.programSchedule = null;
+    },
     SET_PROGRAM_REVIEW(state, programReview) {
       state.programReview = programReview;
     },
@@ -365,7 +368,8 @@ export default new Vuex.Store({
           //프로그램 정보 조회 GET
           console.log(res.data);
           commit("SET_PROGRAM_DETAIL", res.data);
-          commit("CLEAR_USER_RATING", res.data);
+          commit("CLEAR_USER_RATING");
+          commit("CLEAR_PROGRAM_SCHEDULE");
           dispatch("getProgramOrganization", programId);
           dispatch("getProgramReview", programId);
           dispatch("getProgramOnairTalk", programId);

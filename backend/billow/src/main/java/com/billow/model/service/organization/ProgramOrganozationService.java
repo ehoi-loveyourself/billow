@@ -69,6 +69,11 @@ public class ProgramOrganozationService {
                     .organizationResponseList(organizationResponseList)
                     .build());
         }
-        return list;
+        for (OrganizationListResponse organization : list) {
+            if (organization.getOrganizationResponseList() != null) {
+                return list;
+            }
+        }
+        return new ArrayList<>();
     }
 }
