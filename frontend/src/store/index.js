@@ -246,8 +246,33 @@ export default new Vuex.Store({
           console.log(res.data);
           commit("SET_USER_INFO", res.data);
         })
-        .catch((ex) => {
+        .catch((ex) => { // authToken 만료 시
           dispatch("getAuthError");
+
+          axios
+            .post("/api/users/refresh", {
+              email: localStorage.getItem("email"),
+              refreshToken: localStorage.getItem("refreshToken"),
+            })
+            .then((response) => {
+              axios
+              .get("/api/users", {
+                headers: {
+                "Auth-access": response.data.authToken,
+            },
+            })
+              .then((res) => {
+                // GET 성공 시
+                alert(response.data.authToken);
+                console.log(res.data);
+                commit("SET_USER_INFO", res.data);
+
+                localStorage.setItem(
+                  "authToken",
+                  JSON.stringify(response.data.authToken).replace(/\"/gi, "")
+                );
+              })
+        })
         });
     },
     modifyUserInfo({ commit, dispatch, state }) {
