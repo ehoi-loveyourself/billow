@@ -2,208 +2,280 @@
   <div>
     <h2 style="color: white">지금 방송 중인 프로그램(ON AIR)</h2>
     <splide id="carousel_recommend" :options="options">
-      <splide-slide v-for="onair in onairProgram">
-        <div class="box-wrap">
-          <div class="box">
-            <div class="img">
-              <a class="enterDetail" href="#">
-                <router-link
-                  :to="{ name: 'detail' }"
-                  @click="moveProgramDetail(onair.id)"
-                  class="nav-link"
-                >
-                  <img :src="onair.posterImg" alt="Hover Effect" />
-                </router-link>
-              </a>
-            </div>
-            <div class="info">
-              <h3>{{ onair.title }}</h3>
-              <div class="detailbox">
-                <span class="detailbox_design" v-if="onair.age">{{
-                  onair.age
-                }}</span
-                ><span class="detailbox_design" v-if="onair.broadcastingDay">{{
-                  onair.broadcastingDay
-                }}</span
-                ><span class="detailbox_design" v-if="onair.genres[0]">{{
-                  onair.genres[0]
-                }}</span
-                ><span
-                  class="detailbox_design"
-                  v-if="onair.broadcastingStation"
-                  >{{ onair.broadcastingStation }}</span
-                ><span class="detailbox_design" v-if="onair.broadcastingTime"
-                  >{{ onair.broadcastingTime }} ~</span
-                >
+      <template v-if="onairProgram != null && onairProgram.length > 0">
+        <splide-slide v-for="onair in onairProgram">
+          <div class="box-wrap">
+            <div class="box">
+              <div class="img">
+                <a class="enterDetail" href="#">
+                  <router-link
+                    :to="{ name: 'detail' }"
+                    @click="moveProgramDetail(onair.id)"
+                    class="nav-link"
+                  >
+                    <img :src="onair.posterImg" alt="Hover Effect" />
+                  </router-link>
+                </a>
+              </div>
+              <div class="info">
+                <h3>{{ onair.title }}</h3>
+                <div class="detailbox">
+                  <span class="detailbox_design" v-if="onair.age">{{
+                    onair.age
+                  }}</span
+                  ><span
+                    class="detailbox_design"
+                    v-if="onair.broadcastingDay"
+                    >{{ onair.broadcastingDay }}</span
+                  ><span class="detailbox_design" v-if="onair.genres[0]">{{
+                    onair.genres[0]
+                  }}</span
+                  ><span
+                    class="detailbox_design"
+                    v-if="onair.broadcastingStation"
+                    >{{ onair.broadcastingStation }}</span
+                  ><span class="detailbox_design" v-if="onair.broadcastingTime"
+                    >{{ onair.broadcastingTime }} ~</span
+                  >
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </splide-slide>
+        </splide-slide>
+      </template>
+      <template v-else>
+        <h2
+          style="
+            color: white;
+            margin-left: 70px;
+            font-size: 1.1vw;
+            font-weight: 300;
+          "
+        >
+          현재 방영 중인 프로그램이 없습니다.
+        </h2></template
+      >
     </splide>
 
     <h2 style="color: white">요즘 핫한 프로그램</h2>
     <splide id="carousel_recommend" :options="options">
-      <splide-slide v-for="hot in hotProgram">
-        <div class="box-wrap">
-          <div class="box">
-            <div class="img">
-              <a class="enterDetail" href="#">
-                <router-link
-                  :to="{ name: 'detail' }"
-                  @click="moveProgramDetail(hot.id)"
-                  class="nav-link"
-                >
-                  <img :src="hot.posterImg" alt="Hover Effect" />
-                </router-link>
-              </a>
-            </div>
-            <div class="info">
-              <h3>{{ hot.title }}</h3>
-              <div class="detailbox">
-                <span class="detailbox_design" v-if="hot.age">{{
-                  hot.age
-                }}</span
-                ><span class="detailbox_design" v-if="hot.broadcastingDay">{{
-                  hot.broadcastingDay
-                }}</span
-                ><span class="detailbox_design" v-if="hot.genres[0]">{{
-                  hot.genres[0]
-                }}</span
-                ><span
-                  class="detailbox_design"
-                  v-if="hot.broadcastingStation"
-                  >{{ hot.broadcastingStation }}</span
-                >
+      <template v-if="hotProgram != null && hotProgram.length > 0">
+        <splide-slide v-for="hot in hotProgram">
+          <div class="box-wrap">
+            <div class="box">
+              <div class="img">
+                <a class="enterDetail" href="#">
+                  <router-link
+                    :to="{ name: 'detail' }"
+                    @click="moveProgramDetail(hot.id)"
+                    class="nav-link"
+                  >
+                    <img :src="hot.posterImg" alt="Hover Effect" />
+                  </router-link>
+                </a>
+              </div>
+              <div class="info">
+                <h3>{{ hot.title }}</h3>
+                <div class="detailbox">
+                  <span class="detailbox_design" v-if="hot.age">{{
+                    hot.age
+                  }}</span
+                  ><span class="detailbox_design" v-if="hot.broadcastingDay">{{
+                    hot.broadcastingDay
+                  }}</span
+                  ><span class="detailbox_design" v-if="hot.genres[0]">{{
+                    hot.genres[0]
+                  }}</span
+                  ><span
+                    class="detailbox_design"
+                    v-if="hot.broadcastingStation"
+                    >{{ hot.broadcastingStation }}</span
+                  >
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </splide-slide>
+        </splide-slide>
+      </template>
+      <template v-else>
+        <h2
+          style="
+            color: white;
+            margin-left: 70px;
+            font-size: 1.1vw;
+            font-weight: 300;
+          "
+        >
+          요즘 핫한 프로그램이 없습니다.
+        </h2></template
+      >
     </splide>
 
     <h2 style="color: white">신규 프로그램을 추천드려요!</h2>
     <splide id="carousel_recommend" :options="options">
-      <splide-slide v-for="newProgram in newProgram">
-        <div class="box-wrap">
-          <div class="box">
-            <div class="img">
-              <a class="enterDetail" href="#">
-                <router-link
-                  :to="{ name: 'detail' }"
-                  @click="moveProgramDetail(newProgram.id)"
-                  class="nav-link"
-                >
-                  <img :src="newProgram.posterImg" alt="Hover Effect" />
-                </router-link>
-              </a>
-            </div>
-            <div class="info">
-              <h3>{{ newProgram.title }}</h3>
-              <div class="detailbox">
-                <span class="detailbox_design" v-if="newProgram.age">{{
-                  newProgram.age
-                }}</span
-                ><span
-                  class="detailbox_design"
-                  v-if="newProgram.broadcastingDay"
-                  >{{ newProgram.broadcastingDay }}</span
-                ><span class="detailbox_design" v-if="newProgram.genres[0]">{{
-                  newProgram.genres[0]
-                }}</span
-                ><span
-                  class="detailbox_design"
-                  v-if="newProgram.broadcastingStation"
-                  >{{ newProgram.broadcastingStation }}</span
-                >
+      <template v-if="newProgram != null && newProgram.length > 0">
+        <splide-slide v-for="newProgram in newProgram">
+          <div class="box-wrap">
+            <div class="box">
+              <div class="img">
+                <a class="enterDetail" href="#">
+                  <router-link
+                    :to="{ name: 'detail' }"
+                    @click="moveProgramDetail(newProgram.id)"
+                    class="nav-link"
+                  >
+                    <img :src="newProgram.posterImg" alt="Hover Effect" />
+                  </router-link>
+                </a>
+              </div>
+              <div class="info">
+                <h3>{{ newProgram.title }}</h3>
+                <div class="detailbox">
+                  <span class="detailbox_design" v-if="newProgram.age">{{
+                    newProgram.age
+                  }}</span
+                  ><span
+                    class="detailbox_design"
+                    v-if="newProgram.broadcastingDay"
+                    >{{ newProgram.broadcastingDay }}</span
+                  ><span class="detailbox_design" v-if="newProgram.genres[0]">{{
+                    newProgram.genres[0]
+                  }}</span
+                  ><span
+                    class="detailbox_design"
+                    v-if="newProgram.broadcastingStation"
+                    >{{ newProgram.broadcastingStation }}</span
+                  >
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </splide-slide>
+        </splide-slide>
+      </template>
+      <template v-else>
+        <h2
+          style="
+            color: white;
+            margin-left: 70px;
+            font-size: 1.1vw;
+            font-weight: 300;
+          "
+        >
+          신규 프로그램이 없습니다.
+        </h2></template
+      >
     </splide>
 
     <h2 style="color: white">
       {{ userAge }}대 {{ userGender }}자에게 인기 많은 프로그램
     </h2>
     <splide id="carousel_recommend" :options="options">
-      <splide-slide v-for="genderAge in genderAgeProgram">
-        <div class="box-wrap">
-          <div class="box">
-            <div class="img">
-              <a class="enterDetail" href="#">
-                <router-link
-                  :to="{ name: 'detail' }"
-                  @click="moveProgramDetail(genderAge.id)"
-                  class="nav-link"
-                >
-                  <img :src="genderAge.posterImg" alt="Hover Effect" />
-                </router-link>
-              </a>
-            </div>
-            <div class="info">
-              <h3>{{ genderAge.title }}</h3>
-              <div class="detailbox">
-                <span class="detailbox_design" v-if="genderAge.age">{{
-                  genderAge.age
-                }}</span
-                ><span
-                  class="detailbox_design"
-                  v-if="genderAge.broadcastingDay"
-                  >{{ genderAge.broadcastingDay }}</span
-                ><span class="detailbox_design" v-if="genderAge.genres[0]">{{
-                  genderAge.genres[0]
-                }}</span
-                ><span
-                  class="detailbox_design"
-                  v-if="genderAge.broadcastingStation"
-                  >{{ genderAge.broadcastingStation }}</span
-                >
+      <template v-if="genderAgeProgram != null && genderAgeProgram.length > 0">
+        <splide-slide v-for="genderAge in genderAgeProgram">
+          <div class="box-wrap">
+            <div class="box">
+              <div class="img">
+                <a class="enterDetail" href="#">
+                  <router-link
+                    :to="{ name: 'detail' }"
+                    @click="moveProgramDetail(genderAge.id)"
+                    class="nav-link"
+                  >
+                    <img :src="genderAge.posterImg" alt="Hover Effect" />
+                  </router-link>
+                </a>
+              </div>
+              <div class="info">
+                <h3>{{ genderAge.title }}</h3>
+                <div class="detailbox">
+                  <span class="detailbox_design" v-if="genderAge.age">{{
+                    genderAge.age
+                  }}</span
+                  ><span
+                    class="detailbox_design"
+                    v-if="genderAge.broadcastingDay"
+                    >{{ genderAge.broadcastingDay }}</span
+                  ><span class="detailbox_design" v-if="genderAge.genres[0]">{{
+                    genderAge.genres[0]
+                  }}</span
+                  ><span
+                    class="detailbox_design"
+                    v-if="genderAge.broadcastingStation"
+                    >{{ genderAge.broadcastingStation }}</span
+                  >
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </splide-slide>
+        </splide-slide>
+      </template>
+      <template v-else>
+        <h2
+          style="
+            color: white;
+            margin-left: 70px;
+            font-size: 1.1vw;
+            font-weight: 300;
+          "
+        >
+          성연령별 추천 프로그램이 없습니다.
+        </h2></template
+      >
     </splide>
 
     <h2 style="color: white">혹시 {{ actorName }}님에게 관심이 있으신가요?</h2>
     <splide id="carousel_recommend" :options="options">
-      <splide-slide v-for="actor in actorProgram">
-        <div class="box-wrap">
-          <div class="box">
-            <div class="img">
-              <a class="enterDetail" href="#">
-                <router-link
-                  :to="{ name: 'detail' }"
-                  @click="moveProgramDetail(actor.id)"
-                  class="nav-link"
-                >
-                  <img :src="actor.posterImg" alt="Hover Effect" />
-                </router-link>
-              </a>
-            </div>
-            <div class="info">
-              <h3>{{ actor.title }}</h3>
-              <div class="detailbox">
-                <span class="detailbox_design" v-if="actor.age">{{
-                  actor.age
-                }}</span
-                ><span class="detailbox_design" v-if="actor.broadcastingDay">{{
-                  actor.broadcastingDay
-                }}</span
-                ><span class="detailbox_design" v-if="actor.genres[0]">{{
-                  actor.genres[0]
-                }}</span
-                ><span
-                  class="detailbox_design"
-                  v-if="actor.broadcastingStation"
-                  >{{ actor.broadcastingStation }}</span
-                >
+      <template v-if="actorProgram != null && actorProgram.length > 0">
+        <splide-slide v-for="actor in actorProgram">
+          <div class="box-wrap">
+            <div class="box">
+              <div class="img">
+                <a class="enterDetail" href="#">
+                  <router-link
+                    :to="{ name: 'detail' }"
+                    @click="moveProgramDetail(actor.id)"
+                    class="nav-link"
+                  >
+                    <img :src="actor.posterImg" alt="Hover Effect" />
+                  </router-link>
+                </a>
+              </div>
+              <div class="info">
+                <h3>{{ actor.title }}</h3>
+                <div class="detailbox">
+                  <span class="detailbox_design" v-if="actor.age">{{
+                    actor.age
+                  }}</span
+                  ><span
+                    class="detailbox_design"
+                    v-if="actor.broadcastingDay"
+                    >{{ actor.broadcastingDay }}</span
+                  ><span class="detailbox_design" v-if="actor.genres[0]">{{
+                    actor.genres[0]
+                  }}</span
+                  ><span
+                    class="detailbox_design"
+                    v-if="actor.broadcastingStation"
+                    >{{ actor.broadcastingStation }}</span
+                  >
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </splide-slide>
+        </splide-slide>
+      </template>
+      <template v-else>
+        <h2
+          style="
+            color: white;
+            margin-left: 70px;
+            font-size: 1.1vw;
+            font-weight: 300;
+          "
+        >
+          출연진 추천 프로그램이 없습니다.
+        </h2></template
+      >
     </splide>
   </div>
 </template>
