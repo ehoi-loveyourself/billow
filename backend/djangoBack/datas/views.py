@@ -7,11 +7,12 @@ from rest_framework.decorators import api_view
 from datas.models import TbGenre, TbGenreInfo, TbOtt, TbOttInfo, TbProgram, TbRating, TbUser
 from datas.serializers import ProgramSerializer
 from datas import recomm
-# from my_settings import API_KEY
+
+from djangoBack.settings import API_KEY
 
 import requests
 import random
-API_KEY = '3beacdbb8f7b35eb8c782851ddc5b403'
+
 @api_view(['GET'])
 def genre_data(request):
     res = requests.get('https://api.themoviedb.org/3/genre/tv/list?api_key=3beacdbb8f7b35eb8c782851ddc5b403&language=ko-kr')
@@ -27,7 +28,7 @@ def genre_data(request):
     return Response()
 
 def all_program_data(request):
-    BASE_URL = 'https://api.themoviedb.org/3/tv/popular?api_key=3beacdbb8f7b35eb8c782851ddc5b403&language=ko-kr&page='
+    BASE_URL = f'https://api.themoviedb.org/3/tv/popular?api_key={API_KEY}&language=ko-kr&page='
     i = 0
     while True:
         i += 1
@@ -43,7 +44,7 @@ def all_program_data(request):
                 poster_img = ''
                 program_country = program_data['original_language']
                 if program_country == 'ko':
-                    program_detail = f'https://api.themoviedb.org/3/tv/{program_id}?api_key=3beacdbb8f7b35eb8c782851ddc5b403&language=ko-kr'
+                    program_detail = f'https://api.themoviedb.org/3/tv/{program_id}?api_key={API_KEY}&language=ko-kr'
                     detail_res = requests.get(program_detail)
                     data = detail_res.json()
                     original_language = data.get('original_language')   
@@ -57,8 +58,8 @@ def all_program_data(request):
             else:
                 program_country = program_data['original_language']
                 if program_country == 'ko':
-                    program_detail = f'https://api.themoviedb.org/3/tv/{program_id}?api_key=3beacdbb8f7b35eb8c782851ddc5b403&language=ko-kr'
-                    program_ott = f'https://api.themoviedb.org/3/tv/{program_id}/watch/providers?api_key=3beacdbb8f7b35eb8c782851ddc5b403'
+                    program_detail = f'https://api.themoviedb.org/3/tv/{program_id}?api_key={API_KEY}&language=ko-kr'
+                    program_ott = f'https://api.themoviedb.org/3/tv/{program_id}/watch/providers?api_key={API_KEY}'
                     detail_res = requests.get(program_detail)
                     ott_res = requests.get(program_ott)
                     data = detail_res.json()
@@ -145,10 +146,6 @@ def user_recomm(request, user_id):
     for program_id in indi_user_recomm:
         program = TbProgram.objects.get(pk=program_id[0])
         indi_user_recomm_list.append(program)
-
-    serializer = ProgramSerializer(data = indi_user_recomm_list, many = True)
-    if serializer.is_valid():
-        pass
 
     return Response(lst)
 
