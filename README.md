@@ -160,6 +160,7 @@
 - 회원 CRUD API 구현
 - 평점, 리뷰 CRUD API 구현
 - 즐겨찾기, 인기 프로그램 추천, 프로그램 검색 API 구현
+- 소셜 로그인
 - JWT, Spring Security 적용
 - 문서화 담당
 - UCC 기획 및 제작
