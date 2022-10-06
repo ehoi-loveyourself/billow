@@ -126,6 +126,7 @@
 - 리뷰 수정 모달 기능 구현
 
 🧑🏻‍💻 최재현
+
 - 컴포넌트 설계 및 구성
 - 메인 UI 구현
 - 온에어톡, 리뷰 UI 구현
@@ -149,21 +150,30 @@
 - 방영 알림 API 구현
 - Nginx, Docker, Jenkins를 이용한 프로젝트 자동 배포
 - (Front) REST API Axios 통신
+- (Front) REST API Axios Interceptor 구현
+- 포팅 매뉴얼, 배포 가이드 작성
 
 👩🏻‍💻 박태이
 
 - 상황에 맞는 프로그램 추천 API 구현
-  - 협업 필터링 - 아이템 기반 추천 필터링
+  - 협업 필터링 - 아이템 기반 필터링
 - 회원 CRUD API 구현
 - 평점, 리뷰 CRUD API 구현
 - 즐겨찾기, 인기 프로그램 추천, 프로그램 검색 API 구현
 - JWT, Spring Security 적용
+- 문서화 담당
+- UCC 기획 및 제작
+- 발표 PPT 작성
 
 🧑🏻‍💻 양지호
 
+- Django - MySql 연결 셋팅
 - 사용자 맞춤 프로그램 추천 API 구현
   - 협업 필터링 - SVD를  활용한 MF 알고리즘
 - 추천 알고리즘 구현 메인 담당
 - TMDB API를 통해 프로그램 데이터 가공 후 DB에 저장
 - Web Client으로 Core(Django) - Backend(Spring) 통신
 - 온에어톡 CRUD API 구현
+- 발표 PPT 작성
+- 시연 시나리오 작성
+- 최종 발표 담당
