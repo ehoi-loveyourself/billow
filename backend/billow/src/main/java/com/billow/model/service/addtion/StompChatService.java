@@ -2,7 +2,6 @@ package com.billow.model.service.addtion;
 
 import com.billow.domain.dto.addtion.ChatRequest;
 import com.billow.domain.dto.addtion.ChatResponse;
-import com.billow.domain.dto.program.CastResponse;
 import com.billow.domain.entity.addition.Chat;
 import com.billow.domain.entity.program.Program;
 import com.billow.domain.entity.user.User;
@@ -17,7 +16,6 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -47,7 +45,6 @@ public class StompChatService {
                 .dateTime(dateTime)
                 .build();
         chatRepository.save(chat);
-        System.out.println(chat);
 
         ChatResponse castResponse = ChatResponse.builder()
                 .userNickName(chat.getUser().getNickName())
