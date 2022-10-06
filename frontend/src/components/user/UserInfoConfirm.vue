@@ -402,9 +402,9 @@
             style="width: 21%"
           ></b-form-input>
           <br /><br /><br />
-          <a href="#" @click="modifyUser()" class="button btnBorder btnBlue"
-        ><span style="font-size: 1vw">수정</span></a
-      >&nbsp;
+          <a href="#" @click="modifyUser()" class="button btnBorder btnBlue" style="margin-right:2%"
+        ><span style="font-size: 1vw;">수정</span></a
+      >
       <a href="#" @click="deleteUser()" class="button btnBorder btnRed"
         ><span style="font-size: 1vw">탈퇴</span></a
       >

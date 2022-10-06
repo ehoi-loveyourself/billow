@@ -35,5 +35,15 @@ body {
   position: relative;
   padding-bottom: 180px;
   background-color: #141414;
+  font-family: 'NanumBarunGothic';
+}
+
+.v-application {
+  font-family: 'NanumBarunGothic', sans-serif !important;
+}
+
+@font-face {
+  font-family: 'NanumBarunGothic';
+  src: url('assets/fonts/NanumBarunGothic.ttf') format('truetype');
 }
 </style>

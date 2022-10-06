@@ -117,7 +117,7 @@
             font-size: 1.1vw;
             font-weight: 300;
             margin-top: 1.5%;
-            margin-bottom: 4%;
+            margin-bottom: 10%;
           ">
       현재 방송 중인 프로그램이 없습니다.
     </h2>
