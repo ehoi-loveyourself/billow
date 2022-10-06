@@ -9,19 +9,21 @@
     <br /><br /><br /><br /><br /><br />
   </div>
   <div v-else>
-    <h2 style="
-            color: white;
-            margin-left: 70px;
-            font-size: 1.1vw;
-            font-weight: 300;
-          ">
+    <h2
+      style="
+        color: white;
+        margin-left: 70px;
+        font-size: 1.1vw;
+        font-weight: 300;
+      "
+    >
       평점 내역이 없습니다.
     </h2>
   </div>
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState, mapMutations } from "vuex";
 import UserRatingItem from "./UserRatingItem.vue";
 
 export default {
@@ -42,6 +44,7 @@ export default {
   },
   methods: {
     ...mapActions(["getRating", "deleteRating", "getProgramDetail"]),
+    ...mapMutations(["SET_PROGRAM_ID"]),
     check(index) {
       this.score = index + 1;
     },
@@ -53,7 +56,7 @@ export default {
       }
     },
     moveProgramDetail(programId) {
-      this.getProgramDetail(programId);
+      this.SET_PROGRAM_ID(programId);
     },
   },
 };
@@ -113,9 +116,8 @@ a.button {
   padding-top: 0;
 }
 
-
 img:hover {
-  filter: brightness(0.5)
+  filter: brightness(0.5);
 }
 
 .box .info .detailbox {
@@ -135,7 +137,6 @@ img:hover {
   margin: 0px 10px 0px 0px;
   margin-bottom: 5px;
 }
-
 
 .box-wrap {
   display: flex;
@@ -197,7 +198,8 @@ img:hover {
 
 @font-face {
   font-family: "GoyangIlsan";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff") format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }

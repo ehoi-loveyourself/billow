@@ -2,33 +2,44 @@
   <br />
   <div class="flex" v-if="alarmList != null && alarmList.length > 0">
     <div id="Img" v-for="alarm in alarmList">
-        <div class="box-wrap">
-          <div class="box">
-            <img class="poster" :src="alarm.posterImg" alt="Image" @click="moveProgramDetail(alarm.id)"/>
-            <div class="button">
-            <button @click="alarmDelete(alarm.broadcastingAlarmId)" style="border: none; background: none">
-              <img class="trash"
-              src="@/assets/trash.png" style="width:40%" />
+      <div class="box-wrap">
+        <div class="box">
+          <img
+            class="poster"
+            :src="alarm.posterImg"
+            alt="Image"
+            @click="moveProgramDetail(alarm.id)"
+          />
+          <div class="button">
+            <button
+              @click="alarmDelete(alarm.broadcastingAlarmId)"
+              style="border: none; background: none"
+            >
+              <img class="trash" src="@/assets/trash.png" style="width: 40%" />
             </button>
           </div>
-            <div class="info">
-              <h3>{{ alarm.title }}</h3>
-            </div>
+          <div class="info">
+            <h3>{{ alarm.title }}</h3>
           </div>
         </div>
+      </div>
       <span>
         <!-- <img src="@/assets/alarm.png" style="cursor: pointer" />&nbsp; -->
         <div>
-          <span class="station">{{ alarm.alarmStation }}</span>&nbsp;
-          <span class="episode" v-if="alarm.alarmEpisode">{{
-          alarm.alarmEpisode
-          }}&nbsp;&nbsp;</span>
+          <span class="station">{{ alarm.alarmStation }}</span
+          >&nbsp;
+          <span class="episode" v-if="alarm.alarmEpisode"
+            >{{ alarm.alarmEpisode }}&nbsp;&nbsp;</span
+          >
           <!-- <a href="#" @click="alarmDelete(alarm.broadcastingAlarmId)" class="button"><img
               src="@/assets/trash.png" style="width:8%" /></a> -->
         </div>
         <div style="margin-bottom: 10%">
-          <span class="day">{{ alarm.alarmDay }} </span>&nbsp;&nbsp;<span class="time"> {{ alarm.alarmTime
-          }}</span>&nbsp;
+          <span class="day">{{ alarm.alarmDay }} </span>&nbsp;&nbsp;<span
+            class="time"
+          >
+            {{ alarm.alarmTime }}</span
+          >&nbsp;
         </div>
       </span>
     </div>
@@ -36,12 +47,14 @@
     <br /><br /><br /><br />
   </div>
   <div v-else>
-    <h2 style="
-            color: white;
-            margin-left: 70px;
-            font-size: 1.1vw;
-            font-weight: 300;
-          ">
+    <h2
+      style="
+        color: white;
+        margin-left: 70px;
+        font-size: 1.1vw;
+        font-weight: 300;
+      "
+    >
       예약된 방영 알림이 없습니다.
     </h2>
   </div>
@@ -50,7 +63,7 @@
 <script>
 import { reactive } from "@vue/reactivity";
 import axios from "axios";
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState, mapMutations } from "vuex";
 
 export default {
   name: "Star",
@@ -67,20 +80,23 @@ export default {
   },
   methods: {
     ...mapActions(["getAlarm", "deleteAlarm", "getProgramDetail"]),
+    ...mapMutations(["SET_PROGRAM_ID"]),
     check(index) {
       this.score = index + 1;
     },
     alarmDelete(broadcastingAlarmId) {
-      if (confirm("알림을 삭제하시겠습니까?") == true || broadcastingAlarmId==null) {
+      if (
+        confirm("알림을 삭제하시겠습니까?") == true ||
+        broadcastingAlarmId == null
+      ) {
         this.deleteAlarm(broadcastingAlarmId);
-      }
-      else {
+      } else {
         return;
       }
     },
     moveProgramDetail(programId) {
-      this.getProgramDetail(programId);
-      this.$router.push({ name: 'detail' });
+      this.SET_PROGRAM_ID(programId);
+      this.$router.push({ name: "detail" });
     },
   },
 };
@@ -188,9 +204,8 @@ export default {
   font-size: 0.9vw;
 }
 
-
 .poster:hover {
-  filter: brightness(0.5)
+  filter: brightness(0.5);
 }
 
 .box .info .detailbox {
@@ -275,7 +290,8 @@ export default {
 
 @font-face {
   font-family: "GoyangIlsan";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff") format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -289,7 +305,7 @@ body {
   display: none;
 }
 
-.poster:hover+.button,
+.poster:hover + .button,
 .button:hover {
   display: inline-block;
   position: absolute;

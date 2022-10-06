@@ -9,7 +9,11 @@
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
-                <router-link :to="{ name: 'detail' }" @click="moveProgramDetail(genderAge.id)" class="nav-link">
+                <router-link
+                  :to="{ name: 'detail' }"
+                  @click="moveProgramDetail(genderAge.id)"
+                  class="nav-link"
+                >
                   <img :src="genderAge.posterImg" alt="Hover Effect" />
                 </router-link>
               </a>
@@ -18,12 +22,20 @@
               <h3>{{ genderAge.title }}</h3>
               <div class="detailbox">
                 <span class="detailbox_design" v-if="genderAge.age">{{
-                genderAge.age
-                }}</span><span class="detailbox_design" v-if="genderAge.broadcastingDay">{{
-                  genderAge.broadcastingDay }}</span><span class="detailbox_design" v-if="genderAge.genres[0]">{{
+                  genderAge.age
+                }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="genderAge.broadcastingDay"
+                  >{{ genderAge.broadcastingDay }}</span
+                ><span class="detailbox_design" v-if="genderAge.genres[0]">{{
                   genderAge.genres[0]
-                  }}</span><span class="detailbox_design" v-if="genderAge.broadcastingStation">{{
-                  genderAge.broadcastingStation }}</span>
+                }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="genderAge.broadcastingStation"
+                  >{{ genderAge.broadcastingStation }}</span
+                >
               </div>
             </div>
           </div>
@@ -33,13 +45,15 @@
   </div>
 
   <div v-else>
-    <h2 style="
-            color: #a1a1a1;
-            font-size: 1.1vw;
-            font-weight: 300;
-            margin-top: 1.5%;
-            margin-bottom: 4%;
-          ">
+    <h2
+      style="
+        color: #a1a1a1;
+        font-size: 1.1vw;
+        font-weight: 300;
+        margin-top: 1.5%;
+        margin-bottom: 4%;
+      "
+    >
       성,연령별 추천 프로그램이 없습니다.
     </h2>
   </div>
@@ -55,7 +69,11 @@
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
-                <router-link :to="{ name: 'detail' }" @click="moveProgramDetail(actor.id)" class="nav-link">
+                <router-link
+                  :to="{ name: 'detail' }"
+                  @click="moveProgramDetail(actor.id)"
+                  class="nav-link"
+                >
                   <img :src="actor.posterImg" alt="Hover Effect" />
                 </router-link>
               </a>
@@ -64,12 +82,19 @@
               <h3>{{ actor.title }}</h3>
               <div class="detailbox">
                 <span class="detailbox_design" v-if="actor.age">{{
-                actor.age
-                }}</span><span class="detailbox_design" v-if="actor.broadcastingDay">{{ actor.broadcastingDay
-                  }}</span><span class="detailbox_design" v-if="actor.genres[0]">{{
+                  actor.age
+                }}</span
+                ><span class="detailbox_design" v-if="actor.broadcastingDay">{{
+                  actor.broadcastingDay
+                }}</span
+                ><span class="detailbox_design" v-if="actor.genres[0]">{{
                   actor.genres[0]
-                  }}</span><span class="detailbox_design" v-if="actor.broadcastingStation">{{
-                  actor.broadcastingStation }}</span>
+                }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="actor.broadcastingStation"
+                  >{{ actor.broadcastingStation }}</span
+                >
               </div>
             </div>
           </div>
@@ -81,13 +106,16 @@
   <h2 style="color: white">지금 방송 중인 프로그램(ON AIR)</h2>
   <template v-if="onairProgram != null && onairProgram.length > 0">
     <splide id="carousel_recommend" :options="options">
-
       <splide-slide v-for="onair in onairProgram">
         <div class="box-wrap">
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
-                <router-link :to="{ name: 'detail' }" @click="moveProgramDetail(onair.id)" class="nav-link">
+                <router-link
+                  :to="{ name: 'detail' }"
+                  @click="moveProgramDetail(onair.id)"
+                  class="nav-link"
+                >
                   <img :src="onair.posterImg" alt="Hover Effect" />
                 </router-link>
               </a>
@@ -96,13 +124,21 @@
               <h3>{{ onair.title }}</h3>
               <div class="detailbox">
                 <span class="detailbox_design" v-if="onair.age">{{
-                onair.age
-                }}</span><span class="detailbox_design" v-if="onair.broadcastingDay">{{ onair.broadcastingDay
-                  }}</span><span class="detailbox_design" v-if="onair.genres[0]">{{
+                  onair.age
+                }}</span
+                ><span class="detailbox_design" v-if="onair.broadcastingDay">{{
+                  onair.broadcastingDay
+                }}</span
+                ><span class="detailbox_design" v-if="onair.genres[0]">{{
                   onair.genres[0]
-                  }}</span><span class="detailbox_design" v-if="onair.broadcastingStation">{{
-                  onair.broadcastingStation }}</span><span class="detailbox_design" v-if="onair.broadcastingTime">{{
-                  onair.broadcastingTime }} ~</span>
+                }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="onair.broadcastingStation"
+                  >{{ onair.broadcastingStation }}</span
+                ><span class="detailbox_design" v-if="onair.broadcastingTime"
+                  >{{ onair.broadcastingTime }} ~</span
+                >
               </div>
             </div>
           </div>
@@ -112,26 +148,35 @@
   </template>
 
   <template v-else>
-    <h2 style="
-            color: #a1a1a1;
-            font-size: 1.1vw;
-            font-weight: 300;
-            margin-top: 1.5%;
-            margin-bottom: 10%;
-          ">
+    <h2
+      style="
+        color: #a1a1a1;
+        font-size: 1.1vw;
+        font-weight: 300;
+        margin-top: 1.5%;
+        margin-bottom: 10%;
+      "
+    >
       현재 방송 중인 프로그램이 없습니다.
     </h2>
   </template>
 
-
   <h2 style="color: white">요즘 핫한 프로그램</h2>
-  <splide v-if="hotProgram != null && hotProgram.length > 0" id="carousel_recommend" :options="options">
+  <splide
+    v-if="hotProgram != null && hotProgram.length > 0"
+    id="carousel_recommend"
+    :options="options"
+  >
     <splide-slide v-for="hot in hotProgram">
       <div class="box-wrap">
         <div class="box">
           <div class="img">
             <a class="enterDetail" href="#">
-              <router-link :to="{ name: 'detail' }" @click="moveProgramDetail(hot.id)" class="nav-link">
+              <router-link
+                :to="{ name: 'detail' }"
+                @click="moveProgramDetail(hot.id)"
+                class="nav-link"
+              >
                 <img :src="hot.posterImg" alt="Hover Effect" />
               </router-link>
             </a>
@@ -139,14 +184,16 @@
           <div class="info">
             <h3>{{ hot.title }}</h3>
             <div class="detailbox">
-              <span class="detailbox_design" v-if="hot.age">{{
-              hot.age
-              }}</span><span class="detailbox_design" v-if="hot.broadcastingDay">{{
+              <span class="detailbox_design" v-if="hot.age">{{ hot.age }}</span
+              ><span class="detailbox_design" v-if="hot.broadcastingDay">{{
                 hot.broadcastingDay
-                }}</span><span class="detailbox_design" v-if="hot.genres[0]">{{
+              }}</span
+              ><span class="detailbox_design" v-if="hot.genres[0]">{{
                 hot.genres[0]
-                }}</span><span class="detailbox_design" v-if="hot.broadcastingStation">{{ hot.broadcastingStation
-                }}</span>
+              }}</span
+              ><span class="detailbox_design" v-if="hot.broadcastingStation">{{
+                hot.broadcastingStation
+              }}</span>
             </div>
           </div>
         </div>
@@ -155,13 +202,15 @@
   </splide>
 
   <span v-else>
-    <h2 style="
-            color: #a1a1a1;
-            font-size: 1.1vw;
-            font-weight: 300;
-            margin-top: 1.5%;
-            margin-bottom: 4%;
-          ">
+    <h2
+      style="
+        color: #a1a1a1;
+        font-size: 1.1vw;
+        font-weight: 300;
+        margin-top: 1.5%;
+        margin-bottom: 4%;
+      "
+    >
       요즘 핫한 프로그램이 없습니다.
     </h2>
   </span>
@@ -174,7 +223,11 @@
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
-                <router-link :to="{ name: 'detail' }" @click="moveProgramDetail(newProgram.id)" class="nav-link">
+                <router-link
+                  :to="{ name: 'detail' }"
+                  @click="moveProgramDetail(newProgram.id)"
+                  class="nav-link"
+                >
                   <img :src="newProgram.posterImg" alt="Hover Effect" />
                 </router-link>
               </a>
@@ -183,12 +236,20 @@
               <h3>{{ newProgram.title }}</h3>
               <div class="detailbox">
                 <span class="detailbox_design" v-if="newProgram.age">{{
-                newProgram.age
-                }}</span><span class="detailbox_design" v-if="newProgram.broadcastingDay">{{
-                  newProgram.broadcastingDay }}</span><span class="detailbox_design" v-if="newProgram.genres[0]">{{
+                  newProgram.age
+                }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="newProgram.broadcastingDay"
+                  >{{ newProgram.broadcastingDay }}</span
+                ><span class="detailbox_design" v-if="newProgram.genres[0]">{{
                   newProgram.genres[0]
-                  }}</span><span class="detailbox_design" v-if="newProgram.broadcastingStation">{{
-                  newProgram.broadcastingStation }}</span>
+                }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="newProgram.broadcastingStation"
+                  >{{ newProgram.broadcastingStation }}</span
+                >
               </div>
             </div>
           </div>
@@ -196,13 +257,15 @@
       </splide-slide>
     </template>
     <template v-else>
-      <h2 style="
-            color: #a1a1a1;
-            font-size: 1.1vw;
-            font-weight: 300;
-            margin-top: 1.5%;
-            margin-bottom: 4%;
-          ">
+      <h2
+        style="
+          color: #a1a1a1;
+          font-size: 1.1vw;
+          font-weight: 300;
+          margin-top: 1.5%;
+          margin-bottom: 4%;
+        "
+      >
         신규 프로그램이 없습니다.
       </h2>
     </template>
@@ -214,7 +277,7 @@ import { reactive } from "@vue/reactivity";
 import axios from "axios";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 
 export default {
   name: "MainSlider",
@@ -257,8 +320,9 @@ export default {
   },
   methods: {
     ...mapActions(["getProgramDetail", "getRecommendProgram"]),
+    ...mapMutations(["SET_PROGRAM_ID"]),
     moveProgramDetail(programId) {
-      this.getProgramDetail(programId);
+      this.SET_PROGRAM_ID(programId);
     },
   },
 };
@@ -371,7 +435,8 @@ img {
 
 @font-face {
   font-family: "GoyangIlsan";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff") format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }

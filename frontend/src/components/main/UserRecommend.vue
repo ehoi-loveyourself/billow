@@ -1,11 +1,15 @@
 <template>
-  <FullPageLoader v-if="isLoading"/>
+  <FullPageLoader v-if="isLoading" />
   <div v-else id="mainslider" style="text-align: center; margin-top: 10px">
     <splide id="carousel_user_recommend" :options="options">
       <splide-slide v-for="recommend in userRecommend">
         <figure>
           <a class="enterDetail" href="#">
-            <router-link :to="{ name: 'detail' }" @click="moveProgramDetail(recommend.id)" class="nav-link">
+            <router-link
+              :to="{ name: 'detail' }"
+              @click="moveProgramDetail(recommend.id)"
+              class="nav-link"
+            >
               <img class="img_2" :src="recommend.backdropPath" alt="main2" />
             </router-link>
           </a>
@@ -20,7 +24,7 @@
 <script>
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 import FullPageLoader from "@/components/load/FullPageLoader.vue";
 
 export default {
@@ -28,8 +32,8 @@ export default {
   components: {
     Splide,
     SplideSlide,
-    FullPageLoader
-},
+    FullPageLoader,
+  },
   computed: {
     ...mapState(["userRecommend", "isLoading"]),
   },
@@ -41,8 +45,9 @@ export default {
   },
   methods: {
     ...mapActions(["getProgramDetail", "getUserRecommendProgram"]),
+    ...mapMutations(["SET_PROGRAM_ID"]),
     moveProgramDetail(programId) {
-      this.getProgramDetail(programId);
+      this.SET_PROGRAM_ID(programId);
     },
     gotoPage(link) {
       this.$router.push(link);
@@ -53,7 +58,7 @@ export default {
       if (document.readyState == "complete") {
         this.isloaded = true;
       }
-    }
+    };
   },
   data() {
     return {
@@ -150,7 +155,7 @@ html {
 </style>
 
 <style lang="scss" scoped>
-$colors: #8CC271, #69BEEB, #F5AA39, #E9643B;
+$colors: #8cc271, #69beeb, #f5aa39, #e9643b;
 
 // -----------------------------------------------------
 .page-loader {
@@ -183,7 +188,7 @@ $colors: #8CC271, #69BEEB, #F5AA39, #E9643B;
   }
 
   &:last-child {
-    animation: right 1s infinite .5s;
+    animation: right 1s infinite 0.5s;
   }
 }
 

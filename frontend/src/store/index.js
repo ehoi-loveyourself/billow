@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import router from "@/router";
 import axios from "axios";
+import createPersistedState from "vuex-persistedstate";
 
 let isTokenRefreshing = false;
 let refreshSubscribers = [];
@@ -87,6 +88,7 @@ export default new Vuex.Store({
     genre: "",
     conditionId: [],
 
+    programId: 0,
     hotProgram: null,
     newProgram: null,
     genderAgeProgram: null,
@@ -119,15 +121,10 @@ export default new Vuex.Store({
   },
   getters: {},
   mutations: {
-    // SET_AUTH_TOKEN(state, authToken) {
-    //   state.authToken = authToken;
-    // },
     SET_USER_INFO(state, userInfo) {
       state.userInfo = userInfo;
       state.profileUrl =
         "https://j7b309.p.ssafy.io/api/profile/" + userInfo.profileId;
-      console.log("===================");
-      console.log(userInfo.profileId);
     },
     SET_RANDOM_PROGRAM(state, randomProgram) {
       state.randomProgram = randomProgram;
@@ -630,4 +627,5 @@ export default new Vuex.Store({
     },
   },
   modules: {},
+  plugins: [createPersistedState()],
 });

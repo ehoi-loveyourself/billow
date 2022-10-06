@@ -1,14 +1,27 @@
 <template>
   <div class="box-wrap">
     <div class="box">
-      <img class="liked_2" :src="like.posterImg" alt="Image" @click="moveProgramDetail(like.programId)" />
+      <img
+        class="liked_2"
+        :src="like.posterImg"
+        alt="Image"
+        @click="moveProgramDetail(like.programId)"
+      />
       <div class="button">
-        <button @click="addToFavorites(like.programId)" :id="like.programId" v-show="!isFavorite"
-          style="border: none; background: none">
+        <button
+          @click="addToFavorites(like.programId)"
+          :id="like.programId"
+          v-show="!isFavorite"
+          style="border: none; background: none"
+        >
           <img class="hearted" src="@/assets/white_heart.png" />
         </button>
-        <button @click="deleteFromFavorites(like.programId)" :id="like.programId" v-show="isFavorite"
-          style="background: none; border: none">
+        <button
+          @click="deleteFromFavorites(like.programId)"
+          :id="like.programId"
+          v-show="isFavorite"
+          style="background: none; border: none"
+        >
           <img class="hearted" src="@/assets/red_heart.png" />
         </button>
       </div>
@@ -22,8 +35,7 @@
 <script>
 import { reactive } from "@vue/reactivity";
 import axios from "axios";
-import { mapActions } from "vuex";
-import { mapState } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 
 export default {
   name: "LikedProgram",
@@ -54,6 +66,7 @@ export default {
       "userRegistBookmark",
       "userDeleteBookmark",
     ]),
+    ...mapMutations(["SET_PROGRAM_ID"]),
     addToFavorites(programId) {
       this.isFavorite = true;
       this.userRegistBookmark(programId);
@@ -63,8 +76,8 @@ export default {
       this.userDeleteBookmark(programId);
     },
     moveProgramDetail(programId) {
-      this.getProgramDetail(programId);
-      this.$router.push({ name: 'detail' })
+      this.SET_PROGRAM_ID(programId);
+      this.$router.push({ name: "detail" });
     },
   },
 };
@@ -98,7 +111,7 @@ export default {
   margin-bottom: 0.5%;
 }
 
-.liked_2:hover+.button,
+.liked_2:hover + .button,
 .button:hover {
   display: inline-block;
   position: absolute;
@@ -129,7 +142,6 @@ export default {
   margin: 0px 10px 0px 0px;
   margin-bottom: 5px;
 }
-
 
 .box-wrap {
   /* width: 100vw; height: 100vh; */
@@ -195,7 +207,8 @@ export default {
 
 @font-face {
   font-family: "GoyangIlsan";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff") format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
