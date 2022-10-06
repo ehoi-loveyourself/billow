@@ -31,13 +31,15 @@
   </div>
   <p style="text-align: center">
     <a class="startButton" href="#" role="button" style="border-radius: 15px">
-      <router-link
+      <!-- <router-link
         :to="{ name: 'main' }"
         class="nav-link"
         style="font-size: 20px; padding: 10px; color: black"
-      >
+      > -->
+      <div style="font-size: 20px; padding: 10px; color: black" @click="next()">
         BILLOW 만나러 가기
-      </router-link>
+      </div>
+      <!-- </router-link> -->
     </a>
   </p>
   <br /><br /><br /><br />
@@ -52,16 +54,23 @@ import StarRating from "@/components/collect/StarRating.vue";
 export default {
   name: "UserRatingProgram",
   components: {
-    StarRating
+    StarRating,
   },
   computed: {
-    ...mapState(["randomProgram"]),
+    ...mapState(["randomProgram", "ratingCount"]),
   },
   created() {
     this.getRandomProgram();
   },
   methods: {
     ...mapActions(["getRandomProgram"]),
+    next() {
+      if (this.ratingCount == 0) {
+        alert("평점을 하나 이상 등록해주세요!");
+        return;
+      }
+      this.$router.push("/main");
+    },
   },
   components: {
     StarRating,

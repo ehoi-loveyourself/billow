@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -102,10 +102,6 @@ export default {
       this.registRating({ programId: this.random.id, score: 8 });
     },
     setFlagFalse4() {
-      //   this.isTrue1 = false;
-      //   this.isTrue2 = false;
-      //   this.isTrue3 = false;
-      //   this.isTrue4 = false;
       this.isTrue5 = false;
       this.registRating({ programId: this.random.id, score: 8 });
     },
@@ -113,14 +109,9 @@ export default {
       this.isTrue1 = true;
       this.isTrue2 = true;
       this.isTrue3 = true;
-      //   this.isTrue4 = false;
-      //   this.isTrue5 = false;
       this.registRating({ programId: this.random.id, score: 6 });
     },
     setFlagFalse3() {
-      //   this.isTrue1 = false;
-      //   this.isTrue2 = false;
-      //   this.isTrue3 = false;
       this.isTrue4 = false;
       this.isTrue5 = false;
       this.registRating({ programId: this.random.id, score: 6 });
@@ -134,8 +125,6 @@ export default {
       this.registRating({ programId: this.random.id, score: 4 });
     },
     setFlagFalse2() {
-      //   this.isTrue1 = false;
-      //   this.isTrue2 = false;
       this.isTrue3 = false;
       this.isTrue4 = false;
       this.isTrue5 = false;

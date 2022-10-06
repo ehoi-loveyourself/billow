@@ -118,6 +118,7 @@ export default new Vuex.Store({
     isTrue4: false,
     isTrue5: false,
     isLoading: true,
+    ratingCount: 0,
   },
   getters: {},
   mutations: {
@@ -277,6 +278,12 @@ export default new Vuex.Store({
     ADD_CHATTING(state, chat) {
       state.onairTalk.push(chat);
     },
+    ADD_RATING_COUNT(state) {
+      state.ratingCount++;
+    },
+    CLEAR_RATING_COUNT(state) {
+      state.ratingCount = 0;
+    },
   },
   actions: {
     getUserInfo({ commit }) {
@@ -308,11 +315,8 @@ export default new Vuex.Store({
       axios.delete("/api/users").then((res) => {
         // 사용자 정보 삭제 DELETE
         console.log(res.data);
-        // window.localStorage.removeItem("authToken");
-        // window.localStorage.removeItem("name");
-        // window.localStorage.removeItem("email");
         localStorage.clear();
-
+        commit("CLEAR_RATING_COUNT");
         router.push("/loginmain");
       });
     },
@@ -533,6 +537,7 @@ export default new Vuex.Store({
         .post(`/api/program/${rating.programId}`, { score: rating.score })
         .then((res) => {
           //평점 등록 POST
+          commit("ADD_RATING_COUNT");
           console.log(res.data);
           if (rating.score == 10) {
             commit("SET_FLAG_TRUE1");
