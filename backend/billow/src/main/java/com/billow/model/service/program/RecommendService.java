@@ -33,7 +33,6 @@ public class RecommendService {
     private static final String USER_NOT_FOUND = "해당 유저를 찾을 수 없습니다.";
 
     private final ProgramRepository programRepository;
-    private final RatingRepository ratingRepository;
     private final CastRepository castRepository;
     private final UserRepository userRepository;
     private final GenderAgeViewerRepository genderAgeViewerRepository;
@@ -69,14 +68,6 @@ public class RecommendService {
                         .broadcastingAge(organization.getBroadcastingAge())
                         .broadcastingRerun(organization.getBroadcastingRerun())
                         .broadcastingStation(organization.getBroadcastingStation())
-                        .otts(organization.getProgram().getOttList()
-                                .stream()
-                                .map(ott -> OttResponse.builder()
-                                        .name(ott.getOttInfo().getName())
-                                        .url(ott.getOttInfo().getUrl())
-                                        .imgUrl(ott.getOttInfo().getImgUrl())
-                                        .build())
-                                .collect(Collectors.toList()))
                         .build())
                 .collect(Collectors.toList());
     }
@@ -107,14 +98,6 @@ public class RecommendService {
                         .ratingCnt(cast.getProgram().getRatingCnt())
                         .posterImg(cast.getProgram().getPosterImg())
                         .backdropPath(cast.getProgram().getBackdropPath())
-                        .otts(cast.getProgram().getOttList()
-                                .stream()
-                                .map(ott -> OttResponse.builder()
-                                        .name(ott.getOttInfo().getName())
-                                        .url(ott.getOttInfo().getUrl())
-                                        .imgUrl(ott.getOttInfo().getImgUrl())
-                                        .build())
-                                .collect(Collectors.toList()))
                         .build())
                 .collect(Collectors.toList());
     }
@@ -141,14 +124,6 @@ public class RecommendService {
                         .ratingCnt(program.getRatingCnt())
                         .posterImg(program.getPosterImg())
                         .backdropPath(program.getBackdropPath())
-                        .otts(program.getOttList()
-                                .stream()
-                                .map(ott -> OttResponse.builder()
-                                        .name(ott.getOttInfo().getName())
-                                        .url(ott.getOttInfo().getUrl())
-                                        .imgUrl(ott.getOttInfo().getImgUrl())
-                                        .build())
-                                .collect(Collectors.toList()))
                         .build())
                 .collect(Collectors.toList());
     }
@@ -181,14 +156,6 @@ public class RecommendService {
                         .bookmarkCnt(program.getBookmarkCnt())
                         .posterImg(program.getPosterImg())
                         .backdropPath(program.getBackdropPath())
-                        .otts(program.getOttList()
-                                .stream()
-                                .map(ott -> OttResponse.builder()
-                                        .name(ott.getOttInfo().getName())
-                                        .url(ott.getOttInfo().getUrl())
-                                        .imgUrl(ott.getOttInfo().getImgUrl())
-                                        .build())
-                                .collect(Collectors.toList()))
                         .build())
                 .collect(Collectors.toList());
     }
@@ -221,14 +188,6 @@ public class RecommendService {
                         .bookmarkCnt(rating.getProgram().getBookmarkCnt())
                         .posterImg(rating.getProgram().getPosterImg())
                         .backdropPath(rating.getProgram().getBackdropPath())
-                        .otts(rating.getProgram().getOttList()
-                                .stream()
-                                .map(ott -> OttResponse.builder()
-                                        .name(ott.getOttInfo().getName())
-                                        .url(ott.getOttInfo().getUrl())
-                                        .imgUrl(ott.getOttInfo().getImgUrl())
-                                        .build())
-                                .collect(Collectors.toList()))
                         .userAge(user.getAge())
                         .userGender(user.getGender())
                         .build())

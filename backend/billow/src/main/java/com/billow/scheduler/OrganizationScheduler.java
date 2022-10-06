@@ -3,7 +3,6 @@ package com.billow.scheduler;
 import com.billow.domain.entity.addition.BroadcastingAlarm;
 import com.billow.domain.entity.organization.ProgramOrganization;
 import com.billow.domain.entity.program.Program;
-import com.billow.exception.NotFoundException;
 import com.billow.model.service.addtion.BroadcastingAlarmService;
 import com.billow.model.service.organization.ProgramOrganozationService;
 import com.billow.model.service.program.ProgramService;
@@ -32,7 +31,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Controller
 @EnableScheduling
-public class OganizationScheduler {
+public class OrganizationScheduler {
 
     private final ProgramService programService;
     private final ProgramOrganozationService programOrganozationService;
@@ -41,7 +40,7 @@ public class OganizationScheduler {
     //매일 0시 7분 실행
     @ApiOperation(value = "프로그램 편성표 데이터 수집", response = Object.class)
     @Scheduled(cron = "0 7 0 * * *")
-    public void programorganization() throws IOException, ParseException {
+    public void programOrganization() throws IOException, ParseException {
         log.info("프로그램 편성표 데이터 수집 Scheduler 호출");
         LocalDate today = LocalDate.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM.dd.");
@@ -118,8 +117,8 @@ public class OganizationScheduler {
         Date date = new Date();
         List<ProgramOrganization> programOrganizationList = programOrganozationService.findByBroadcastingTimeBefore(date);
         for (ProgramOrganization programOrganization : programOrganizationList) {
-            List<BroadcastingAlarm>broadcastingAlarmList = broadcastingAlarmService.findByProgramOrganization_Id(programOrganization.getId());
-            for (BroadcastingAlarm broadcastingAlarm: broadcastingAlarmList){
+            List<BroadcastingAlarm> broadcastingAlarmList = broadcastingAlarmService.findByProgramOrganization_Id(programOrganization.getId());
+            for (BroadcastingAlarm broadcastingAlarm : broadcastingAlarmList) {
                 broadcastingAlarmService.deleteAlarm(broadcastingAlarm.getId());
             }
             programOrganozationService.delete(programOrganization);

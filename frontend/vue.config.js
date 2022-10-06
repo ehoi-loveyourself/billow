@@ -3,7 +3,7 @@
 //   transpileDependencies: true,
 //   lintOnSave:false,
 //   publicPath: '',
-  
+
 // //   devServer:{
 // //   proxy:{
 // //     "/api":{
@@ -18,12 +18,12 @@
 
 module.exports = {
   transpileDependencies: true,
-  lintOnSave:false,
-  publicPath: '',
-  
-  devServer:{
+  lintOnSave: false,
+  publicPath: "",
+
+  devServer: {
     // proxy: "http://localhost:8009",
     proxy: "https://j7b309.p.ssafy.io",
-    historyApiFallback: true
-  }
-}
+    historyApiFallback: true,
+  },
+};

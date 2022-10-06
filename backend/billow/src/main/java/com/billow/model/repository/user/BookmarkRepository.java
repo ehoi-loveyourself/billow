@@ -3,7 +3,6 @@ package com.billow.model.repository.user;
 import com.billow.domain.entity.user.Bookmark;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.awt.print.Book;
 import java.util.List;
 import java.util.Optional;
 

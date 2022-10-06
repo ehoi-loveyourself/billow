@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.billow.domain.entity.program.QProgram.program;
 import static com.billow.domain.entity.addition.QRating.rating;
+import static com.billow.domain.entity.program.QProgram.program;
 import static com.billow.domain.entity.user.QUser.user;
 
 @RequiredArgsConstructor

@@ -1,6 +1,5 @@
 package com.billow.model.repository.program;
 
-import com.billow.domain.entity.program.QConditionRecommend;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -9,12 +8,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.billow.domain.entity.program.QProgram.program;
 import static com.billow.domain.entity.program.QConditionRecommend.conditionRecommend;
+import static com.billow.domain.entity.program.QProgram.program;
 
 @RequiredArgsConstructor
 @Repository
-public class ConditionRecommendCustomRepositoryImpl implements  ConditionRecommendCustomRepository {
+public class ConditionRecommendCustomRepositoryImpl implements ConditionRecommendCustomRepository {
 
     private final JPAQueryFactory jpaQueryFactory;
 
@@ -31,14 +30,4 @@ public class ConditionRecommendCustomRepositoryImpl implements  ConditionRecomme
                 .limit(3)
                 .fetch();
     }
-
-    /*
-    select program_id
-from tb_condition_recommend
-where genre = '우울'
-and who = '혼자'
-group by program_id
-order by count(program_id) desc
-limit 3;
-     */
 }
