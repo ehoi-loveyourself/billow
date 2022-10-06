@@ -25,11 +25,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY = 'django-insecure-h9a#$_0rrkpqdc$=e2ed123*cdk$l&wm*yc%mwv210y=9p5tp+'
 DATABASES = my_settings.DATABASES
 SECRET_KEY = my_settings.SECRET_KEY
-
+API_KEY = '3beacdbb8f7b35eb8c782851ddc5b403'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.http://localhost:8009', 'http://localhost:8009', '.https://j7b309.p.ssafy.io/']
 
 
 # Application definition
