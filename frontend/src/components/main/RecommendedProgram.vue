@@ -44,7 +44,6 @@
     </h2>
   </div>
 
-
   <div v-if="actorProgram != null && actorProgram.length > 0">
     <h2 style="color: white">
       혹시 {{ actorProgram[0].actorName }}
@@ -77,17 +76,6 @@
         </div>
       </splide-slide>
     </splide>
-  </div>
-  <div v-else>
-    <h2 style="
-            color: #a1a1a1;
-            font-size: 1.1vw;
-            font-weight: 300;
-            margin-top: 1.5%;
-            margin-bottom: 4%;
-          ">
-      관련 프로그램이 없습니다.
-    </h2>
   </div>
 
   <h2 style="color: white">지금 방송 중인 프로그램(ON AIR)</h2>
