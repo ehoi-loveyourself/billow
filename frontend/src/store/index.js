@@ -141,14 +141,12 @@ export default new Vuex.Store({
     },
     ADD_CONDITION_ID(state, conditionId) {
       state.conditionId.push(conditionId);
-      console.log(state.conditionId);
     },
     DELETE_CONDITION_ID(state, conditionId) {
       const idx = state.conditionId.findIndex(function (item) {
         return item === conditionId;
       });
       state.conditionId.splice(idx, 1);
-      console.log(state.conditionId);
     },
     CLEAR_CONDITION_ID(state) {
       state.conditionId = [];
@@ -275,6 +273,9 @@ export default new Vuex.Store({
     },
     SET_IS_LOADING_TRUE(state) {
       state.isLoading = true;
+    },
+    ADD_CHATTING(state, chat) {
+      state.onairTalk.push(chat);
     },
   },
   actions: {

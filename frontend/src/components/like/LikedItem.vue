@@ -78,6 +78,7 @@ export default {
     moveProgramDetail(programId) {
       this.SET_PROGRAM_ID(programId);
       this.$router.push({ name: "detail" });
+      window.location.replace(`/detail`);
     },
   },
 };
