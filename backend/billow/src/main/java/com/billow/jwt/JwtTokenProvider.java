@@ -39,8 +39,8 @@ public class JwtTokenProvider implements InitializingBean {
 
     public static String createAuthToken(Long id, String email, String name) {
         return create(id, email, name, "Auth-access",
-//                EXPIRATION
-                1000 * 10L // 테스트용 : 3초
+                EXPIRATION
+//                1000 * 10L // 테스트용 : 3초
         );
     }
 

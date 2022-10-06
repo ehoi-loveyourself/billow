@@ -37,9 +37,9 @@ public class MessageService {
         params.put("to", toNumber);
         params.put("from", fromNumber);
         params.put("type", "LMS");
-        params.put("text", "[Billow]\n알림 예약하신 [" + programOrganization.getProgram().getTitle() + "] 방영 15분전입니다.\n" +
-                "방영시간: " + DateUtil.toAlarmString(programOrganization.getBroadcastingTime()) + " " + programOrganization.getBroadcastingDay() + "\n" +
-                "방영채널: " + programOrganization.getBroadcastingStation());
+        params.put("text", "[BILLOW]\n알림 예약하신 [" + programOrganization.getProgram().getTitle() + "] 방영 15분 전입니다.\n" +
+                "방영 시간 : " + DateUtil.toAlarmString(programOrganization.getBroadcastingTime()) + " " + programOrganization.getBroadcastingDay() + "\n" +
+                "방영 채널 : " + programOrganization.getBroadcastingStation());
         params.put("datetime", dateTime);
         System.out.println(params);
         try {

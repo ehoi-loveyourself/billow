@@ -349,7 +349,7 @@ body {
 }
 
 .blabla::-webkit-scrollbar {
-  width: 10px;
+  width: 7px;
   /* padding-left: 1%; */
 }
 
@@ -359,7 +359,7 @@ body {
 
 .blabla::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background-color: #E4DADA;
+  background-color: #A1A1A1;
 }
 
 .blabla::-webkit-scrollbar-button {
