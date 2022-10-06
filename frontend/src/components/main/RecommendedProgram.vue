@@ -124,7 +124,7 @@
   </template>
 
 
-  <h2 style="color: white">요즘 핫한 프로그램</h2>
+  <h2 style="color: white">인기 프로그램</h2>
   <splide v-if="hotProgram != null && hotProgram.length > 0" id="carousel_recommend" :options="options">
     <splide-slide v-for="hot in hotProgram">
       <div class="box-wrap">
@@ -162,7 +162,7 @@
             margin-top: 1.5%;
             margin-bottom: 4%;
           ">
-      요즘 핫한 프로그램이 없습니다.
+      인기 프로그램이 없습니다.
     </h2>
   </span>
 

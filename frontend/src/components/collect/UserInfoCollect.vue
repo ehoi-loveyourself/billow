@@ -406,7 +406,7 @@
       </b-col>
     </b-row>
     <b-row style="margin-bottom: 2%">
-      <b-col cols="2" style="text-align: right"> TV 서비스 </b-col>
+      <b-col cols="2" style="text-align: right"> 인터넷 서비스 </b-col>
       <b-col cols="10" style="padding-left: 1%">
         <b-form-select
           v-model="selected_tv_carrier"
@@ -480,7 +480,7 @@ export default {
         { value: "제주", text: "제주" },
       ],
       options_tv_carrier: [
-        { value: null, text: "TV 서비스를 택하세요" },
+        { value: null, text: "인터넷 서비스를 택하세요" },
         { value: "SK 브로드밴드", text: "SK 브로드밴드" },
         { value: "KT olleh", text: "KT olleh" },
         { value: "LG U+", text: "LG U+" },
