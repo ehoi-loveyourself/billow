@@ -34,10 +34,11 @@
 
   <div v-else>
     <h2 style="
-            color: white;
-            margin-left: 70px;
+            color: #a1a1a1;
             font-size: 1.1vw;
             font-weight: 300;
+            margin-top: 1.5%;
+            margin-bottom: 4%;
           ">
       성,연령별 추천 프로그램이 없습니다.
     </h2>
@@ -167,10 +168,11 @@
 
   <span v-else>
     <h2 style="
-            color: white;
-            margin-left: 70px;
+            color: #a1a1a1;
             font-size: 1.1vw;
             font-weight: 300;
+            margin-top: 1.5%;
+            margin-bottom: 4%;
           ">
       요즘 핫한 프로그램이 없습니다.
     </h2>
@@ -207,10 +209,11 @@
     </template>
     <template v-else>
       <h2 style="
-            color: white;
-            margin-left: 70px;
+            color: #a1a1a1;
             font-size: 1.1vw;
             font-weight: 300;
+            margin-top: 1.5%;
+            margin-bottom: 4%;
           ">
         신규 프로그램이 없습니다.
       </h2>
