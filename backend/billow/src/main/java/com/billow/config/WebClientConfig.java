@@ -16,7 +16,7 @@ public class WebClientConfig {
 
     @Bean
     public WebClient webClient() {
-//        return WebClient.create("https://j7b309.p.ssafy.io/");
-        return WebClient.create("http://127.0.0.1:8000/");
+        return WebClient.create("https://j7b309.p.ssafy.io/");
+//        return WebClient.create("http://127.0.0.1:8000/");
     }
 }
