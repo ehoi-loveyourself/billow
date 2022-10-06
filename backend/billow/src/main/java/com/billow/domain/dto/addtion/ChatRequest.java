@@ -8,5 +8,7 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ChatRequest {
 
+    private Long programId;
+
     private String content;
 }
