@@ -2,7 +2,6 @@ package com.billow.model.repository.organization;
 
 import com.billow.domain.entity.organization.ProgramOrganization;
 import com.querydsl.core.types.ConstantImpl;
-import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.StringTemplate;
 import com.querydsl.jpa.impl.JPAQueryFactory;

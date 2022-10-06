@@ -86,5 +86,4 @@ public class kPop {
     private String fixingCastNm;
 
     private String castNm;
-
 }

@@ -1,6 +1,5 @@
 package com.billow.model.repository.program;
 
-import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.domain.entity.addition.Rating;
 import com.billow.domain.entity.program.Program;
 

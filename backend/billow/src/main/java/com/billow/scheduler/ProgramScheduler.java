@@ -37,7 +37,6 @@ public class ProgramScheduler {
             if (programList.get(i).getRatingCnt() == null) {
                 programList.get(i).setRatingCnt(0L);
             }
-//            if (programList.get(i).getAge() != null) continue;
             Connection connection = Jsoup.connect("https://search.naver.com/search.naver?query=" + programList.get(i).getTitle());
             Document document = connection.get();
 

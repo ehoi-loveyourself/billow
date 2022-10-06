@@ -52,6 +52,15 @@ public class DateUtil {
         }
     }
 
+    public static String toReviewDate(Date date) {
+        if (date != null) {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return formatter.format(date);
+        } else {
+            return null;
+        }
+    }
+
     public static String toAlarmString(Date broadcastingTime) {
         if (broadcastingTime != null) {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");

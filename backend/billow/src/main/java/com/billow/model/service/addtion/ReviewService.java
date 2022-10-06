@@ -10,12 +10,14 @@ import com.billow.exception.NotFoundException;
 import com.billow.model.repository.addition.ReviewRepository;
 import com.billow.model.repository.program.ProgramRepository;
 import com.billow.model.repository.user.UserRepository;
+import com.billow.util.DateUtil;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,7 +52,8 @@ public class ReviewService {
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
         Program program = programRepository.findById(programId)
                 .orElseThrow(() -> new NotFoundException(PROGRAM_NOT_FOUND));
-        String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        Date date = new Date();
+        String dateTime = DateUtil.toReviewDate(date);
 
         Review review = Review.builder()
                 .user(user)
