@@ -50,6 +50,9 @@ dependencies {
 
 	implementation group: 'net.nurigo', name: 'javaSDK', version: '2.2'
 
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	implementation group: 'org.webjars', name: 'stomp-websocket', version: '2.3.3-1'
+
 	// QueryDSL
 	implementation 'com.querydsl:querydsl-jpa:5.0.0'
 	annotationProcessor(
