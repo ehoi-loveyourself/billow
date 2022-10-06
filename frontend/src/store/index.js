@@ -52,6 +52,7 @@ axios.interceptors.response.use(
           })
           .catch((err) => {
             alert("재로그인이 필요합니다.");
+            router.push("/loginmain");
             console.log(err);
           });
       }
@@ -64,12 +65,12 @@ axios.interceptors.response.use(
       return retryOriginalRequest;
     }
     if (status === 403) {
-      // alert("재로그인이 필요합니다.");
-      // router.push("/loginmain");
+      alert("재로그인이 필요합니다.");
+      router.push("/loginmain");
     }
     if (status === 400) {
-      // alert("오류가 발생하여 로그인 페이지로 이동합니다.");
-      // router.push("/loginmain");
+      alert("오류가 발생하여 로그인 페이지로 이동합니다.");
+      router.push("/loginmain");
     }
     return Promise.reject(error);
   }
@@ -343,7 +344,6 @@ export default new Vuex.Store({
           commit("SET_IS_LOADING_FALSE");
         })
         .catch((ex) => {
-          console.log("Ddd");
           commit("SET_IS_LOADING_FALSE");
         });
     },
@@ -440,9 +440,6 @@ export default new Vuex.Store({
         .then((res) => {
           console.log(res.data);
           dispatch("getProgramReview", state.programId);
-        })
-        .catch((ex) => {
-          alert("로그인이 필요한 서비스입니다.");
         });
     },
     modifyProgramReview({ commit, dispatch, state }, modifyReview) {
@@ -481,21 +478,13 @@ export default new Vuex.Store({
           //온에어 톡 메시지 POST
           console.log(res.data);
           dispatch("getProgramOnairTalk", state.programId);
-        })
-        .catch((ex) => {
-          alert("로그인이 필요한 서비스입니다.");
         });
     },
     registAlarm({ commit }, id) {
-      axios
-        .post(`/api/alarm/${id}`)
-        .then((res) => {
-          //방영 알림 등록 POSt
-          console.log(res.data);
-        })
-        .catch((ex) => {
-          alert("로그인이 필요한 서비스입니다.");
-        });
+      axios.post(`/api/alarm/${id}`).then((res) => {
+        //방영 알림 등록 POSt
+        console.log(res.data);
+      });
     },
     getAlarm({ commit }) {
       axios.get(`/api/alarm`).then((res) => {
@@ -575,9 +564,6 @@ export default new Vuex.Store({
             commit("SET_FLAG_FALSE4");
             commit("SET_FLAG_FALSE5");
           }
-        })
-        .catch((ex) => {
-          alert("로그인이 필요한 서비스입니다.");
         });
     },
     getSearchProgram({ commit }, word) {
@@ -627,7 +613,6 @@ export default new Vuex.Store({
         })
         .catch((ex) => {
           commit("SET_BOOKMARK_FALSE");
-          alert("로그인이 필요한 서비스입니다.");
         });
     },
     userDeleteBookmark({ commit }, programId) {
@@ -639,7 +624,6 @@ export default new Vuex.Store({
         })
         .catch((ex) => {
           commit("SET_BOOKMARK_FALSE");
-          alert("로그인이 필요한 서비스입니다.");
         });
     },
   },

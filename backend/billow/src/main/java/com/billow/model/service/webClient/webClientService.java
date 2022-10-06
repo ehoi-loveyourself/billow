@@ -117,6 +117,10 @@ public class webClientService {
                     .id(program.getId())
                     .title(program.getTitle())
                     .age(program.getAge())
+                    .genres(program.getGenreList()
+                            .stream()
+                            .map(g -> g.getGenreInfo().getName())
+                            .collect(Collectors.toList()))
                     .summary(program.getSummary())
                     .broadcastingDay(program.getBroadcastingDay())
                     .broadcastingEpisode(program.getBroadcastingEpisode())
@@ -171,7 +175,6 @@ public class webClientService {
                     .genre(pickedGenre)
                     .who(pickedWho)
                     .build();
-
             conditionRecommendRepository.save(build);
         }
     }
