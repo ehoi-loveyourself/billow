@@ -114,6 +114,7 @@ def ott_data(request):
 def user_recomm(request, user_id):
 
     user_id = user_id
+    print(user_id)
     indi_user_recomm = recomm.mf_algo_individual(user_id)
 
     indi_user_recomm = indi_user_recomm.values.tolist()
