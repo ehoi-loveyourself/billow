@@ -24,7 +24,7 @@
             <span class="username">{{ review.userNickName }}</span>&nbsp;&nbsp;
             <span class="time"> {{ review.regDateTime }}&nbsp;&nbsp;&nbsp;</span>
             <span v-if="userInfo.nickName==review.userNickName">
-              <a href="#" @click="setReviewId(review.reviewId)" class="button btnBorder btnBlue" v-b-modal.modal-5><span
+              <a href="#" @click="setReviewId(review.reviewId, review.content)" class="button btnBorder btnBlue" v-b-modal.modal-5><span
                   style="font-size: 0.8vw">수정</span></a>&nbsp;
               <a href="#" @click="reviewDelete(review.reviewId)" class="button btnBorder btnRed"
                 style="background-color:#990000"><span style="font-size: 0.8vw">삭제</span></a></span>
@@ -101,8 +101,9 @@ export default {
       this.registReview(this.message);
       this.message = "";
     },
-    setReviewId(reviewId) {
+    setReviewId(reviewId, content) {
       this.reviewId = reviewId;
+      this.modifyReview = content;
     },
     reviewModify() {
       if (this.modifyReview == "") {
