@@ -5,7 +5,7 @@ import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
+import java.util.List;
 
 import static com.billow.domain.entity.program.QGenderAgeViewer.genderAgeViewer;
 

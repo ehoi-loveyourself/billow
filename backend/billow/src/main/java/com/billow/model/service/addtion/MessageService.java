@@ -41,10 +41,8 @@ public class MessageService {
                 "방영 시간 : " + DateUtil.toAlarmString(programOrganization.getBroadcastingTime()) + " " + programOrganization.getBroadcastingDay() + "\n" +
                 "방영 채널 : " + programOrganization.getBroadcastingStation());
         params.put("datetime", dateTime);
-        System.out.println(params);
         try {
             JSONObject result = (JSONObject) coolsms.send(params);
-            System.out.println(result.toString());
             return (String) result.get("group_id");
         } catch (CoolsmsException e) {
             throw new BadRequestException(ALRAM_MESSAGE_ERROR);

@@ -34,20 +34,17 @@ public class JwtTokenProvider implements InitializingBean {
     public void afterPropertiesSet() throws Exception {  // init()
         String encodedKey = Base64.getEncoder().encodeToString(SECRET.getBytes());
         key = Keys.hmacShaKeyFor(encodedKey.getBytes());
-        // https://budnamu.tistory.com/entry/JWT 참고
     }
 
     public static String createAuthToken(Long id, String email, String name) {
         return create(id, email, name, "Auth-access",
                 EXPIRATION
-//                1000 * 10L // 테스트용 : 3초
         );
     }
 
     public static String createRefreshToken() {
         return create(null, null, null, "refreshToken",
                 EXPIRATION * 5
-//                1000 * 60 * 2L // 테스트용 : 2분
         );
     }
 
@@ -80,7 +77,6 @@ public class JwtTokenProvider implements InitializingBean {
                 .getBody();
     }
 
-    // 토큰 유효성 검사
     public static boolean validateToken(String token) {
         try {
             Jws<Claims> claims = Jwts.parserBuilder()

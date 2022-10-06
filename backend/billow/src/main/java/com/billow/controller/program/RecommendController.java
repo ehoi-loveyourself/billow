@@ -5,7 +5,6 @@ import com.billow.domain.dto.program.CastResponse;
 import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.jwt.JwtTokenProvider;
 import com.billow.model.service.program.RecommendService;
-import com.billow.util.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

@@ -4,7 +4,7 @@ import com.billow.domain.entity.program.Cast;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
+import java.util.List;
 
 import static com.billow.domain.entity.addition.QRating.rating;
 import static com.billow.domain.entity.program.QCast.cast;
