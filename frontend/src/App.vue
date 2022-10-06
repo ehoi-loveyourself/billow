@@ -27,7 +27,6 @@ body {
 }
 
 #app {
-  font-family: basic-scans, sans-serif;
   font-size: 1em;
   line-height: 1.6;
   margin: 0;
@@ -35,7 +34,7 @@ body {
   position: relative;
   padding-bottom: 180px;
   background-color: #141414;
-  font-family: 'NanumBarunGothic';
+  font-family: 'NanumBarunGothic', sans-serif !important;
 }
 
 .v-application {

@@ -121,8 +121,6 @@ img:hover {
   display: inline-block;
   background: rgb(46, 47, 49);
   color: rgb(255, 255, 255);
-  font-family: "Watcha Sans", Roboto, "Noto Sans KR", "Apple SD Gothic Neo",
-    "Nanum Gothic", "Malgun Gothic", sans-serif;
   font-size: 12px;
   font-weight: 400;
   vertical-align: top;

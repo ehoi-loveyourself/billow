@@ -237,8 +237,6 @@ section {
 .blabla {
   margin-top: 8px;
   color: white;
-  font-family: Noto Sans KR, -apple-system, BlinkMacSystemFont, Roboto, Segoe UI,
-    Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
   max-height: 22vh;
   overflow-y: auto;
 }
@@ -247,8 +245,6 @@ section {
   display: inline-block;
   background: rgb(46, 47, 49);
   color: rgb(255, 255, 255);
-  font-family: "Watcha Sans", Roboto, "Noto Sans KR", "Apple SD Gothic Neo",
-    "Nanum Gothic", "Malgun Gothic", sans-serif;
   font-size: 12px;
   font-weight: 900;
   vertical-align: top;
@@ -262,15 +258,11 @@ section {
 .genre {
   color: #a1a1a1;
   font-size: 17px;
-  font-family: Noto Sans KR, -apple-system, BlinkMacSystemFont, Roboto, Segoe UI,
-    Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
   margin-top: 8px;
 }
 
 .talent {
   color: white;
-  font-family: Noto Sans KR, -apple-system, BlinkMacSystemFont, Roboto, Segoe UI,
-    Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
   margin-top: 4px;
 }
 
