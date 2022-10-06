@@ -34,7 +34,7 @@
             <b-avatar
               class="avatar"
               variant="info"
-              src="https://j7b309.p.ssafy.io/api/profile/12"
+              src="https://j7b309.p.ssafy.io/api/profile/2"
               size="4rem"
             ></b-avatar>
           </label>
@@ -384,7 +384,7 @@
         </b-col>
       </b-row>
       <b-row style="margin-bottom: 2%">
-        <b-col cols="1" style="text-align: right"> 통신사 </b-col>
+        <b-col cols="1" style="text-align: right"> TV 서비스 </b-col>
         <b-col cols="11" style="padding-left: 1%">
           <b-form-select
             v-model="userInfo.tvCarrier"
@@ -402,9 +402,9 @@
             style="width: 21%"
           ></b-form-input>
           <br /><br /><br />
-          <a href="#" @click="modifyUser()" class="button btnBorder btnBlue"
-        ><span style="font-size: 1vw">수정</span></a
-      >&nbsp;
+          <a href="#" @click="modifyUser()" class="button btnBorder btnBlue" style="margin-right:2%"
+        ><span style="font-size: 1vw;">수정</span></a
+      >
       <a href="#" @click="deleteUser()" class="button btnBorder btnRed"
         ><span style="font-size: 1vw">탈퇴</span></a
       >
@@ -452,7 +452,7 @@ export default {
         { value: "제주", text: "제주" },
       ],
       options_tv_carrier: [
-        { value: null, text: "통신사를 선택하세요" },
+        { value: null, text: "TV 서비스를 선택하세요" },
         { value: "SK 브로드밴드", text: "SK 브로드밴드" },
         { value: "KT olleh", text: "KT olleh" },
         { value: "LG U+", text: "LG U+" },
@@ -493,7 +493,7 @@ export default {
     deleteUser() {
       if (confirm("정말 탈퇴하시겠습니까?") == true){
         this.deleteUserInfo();
-        alert("그동안 BILLOW를 이용해주셔서 감사합니다. 다음 기회에 만나요!")
+        alert("그동안 BILLOW를 이용해주셔서 감사합니다. 다음 기회에 다시 만나요!")
       }
     },
   },

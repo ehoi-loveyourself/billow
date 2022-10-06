@@ -34,15 +34,15 @@
 
   <div v-else>
     <h2 style="
-            color: white;
-            margin-left: 70px;
+            color: #a1a1a1;
             font-size: 1.1vw;
             font-weight: 300;
+            margin-top: 1.5%;
+            margin-bottom: 4%;
           ">
       성,연령별 추천 프로그램이 없습니다.
     </h2>
   </div>
-
 
   <div v-if="actorProgram != null && actorProgram.length > 0">
     <h2 style="color: white">
@@ -76,17 +76,6 @@
         </div>
       </splide-slide>
     </splide>
-  </div>
-  <div v-else>
-    <h2 style="
-            color: #a1a1a1;
-            font-size: 1.1vw;
-            font-weight: 300;
-            margin-top: 1.5%;
-            margin-bottom: 4%;
-          ">
-      관련 프로그램이 없습니다.
-    </h2>
   </div>
 
   <h2 style="color: white">지금 방송 중인 프로그램(ON AIR)</h2>
@@ -128,7 +117,7 @@
             font-size: 1.1vw;
             font-weight: 300;
             margin-top: 1.5%;
-            margin-bottom: 4%;
+            margin-bottom: 10%;
           ">
       현재 방송 중인 프로그램이 없습니다.
     </h2>
@@ -167,10 +156,11 @@
 
   <span v-else>
     <h2 style="
-            color: white;
-            margin-left: 70px;
+            color: #a1a1a1;
             font-size: 1.1vw;
             font-weight: 300;
+            margin-top: 1.5%;
+            margin-bottom: 4%;
           ">
       요즘 핫한 프로그램이 없습니다.
     </h2>
@@ -207,10 +197,11 @@
     </template>
     <template v-else>
       <h2 style="
-            color: white;
-            margin-left: 70px;
+            color: #a1a1a1;
             font-size: 1.1vw;
             font-weight: 300;
+            margin-top: 1.5%;
+            margin-bottom: 4%;
           ">
         신규 프로그램이 없습니다.
       </h2>
@@ -282,8 +273,6 @@ export default {
   display: inline-block;
   background: rgb(46, 47, 49);
   color: rgb(255, 255, 255);
-  font-family: "Watcha Sans", Roboto, "Noto Sans KR", "Apple SD Gothic Neo",
-    "Nanum Gothic", "Malgun Gothic", sans-serif;
   font-size: 12px;
   font-weight: 400;
   vertical-align: top;

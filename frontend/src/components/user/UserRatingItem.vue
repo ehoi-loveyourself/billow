@@ -3,7 +3,7 @@
     <div class="box">
       <img class="poster" :src="rating.posterImg" alt="Image" @click="moveProgramDetail(rating.id)" />
       <div class="button">
-        <button @click="ratingDelete(rating.id)" style="border: none; background: none">
+        <button @click="ratingDelete(rating.ratingId)" style="border: none; background: none">
           <img class="trash" src="@/assets/trash.png" style="width:50%" />
         </button>
       </div>
@@ -25,9 +25,6 @@
       style="margin-right:5%" />
     <img v-show="isTrue5" @click="setFlagFalse5" class="hearted" src="@/assets/blue_star_small.png"
       style="margin-right:5%" />
-
-    <a href="#" @click="ratingDelete(rating.ratingId)" class="button"><img src="@/assets/trash.png"
-        style="width:8%" /></a>
   </div>
 </template>
 
@@ -219,8 +216,6 @@ img:hover {
   display: inline-block;
   background: rgb(46, 47, 49);
   color: rgb(255, 255, 255);
-  font-family: "Watcha Sans", Roboto, "Noto Sans KR", "Apple SD Gothic Neo",
-    "Nanum Gothic", "Malgun Gothic", sans-serif;
   font-size: 12px;
   font-weight: 400;
   vertical-align: top;
