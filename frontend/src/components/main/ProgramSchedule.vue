@@ -1,7 +1,6 @@
 <template>
   <div style="margin-top: 10px">
     <br />
-    <br />
     <div class="flex">
       <div v-if="programSchedule != null && programSchedule.length > 0">
         <b-table-simple bordered fixed style="border-color: #ffffff; color: #ffffff; font-weight: 400">

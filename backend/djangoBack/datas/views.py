@@ -7,11 +7,12 @@ from rest_framework.decorators import api_view
 from datas.models import TbGenre, TbGenreInfo, TbOtt, TbOttInfo, TbProgram, TbRating, TbUser
 from datas.serializers import ProgramSerializer
 from datas import recomm
-# from my_settings import API_KEY
+
+from djangoBack.settings import API_KEY
 
 import requests
 import random
-API_KEY = '3beacdbb8f7b35eb8c782851ddc5b403'
+
 @api_view(['GET'])
 def genre_data(request):
     res = requests.get('https://api.themoviedb.org/3/genre/tv/list?api_key=3beacdbb8f7b35eb8c782851ddc5b403&language=ko-kr')
@@ -27,7 +28,7 @@ def genre_data(request):
     return Response()
 
 def all_program_data(request):
-    BASE_URL = 'https://api.themoviedb.org/3/tv/popular?api_key=3beacdbb8f7b35eb8c782851ddc5b403&language=ko-kr&page='
+    BASE_URL = f'https://api.themoviedb.org/3/tv/popular?api_key={API_KEY}&language=ko-kr&page='
     i = 0
     while True:
         i += 1
@@ -37,25 +38,28 @@ def all_program_data(request):
             summary = ''
             poster_img = ''
             backdrop_path = ''
+            broadcasting_station = ''
             program_id=program_data['id']
-            if TbProgram.objects.filter(program_num=program_id):
+            if TbProgram.objects.filter(program_num=program_id).exists():
+                poster_img = ''
                 program_country = program_data['original_language']
                 if program_country == 'ko':
-                    program_detail = f'https://api.themoviedb.org/3/tv/{program_id}?api_key=3beacdbb8f7b35eb8c782851ddc5b403&language=ko-kr'
+                    program_detail = f'https://api.themoviedb.org/3/tv/{program_id}?api_key={API_KEY}&language=ko-kr'
                     detail_res = requests.get(program_detail)
                     data = detail_res.json()
                     original_language = data.get('original_language')   
                     if original_language == 'ko':
-                        if data.get('poster_path'):
-                            poster_img = data.get('poster_path')
-                        program = TbProgram.objects.update(
-                            poster_img = 'https://image.tmdb.org/t/p/w500' + poster_img,
-                        )
+                        # if data.get('poster_path'):
+                        poster_img = data.get('poster_path')
+                        if poster_img == None:
+                            continue
+                        TbProgram.objects.filter(program_num=program_id).update(poster_img = 'https://image.tmdb.org/t/p/w500' + poster_img)
+                            
             else:
                 program_country = program_data['original_language']
                 if program_country == 'ko':
-                    program_detail = f'https://api.themoviedb.org/3/tv/{program_id}?api_key=3beacdbb8f7b35eb8c782851ddc5b403&language=ko-kr'
-                    program_ott = f'https://api.themoviedb.org/3/tv/{program_id}/watch/providers?api_key=3beacdbb8f7b35eb8c782851ddc5b403'
+                    program_detail = f'https://api.themoviedb.org/3/tv/{program_id}?api_key={API_KEY}&language=ko-kr'
+                    program_ott = f'https://api.themoviedb.org/3/tv/{program_id}/watch/providers?api_key={API_KEY}'
                     detail_res = requests.get(program_detail)
                     ott_res = requests.get(program_ott)
                     data = detail_res.json()
@@ -65,12 +69,15 @@ def all_program_data(request):
                         title = data.get('name')
                         if data.get('overview'):
                             summary = data.get('overview')
+                        if len(summary) > 1000:
+                            summary = summary[:1000]
                         networks = data.get('networks')
                         if data.get('poster_path'):
                             poster_img = data.get('poster_path')
                         if data.get('backdrop_path'):
                             backdrop_path = data.get('backdrop_path')
-                        first_air_date = data.get('first_air_date')
+                        if data.get('first_air_date'):
+                            first_air_date = data.get('first_air_date')
                         for network in networks:
                             broadcasting_station = network.get('name')
                             break
@@ -90,8 +97,8 @@ def all_program_data(request):
                                 break
                             genre = TbGenreInfo.objects.get(pk=program_genre.get('id'))
                             TbGenre.objects.create(
-                                program = program,
-                                genre_info = genre
+                                genre_info_id = genre.genre_info_id,
+                                program_id = program.program_id
                             )
                         kr_ott = ott_data.get('KR')
                         if kr_ott != None:
@@ -102,8 +109,8 @@ def all_program_data(request):
                                         break
                                     ott = TbOttInfo.objects.get(pk=ott_detail.get('provider_id'))
                                     TbOtt.objects.create(
-                                        ott_info = ott,
-                                        program = program
+                                        ott_info_id = ott.ott_info_id,
+                                        program_id = program.program_id
                                     )
     return Response()
 
@@ -139,10 +146,6 @@ def user_recomm(request, user_id):
     for program_id in indi_user_recomm:
         program = TbProgram.objects.get(pk=program_id[0])
         indi_user_recomm_list.append(program)
-
-    serializer = ProgramSerializer(data = indi_user_recomm_list, many = True)
-    if serializer.is_valid():
-        pass
 
     return Response(lst)
 

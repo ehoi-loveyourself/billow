@@ -10,5 +10,3 @@ DATABASES = {
     }   
 }
 SECRET_KEY = 'ssafy second project B309 Billow'
-
-API_KEY = '3beacdbb8f7b35eb8c782851ddc5b403'
