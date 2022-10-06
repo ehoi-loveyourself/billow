@@ -49,7 +49,6 @@ def all_program_data(request):
                     data = detail_res.json()
                     original_language = data.get('original_language')   
                     if original_language == 'ko':
-                        # if data.get('poster_path'):
                         poster_img = data.get('poster_path')
                         if poster_img == None:
                             continue
