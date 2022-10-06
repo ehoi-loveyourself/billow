@@ -34,7 +34,7 @@
             <b-avatar
               class="avatar"
               variant="info"
-              src="https://j7b309.p.ssafy.io/api/profile/12"
+              src="https://j7b309.p.ssafy.io/api/profile/2"
               size="4rem"
             ></b-avatar>
           </label>
