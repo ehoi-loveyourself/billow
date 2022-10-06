@@ -22,8 +22,8 @@ module.exports = {
   publicPath: "",
 
   devServer: {
-    // proxy: "http://localhost:8009",
-    proxy: "https://j7b309.p.ssafy.io",
+    proxy: "http://localhost:8009",
+    // proxy: "https://j7b309.p.ssafy.io",
     historyApiFallback: true,
   },
 };
