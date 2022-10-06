@@ -1,6 +1,7 @@
 package com.billow.model.service.addtion;
 
 import com.billow.domain.dto.addtion.ChatRequest;
+import com.billow.domain.dto.addtion.ChatResponse;
 import com.billow.domain.entity.addition.Chat;
 import com.billow.domain.entity.program.Program;
 import com.billow.domain.entity.user.User;
@@ -45,7 +46,14 @@ public class StompChatService {
                 .build();
         chatRepository.save(chat);
 
-        template.convertAndSend("/sub/chat/room/" + chatRequest.getProgramId(), chat);
+        ChatResponse castResponse = ChatResponse.builder()
+                .userNickName(chat.getUser().getNickName())
+                .userProfile(chat.getUser().getProfileImg().getUrl())
+                .content(chat.getContent())
+                .regDateTime(chat.getDateTime())
+                .build();
+
+        template.convertAndSend("/sub/chat/program/" + chatRequest.getProgramId(), castResponse);
         return new Message("메시지 전송 성공");
     }
 }

@@ -5,13 +5,15 @@
       <splide-slide v-for="recommend in userRecommend">
         <figure>
           <a class="enterDetail" href="#">
-            <router-link
+            <!-- <router-link
               :to="{ name: 'detail' }"
               @click="moveProgramDetail(recommend.id)"
               class="nav-link"
-            >
+            > -->
+            <div @click="moveProgramDetail(recommend.id)">
               <img class="img_2" :src="recommend.backdropPath" alt="main2" />
-            </router-link>
+            </div>
+            <!-- </router-link> -->
           </a>
           <figcaption>{{ recommend.title }}</figcaption>
         </figure>
@@ -48,6 +50,7 @@ export default {
     ...mapMutations(["SET_PROGRAM_ID"]),
     moveProgramDetail(programId) {
       this.SET_PROGRAM_ID(programId);
+      window.location.replace(`/detail`);
     },
     gotoPage(link) {
       this.$router.push(link);
