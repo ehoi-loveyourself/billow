@@ -19,7 +19,8 @@
   <div class="body">
     <h2 style="color: white; font-size: 1.1vw; font-weight: 300">
       회원님이 봤던 프로그램들을 평가해주세요.<br />
-      BILLOW가 회원님이 좋아할만한 프로그램을 추천해줄거예요.
+      BILLOW가 회원님이 좋아할만한 프로그램을 추천해줄거예요. (평점은 5개 이상
+      필수로 평가해주세요!)
     </h2>
     <br />
     <div class="flex">
@@ -65,8 +66,8 @@ export default {
   methods: {
     ...mapActions(["getRandomProgram"]),
     next() {
-      if (this.ratingCount == 0) {
-        alert("평점을 하나 이상 등록해주세요!");
+      if (this.ratingCount.length < 5) {
+        alert("평점을 5개 이상 등록해주세요!");
         return;
       }
       this.$router.push("/main");

@@ -118,7 +118,7 @@ export default new Vuex.Store({
     isTrue4: false,
     isTrue5: false,
     isLoading: true,
-    ratingCount: 0,
+    ratingCount: [],
   },
   getters: {},
   mutations: {
@@ -278,11 +278,16 @@ export default new Vuex.Store({
     ADD_CHATTING(state, chat) {
       state.onairTalk.push(chat);
     },
-    ADD_RATING_COUNT(state) {
-      state.ratingCount++;
+    ADD_RATING_COUNT(state, programId) {
+      const idx = state.ratingCount.findIndex(function (item) {
+        return item === programId;
+      });
+      if (idx == -1) {
+        state.ratingCount.push(programId);
+      }
     },
     CLEAR_RATING_COUNT(state) {
-      state.ratingCount = 0;
+      state.ratingCount = [];
     },
   },
   actions: {
@@ -537,7 +542,7 @@ export default new Vuex.Store({
         .post(`/api/program/${rating.programId}`, { score: rating.score })
         .then((res) => {
           //평점 등록 POST
-          commit("ADD_RATING_COUNT");
+          commit("ADD_RATING_COUNT", rating.programId);
           console.log(res.data);
           if (rating.score == 10) {
             commit("SET_FLAG_TRUE1");
