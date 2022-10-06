@@ -162,6 +162,7 @@ img:hover {
 
 #Img {
   position: relative;
+  text-align: left;
 }
 
 .flex {
