@@ -493,7 +493,7 @@ export default {
     deleteUser() {
       if (confirm("정말 탈퇴하시겠습니까?") == true){
         this.deleteUserInfo();
-        alert("그동안 BILLOW를 이용해주셔서 감사합니다. 다음 기회에 만나요!")
+        alert("그동안 BILLOW를 이용해주셔서 감사합니다. 다음 기회에 다시 만나요!")
       }
     },
   },
