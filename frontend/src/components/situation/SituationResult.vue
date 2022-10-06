@@ -2,10 +2,20 @@
   <header-bar />
   <SecondBar />
   <br />
-  <h2 style="color: white; margin-left: 70px; font-size: 1.2vw; font-weight: 400; margin-bottom: 1%;">
+  <h2
+    style="
+      color: white;
+      margin-left: 70px;
+      font-size: 1.2vw;
+      font-weight: 400;
+      margin-bottom: 1%;
+    "
+  >
     #{{ who }} #{{ genre }}
   </h2>
-  <h2 style="color: white; margin-left: 70px; font-size: 1.1vw; font-weight: 300">
+  <h2
+    style="color: white; margin-left: 70px; font-size: 1.1vw; font-weight: 300"
+  >
     딱 맞는 프로그램을 추천해드릴게요.
   </h2>
   <LoadingSpinner v-if="isLoading" />
@@ -16,7 +26,11 @@
         <div class="box-wrap">
           <div class="box">
             <div class="img">
-              <router-link :to="{ name: 'detail' }" @click="moveProgramDetail(condition.id)" class="nav-link">
+              <router-link
+                :to="{ name: 'detail' }"
+                @click="moveProgramDetail(condition.id)"
+                class="nav-link"
+              >
                 <img :src="condition.posterImg" alt="Image" />
               </router-link>
             </div>
@@ -24,16 +38,24 @@
               <h3>{{ condition.title }}</h3>
               <div class="detailbox">
                 <span class="detailbox_design" v-if="condition.age">{{
-                condition.age
-                }}</span><span class="detailbox_design" v-if="condition.broadcastingDay">{{
-                  condition.broadcastingDay
-                  }}</span><span class="detailbox_design" v-if="condition.genres[0]">{{
+                  condition.age
+                }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="condition.broadcastingDay"
+                  >{{ condition.broadcastingDay }}</span
+                ><span class="detailbox_design" v-if="condition.genres[0]">{{
                   condition.genres[0]
-                  }}</span><span class="detailbox_design" v-if="condition.broadcastingStation">{{
-                  condition.broadcastingStation
-                  }}</span><span class="detailbox_design" v-if="condition.broadcastingTime">{{
-                  condition.broadcastingTime }}
-                  ~</span>
+                }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="condition.broadcastingStation"
+                  >{{ condition.broadcastingStation }}</span
+                ><span
+                  class="detailbox_design"
+                  v-if="condition.broadcastingTime"
+                  >{{ condition.broadcastingTime }} ~</span
+                >
               </div>
             </div>
           </div>
@@ -44,7 +66,11 @@
   </div>
   <p style="text-align: center">
     <a class="startButton" href="#" role="button" style="border-radius: 15px">
-      <router-link :to="{ name: 'main' }" class="nav-link" style="font-size: 20px; padding: 10px; color: black">
+      <router-link
+        :to="{ name: 'main' }"
+        class="nav-link"
+        style="font-size: 20px; padding: 10px; color: black"
+      >
         홈으로
       </router-link>
     </a>
@@ -52,11 +78,10 @@
   <br /><br /><br /><br /><br />
 </template>
 
-
 <script>
 import HeaderBar from "@/components/layout/HeaderNavBar.vue";
 import SecondBar from "@/components/layout/SecondNavBar.vue";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 import LoadingSpinner from "@/components/load/LoadingSpinner.vue";
 
 export default {
@@ -64,7 +89,7 @@ export default {
   components: {
     HeaderBar,
     SecondBar,
-    LoadingSpinner
+    LoadingSpinner,
   },
   computed: {
     ...mapState(["who", "genre", "conditionRecommend", "isLoading"]),
@@ -74,8 +99,9 @@ export default {
   },
   methods: {
     ...mapActions(["getProgramDetail", "getConditionRecommendProgram"]),
+    ...mapMutations(["SET_PROGRAM_ID"]),
     moveProgramDetail(programId) {
-      this.getProgramDetail(programId);
+      this.SET_PROGRAM_ID(programId);
     },
   },
 };
@@ -110,7 +136,7 @@ img {
 }
 
 img:hover {
-  filter: brightness(0.5)
+  filter: brightness(0.5);
 }
 
 .box .info .detailbox {
@@ -130,7 +156,6 @@ img:hover {
   margin: 0px 10px 0px 0px;
   margin-bottom: 5px;
 }
-
 
 .box-wrap {
   /* width: 100vw; height: 100vh; */
@@ -196,7 +221,8 @@ img:hover {
 
 @font-face {
   font-family: "GoyangIlsan";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff") format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
