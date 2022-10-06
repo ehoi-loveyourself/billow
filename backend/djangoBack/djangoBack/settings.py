@@ -29,7 +29,7 @@ API_KEY = '3beacdbb8f7b35eb8c782851ddc5b403'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.http://localhost:8009', 'http://localhost:8009', '.https://j7b309.p.ssafy.io/']
+ALLOWED_HOSTS = ['.http://localhost:8009', 'http://localhost:8009', '.https://j7b309.p.ssafy.io/', 'https://j7b309.p.ssafy.io/']
 
 
 # Application definition
