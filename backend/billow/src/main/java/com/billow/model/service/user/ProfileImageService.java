@@ -1,10 +1,8 @@
 package com.billow.model.service.user;
 
 import com.billow.domain.entity.user.ProfileImg;
-import com.billow.domain.entity.user.User;
 import com.billow.exception.NotFoundException;
 import com.billow.model.repository.user.ProfileImgRepository;
-import com.billow.model.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;

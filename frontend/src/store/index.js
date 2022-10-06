@@ -63,12 +63,12 @@ axios.interceptors.response.use(
       return retryOriginalRequest;
     }
     if (status === 403) {
-      alert("재로그인이 필요합니다.");
-      router.push("/loginmain");
+      // alert("재로그인이 필요합니다.");
+      // router.push("/loginmain");
     }
     if (status === 400) {
-      alert("오류가 발생하여 로그인 페이지로 이동합니다.");
-      router.push("/loginmain");
+      // alert("오류가 발생하여 로그인 페이지로 이동합니다.");
+      // router.push("/loginmain");
     }
     return Promise.reject(error);
   }
@@ -115,7 +115,7 @@ export default new Vuex.Store({
     isTrue3: false,
     isTrue4: false,
     isTrue5: false,
-    isLoading: true
+    isLoading: true,
   },
   getters: {},
   mutations: {
@@ -278,7 +278,7 @@ export default new Vuex.Store({
     },
     SET_IS_LOADING_TRUE(state) {
       state.isLoading = true;
-    }
+    },
   },
   actions: {
     getUserInfo({ commit }) {

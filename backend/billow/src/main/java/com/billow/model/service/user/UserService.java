@@ -18,12 +18,8 @@ import com.billow.model.repository.user.UserRepository;
 import com.billow.util.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -103,11 +99,8 @@ public class UserService {
         if (!user.getName().equals(signUpRequest.getName())) {
             throw new BadRequestException(BAD_REQUEST);
         }
-        // 지역을 찾아서 객체로 넣어줘야해
         Region region = regionRepository.findByRegion(signUpRequest.getRegion());
-        // 통신사도 찾아서 객체로 넣어줘야 하고
         TvCarrier tvCarrier = tvCarrierRepository.findByCompany(signUpRequest.getTvCarrier());
-        // 프로필 이미지도 번호를 찾아서
         ProfileImg profileImg = profileImgRepository.findById(signUpRequest.getProfileImgId())
                 .orElseThrow(() -> new NotFoundException(PROFILE_IMG_NOT_FOUND));
 

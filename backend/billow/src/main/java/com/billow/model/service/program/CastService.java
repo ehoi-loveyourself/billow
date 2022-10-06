@@ -1,17 +1,12 @@
 package com.billow.model.service.program;
 
 import com.billow.domain.dto.program.CastResponse;
-import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.domain.entity.program.Cast;
-import com.billow.domain.entity.program.Program;
-import com.billow.exception.NotFoundException;
 import com.billow.model.repository.program.CastRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor

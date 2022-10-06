@@ -49,10 +49,6 @@ public class webClientService {
                 .map(program -> ProgramResponse.builder()
                         .id(program.getId())
                         .title(program.getTitle())
-                        .genres(program.getGenreList()
-                                .stream()
-                                .map(genre -> genre.getGenreInfo().getName())
-                                .collect(Collectors.toList()))
                         .age(program.getAge())
                         .summary(program.getSummary())
                         .broadcastingDay(program.getBroadcastingDay())
@@ -83,7 +79,6 @@ public class webClientService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
 
-        // 리퀘스트에 있는 정보를 꺼내서 다 테이블에 넣는다
         String who = conditionRecommendRequest.getWho();
         String genre = conditionRecommendRequest.getGenre();
         List<Long> programList = conditionRecommendRequest.getProgramList();
@@ -100,11 +95,9 @@ public class webClientService {
         }
         log.info("유저가 고른 프로그램 : " + conditionRecommendRequest.getProgramList().toString());
 
-        // 이제 db에서 해당 기분과 장르에 맞는 가장 상위 프로그램 3개를 가져온다
         List<Long> result = conditionRecommendRepository.findTop3ByWithWhomAndGenre(who, genre);
         log.info("해당 {}과 {}에 맞는 상위 프로그램 3개 추출 : {}", who, genre, result.toString());
 
-        // 셋을 초기화 하고
         Set<Long> programIdSet = new HashSet<>();
         int cnt = 0;
         for (Long programId : result) {
@@ -112,14 +105,10 @@ public class webClientService {
                     .orElseThrow(() -> new NotFoundException(PROGRAM_NOT_FOUND));
             List<Long> idList = getConditionProgramIdByDjango(programId);
             log.info("상위 프로그램 3개를 넣어서 나온 프로그램 : " + ++cnt + "회차, 프로그램 id : " + idList.toString());
-            // 나온 결과값을 셋에 넣는다 : 중복된 프로그램 id를 없앨 수 있도록
             programIdSet.addAll(idList);
         }
-        // 프로그램 id가 중복이 제거된 채로 셋에 들어있다.
         log.info("중복이 제거된 셋 : " + programIdSet);
 
-
-        // 셋을 돌리면서 responses 에 담는다.
         List<ProgramResponse> responses = new ArrayList<>();
         for (Long id : programIdSet) {
             Program program = programRepository.findById(id)
@@ -127,10 +116,6 @@ public class webClientService {
             ProgramResponse build = ProgramResponse.builder()
                     .id(program.getId())
                     .title(program.getTitle())
-                    .genres(program.getGenreList()
-                            .stream()
-                            .map(g -> g.getGenreInfo().getName())
-                            .collect(Collectors.toList()))
                     .age(program.getAge())
                     .summary(program.getSummary())
                     .broadcastingDay(program.getBroadcastingDay())
@@ -143,16 +128,7 @@ public class webClientService {
                     .ratingCnt(program.getRatingCnt())
                     .posterImg(program.getPosterImg())
                     .backdropPath(program.getBackdropPath())
-                    .otts(program.getOttList()
-                            .stream()
-                            .map(ott -> OttResponse.builder()
-                                    .name(ott.getOttInfo().getName())
-                                    .url(ott.getOttInfo().getUrl())
-                                    .imgUrl(ott.getOttInfo().getImgUrl())
-                                    .build())
-                            .collect(Collectors.toList()))
                     .build();
-
             responses.add(build);
         }
         return responses;
@@ -201,7 +177,6 @@ public class webClientService {
     }
 
     public void makeRandomRating() {
-        // 유저와 프로그램, 스코어를 매겨야 한다
         int userCnt = (int) userRepository.count();
         int programCnt = (int) programRepository.count();
 

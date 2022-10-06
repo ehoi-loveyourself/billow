@@ -30,8 +30,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                 .and()
                 .authorizeRequests()
                 .anyRequest().permitAll()
-                .and()
-        ;
+                .and();
         return http.build();
     }
 

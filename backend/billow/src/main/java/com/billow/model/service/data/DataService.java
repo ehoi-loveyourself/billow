@@ -67,7 +67,6 @@ public class DataService {
             if (genderAgeViewer != null) {
                 genderAgeViewer.setProgram(program);
                 genderAgeViewerRepository.save(genderAgeViewer);
-                System.out.println(programTitle);
             }
         }
         return new Message("succeeded");

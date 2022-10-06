@@ -4,7 +4,6 @@ import com.billow.domain.dto.user.BookmarkResponse;
 import com.billow.domain.entity.program.Program;
 import com.billow.domain.entity.user.Bookmark;
 import com.billow.domain.entity.user.User;
-import com.billow.exception.BadRequestException;
 import com.billow.exception.DuplicationException;
 import com.billow.exception.NotFoundException;
 import com.billow.model.repository.program.ProgramRepository;
@@ -24,7 +23,6 @@ public class BookmarkService {
     private static final String PROGRAM_NOT_FOUND = "해당 프로그램을 찾을 수 없습니다.";
     private static final String USER_NOT_FOUND = "해당 유저를 찾을 수 없습니다.";
     private static final String BOOKMARK_NOT_FOUND = "해당 즐겨찾기를 찾을 수 없습니다.";
-    private static final String BAD_REQUEST = "잘못된 요청입니다.";
     private static final String BOOKMARK_ALREADY_REGISTERED = "이미 즐겨찾기에 담겼습니다.";
     private static final String BOOKMARK_ZERO = "담긴 즐겨찾기가 없습니다.";
 
@@ -63,8 +61,7 @@ public class BookmarkService {
                 .orElseThrow(() -> new NotFoundException(PROGRAM_NOT_FOUND));
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
-        // 이미 담겨있다면 예외 처리하기
-        // 유저의 북마크를 보고 이미 담겨 있다면 예외 처리하기
+
         List<Bookmark> bookmarks = bookmarkRepository.findByUser_Id(userId);
         for (Bookmark b : bookmarks) {
             if (b.getProgram() == program) {
