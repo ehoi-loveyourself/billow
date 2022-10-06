@@ -19,7 +19,8 @@
   <div class="body">
     <h2 style="color: white; font-size: 1.1vw; font-weight: 300">
       회원님이 봤던 프로그램들을 평가해주세요.<br />
-      BILLOW가 회원님이 좋아할만한 프로그램을 추천해줄거예요.
+      BILLOW가 회원님이 좋아할만한 프로그램을 추천해줄거예요. (평점은 5개 이상
+      필수로 평가해주세요!)
     </h2>
     <br />
     <div class="flex">
@@ -31,13 +32,15 @@
   </div>
   <p style="text-align: center">
     <a class="startButton" href="#" role="button" style="border-radius: 15px">
-      <router-link
+      <!-- <router-link
         :to="{ name: 'main' }"
         class="nav-link"
         style="font-size: 20px; padding: 10px; color: black"
-      >
+      > -->
+      <div style="font-size: 20px; padding: 10px; color: black" @click="next()">
         BILLOW 만나러 가기
-      </router-link>
+      </div>
+      <!-- </router-link> -->
     </a>
   </p>
   <br /><br /><br /><br />
@@ -52,16 +55,23 @@ import StarRating from "@/components/collect/StarRating.vue";
 export default {
   name: "UserRatingProgram",
   components: {
-    StarRating
+    StarRating,
   },
   computed: {
-    ...mapState(["randomProgram"]),
+    ...mapState(["randomProgram", "ratingCount"]),
   },
   created() {
     this.getRandomProgram();
   },
   methods: {
     ...mapActions(["getRandomProgram"]),
+    next() {
+      if (this.ratingCount.length < 5) {
+        alert("평점을 5개 이상 등록해주세요!");
+        return;
+      }
+      this.$router.push("/main");
+    },
   },
   components: {
     StarRating,
