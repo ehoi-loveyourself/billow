@@ -1,10 +1,18 @@
 <template>
   <div class="box-wrap">
     <div class="box">
-      <img class="poster" :src="rating.posterImg" alt="Image" @click="moveProgramDetail(rating.id)" />
+      <img
+        class="poster"
+        :src="rating.posterImg"
+        alt="Image"
+        @click="moveProgramDetail(rating.id)"
+      />
       <div class="button">
-        <button @click="ratingDelete(rating.ratingId)" style="border: none; background: none">
-          <img class="trash" src="@/assets/trash.png" style="width:50%" />
+        <button
+          @click="ratingDelete(rating.ratingId)"
+          style="border: none; background: none"
+        >
+          <img class="trash" src="@/assets/trash.png" style="width: 50%" />
         </button>
       </div>
       <div class="info">
@@ -13,25 +21,75 @@
     </div>
   </div>
   <div style="text-align: center; margin-bottom: 18%; margin-top: 3%">
-    <img v-show="!isTrue1" @click="setFlagTrue1" class="hearted" src="@/assets/grey_star_small.png" />
-    <img v-show="isTrue1" @click="setFlagFalse1" class="hearted" src="@/assets/blue_star_small.png" />
-    <img v-show="!isTrue2" @click="setFlagTrue2" class="hearted" src="@/assets/grey_star_small.png" />
-    <img v-show="isTrue2" @click="setFlagFalse2" class="hearted" src="@/assets/blue_star_small.png" />
-    <img v-show="!isTrue3" @click="setFlagTrue3" class="hearted" src="@/assets/grey_star_small.png" />
-    <img v-show="isTrue3" @click="setFlagFalse3" class="hearted" src="@/assets/blue_star_small.png" />
-    <img v-show="!isTrue4" @click="setFlagTrue4" class="hearted" src="@/assets/grey_star_small.png" />
-    <img v-show="isTrue4" @click="setFlagFalse4" class="hearted" src="@/assets/blue_star_small.png" />
-    <img v-show="!isTrue5" @click="setFlagTrue5" class="hearted" src="@/assets/grey_star_small.png"
-      style="margin-right:5%" />
-    <img v-show="isTrue5" @click="setFlagFalse5" class="hearted" src="@/assets/blue_star_small.png"
-      style="margin-right:5%" />
+    <img
+      v-show="!isTrue1"
+      @click="setFlagTrue1"
+      class="hearted"
+      src="@/assets/grey_star_small.png"
+    />
+    <img
+      v-show="isTrue1"
+      @click="setFlagFalse1"
+      class="hearted"
+      src="@/assets/blue_star_small.png"
+    />
+    <img
+      v-show="!isTrue2"
+      @click="setFlagTrue2"
+      class="hearted"
+      src="@/assets/grey_star_small.png"
+    />
+    <img
+      v-show="isTrue2"
+      @click="setFlagFalse2"
+      class="hearted"
+      src="@/assets/blue_star_small.png"
+    />
+    <img
+      v-show="!isTrue3"
+      @click="setFlagTrue3"
+      class="hearted"
+      src="@/assets/grey_star_small.png"
+    />
+    <img
+      v-show="isTrue3"
+      @click="setFlagFalse3"
+      class="hearted"
+      src="@/assets/blue_star_small.png"
+    />
+    <img
+      v-show="!isTrue4"
+      @click="setFlagTrue4"
+      class="hearted"
+      src="@/assets/grey_star_small.png"
+    />
+    <img
+      v-show="isTrue4"
+      @click="setFlagFalse4"
+      class="hearted"
+      src="@/assets/blue_star_small.png"
+    />
+    <img
+      v-show="!isTrue5"
+      @click="setFlagTrue5"
+      class="hearted"
+      src="@/assets/grey_star_small.png"
+      style="margin-right: 5%"
+    />
+    <img
+      v-show="isTrue5"
+      @click="setFlagFalse5"
+      class="hearted"
+      src="@/assets/blue_star_small.png"
+      style="margin-right: 5%"
+    />
   </div>
 </template>
 
 <script>
 import { reactive } from "@vue/reactivity";
 import axios from "axios";
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState, mapMutations } from "vuex";
 
 export default {
   name: "Star",
@@ -68,7 +126,13 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["deleteRating", "getProgramDetail", "registRating", "getRating"]),
+    ...mapActions([
+      "deleteRating",
+      "getProgramDetail",
+      "registRating",
+      "getRating",
+    ]),
+    ...mapMutations(["SET_PROGRAM_ID"]),
     ratingDelete(ratingId) {
       if (confirm("평점을 삭제하시겠습니까?") == true || ratingId == null) {
         this.deleteRating(ratingId);
@@ -77,8 +141,8 @@ export default {
       }
     },
     moveProgramDetail(programId) {
-      this.getProgramDetail(programId);
-      this.$router.push({ name: 'detail' });
+      this.SET_PROGRAM_ID(programId);
+      this.$router.push({ name: "detail" });
     },
     setFlagTrue5() {
       this.isTrue1 = true;
@@ -203,9 +267,8 @@ a.button {
   padding-top: 0;
 }
 
-
 img:hover {
-  filter: brightness(0.5)
+  filter: brightness(0.5);
 }
 
 .box .info .detailbox {
@@ -225,7 +288,6 @@ img:hover {
   margin: 0px 10px 0px 0px;
   margin-bottom: 5px;
 }
-
 
 .box-wrap {
   display: flex;
@@ -287,7 +349,8 @@ img:hover {
 
 @font-face {
   font-family: "GoyangIlsan";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff") format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -301,7 +364,7 @@ body {
   display: none;
 }
 
-.poster:hover+.button,
+.poster:hover + .button,
 .button:hover {
   display: inline-block;
   position: absolute;

@@ -9,98 +9,100 @@
   </b-row>
   <div style="padding-left: 70px; padding-right: 70px; color: white">
     <br />
-    <section>
-      <div class="column-1">
-        <div style="padding-bottom: 4%">
-          <button
-            @click="addToFavorites"
-            v-show="!isFavorite"
-            style="border: none; background-color: #141414"
-          >
-            <img src="@/assets/white_heart.png" />
-          </button>
-          <button
-            @click="deleteFromFavorites"
-            v-show="isFavorite"
-            style="background: none; border: none"
-          >
-            <img src="@/assets/red_heart.png" />
-          </button>
-        </div>
-        <img class="posterImg" :src="programDetail.posterImg" />
-      </div>
-      <div class="column-2"></div>
-      <div class="column-3">
-        <span class="title">{{ programDetail.title }}</span
-        ><span
-          >&nbsp;&nbsp;&nbsp;&nbsp;
-
-          <img src="@/assets/one-star.png" /> </span
-        >&nbsp;<span style="vertical-align: middle">{{
-          programDetail.averageRating
-        }}</span
-        >&nbsp;&nbsp;&nbsp;
-
-        <div class="box">
-          <span class="box_design" v-if="programDetail.age">{{
-            programDetail.age
-          }}</span>
-          <span class="box_design" v-if="programDetail.broadcastingDay">{{
-            programDetail.broadcastingDay
-          }}</span>
-
-          <span class="box_design" v-if="programDetail.broadcastingEpisode">{{
-            programDetail.broadcastingEpisode
-          }}</span>
-          <span class="box_design" v-if="programDetail.broadcastingStation">{{
-            programDetail.broadcastingStation
-          }}</span>
-        </div>
-        <div class="genre">
-          <span v-for="genre in programDetail.genres">
-            #{{ genre }}&nbsp;&nbsp;
-          </span>
-        </div>
-        <div class="ott">
-          <span v-for="ott in programDetail.otts">
-            <a :href="ott.url" target="_blank">
-              <img class="ottImg" :src="ott.imgUrl"
-            /></a>
-          </span>
-        </div>
-        <div class="blabla">{{ programDetail.summary }}</div>
-      </div>
-      <div class="column-4"></div>
-      <div class="column-5">
-        <b-card
-          style="
-            background-color: #ffffff;
-            color: #141414;
-            width: fit-content;
-            float: right;
-          "
-        >
-          <div class="waviy" style="padding-bottom: 6%">
-            <span style="--i: 1">이</span>
-            <span style="--i: 2">&nbsp;</span>
-            <span style="--i: 3">프</span>
-            <span style="--i: 4">로</span>
-            <span style="--i: 5">그</span>
-            <span style="--i: 6">램</span>
-            <span style="--i: 7">을</span>
-            <span style="--i: 8">&nbsp;</span>
-            <span style="--i: 9">보</span>
-            <span style="--i: 10">셨</span>
-            <span style="--i: 11">다</span>
-            <span style="--i: 12">면</span>
-            <span style="--i: 13">?</span>
+    <div v-if="programDetail != null">
+      <section>
+        <div class="column-1">
+          <div style="padding-bottom: 4%">
+            <button
+              @click="addToFavorites"
+              v-show="!isFavorite"
+              style="border: none; background-color: #141414"
+            >
+              <img src="@/assets/white_heart.png" />
+            </button>
+            <button
+              @click="deleteFromFavorites"
+              v-show="isFavorite"
+              style="background: none; border: none"
+            >
+              <img src="@/assets/red_heart.png" />
+            </button>
           </div>
-          <div>
-            <StarRating />
+          <img class="posterImg" :src="programDetail.posterImg" />
+        </div>
+        <div class="column-2"></div>
+        <div class="column-3">
+          <span class="title">{{ programDetail.title }}</span
+          ><span
+            >&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <img src="@/assets/one-star.png" /> </span
+          >&nbsp;<span style="vertical-align: middle">{{
+            programDetail.averageRating
+          }}</span
+          >&nbsp;&nbsp;&nbsp;
+
+          <div class="box">
+            <span class="box_design" v-if="programDetail.age">{{
+              programDetail.age
+            }}</span>
+            <span class="box_design" v-if="programDetail.broadcastingDay">{{
+              programDetail.broadcastingDay
+            }}</span>
+
+            <span class="box_design" v-if="programDetail.broadcastingEpisode">{{
+              programDetail.broadcastingEpisode
+            }}</span>
+            <span class="box_design" v-if="programDetail.broadcastingStation">{{
+              programDetail.broadcastingStation
+            }}</span>
           </div>
-        </b-card>
-      </div>
-    </section>
+          <div class="genre">
+            <span v-for="genre in programDetail.genres">
+              #{{ genre }}&nbsp;&nbsp;
+            </span>
+          </div>
+          <div class="ott">
+            <span v-for="ott in programDetail.otts">
+              <a :href="ott.url" target="_blank">
+                <img class="ottImg" :src="ott.imgUrl"
+              /></a>
+            </span>
+          </div>
+          <div class="blabla">{{ programDetail.summary }}</div>
+        </div>
+        <div class="column-4"></div>
+        <div class="column-5">
+          <b-card
+            style="
+              background-color: #ffffff;
+              color: #141414;
+              width: fit-content;
+              float: right;
+            "
+          >
+            <div class="waviy" style="padding-bottom: 6%">
+              <span style="--i: 1">이</span>
+              <span style="--i: 2">&nbsp;</span>
+              <span style="--i: 3">프</span>
+              <span style="--i: 4">로</span>
+              <span style="--i: 5">그</span>
+              <span style="--i: 6">램</span>
+              <span style="--i: 7">을</span>
+              <span style="--i: 8">&nbsp;</span>
+              <span style="--i: 9">보</span>
+              <span style="--i: 10">셨</span>
+              <span style="--i: 11">다</span>
+              <span style="--i: 12">면</span>
+              <span style="--i: 13">?</span>
+            </div>
+            <div>
+              <StarRating />
+            </div>
+          </b-card>
+        </div>
+      </section>
+    </div>
     <br /><br /><br />
 
     <b-tabs id="tabs" style="align-items: center">
@@ -148,8 +150,14 @@ export default {
       score: 0,
     };
   },
+  created() {
+    // if (this.programDetail == null) {
+    //   this.$router.push("/main");
+    // }
+    this.getProgramDetail(this.programId);
+  },
   methods: {
-    ...mapActions(["registBookmark", "deleteBookmark"]),
+    ...mapActions(["getProgramDetail", "registBookmark", "deleteBookmark"]),
     check(index) {
       this.score = index + 1;
     },
@@ -351,7 +359,7 @@ body {
 
 .blabla::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background-color: #A1A1A1;
+  background-color: #a1a1a1;
 }
 
 .blabla::-webkit-scrollbar-button {
