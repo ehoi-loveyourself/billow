@@ -27,7 +27,7 @@
               <a href="#" @click="setReviewId(review.reviewId, review.content)" class="button btnBorder btnBlue" v-b-modal.modal-5><span
                   style="font-size: 0.8vw">수정</span></a>&nbsp;
               <a href="#" @click="reviewDelete(review.reviewId)" class="button btnBorder btnRed"
-                style="background-color:#990000"><span style="font-size: 0.8vw">삭제</span></a></span>
+                style="background-color:#bb8082; color: #ffffff;"><span style="font-size: 0.8vw">삭제</span></a></span>
             <p>{{ review.content }}</p>
           </b-col>
         </b-row>
@@ -152,11 +152,10 @@ export default {
 }
 
 a.button {
-  padding: 0.2%;
+  padding: 0.18%;
   padding-top: 0;
-  font-weight: 600;
+  font-weight: 100;
   text-align: center;
-  color: #fff;
   border-radius: 5px;
   text-decoration: none;
   transition: all 0.2s;
@@ -171,7 +170,8 @@ a.button {
 }
 
 .btnBlue {
-  background: #002bae;
+  background-color:  #046582;
+  color:#ffffff;
 }
 
 .btnRed.btnBorder {

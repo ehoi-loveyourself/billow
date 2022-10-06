@@ -161,12 +161,9 @@
     </h2>
   </template>
 
-  <h2 style="color: white">요즘 핫한 프로그램</h2>
-  <splide
-    v-if="hotProgram != null && hotProgram.length > 0"
-    id="carousel_recommend"
-    :options="options"
-  >
+
+  <h2 style="color: white">인기 프로그램</h2>
+  <splide v-if="hotProgram != null && hotProgram.length > 0" id="carousel_recommend" :options="options">
     <splide-slide v-for="hot in hotProgram">
       <div class="box-wrap">
         <div class="box">
@@ -202,16 +199,14 @@
   </splide>
 
   <span v-else>
-    <h2
-      style="
-        color: #a1a1a1;
-        font-size: 1.1vw;
-        font-weight: 300;
-        margin-top: 1.5%;
-        margin-bottom: 4%;
-      "
-    >
-      요즘 핫한 프로그램이 없습니다.
+    <h2 style="
+            color: #a1a1a1;
+            font-size: 1.1vw;
+            font-weight: 300;
+            margin-top: 1.5%;
+            margin-bottom: 4%;
+          ">
+      인기 프로그램이 없습니다.
     </h2>
   </span>
 

@@ -4,9 +4,9 @@
   <div v-if="userInfo != null">
     <section style="font-size: 0.96vw">
       <b-row style="margin-bottom: 2%">
-        <b-col cols="1" style="text-align: right"> 프로필 </b-col>
+        <b-col cols="1" style="text-align: right; padding:0"> 프로필 </b-col>
 
-        <b-col cols="11" style="padding-left: 1%">
+        <b-col cols="11" style="padding-left: 2%">
           <input
             type="radio"
             name="choice"
@@ -329,8 +329,8 @@
         </b-col>
       </b-row>
       <b-row style="margin-bottom: 2%">
-        <b-col cols="1" style="text-align: right"> 성별 </b-col>
-        <b-col cols="11" style="padding-left: 1%">
+        <b-col cols="1" style="text-align: right; padding:0"> 성별 </b-col>
+        <b-col cols="11" style="padding-left: 2%">
           <b-row>
             <b-col cols="1">
               <b-form-radio
@@ -354,8 +354,8 @@
         </b-col>
       </b-row>
       <b-row style="margin-bottom: 2%">
-        <b-col cols="1" style="text-align: right"> 연령대 </b-col>
-        <b-col cols="11" style="padding-left: 1%">
+        <b-col cols="1" style="text-align: right; padding:0"> 연령대 </b-col>
+        <b-col cols="11" style="padding-left: 2%">
           <b-form-select
             v-model="userInfo.age"
             :options="options_age"
@@ -364,8 +364,8 @@
         </b-col>
       </b-row>
       <b-row style="margin-bottom: 2%">
-        <b-col cols="1" style="text-align: right"> 닉네임 </b-col>
-        <b-col cols="11" style="padding-left: 1%">
+        <b-col cols="1" style="text-align: right; padding:0"> 닉네임 </b-col>
+        <b-col cols="11" style="padding-left: 2%">
           <b-form-input
             v-model="userInfo.nickName"
             placeholder="닉네임을 입력하세요."
@@ -374,8 +374,8 @@
         </b-col>
       </b-row>
       <b-row style="margin-bottom: 2%">
-        <b-col cols="1" style="text-align: right"> 지역 </b-col>
-        <b-col cols="11" style="padding-left: 1%">
+        <b-col cols="1" style="text-align: right; padding:0"> 지역 </b-col>
+        <b-col cols="11" style="padding-left: 2%">
           <b-form-select
             v-model="userInfo.region"
             :options="options_region"
@@ -384,8 +384,8 @@
         </b-col>
       </b-row>
       <b-row style="margin-bottom: 2%">
-        <b-col cols="1" style="text-align: right"> TV 서비스 </b-col>
-        <b-col cols="11" style="padding-left: 1%">
+        <b-col cols="1" style="text-align: right; padding:0"> 인터넷 서비스 </b-col>
+        <b-col cols="11" style="padding-left: 2%">
           <b-form-select
             v-model="userInfo.tvCarrier"
             :options="options_tv_carrier"
@@ -394,8 +394,8 @@
         </b-col>
       </b-row>
       <b-row style="margin-bottom: 2%">
-        <b-col cols="1" style="text-align: right"> 휴대폰 번호 </b-col>
-        <b-col cols="11" style="padding-left: 1%">
+        <b-col cols="1" style="text-align: right; padding:0"> 휴대폰 번호 </b-col>
+        <b-col cols="11" style="padding-left: 2%">
           <b-form-input
             v-model="userInfo.mobile"
             placeholder="000-0000-0000"
@@ -452,7 +452,7 @@ export default {
         { value: "제주", text: "제주" },
       ],
       options_tv_carrier: [
-        { value: null, text: "TV 서비스를 선택하세요" },
+        { value: null, text: "인터넷 서비스를 선택하세요" },
         { value: "SK 브로드밴드", text: "SK 브로드밴드" },
         { value: "KT olleh", text: "KT olleh" },
         { value: "LG U+", text: "LG U+" },
@@ -559,7 +559,7 @@ input[type="radio"]:checked + label > .avatar {
 }
 
 a.button {
-  padding: 0.5%;
+  padding: 0.6%;
   /* margin: 10px 20px 10px 0; */
   font-weight: 400;
   text-align: center;
@@ -580,7 +580,7 @@ a.button {
 }
 
 .btnBlue {
-  background: #002bae;
+  background: #046582;
 }
 
 .btnRed.btnBorder {
@@ -592,6 +592,6 @@ a.button {
 }
 
 .btnRed {
-  background: #ae2b00;
+  background: #bb8082;
 }
 </style>
