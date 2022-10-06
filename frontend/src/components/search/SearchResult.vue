@@ -63,8 +63,6 @@ export default {
     display: inline-block;
     background: rgb(46, 47, 49);
     color: rgb(255, 255, 255);
-    font-family: "Watcha Sans", Roboto, "Noto Sans KR", "Apple SD Gothic Neo",
-        "Nanum Gothic", "Malgun Gothic", sans-serif;
     font-size: 12px;
     font-weight: 400;
     vertical-align: top;
@@ -158,7 +156,7 @@ img {
     height: 60px;
 }
 
-@font-face {
+/* @font-face {
     font-family: "GoyangIlsan";
     src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff") format("woff");
     font-weight: normal;
@@ -168,7 +166,7 @@ img {
 body {
     background-color: #1a237e;
     font-family: "GoyangIlsan";
-}
+} */
 
 .liked {
     width: 14vw;

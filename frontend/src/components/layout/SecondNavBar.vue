@@ -103,7 +103,7 @@ nav .navbar-nav a:hover {
 #drop input[type="text"] {
   display: block;
   margin: 0 0 0 auto;
-  width: 64%;
+  width: 56.5%;
   box-sizing: border-box;
   border: 2px solid #2b2b2b;
   border-radius: 4px;
@@ -122,7 +122,6 @@ nav .navbar-nav a:hover {
   width: 106%;
 }
 #drop input {
-  font: 1em Hind, sans-serif;
   line-height: 1em;
   height: 2.3vw;
 }
