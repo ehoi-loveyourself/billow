@@ -11,6 +11,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.messaging.handler.annotation.Header;
 
 @RequiredArgsConstructor
 @Controller
@@ -21,7 +22,8 @@ public class StompChatController {
 
     @MessageMapping(value = "/message")
     @SendTo("/message")
-    public Message message(@RequestHeader("Auth-access") String token, @Payload ChatRequest chatRequest) {
+    public Message message(@Header("Auth-access") String token, @Payload ChatRequest chatRequest) {
+        System.out.println(token);
         log.info("메시지 등록 API 호출");
         Message response = stompChatService.sendMessage(JwtTokenProvider.getUserId(token), chatRequest);
         log.info("메시지 전송 성공");

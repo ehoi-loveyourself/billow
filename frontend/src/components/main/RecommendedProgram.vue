@@ -9,13 +9,15 @@
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
-                <router-link
+                <!-- <router-link
                   :to="{ name: 'detail' }"
                   @click="moveProgramDetail(genderAge.id)"
                   class="nav-link"
-                >
+                > -->
+                <div @click="moveProgramDetail(genderAge.id)">
                   <img :src="genderAge.posterImg" alt="Hover Effect" />
-                </router-link>
+                </div>
+                <!-- </router-link> -->
               </a>
             </div>
             <div class="info">
@@ -69,13 +71,15 @@
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
-                <router-link
+                <!-- <router-link
                   :to="{ name: 'detail' }"
                   @click="moveProgramDetail(actor.id)"
                   class="nav-link"
-                >
+                > -->
+                <div @click="moveProgramDetail(actor.id)">
                   <img :src="actor.posterImg" alt="Hover Effect" />
-                </router-link>
+                </div>
+                <!-- </router-link> -->
               </a>
             </div>
             <div class="info">
@@ -111,13 +115,15 @@
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
-                <router-link
+                <!-- <router-link
                   :to="{ name: 'detail' }"
                   @click="moveProgramDetail(onair.id)"
                   class="nav-link"
-                >
+                > -->
+                <div @click="moveProgramDetail(onair.id)">
                   <img :src="onair.posterImg" alt="Hover Effect" />
-                </router-link>
+                </div>
+                <!-- </router-link> -->
               </a>
             </div>
             <div class="info">
@@ -161,21 +167,27 @@
     </h2>
   </template>
 
-
   <h2 style="color: white">인기 프로그램</h2>
-  <splide v-if="hotProgram != null && hotProgram.length > 0" id="carousel_recommend" :options="options">
+  <splide
+    v-if="hotProgram != null && hotProgram.length > 0"
+    id="carousel_recommend"
+    :options="options"
+  >
     <splide-slide v-for="hot in hotProgram">
       <div class="box-wrap">
         <div class="box">
           <div class="img">
             <a class="enterDetail" href="#">
-              <router-link
+              <!-- <router-link
                 :to="{ name: 'detail' }"
                 @click="moveProgramDetail(hot.id)"
                 class="nav-link"
               >
                 <img :src="hot.posterImg" alt="Hover Effect" />
-              </router-link>
+              </router-link> -->
+              <div @click="moveProgramDetail(hot.id)">
+                <img :src="hot.posterImg" alt="Hover Effect" />
+              </div>
             </a>
           </div>
           <div class="info">
@@ -199,13 +211,15 @@
   </splide>
 
   <span v-else>
-    <h2 style="
-            color: #a1a1a1;
-            font-size: 1.1vw;
-            font-weight: 300;
-            margin-top: 1.5%;
-            margin-bottom: 4%;
-          ">
+    <h2
+      style="
+        color: #a1a1a1;
+        font-size: 1.1vw;
+        font-weight: 300;
+        margin-top: 1.5%;
+        margin-bottom: 4%;
+      "
+    >
       인기 프로그램이 없습니다.
     </h2>
   </span>
@@ -218,13 +232,16 @@
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
-                <router-link
+                <!-- <router-link
                   :to="{ name: 'detail' }"
                   @click="moveProgramDetail(newProgram.id)"
                   class="nav-link"
                 >
                   <img :src="newProgram.posterImg" alt="Hover Effect" />
-                </router-link>
+                </router-link> -->
+                <div @click="moveProgramDetail(newProgram.id)">
+                  <img :src="newProgram.posterImg" alt="Hover Effect" />
+                </div>
               </a>
             </div>
             <div class="info">
@@ -318,6 +335,7 @@ export default {
     ...mapMutations(["SET_PROGRAM_ID"]),
     moveProgramDetail(programId) {
       this.SET_PROGRAM_ID(programId);
+      window.location.replace(`/detail`);
     },
   },
 };

@@ -17,13 +17,15 @@
   <div style="padding-left: 70px; padding-right: 70px">
     <div class="flex" v-if="searchProgram != null">
       <span id="Img" v-for="search in searchProgram">
-        <router-link
+        <!-- <router-link
           :to="{ name: 'detail' }"
           @click="moveProgramDetail(search.id)"
           class="nav-link"
-        >
+        > -->
+        <div @click="moveProgramDetail(search.id)">
           <img class="liked_2" :src="search.posterImg" alt="Image" />
-        </router-link>
+        </div>
+        <!-- </router-link> -->
       </span>
     </div>
     <div v-else>
@@ -64,6 +66,7 @@ export default {
     ...mapMutations(["SET_PROGRAM_ID"]),
     moveProgramDetail(programId) {
       this.SET_PROGRAM_ID(programId);
+      window.location.replace(`/detail`);
     },
   },
 };

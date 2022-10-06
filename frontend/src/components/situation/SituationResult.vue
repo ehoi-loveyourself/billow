@@ -26,13 +26,15 @@
         <div class="box-wrap">
           <div class="box">
             <div class="img">
-              <router-link
+              <!-- <router-link
                 :to="{ name: 'detail' }"
                 @click="moveProgramDetail(condition.id)"
                 class="nav-link"
-              >
+              > -->
+              <div @click="moveProgramDetail(condition.id)">
                 <img :src="condition.posterImg" alt="Image" />
-              </router-link>
+              </div>
+              <!-- </router-link> -->
             </div>
             <div class="info">
               <h3>{{ condition.title }}</h3>
@@ -102,6 +104,7 @@ export default {
     ...mapMutations(["SET_PROGRAM_ID"]),
     moveProgramDetail(programId) {
       this.SET_PROGRAM_ID(programId);
+      window.location.replace(`/detail`);
     },
   },
 };

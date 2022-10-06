@@ -55,9 +55,6 @@ export default {
         return;
       }
     },
-    moveProgramDetail(programId) {
-      this.SET_PROGRAM_ID(programId);
-    },
   },
 };
 </script>
