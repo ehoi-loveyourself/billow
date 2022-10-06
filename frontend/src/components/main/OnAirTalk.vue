@@ -144,7 +144,10 @@ export default {
 .onairtalk_set {
   display: flex;
   flex-direction: column-reverse;
+
   /* max-height: 80vh; */
+  height:fit-content;
+
   overflow-y: auto;
   overflow-x: hidden;
   width: 94.5%;
