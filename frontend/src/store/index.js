@@ -324,12 +324,18 @@ export default new Vuex.Store({
     },
     getUserRecommendProgram({ commit }) {
       commit("SET_IS_LOADING_TRUE");
-      axios.get("/api/mf/user-recommend").then((res) => {
-        // 사용자 맞춤 프로그램 추천 데이터 GET
-        console.log(res.data);
-        commit("SET_USER_RECOMMEND_PROGRAM", res.data);
-        commit("SET_IS_LOADING_FALSE");
-      });
+      axios
+        .get("/api/mf/user-recommend")
+        .then((res) => {
+          // 사용자 맞춤 프로그램 추천 데이터 GET
+          console.log(res.data);
+          commit("SET_USER_RECOMMEND_PROGRAM", res.data);
+          commit("SET_IS_LOADING_FALSE");
+        })
+        .catch((ex) => {
+          console.log("Ddd");
+          commit("SET_IS_LOADING_FALSE");
+        });
     },
     getConditionRecommendProgram({ commit, state }) {
       commit("SET_IS_LOADING_TRUE");
@@ -609,7 +615,7 @@ export default new Vuex.Store({
           console.log(res.data);
         })
         .catch((ex) => {
-          this.SET_BOOKMARK_FALSE();
+          commit("SET_BOOKMARK_FALSE");
           alert("로그인이 필요한 서비스입니다.");
         });
     },
@@ -621,7 +627,7 @@ export default new Vuex.Store({
           console.log(res.data);
         })
         .catch((ex) => {
-          this.SET_BOOKMARK_FALSE();
+          commit("SET_BOOKMARK_FALSE");
           alert("로그인이 필요한 서비스입니다.");
         });
     },
