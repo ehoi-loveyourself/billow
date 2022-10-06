@@ -38,7 +38,7 @@ export default {
 <style scoped>
 nav .navbar-nav a.router-link-active {
   color: white;
-  font-weight: bold;
+  font-weight: 400;
 }
 
 nav .navbar-nav a:hover {
@@ -59,5 +59,10 @@ nav .navbar-nav a:hover {
 
 .nav-link {
   color: #a1a1a1;
+}
+
+.navbar-expand-lg {
+  padding: 8px 0px;
+  height:9vh;
 }
 </style>

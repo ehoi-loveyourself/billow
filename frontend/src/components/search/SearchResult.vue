@@ -22,9 +22,16 @@
           @click="moveProgramDetail(search.id)"
           class="nav-link"
         > -->
-        <div @click="moveProgramDetail(search.id)">
-          <img class="liked_2" :src="search.posterImg" alt="Image" />
+        <div class="box-wrap">
+          <div class="box">
+        <div @click="moveProgramDetail(search.id)">       
+          <img class="searchimg" :src="search.posterImg" alt="Image" />
         </div>
+        <div class="info">
+            <span class="title">{{ search.title }}</span>
+          </div>
+      </div>
+          </div>
         <!-- </router-link> -->
       </span>
     </div>
@@ -73,40 +80,6 @@ export default {
 </script>
 
 <style scoped>
-.box .info .detailbox {
-  font-size: 12px;
-}
-
-.box .info .detailbox_design {
-  display: inline-block;
-  background: rgb(46, 47, 49);
-  color: rgb(255, 255, 255);
-  font-size: 12px;
-  font-weight: 400;
-  vertical-align: top;
-  line-height: 18px;
-  height: 20px;
-  padding: 1px 5px;
-  border: none;
-  margin: 0px 10px 0px 0px;
-  margin-bottom: 5px;
-}
-
-h2 {
-  font-weight: 500;
-  font-size: 1.4vw;
-  margin-bottom: 0.7%;
-  padding-left: 70px;
-}
-
-img {
-  margin-bottom: 20%;
-  width: 100%;
-  height: 21vw;
-  padding-right: 3%;
-  padding-bottom: 3%;
-}
-
 .box-wrap {
   /* width: 100vw; height: 100vh; */
   display: flex;
@@ -132,32 +105,21 @@ img {
 .box .info {
   position: absolute;
   left: 5px;
-  bottom: 45px;
+  bottom: 10px;
   color: #fff;
-  width: 100%;
-  /* padding: 15px; */
   box-sizing: border-box;
   opacity: 0;
   transition: all 0.3s ease-in-out;
 }
 
-.box .info h3 {
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 20px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  padding-bottom: 3px;
+.box .info .title {
+  font-size: 1vw;
+  font-weight: 400;
   text-align: left;
+  white-space: normal;
+
 }
 
-/* .box .info p {
-  font-size: 16px;
-  overflow: hidden; 
-  white-space: nowrap;
-  text-overflow: ellipsis;
-} */
 .box:hover .info {
   opacity: 1;
 }
@@ -186,43 +148,24 @@ body {
     font-family: "GoyangIlsan";
 } */
 
-.liked {
+.searchimg {
   width: 14vw;
   height: 21vw;
-  margin-right: 0.5%;
-  margin-bottom: 0.5%;
-}
-
-.liked_2 {
-  width: 14vw;
-  height: 21vw;
-  margin-right: 0.5%;
-  margin-bottom: 0.5%;
+  padding-right: 3%;
+  padding-bottom: 3%;
+  cursor: pointer;
 }
 
 img:hover {
   filter: brightness(0.5);
 }
 
-.button {
-  display: none;
-}
-
 #Img {
   position: relative;
 }
 
-img:hover + .button,
-.button:hover {
-  display: inline-block;
-  position: absolute;
-  top: 1vw;
-  left: 1vw;
-}
-
 .flex {
   display: flex;
-  /* height: 600px; */
   flex-wrap: wrap;
   align-content: stretch;
 }

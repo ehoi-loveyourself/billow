@@ -19,7 +19,7 @@
             </button>
           </div>
           <div class="info">
-            <h3>{{ alarm.title }}</h3>
+            <div class="title">{{ alarm.title }}</div>
           </div>
         </div>
       </div>
@@ -134,34 +134,9 @@ export default {
 
 .flex {
   display: flex;
-  /* height: 600px; */
   flex-wrap: wrap;
   align-content: stretch;
 }
-
-/* .poster:hover {
-    filter: brightness(0.5);
-  } */
-
-/* .explain {
-    display: none;
-  }
-  
-  .poster:hover+.explain,
-  .explain:hover {
-    display: inline-block;
-    position: absolute;
-    top: 1vw;
-    left: 1vw;
-  } */
-/* .saveButton {
-  background-color: #ffffff;
-  padding: 3px 30px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-} */
 
 .btnRed.btnBorder {
   box-shadow: 0px 0px 0px 0px #823621;
@@ -175,16 +150,6 @@ export default {
   background: #ae2b00;
 }
 
-/* a.button {
-  padding: 1%;
-  font-weight: 600;
-  text-align: center;
-  color: #fff;
-  border-radius: 5px;
-  text-decoration: none;
-  transition: all 0.1s;
-  padding-top: 0;
-} */
 .day {
   color: #a0a0a0;
   font-size: 1vw;
@@ -205,25 +170,7 @@ export default {
 }
 
 .poster:hover {
-  filter: brightness(0.5);
-}
-
-.box .info .detailbox {
-  font-size: 12px;
-}
-
-.box .info .detailbox_design {
-  display: inline-block;
-  background: rgb(46, 47, 49);
-  color: rgb(255, 255, 255);
-  font-size: 12px;
-  font-weight: 400;
-  vertical-align: top;
-  line-height: 18px;
-  padding: 1px 5px;
-  border: none;
-  margin: 0px 10px 0px 0px;
-  margin-bottom: 5px;
+  filter: brightness(0.3);
 }
 
 .box-wrap {
@@ -254,22 +201,16 @@ export default {
   left: 5px;
   bottom: 10px;
   color: #fff;
-  width: 100%;
-  /* padding: 15px; */
   box-sizing: border-box;
   opacity: 0;
   transition: all 0.3s ease-in-out;
 }
 
-.box .info h3 {
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 20px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  padding-bottom: 3px;
+.box .info .title {
+  font-size: 0.9vw;
+  font-weight: 400;
   text-align: left;
+  white-space: normal;
 }
 
 .box:hover .info {

@@ -37,7 +37,7 @@
               <!-- </router-link> -->
             </div>
             <div class="info">
-              <h3>{{ condition.title }}</h3>
+              <div class="title">{{ condition.title }}</div>
               <div class="detailbox">
                 <span class="detailbox_design" v-if="condition.age">{{
                   condition.age
@@ -188,22 +188,17 @@ img:hover {
   left: 5px;
   bottom: 10px;
   color: #fff;
-  width: 100%;
-  /* padding: 15px; */
   box-sizing: border-box;
   opacity: 0;
   transition: all 0.3s ease-in-out;
 }
 
-.box .info h3 {
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 20px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  padding-bottom: 3px;
+.box .info .title {
+  font-size: 1vw;
+  font-weight: 400;
   text-align: left;
+  white-space: normal;
+  margin-bottom: 3%;
 }
 
 .box:hover .info {

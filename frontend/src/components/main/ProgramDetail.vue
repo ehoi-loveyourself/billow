@@ -1,12 +1,12 @@
 <template>
-  <b-row>
-    <b-col cols="8">
+  <!-- <b-row>
+    <b-col cols="8"> -->
       <header-bar />
-    </b-col>
-    <b-col cols="4">
+    <!-- </b-col>
+    <b-col cols="4"> -->
       <SecondBar />
-    </b-col>
-  </b-row>
+    <!-- </b-col>
+  </b-row> -->
   <div style="padding-left: 70px; padding-right: 70px; color: white">
     <br />
     <div v-if="programDetail != null">

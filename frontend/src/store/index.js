@@ -327,10 +327,12 @@ export default new Vuex.Store({
       });
     },
     getRandomProgram({ commit }) {
+      commit("SET_IS_LOADING_TRUE");
       axios.get("/api/program/random").then((res) => {
         // 랜덤 프로그램 추천 데이터 GET
         console.log(res.data);
         commit("SET_RANDOM_PROGRAM", res.data);
+        commit("SET_IS_LOADING_FALSE");
       });
     },
     getUserRecommendProgram({ commit }) {

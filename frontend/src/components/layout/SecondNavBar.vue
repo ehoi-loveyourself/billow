@@ -99,6 +99,7 @@ nav .navbar-nav a:hover {
 }
 .navbar-expand-lg {
   padding: 8px 0px;
+  height:9vh;
 }
 #drop input[type="text"] {
   display: block;

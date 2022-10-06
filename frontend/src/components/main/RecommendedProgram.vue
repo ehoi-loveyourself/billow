@@ -21,7 +21,7 @@
               </a>
             </div>
             <div class="info">
-              <h3>{{ genderAge.title }}</h3>
+              <div class="title">{{ genderAge.title }}</div>
               <div class="detailbox">
                 <span class="detailbox_design" v-if="genderAge.age">{{
                   genderAge.age
@@ -83,7 +83,7 @@
               </a>
             </div>
             <div class="info">
-              <h3>{{ actor.title }}</h3>
+              <div class="title">{{ actor.title }}</div>
               <div class="detailbox">
                 <span class="detailbox_design" v-if="actor.age">{{
                   actor.age
@@ -127,7 +127,7 @@
               </a>
             </div>
             <div class="info">
-              <h3>{{ onair.title }}</h3>
+              <div class="title">{{ onair.title }}</div>
               <div class="detailbox">
                 <span class="detailbox_design" v-if="onair.age">{{
                   onair.age
@@ -191,7 +191,7 @@
             </a>
           </div>
           <div class="info">
-            <h3>{{ hot.title }}</h3>
+            <div class="title">{{ hot.title }}</div>
             <div class="detailbox">
               <span class="detailbox_design" v-if="hot.age">{{ hot.age }}</span
               ><span class="detailbox_design" v-if="hot.broadcastingDay">{{
@@ -245,7 +245,7 @@
               </a>
             </div>
             <div class="info">
-              <h3>{{ newProgram.title }}</h3>
+              <div class="title">{{ newProgram.title }}</div>
               <div class="detailbox">
                 <span class="detailbox_design" v-if="newProgram.age">{{
                   newProgram.age
@@ -413,23 +413,14 @@ img {
   transition: all 0.3s ease-in-out;
 }
 
-.box .info h3 {
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 20px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  padding-bottom: 3px;
+.box .info .title {
+  font-size: 1.15vw;
+  font-weight: 400;
   text-align: left;
+  white-space: normal;
+  padding-bottom: 3%;
 }
 
-/* .box .info p {
-  font-size: 16px;
-  overflow: hidden; 
-  white-space: nowrap;
-  text-overflow: ellipsis;
-} */
 .box:hover .info {
   opacity: 1;
 }

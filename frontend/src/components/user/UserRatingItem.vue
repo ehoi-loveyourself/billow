@@ -16,7 +16,7 @@
         </button>
       </div>
       <div class="info">
-        <h3>{{ rating.title }}</h3>
+        <div class="title">{{ rating.title }}</div>
       </div>
     </div>
   </div>
@@ -268,25 +268,7 @@ a.button {
 }
 
 img:hover {
-  filter: brightness(0.5);
-}
-
-.box .info .detailbox {
-  font-size: 12px;
-}
-
-.box .info .detailbox_design {
-  display: inline-block;
-  background: rgb(46, 47, 49);
-  color: rgb(255, 255, 255);
-  font-size: 12px;
-  font-weight: 400;
-  vertical-align: top;
-  line-height: 18px;
-  padding: 1px 5px;
-  border: none;
-  margin: 0px 10px 0px 0px;
-  margin-bottom: 5px;
+  filter: brightness(0.3);
 }
 
 .box-wrap {
@@ -314,23 +296,16 @@ img:hover {
   left: 5px;
   bottom: 10px;
   color: #fff;
-  width: 100%;
   box-sizing: border-box;
   opacity: 0;
   transition: all 0.3s ease-in-out;
 }
-
-.box .info h3 {
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 20px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  padding-bottom: 3px;
+.box .info .title {
+  font-size: 0.9vw;
+  font-weight: 400;
   text-align: left;
+  white-space: normal;
 }
-
 .box:hover .info {
   opacity: 1;
 }

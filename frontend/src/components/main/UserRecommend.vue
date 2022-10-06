@@ -1,5 +1,5 @@
 <template>
-  <FullPageLoader v-if="isLoading" />
+  <MainPageLoader v-if="isLoading" />
   <div v-else id="mainslider" style="text-align: center; margin-top: 10px">
     <splide id="carousel_user_recommend" :options="options">
       <splide-slide v-for="recommend in userRecommend">
@@ -27,14 +27,14 @@
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import { mapState, mapActions, mapMutations } from "vuex";
-import FullPageLoader from "@/components/load/FullPageLoader.vue";
+import MainPageLoader from "@/components/load/MainPageLoader.vue";
 
 export default {
   name: "MainSlider",
   components: {
     Splide,
     SplideSlide,
-    FullPageLoader,
+    MainPageLoader,
   },
   computed: {
     ...mapState(["userRecommend", "isLoading"]),

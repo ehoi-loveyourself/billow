@@ -166,17 +166,6 @@ img:hover {
   transition: all 0.3s ease-in-out;
 }
 
-.box .info h3 {
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 20px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  padding-bottom: 3px;
-  text-align: left;
-}
-
 .box:hover .info {
   opacity: 1;
 }
