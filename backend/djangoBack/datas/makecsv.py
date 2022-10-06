@@ -1,7 +1,7 @@
 import pandas as pd
 import MySQLdb
 
-conn = MySQLdb.connect(host='localhost', user='B309', password='B309Billow', db='billow', charset='utf8')
+conn = MySQLdb.connect(host='j7b309.p.ssafy.io', user='B309', password='B309Billow', db='billow', charset='utf8')
 program_query = 'SELECT * FROM tb_program'
 program_df = pd.read_sql_query(program_query, conn)
 conn = MySQLdb.connect(host='j7b309.p.ssafy.io', user='B309', password='B309Billow', db='billow', charset='utf8')
