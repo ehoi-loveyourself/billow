@@ -4,11 +4,7 @@
     <br />
     <div class="flex">
       <div v-if="programSchedule != null && programSchedule.length > 0">
-        <b-table-simple
-          bordered
-          fixed
-          style="border-color: #ffffff; color: #ffffff; font-weight: 400"
-        >
+        <b-table-simple bordered fixed style="border-color: #ffffff; color: #ffffff; font-weight: 400">
           <b-thead style="background-color: #5a5a5a">
             <b-tr>
               <b-th v-for="schedule in programSchedule">
@@ -19,26 +15,23 @@
           <tbody>
             <b-tr style="padding: 5">
               <b-td v-for="schedule in programSchedule">
-                <div v-if="schedule.organizationResponseList != null">
-                  <div
-                    v-for="organization in schedule.organizationResponseList"
-                    style="white-space: nowrap"
-                  >
-                    <span class="time"
-                      >{{ organization.broadcastingTime }}&nbsp;</span
-                    ><span class="station"
-                      >{{ organization.broadcastingStation }}&nbsp;</span
-                    >
-                    <span
-                      class="episode"
-                      v-if="organization.broadcastingEpisode"
-                      >{{ organization.broadcastingEpisode }}&nbsp;</span
-                    >
-                    <span class="box" v-if="organization.broadcastingRerun"
-                      ><span class="box_design">재</span>&nbsp;</span
-                    >
-                    <span @click="alarm(organization.programOrganizationId)">
-                      <img src="@/assets/alarm.png" style="cursor: pointer" />
+                <div v-if="schedule.organizationResponseList != null" style="white-space: nowrap;">
+                  <div v-for="organization in schedule.organizationResponseList">
+                    <span class="time">{{ organization.broadcastingTime }}&nbsp;&nbsp;</span><span class="station">{{
+                    organization.broadcastingStation }}&nbsp;&nbsp;</span>
+                    <span class="episode" v-if="organization.broadcastingEpisode">{{ organization.broadcastingEpisode
+                    }}&nbsp;</span>
+                    <span class="box" v-if="organization.broadcastingRerun"><span
+                        class="box_design">재</span>&nbsp;</span>
+                    <span @click="alarm(organization.programOrganizationId)" style="cursor: pointer;">
+                      <svg width="15" height="15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M4.03 4.98a3.491 3.491 0 0 1 6.94 0l.157 1.417c.081.727.318 1.428.694 2.054l.361.603.054.091a1 1 0 0 1-.838 1.48H3.602a1 1 0 0 1-.783-1.571l.361-.603a5.084 5.084 0 0 0 .694-2.054l.157-1.416Z"
+                          stroke="#CCD2E3" stroke-width="2" />
+                        <path
+                          d="M5.689 11.04c.107.599.342 1.127.67 1.504.327.377.728.581 1.141.581.413 0 .814-.204 1.141-.581.328-.377.563-.905.67-1.504"
+                          stroke="#CCD2E3" stroke-width="2" stroke-linecap="round" />
+                      </svg>
                     </span>
                   </div>
                 </div>
@@ -49,14 +42,12 @@
         </b-table-simple>
       </div>
       <div v-else>
-        <h2
-          style="
+        <h2 style="
             color: white;
             margin-left: 70px;
             font-size: 1.1vw;
             font-weight: 300;
-          "
-        >
+          ">
           편성 정보가 없습니다.
         </h2>
       </div>
@@ -121,6 +112,7 @@ export default {
 
 .episode {
   font-size: 0.9vw;
+  margin-right:0.5%;
 }
 
 th {
