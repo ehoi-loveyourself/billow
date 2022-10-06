@@ -1,10 +1,18 @@
 <template>
   <div style="margin-top: 10px">
     <br />
-    <b-row style="margin-top: 20px">
-      <b-col cols="10" style="padding-right:0; margin-left: 4.2%;">
+    <b-row>
+      <div style="margin-bottom:0.5%">
+        <template v-if="programReview != null && programReview.length > 0">
+          <span style="padding-left:3.4%">{{ programReview.length }}</span>&nbsp;개의 REVIEW
+        </template>
+        <template v-else> <span style="padding-left:3%">0</span>
+          개의 REVIEW
+        </template>
+      </div>
+      <b-col cols="11" style="padding-right:0;">
         <input v-model="message" class="form-control" type="text" name="search" placeholder="리뷰를 작성해주세요." required
-          @keyup.enter="onSubmit()" />
+          @keyup.enter="onSubmit()" style="width:96.4%; float:right" />
       </b-col>
       <b-col cols="1">
         <b-button size="md" type="text" @click="onSubmit()" style="text-align:left">
@@ -24,8 +32,8 @@
             <span class="username">{{ review.userNickName }}</span>&nbsp;&nbsp;
             <span class="time"> {{ review.regDateTime }}&nbsp;&nbsp;&nbsp;</span>
             <span v-if="userInfo.nickName==review.userNickName">
-              <a href="#" @click="setReviewId(review.reviewId, review.content)" class="button btnBorder btnBlue" v-b-modal.modal-5><span
-                  style="font-size: 0.8vw">수정</span></a>&nbsp;
+              <a href="#" @click="setReviewId(review.reviewId, review.content)" class="button btnBorder btnBlue"
+                v-b-modal.modal-5><span style="font-size: 0.8vw">수정</span></a>&nbsp;
               <a href="#" @click="reviewDelete(review.reviewId)" class="button btnBorder btnRed"
                 style="background-color:#bb8082; color: #ffffff;"><span style="font-size: 0.8vw">삭제</span></a></span>
             <p>{{ review.content }}</p>
@@ -131,6 +139,10 @@ export default {
 .review_set {
   display: flex;
   flex-direction: column-reverse;
+  /* max-height: 80vh; */
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 92%;
 }
 
 .reviews>h2 {
@@ -170,8 +182,8 @@ a.button {
 }
 
 .btnBlue {
-  background-color:  #046582;
-  color:#ffffff;
+  background-color: #046582;
+  color: #ffffff;
 }
 
 .btnRed.btnBorder {
@@ -187,6 +199,25 @@ a.button {
   font-size: 0.9rem;
   margin: 0;
   color: #f1f1f1;
+}
+
+.review_set::-webkit-scrollbar {
+  width: 0.3vw;
+  /* padding-left: 1%; */
+}
+
+.review_set::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.review_set::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #a1a1a1;
+}
+
+.review_set::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
 }
 </style>
 <style>
