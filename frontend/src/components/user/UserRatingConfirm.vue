@@ -2,7 +2,7 @@
   <br/>
   <div class="help-tip">
     <p>
-      회원님이 남긴 평점은 추천 알고리즘에 모두 반영됩니다.<br />
+      회원님께서 남겨주신 평점은 추천 알고리즘에 모두 반영됩니다.<br />
       평점 정보가 너무 적으면 추천의 정확성이 떨어지기 때문에, 최소한은 남겨주시는 것이 좋아요!</p>
   </div>
   <div v-if="ratingList != null">
@@ -231,8 +231,7 @@ body {
   display: none;
   text-align: left;
   background-color: #1E2021;
-  padding: 20px;
-  width: 23vw;
+  width: 24vw;
   position: absolute;
   border-radius: 3px;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
@@ -240,6 +239,7 @@ body {
   color: #FFF;
   font-size: 13px;
   line-height: 1.4;
+  padding: 1px 1px 1px 1px;
 }
 
 .help-tip p:before {

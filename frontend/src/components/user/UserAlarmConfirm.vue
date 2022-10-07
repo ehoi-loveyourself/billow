@@ -272,7 +272,6 @@ body {
   display: none;
   text-align: left;
   background-color: #1E2021;
-  padding: 20px;
   width: 23vw;
   position: absolute;
   border-radius: 3px;
@@ -281,6 +280,7 @@ body {
   color: #FFF;
   font-size: 13px;
   line-height: 1.4;
+  padding: 1px 1px 1px 1px;
 }
 
 .help-tip p:before {
