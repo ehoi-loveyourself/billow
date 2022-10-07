@@ -99,6 +99,7 @@ def mf_algo_individual(request):
             user_result.insert(2, 'user_id', user)
             user_result = user_result[0:10]
             predict_result = pd.concat([predict_result, user_result])
+            break
     return predict_result
 
 # 상황 추천 알고리즘
