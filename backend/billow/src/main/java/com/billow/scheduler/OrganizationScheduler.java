@@ -35,6 +35,7 @@ public class OrganizationScheduler {
 
     private final ProgramService programService;
     private final ProgramOrganozationService programOrganozationService;
+
     private final BroadcastingAlarmService broadcastingAlarmService;
 
     //매일 0시 7분 실행
@@ -109,12 +110,14 @@ public class OrganizationScheduler {
         log.info("프로그램 편성표 데이터 수집 Scheduler 성공");
     }
 
-    //10분 주기로 실행
-    @Scheduled(cron = "0 0 * * * *")
+    //2시간 주기로 실행
+    @Scheduled(cron = "0 0 */2 * * *")
     @ApiOperation(value = "지난 편성표 데이터 삭제", response = Object.class)
     public void organizationDelete() throws IOException {
         log.info("지난 편성표 데이터 삭제 Scheduler 호출");
-        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.HOUR, -2);
+        Date date = new Date(calendar.getTimeInMillis());
         List<ProgramOrganization> programOrganizationList = programOrganozationService.findByBroadcastingTimeBefore(date);
         for (ProgramOrganization programOrganization : programOrganizationList) {
             List<BroadcastingAlarm> broadcastingAlarmList = broadcastingAlarmService.findByProgramOrganization_Id(programOrganization.getId());
@@ -124,5 +127,20 @@ public class OrganizationScheduler {
             programOrganozationService.delete(programOrganization);
         }
         log.info("지난 편성표 데이터 삭제 Scheduler 삭제");
+    }
+
+    //10분 주기로 실행
+    @Scheduled(cron = "0 */10 * * * *")
+    @ApiOperation(value = "지난 편성표 데이터 삭제", response = Object.class)
+    public void alarmDelete() throws IOException {
+        log.info("지난 알림 데이터 삭제 Scheduler 호출");
+        Date date = new Date();
+        List<BroadcastingAlarm> broadcastingAlarmList = broadcastingAlarmService.findAll();
+        for (BroadcastingAlarm broadcastingAlarm : broadcastingAlarmList) {
+            if (broadcastingAlarm.getProgramOrganization().getBroadcastingTime().before(date)) {
+                broadcastingAlarmService.deleteAlarm(broadcastingAlarm.getId());
+            }
+        }
+        log.info("지난 알림 데이터 삭제 Scheduler 삭제");
     }
 }
