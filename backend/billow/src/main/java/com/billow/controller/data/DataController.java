@@ -1,36 +1,19 @@
 package com.billow.controller.data;
 
-import com.billow.domain.entity.organization.ProgramOrganization;
-import com.billow.domain.entity.program.Cast;
-import com.billow.domain.entity.program.Program;
+import com.billow.model.service.addtion.BroadcastingAlarmService;
 import com.billow.model.service.data.DataService;
 import com.billow.model.service.organization.ProgramOrganozationService;
 import com.billow.model.service.program.CastService;
 import com.billow.model.service.program.ProgramService;
-import com.billow.util.DateUtil;
 import com.billow.util.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.io.IOException;
-import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -40,9 +23,6 @@ import java.util.List;
 public class DataController {
 
     private final DataService dataService;
-    private final ProgramOrganozationService programOrganozationService;
-    private final CastService castService;
-    private final ProgramService programService;
 
     @ApiOperation(value = "kdrama 데이터 수집", response = Object.class)
     @GetMapping(value = "/kdrama")

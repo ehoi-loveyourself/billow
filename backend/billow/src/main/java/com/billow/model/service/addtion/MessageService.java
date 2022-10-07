@@ -56,6 +56,7 @@ public class MessageService {
         try {
             JSONObject result = coolsms.cancel(params);
         } catch (CoolsmsException e) {
+            e.printStackTrace();
             throw new BadRequestException(ALRAM_MESSAGE_ERROR);
         }
     }

@@ -2,7 +2,6 @@ package com.billow.jwt;
 
 import com.billow.exception.UnauthorizedException;
 import com.billow.exception.WrongAccessException;
-import com.billow.model.repository.user.UserRepository;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
@@ -23,12 +22,9 @@ public class JwtTokenProvider implements InitializingBean {
     private static final String SECRET = "ssafy second project B309 Billow";
     private static final long EXPIRATION = 1000 * 60 * 60 * 2L;
     private static final String EXPIRED_TOKEN = "토큰이 만료되었습니다. 리프레시 토큰을 주세요.";
-    private static final String USER_NOT_FOUND = "해당 유저를 찾을 수 없습니다.";
     private static final String RE_LOGIN = "다시 로그인 해주세요!";
 
     private static Key key;
-
-    private final UserRepository userRepository;
 
     @Override
     public void afterPropertiesSet() throws Exception {  // init()
