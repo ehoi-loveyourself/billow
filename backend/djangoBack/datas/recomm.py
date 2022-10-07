@@ -85,7 +85,7 @@ def recommend_programs(df_svd_preds, i, user_id, ori_programs_df, ori_ratings_df
     # 사용자의 프로그램 평점이 높은 순으로 정렬된 데이터와 위 recommendations을 합친다. 
     recommendations = recommendations.merge(pd.DataFrame(sorted_user_predictions).reset_index(), on = 'program_id')
     # 컬럼 이름 바꾸고 정렬해서 return
-    recommendations = recommendations.rename(columns = {i: 'Predictions'}).sort_values('Predictions', ascending = False).iloc[:num_recommendations, :]
+    recommendations = recommendations.rename(columns = {i: 'Predictions'}).sort_values('Predictions', ascending = False)
     return recommendations
 
 def mf_algo_individual(request):
