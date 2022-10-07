@@ -241,7 +241,7 @@ body {
 
 .help-tip {
   position: absolute;
-  top: 2%;
+  top: 2.7%;
   right:1.2%;
   text-align: center;
   background-color: #6e7c7c;
