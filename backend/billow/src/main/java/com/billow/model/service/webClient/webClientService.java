@@ -1,7 +1,6 @@
 package com.billow.model.service.webClient;
 
 import com.billow.domain.dto.program.ConditionRecommendRequest;
-import com.billow.domain.dto.program.OttResponse;
 import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.domain.entity.addition.Rating;
 import com.billow.domain.entity.program.ConditionRecommend;

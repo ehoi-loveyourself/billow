@@ -13,7 +13,6 @@ import java.util.Date;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tb_program_organization")
 @Entity
-@ToString
 public class ProgramOrganization {
 
     @Id

@@ -2,7 +2,6 @@ package com.billow.model.service.program;
 
 import com.billow.domain.dto.organization.OrganizationResponse;
 import com.billow.domain.dto.program.CastResponse;
-import com.billow.domain.dto.program.OttResponse;
 import com.billow.domain.dto.program.ProgramResponse;
 import com.billow.domain.entity.addition.Rating;
 import com.billow.domain.entity.organization.ProgramOrganization;
@@ -11,7 +10,6 @@ import com.billow.domain.entity.program.GenderAgeViewer;
 import com.billow.domain.entity.program.Program;
 import com.billow.domain.entity.user.User;
 import com.billow.exception.NotFoundException;
-import com.billow.model.repository.addition.RatingRepository;
 import com.billow.model.repository.organization.ProgramOrganizationRepository;
 import com.billow.model.repository.program.CastRepository;
 import com.billow.model.repository.program.GenderAgeViewerRepository;

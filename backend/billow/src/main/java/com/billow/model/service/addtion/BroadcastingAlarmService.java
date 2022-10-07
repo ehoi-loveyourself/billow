@@ -78,4 +78,8 @@ public class BroadcastingAlarmService {
     public List<BroadcastingAlarm> findByProgramOrganization_Id(Long programOrganizationId) {
         return broadcastingAlarmRepository.findByProgramOrganization_Id(programOrganizationId);
     }
+
+    public List<BroadcastingAlarm> findAll() {
+        return broadcastingAlarmRepository.findAll();
+    }
 }
