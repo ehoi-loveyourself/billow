@@ -2,7 +2,7 @@
   <br/>
   <div class="help-tip">
     <p>
-      회원님이 남긴 평점은 추천 알고리즘에 모두 반영됩니다.<br />
+      회원님께서 남겨주신 평점은 추천 알고리즘에 모두 반영됩니다.<br />
       평점 정보가 너무 적으면 추천의 정확성이 떨어지기 때문에, 최소한은 남겨주시는 것이 좋아요!</p>
   </div>
   <div v-if="ratingList != null">
@@ -186,21 +186,9 @@ img:hover {
   height: 60px;
 }
 
-@font-face {
-  font-family: "GoyangIlsan";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
-body {
-  background-color: #1a237e;
-  font-family: "GoyangIlsan";
-}
-
 .help-tip {
   position: absolute;
-  top: 1.6%;
+  top: 2.5%;
   right:1.2%;
   text-align: center;
   background-color: #6e7c7c;
@@ -211,6 +199,7 @@ body {
   line-height: 26px;
   cursor: default;
   padding-left: 2px;
+
 }
 
 .help-tip:before {
@@ -227,23 +216,21 @@ body {
 }
 
 .help-tip p {
-  /* The tooltip */
   display: none;
   text-align: left;
   background-color: #1E2021;
-  padding: 20px;
-  width: 23vw;
+  width: 28vw;
   position: absolute;
   border-radius: 3px;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
   right: -4px;
   color: #FFF;
-  font-size: 13px;
+  font-size: 1vw;
   line-height: 1.4;
+  padding:20px;
 }
 
 .help-tip p:before {
-  /* The pointer of the tooltip */
   position: absolute;
   content: '';
   width: 0;
@@ -255,7 +242,6 @@ body {
 }
 
 .help-tip p:after {
-  /* Prevents the tooltip from being hidden */
   width: 100%;
   height: 40px;
   content: '';
@@ -263,8 +249,6 @@ body {
   top: -40px;
   left: 0;
 }
-
-/* CSS animation */
 
 @-webkit-keyframes fadeIn {
   0% {

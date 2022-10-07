@@ -17,11 +17,6 @@
   <div style="padding-left: 70px; padding-right: 70px">
     <div class="flex" v-if="searchProgram != null">
       <span id="Img" v-for="search in searchProgram">
-        <!-- <router-link
-          :to="{ name: 'detail' }"
-          @click="moveProgramDetail(search.id)"
-          class="nav-link"
-        > -->
         <div class="box-wrap">
           <div class="box">
         <div @click="moveProgramDetail(search.id)">       
@@ -32,7 +27,6 @@
           </div>
       </div>
           </div>
-        <!-- </router-link> -->
       </span>
     </div>
     <div v-else>
@@ -81,7 +75,6 @@ export default {
 
 <style scoped>
 .box-wrap {
-  /* width: 100vw; height: 100vh; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,12 +82,10 @@ export default {
 
 .box {
   position: relative;
-  /* background: #000; */
   width: 100%;
   border: none;
   cursor: pointer;
   overflow: hidden;
-  /* box-shadow: 1px 1px 3px rgba(0,0,0,0.4); */
 }
 
 .box img {
@@ -135,18 +126,6 @@ export default {
 .box:hover:after {
   height: 60px;
 }
-
-/* @font-face {
-    font-family: "GoyangIlsan";
-    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
-}
-
-body {
-    background-color: #1a237e;
-    font-family: "GoyangIlsan";
-} */
 
 .searchimg {
   width: 14vw;

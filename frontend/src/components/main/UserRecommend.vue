@@ -5,15 +5,9 @@
       <splide-slide v-for="recommend in userRecommend">
         <figure>
           <a class="enterDetail" href="#">
-            <!-- <router-link
-              :to="{ name: 'detail' }"
-              @click="moveProgramDetail(recommend.id)"
-              class="nav-link"
-            > -->
             <div @click="moveProgramDetail(recommend.id)">
               <img class="img_2" :src="recommend.backdropPath" alt="main2" />
             </div>
-            <!-- </router-link> -->
           </a>
           <figcaption>{{ recommend.title }}</figcaption>
         </figure>
@@ -57,11 +51,6 @@ export default {
     },
   },
   mounted() {
-    // document.onreadystatechange = () => {
-    //   if (document.readyState == "complete") {
-    //     this.isloaded = true;
-    //   }
-    // };
   },
   data() {
     return {
@@ -124,7 +113,6 @@ figcaption {
   padding: 0.7em;
   padding-right: 0.2em;
   padding-left: 0.2em;
-  /* line-height: 100; */
   position: absolute;
   left: 5%;
   bottom: 9%;
@@ -139,7 +127,6 @@ figure {
   position: relative;
 }
 
-/* Alignment styles */
 body {
   display: flex;
   justify-content: center;
@@ -160,7 +147,6 @@ html {
 <style lang="scss" scoped>
 $colors: #8cc271, #69beeb, #f5aa39, #e9643b;
 
-// -----------------------------------------------------
 .page-loader {
   display: flex;
   justify-content: center;
@@ -174,7 +160,6 @@ $colors: #8cc271, #69beeb, #f5aa39, #e9643b;
   z-index: 999;
 }
 
-// -----------------------------------------------------
 .cube {
   width: 40px;
   height: 40px;
@@ -195,7 +180,6 @@ $colors: #8cc271, #69beeb, #f5aa39, #e9643b;
   }
 }
 
-// -----------------------------------------------------
 @keyframes left {
   40% {
     transform: translateX(-60px);

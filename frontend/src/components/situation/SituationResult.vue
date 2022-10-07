@@ -26,15 +26,9 @@
         <div class="box-wrap">
           <div class="box">
             <div class="img">
-              <!-- <router-link
-                :to="{ name: 'detail' }"
-                @click="moveProgramDetail(condition.id)"
-                class="nav-link"
-              > -->
               <div @click="moveProgramDetail(condition.id)">
                 <img :src="condition.posterImg" alt="Image" />
               </div>
-              <!-- </router-link> -->
             </div>
             <div class="info">
               <div class="title">{{ condition.title }}</div>
@@ -161,7 +155,6 @@ img:hover {
 }
 
 .box-wrap {
-  /* width: 100vw; height: 100vh; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -171,12 +164,10 @@ img:hover {
 
 .box {
   position: relative;
-  /* background: #000; */
   width: 100%;
   border: none;
   cursor: pointer;
   overflow: hidden;
-  /* box-shadow: 1px 1px 3px rgba(0,0,0,0.4); */
 }
 
 .box img {

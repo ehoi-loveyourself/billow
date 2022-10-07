@@ -26,7 +26,6 @@
   
   <style lang="scss" scoped>
      $colors: #8696bc, #82a0ff, #adccf3,	#e7f2f6;
-    // -----------------------------------------------------
     .page-loader {
       display: flex;
       justify-content: center;
@@ -39,7 +38,7 @@
       background-color: #333;
       z-index: 999;
     }
-    // -----------------------------------------------------
+
     .cube{
       width: 50px;
       height: 50px;
@@ -56,7 +55,7 @@
         animation: right 1s infinite .5s;
       }
     }
-    // -----------------------------------------------------
+   
     @keyframes left {
       40% {
         transform: translateX(-60px);

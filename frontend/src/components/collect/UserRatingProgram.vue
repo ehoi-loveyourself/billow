@@ -27,15 +27,9 @@
     </div>
     <p style="text-align: center">
       <a class="startButton" href="#" role="button" style="border-radius: 15px">
-        <!-- <router-link
-        :to="{ name: 'main' }"
-        class="nav-link"
-        style="font-size: 20px; padding: 10px; color: black"
-      > -->
         <div style="font-size: 20px; padding: 10px; color: black" @click="next()">
           BILLOW 만나러 가기
         </div>
-        <!-- </router-link> -->
       </a>
     </p>
   </div>
