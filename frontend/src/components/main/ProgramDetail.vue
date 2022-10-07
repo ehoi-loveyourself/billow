@@ -1,30 +1,16 @@
 <template>
-  <!-- <b-row>
-    <b-col cols="8"> -->
-      <header-bar />
-    <!-- </b-col>
-    <b-col cols="4"> -->
-      <SecondBar />
-    <!-- </b-col>
-  </b-row> -->
+  <header-bar />
+  <SecondBar />
   <div style="padding-left: 70px; padding-right: 70px; color: white">
     <br />
     <div v-if="programDetail != null">
       <section>
         <div class="column-1">
           <div style="padding-bottom: 4%">
-            <button
-              @click="addToFavorites"
-              v-show="!isFavorite"
-              style="border: none; background-color: #141414"
-            >
+            <button @click="addToFavorites" v-show="!isFavorite" style="border: none; background-color: #141414">
               <img src="@/assets/white_heart.png" />
             </button>
-            <button
-              @click="deleteFromFavorites"
-              v-show="isFavorite"
-              style="background: none; border: none"
-            >
+            <button @click="deleteFromFavorites" v-show="isFavorite" style="background: none; border: none">
               <img src="@/assets/red_heart.png" />
             </button>
           </div>
@@ -32,29 +18,25 @@
         </div>
         <div class="column-2"></div>
         <div class="column-3">
-          <span class="title">{{ programDetail.title }}</span
-          ><span
-            >&nbsp;&nbsp;&nbsp;&nbsp;
+          <span class="title">{{ programDetail.title }}</span><span>&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <img src="@/assets/one-star.png" /> </span
-          >&nbsp;<span style="vertical-align: middle">{{
+            <img src="@/assets/one-star.png" /> </span>&nbsp;<span style="vertical-align: middle">{{
             programDetail.averageRating
-          }}</span
-          >&nbsp;&nbsp;&nbsp;
+            }}</span>&nbsp;&nbsp;&nbsp;
 
           <div class="box">
             <span class="box_design" v-if="programDetail.age">{{
-              programDetail.age
+            programDetail.age
             }}</span>
             <span class="box_design" v-if="programDetail.broadcastingDay">{{
-              programDetail.broadcastingDay
+            programDetail.broadcastingDay
             }}</span>
 
             <span class="box_design" v-if="programDetail.broadcastingEpisode">{{
-              programDetail.broadcastingEpisode
+            programDetail.broadcastingEpisode
             }}</span>
             <span class="box_design" v-if="programDetail.broadcastingStation">{{
-              programDetail.broadcastingStation
+            programDetail.broadcastingStation
             }}</span>
           </div>
           <div class="genre">
@@ -65,22 +47,19 @@
           <div class="ott">
             <span v-for="ott in programDetail.otts">
               <a :href="ott.url" target="_blank">
-                <img class="ottImg" :src="ott.imgUrl"
-              /></a>
+                <img class="ottImg" :src="ott.imgUrl" /></a>
             </span>
           </div>
           <div class="blabla">{{ programDetail.summary }}</div>
         </div>
         <div class="column-4"></div>
         <div class="column-5">
-          <b-card
-            style="
+          <b-card style="
               background-color: #ffffff;
               color: #141414;
               width: fit-content;
               float: right;
-            "
-          >
+            ">
             <div class="waviy" style="padding-bottom: 6%">
               <span style="--i: 1">이</span>
               <span style="--i: 2">&nbsp;</span>
@@ -118,9 +97,6 @@
       <b-tab title="REVIEW">
         <Review />
       </b-tab>
-      <!-- <b-tab title="RELATED">
-                    <LikedProgram />
-                </b-tab> -->
     </b-tabs>
 
     <br /><br /><br />
@@ -140,7 +116,6 @@ import axios from "axios";
 import { mapState, mapActions } from "vuex";
 
 export default {
-  // name: "App",
   name: "Star",
   computed: {
     ...mapState(["programDetail", "programId", "isFavorite"]),
@@ -151,9 +126,6 @@ export default {
     };
   },
   created() {
-    // if (this.programDetail == null) {
-    //   this.$router.push("/main");
-    // }
     this.getProgramDetail(this.programId);
   },
   methods: {
@@ -185,24 +157,11 @@ export default {
   width: 100px;
 }
 
-/* .star-rating,
-.star-rating span {
-  display: inline-block;
-  height: 18px;
-  overflow: hidden;
-  background: url(@/assets/star_1.png) no-repeat;
-} */
-
 .star-rating span {
   background-position: left bottom;
   line-height: 0;
   vertical-align: top;
 }
-
-/* .container {
-    margin: 0;
-    padding: 0;
-} */
 
 .column-1 {
   float: left;
@@ -312,6 +271,7 @@ section {
 .favorite__heart__selected {
   color: #df470b;
 }
+
 * {
   padding: 0;
   margin: 0;
@@ -325,10 +285,12 @@ body {
   align-items: center;
   min-height: 0.1vh;
 }
+
 .waviy {
   position: relative;
   -webkit-box-reflect: below -1px linear-gradient(transparent, rgba(0, 0, 0, 0.1));
 }
+
 .waviy span {
   position: relative;
   display: inline-block;
@@ -337,12 +299,15 @@ body {
   animation: waviy 3s infinite;
   animation-delay: calc(0.1s * var(--i));
 }
+
 @keyframes waviy {
+
   0%,
   40%,
   100% {
     transform: translateY(0);
   }
+
   20% {
     transform: translateY(-10px);
   }
@@ -350,7 +315,6 @@ body {
 
 .blabla::-webkit-scrollbar {
   width: 7px;
-  /* padding-left: 1%; */
 }
 
 .blabla::-webkit-scrollbar-track {

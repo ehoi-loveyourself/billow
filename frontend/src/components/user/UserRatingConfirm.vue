@@ -186,18 +186,6 @@ img:hover {
   height: 60px;
 }
 
-/* @font-face {
-  font-family: "GoyangIlsan";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
-body {
-  background-color: #1a237e;
-  font-family: "GoyangIlsan";
-} */
-
 .help-tip {
   position: absolute;
   top: 2.5%;
@@ -228,7 +216,6 @@ body {
 }
 
 .help-tip p {
-  /* The tooltip */
   display: none;
   text-align: left;
   background-color: #1E2021;
@@ -244,7 +231,6 @@ body {
 }
 
 .help-tip p:before {
-  /* The pointer of the tooltip */
   position: absolute;
   content: '';
   width: 0;
@@ -256,7 +242,6 @@ body {
 }
 
 .help-tip p:after {
-  /* Prevents the tooltip from being hidden */
   width: 100%;
   height: 40px;
   content: '';
@@ -264,8 +249,6 @@ body {
   top: -40px;
   left: 0;
 }
-
-/* CSS animation */
 
 @-webkit-keyframes fadeIn {
   0% {

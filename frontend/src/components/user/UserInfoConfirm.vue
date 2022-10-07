@@ -512,7 +512,6 @@ section {
 
 h2 {
   font-weight: 500;
-  /* font-size: 1.4vw; */
 }
 
 .avatar:hover {
@@ -562,10 +561,8 @@ input[type="radio"]:checked + label > .avatar {
 
 a.button {
   padding: 0.6%;
-  /* margin: 10px 20px 10px 0; */
   font-weight: 400;
   text-align: center;
-  /* line-height: 50px; */
   color: #fff;
   border-radius: 5px;
   text-decoration: none;

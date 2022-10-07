@@ -541,8 +541,8 @@ export default {
               console.warn("ERROR!!!!! : ", ex);
             });
         }
-      } // else
-    }, // signUp
+      }
+    },
 
     onKeyUp(e) {
       axios
@@ -586,7 +586,6 @@ section {
 
 h2 {
   font-weight: 500;
-  /* font-size: 1.4vw; */
 }
 
 .avatar:hover {

@@ -139,10 +139,7 @@ export default {
 .review_set {
   display: flex;
   flex-direction: column-reverse;
-
-  /* max-height: 80vh; */
   height:fit-content;
-
   overflow-y: auto;
   overflow-x: hidden;
   width: 92%;
@@ -206,7 +203,6 @@ a.button {
 
 .review_set::-webkit-scrollbar {
   width: 0.3vw;
-  /* padding-left: 1%; */
 }
 
 .review_set::-webkit-scrollbar-track {

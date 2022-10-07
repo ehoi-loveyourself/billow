@@ -49,7 +49,6 @@ export default {
 }
 
 .help-tip p {
-  /* The tooltip */
   display: none;
   text-align: left;
   background-color: #1E2021;
@@ -65,7 +64,6 @@ export default {
 }
 
 .help-tip p:before {
-  /* The pointer of the tooltip */
   position: absolute;
   content: '';
   width: 0;
@@ -77,7 +75,6 @@ export default {
 }
 
 .help-tip p:after {
-  /* Prevents the tooltip from being hidden */
   width: 100%;
   height: 40px;
   content: '';
@@ -85,8 +82,6 @@ export default {
   top: -40px;
   left: 0;
 }
-
-/* CSS animation */
 
 @-webkit-keyframes fadeIn {
   0% {

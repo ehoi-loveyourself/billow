@@ -81,8 +81,6 @@ img {
 
 img:hover {
   filter: brightness(0.3);
-  /* transition: all 0.5s linear;
-  transform: scale(1.2); */
   cursor: pointer;
 }
 

@@ -14,7 +14,6 @@ export default {};
 <style lang="scss" scoped>
 $colors: #c8c6a7, #92967d, #6e7c7c, #435560;
 
-// -----------------------------------------------------
 .page-loader {
     display: flex;
     justify-content: center;
@@ -28,7 +27,6 @@ $colors: #c8c6a7, #92967d, #6e7c7c, #435560;
     z-index: 999;
 }
 
-// -----------------------------------------------------
 .cube {
     width: 50px;
     height: 50px;
@@ -49,7 +47,6 @@ $colors: #c8c6a7, #92967d, #6e7c7c, #435560;
     }
 }
 
-// -----------------------------------------------------
 @keyframes left {
     40% {
         transform: translateX(-60px);

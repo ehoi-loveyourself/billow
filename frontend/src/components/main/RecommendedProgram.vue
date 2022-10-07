@@ -9,15 +9,9 @@
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
-                <!-- <router-link
-                  :to="{ name: 'detail' }"
-                  @click="moveProgramDetail(genderAge.id)"
-                  class="nav-link"
-                > -->
                 <div @click="moveProgramDetail(genderAge.id)">
                   <img :src="genderAge.posterImg" alt="Hover Effect" />
                 </div>
-                <!-- </router-link> -->
               </a>
             </div>
             <div class="info">
@@ -71,15 +65,9 @@
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
-                <!-- <router-link
-                  :to="{ name: 'detail' }"
-                  @click="moveProgramDetail(actor.id)"
-                  class="nav-link"
-                > -->
                 <div @click="moveProgramDetail(actor.id)">
                   <img :src="actor.posterImg" alt="Hover Effect" />
                 </div>
-                <!-- </router-link> -->
               </a>
             </div>
             <div class="info">
@@ -115,15 +103,9 @@
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
-                <!-- <router-link
-                  :to="{ name: 'detail' }"
-                  @click="moveProgramDetail(onair.id)"
-                  class="nav-link"
-                > -->
                 <div @click="moveProgramDetail(onair.id)">
                   <img :src="onair.posterImg" alt="Hover Effect" />
                 </div>
-                <!-- </router-link> -->
               </a>
             </div>
             <div class="info">
@@ -178,13 +160,6 @@
         <div class="box">
           <div class="img">
             <a class="enterDetail" href="#">
-              <!-- <router-link
-                :to="{ name: 'detail' }"
-                @click="moveProgramDetail(hot.id)"
-                class="nav-link"
-              >
-                <img :src="hot.posterImg" alt="Hover Effect" />
-              </router-link> -->
               <div @click="moveProgramDetail(hot.id)">
                 <img :src="hot.posterImg" alt="Hover Effect" />
               </div>
@@ -232,13 +207,6 @@
           <div class="box">
             <div class="img">
               <a class="enterDetail" href="#">
-                <!-- <router-link
-                  :to="{ name: 'detail' }"
-                  @click="moveProgramDetail(newProgram.id)"
-                  class="nav-link"
-                >
-                  <img :src="newProgram.posterImg" alt="Hover Effect" />
-                </router-link> -->
                 <div @click="moveProgramDetail(newProgram.id)">
                   <img :src="newProgram.posterImg" alt="Hover Effect" />
                 </div>
@@ -312,11 +280,7 @@ export default {
   data() {
     return {
       options: {
-        // type: "loop",
         perPage: 7,
-        // perMove:6,
-        // pagination:false,
-        // autoplay    : false,
         gap: 7,
         pauseOnHover: false,
         arrows: true,
@@ -370,7 +334,6 @@ h2 {
 
 img {
   margin-bottom: 20%;
-  /* width:16.1%; */
   width: 100%;
   height: 20vw;
   padding-right: 0;
@@ -378,7 +341,6 @@ img {
 }
 
 .box-wrap {
-  /* width: 100vw; height: 100vh; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -388,12 +350,10 @@ img {
 
 .box {
   position: relative;
-  /* background: #000; */
   width: 100%;
   border: none;
   cursor: pointer;
   overflow: hidden;
-  /* box-shadow: 1px 1px 3px rgba(0,0,0,0.4); */
 }
 
 .box img {
@@ -407,7 +367,6 @@ img {
   bottom: 45px;
   color: #fff;
   width: 100%;
-  /* padding: 15px; */
   box-sizing: border-box;
   opacity: 0;
   transition: all 0.3s ease-in-out;

@@ -2,7 +2,6 @@
   <div style="margin-top: 10px; width:100%; align-content: center;">
     <br />
     <b-card style="background-color:#1f1f1f; border-radius: 1vw; margin-left: 1vw; margin-right: 1vw;">
-      <!-- list size -->
       <div style="margin-top:2%">
         <template v-if="onairTalk != null && onairTalk.length > 0">
           <span style="padding-left:3%">{{ onairTalk.length }}</span>
@@ -117,9 +116,6 @@ export default {
           })
         );
       }
-      // else {
-      //   this.sendMessage(this.message);
-      // }
       this.message = "";
     },
     getStomp() {
@@ -144,10 +140,7 @@ export default {
 .onairtalk_set {
   display: flex;
   flex-direction: column-reverse;
-
-  /* max-height: 80vh; */
-  height:fit-content;
-
+  height: fit-content;
   overflow-y: auto;
   overflow-x: hidden;
   width: 94.5%;
@@ -186,7 +179,6 @@ p.theirTalk {
 
 .onairtalk_set::-webkit-scrollbar {
   width: 0.3vw;
-  /* padding-left: 1%; */
 }
 
 .onairtalk_set::-webkit-scrollbar-track {

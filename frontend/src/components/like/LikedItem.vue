@@ -53,7 +53,6 @@ export default {
       likeList: [],
     });
     axios.get(`/api/bookmark`).then((res) => {
-      //즐겨찾기 데이터 GET
       console.log(res.data);
       state.likeList = res.data;
     });
@@ -127,7 +126,6 @@ export default {
 }
 
 .box-wrap {
-  /* width: 100vw; height: 100vh; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -137,12 +135,10 @@ export default {
 
 .box {
   position: relative;
-  /* background: #000; */
   width: 100%;
   border: none;
   cursor: pointer;
   overflow: hidden;
-  /* box-shadow: 1px 1px 3px rgba(0,0,0,0.4); */
 }
 
 .box img {

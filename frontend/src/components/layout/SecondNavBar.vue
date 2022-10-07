@@ -69,10 +69,8 @@ export default {
 
 <style scoped>
 a.button {
-  /* padding: 0.02%; */
   font-weight: 500;
   text-align: center;
-  /* line-height: 50px; */
   color: #fff;
   border-radius: 5px;
   transition: all 0.2s;

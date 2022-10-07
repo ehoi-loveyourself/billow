@@ -19,12 +19,9 @@
         </div>
       </div>
       <span>
-        <!-- <img src="@/assets/alarm.png" style="cursor: pointer" />&nbsp; -->
         <div>
           <span class="station">{{ alarm.alarmStation }}</span>&nbsp;
           <span class="episode" v-if="alarm.alarmEpisode">{{ alarm.alarmEpisode }}&nbsp;&nbsp;</span>
-          <!-- <a href="#" @click="alarmDelete(alarm.broadcastingAlarmId)" class="button"><img
-              src="@/assets/trash.png" style="width:8%" /></a> -->
         </div>
         <div style="margin-bottom: 10%">
           <span class="day">{{ alarm.alarmDay }} </span>&nbsp;&nbsp;<span class="time">
@@ -159,7 +156,6 @@ export default {
 }
 
 .box-wrap {
-  /* width: 100vw; height: 100vh; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -169,12 +165,10 @@ export default {
 
 .box {
   position: relative;
-  /* background: #000; */
   width: 100%;
   border: none;
   cursor: pointer;
   overflow: hidden;
-  /* box-shadow: 1px 1px 3px rgba(0,0,0,0.4); */
 }
 
 .box .poster {
@@ -268,7 +262,6 @@ body {
 }
 
 .help-tip p {
-  /* The tooltip */
   display: none;
   text-align: left;
   background-color: #1E2021;
@@ -284,7 +277,6 @@ body {
 }
 
 .help-tip p:before {
-  /* The pointer of the tooltip */
   position: absolute;
   content: '';
   width: 0;
@@ -296,7 +288,6 @@ body {
 }
 
 .help-tip p:after {
-  /* Prevents the tooltip from being hidden */
   width: 100%;
   height: 40px;
   content: '';
@@ -304,8 +295,6 @@ body {
   top: -40px;
   left: 0;
 }
-
-/* CSS animation */
 
 @-webkit-keyframes fadeIn {
   0% {
