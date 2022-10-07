@@ -1,23 +1,27 @@
 <template>
-  <br />
+  <br/>
+  <div class="help-tip">
+    <p>
+      회원님이 남긴 평점은 추천 알고리즘에 모두 반영됩니다.<br />
+      평점 정보가 너무 적으면 추천의 정확성이 떨어지기 때문에, 최소한은 남겨주시는 것이 좋아요!</p>
+  </div>
   <div v-if="ratingList != null">
     <span class="flex">
       <div id="Img" v-for="rating in ratingList">
         <UserRatingItem v-bind:rating="rating" />
       </div>
     </span>
-    <br /><br /><br /><br /><br /><br />
+    <br /><br /><br /><br /><br />
   </div>
   <div v-else>
-    <h2
-      style="
+    <h2 style="
         color: white;
         margin-left: 70px;
         font-size: 1.1vw;
         font-weight: 300;
-      "
-    >
-      평점 내역이 없습니다.<br/><br /><br /><br /><br /><br/><br /><br /><br /><br /><br/><br /><br /><br /><br /><br/><br /><br /><br /><br /><br/><br /><br />
+      ">
+      평점 내역이
+      없습니다.<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     </h2>
   </div>
 </template>
@@ -184,8 +188,7 @@ img:hover {
 
 @font-face {
   font-family: "GoyangIlsan";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff")
-    format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -193,5 +196,95 @@ img:hover {
 body {
   background-color: #1a237e;
   font-family: "GoyangIlsan";
+}
+
+.help-tip {
+  position: absolute;
+  top: 1.6%;
+  right:1.2%;
+  text-align: center;
+  background-color: #6e7c7c;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  line-height: 26px;
+  cursor: default;
+  padding-left: 2px;
+}
+
+.help-tip:before {
+  content: '?';
+  font-weight: bold;
+  color: #fff;
+}
+
+.help-tip:hover p {
+  display: block;
+  transform-origin: 100% 0%;
+  -webkit-animation: fadeIn 0.3s ease-in-out;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.help-tip p {
+  /* The tooltip */
+  display: none;
+  text-align: left;
+  background-color: #1E2021;
+  padding: 20px;
+  width: 23vw;
+  position: absolute;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  right: -4px;
+  color: #FFF;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.help-tip p:before {
+  /* The pointer of the tooltip */
+  position: absolute;
+  content: '';
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-bottom-color: #1E2021;
+  left: 20%;
+  top: 12px;
+}
+
+.help-tip p:after {
+  /* Prevents the tooltip from being hidden */
+  width: 100%;
+  height: 40px;
+  content: '';
+  position: absolute;
+  top: -40px;
+  left: 0;
+}
+
+/* CSS animation */
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+
+  100% {
+    opacity: 100%;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 100%;
+  }
 }
 </style>
