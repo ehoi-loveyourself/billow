@@ -1,20 +1,15 @@
 <template>
+    <div class="help-tip">
+      <p>방영 시간의 15분 전에, 회원님께 알림을 드립니다!</p>
+    </div>
   <br />
   <div class="flex" v-if="alarmList != null && alarmList.length > 0">
     <div id="Img" v-for="alarm in alarmList">
       <div class="box-wrap">
         <div class="box">
-          <img
-            class="poster"
-            :src="alarm.posterImg"
-            alt="Image"
-            @click="moveProgramDetail(alarm.id)"
-          />
+          <img class="poster" :src="alarm.posterImg" alt="Image" @click="moveProgramDetail(alarm.id)" />
           <div class="button">
-            <button
-              @click="alarmDelete(alarm.broadcastingAlarmId)"
-              style="border: none; background: none"
-            >
+            <button @click="alarmDelete(alarm.broadcastingAlarmId)" style="border: none; background: none">
               <img class="trash" src="@/assets/trash.png" style="width: 40%" />
             </button>
           </div>
@@ -26,35 +21,28 @@
       <span>
         <!-- <img src="@/assets/alarm.png" style="cursor: pointer" />&nbsp; -->
         <div>
-          <span class="station">{{ alarm.alarmStation }}</span
-          >&nbsp;
-          <span class="episode" v-if="alarm.alarmEpisode"
-            >{{ alarm.alarmEpisode }}&nbsp;&nbsp;</span
-          >
+          <span class="station">{{ alarm.alarmStation }}</span>&nbsp;
+          <span class="episode" v-if="alarm.alarmEpisode">{{ alarm.alarmEpisode }}&nbsp;&nbsp;</span>
           <!-- <a href="#" @click="alarmDelete(alarm.broadcastingAlarmId)" class="button"><img
               src="@/assets/trash.png" style="width:8%" /></a> -->
         </div>
         <div style="margin-bottom: 10%">
-          <span class="day">{{ alarm.alarmDay }} </span>&nbsp;&nbsp;<span
-            class="time"
-          >
-            {{ alarm.alarmTime }}</span
-          >&nbsp;
+          <span class="day">{{ alarm.alarmDay }} </span>&nbsp;&nbsp;<span class="time">
+            {{ alarm.alarmTime }}</span>&nbsp;
         </div>
       </span>
-      <br /><br /><br /><br /><br/>
+      <br />
     </div>
   </div>
   <div v-else>
-    <h2
-      style="
+    <h2 style="
         color: white;
         margin-left: 70px;
         font-size: 1.1vw;
         font-weight: 300;
-      "
-    >
-      예약된 방영 알림이 없습니다.<br/><br /><br /><br /><br /><br/><br /><br /><br /><br /><br/><br /><br /><br /><br /><br/><br /><br /><br /><br /><br/><br /><br />
+      ">
+      예약된 방영 알림이
+      없습니다.<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     </h2>
   </div>
 </template>
@@ -127,8 +115,6 @@ export default {
 #Img {
   text-align: center;
   padding-right: 0.5%;
-  padding-bottom: 2%;
-  position: relative;
 }
 
 .flex {
@@ -230,8 +216,7 @@ export default {
 
 @font-face {
   font-family: "GoyangIlsan";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff")
-    format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -245,11 +230,102 @@ body {
   display: none;
 }
 
-.poster:hover + .button,
+.poster:hover+.button,
 .button:hover {
   display: inline-block;
   position: absolute;
   top: 1vw;
   right: 0;
+}
+
+
+.help-tip {
+  position: absolute;
+  top: 2%;
+  right:1.2%;
+  text-align: center;
+  background-color: #6e7c7c;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  line-height: 26px;
+  cursor: default;
+  padding-left: 2px;
+}
+
+.help-tip:before {
+  content: '?';
+  font-weight: bold;
+  color: #fff;
+}
+
+.help-tip:hover p {
+  display: block;
+  transform-origin: 100% 0%;
+  -webkit-animation: fadeIn 0.3s ease-in-out;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.help-tip p {
+  /* The tooltip */
+  display: none;
+  text-align: left;
+  background-color: #1E2021;
+  padding: 20px;
+  width: 23vw;
+  position: absolute;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  right: -4px;
+  color: #FFF;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.help-tip p:before {
+  /* The pointer of the tooltip */
+  position: absolute;
+  content: '';
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-bottom-color: #1E2021;
+  left: 20%;
+  top: 12px;
+}
+
+.help-tip p:after {
+  /* Prevents the tooltip from being hidden */
+  width: 100%;
+  height: 40px;
+  content: '';
+  position: absolute;
+  top: -40px;
+  left: 0;
+}
+
+/* CSS animation */
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+
+  100% {
+    opacity: 100%;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 100%;
+  }
 }
 </style>
