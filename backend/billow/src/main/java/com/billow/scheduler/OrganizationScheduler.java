@@ -109,8 +109,8 @@ public class OrganizationScheduler {
         log.info("프로그램 편성표 데이터 수집 Scheduler 성공");
     }
 
-    //한시간 주기로 실행
-    @Scheduled(cron = "0 0 * * * *")
+    //10분 주기로 실행
+    @Scheduled(cron = "0 0/10 * * * *")
     @ApiOperation(value = "지난 편성표 데이터 삭제", response = Object.class)
     public void organizationDelete() throws IOException {
         log.info("지난 편성표 데이터 삭제 Scheduler 호출");

@@ -76,6 +76,7 @@ public class RecommendService {
         List<String> actor = castRepository.findActorName(userId);
         if (actor.size() == 0) return null;
         List<Cast> castList = castRepository.findByActorName(userId, actor.get(0));
+        if (castList.size() == 0) return null;
         return castList
                 .stream()
                 .map(cast -> CastResponse.builder()

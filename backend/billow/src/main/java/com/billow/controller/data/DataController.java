@@ -73,4 +73,48 @@ public class DataController {
         return ResponseEntity.ok()
                 .body(message);
     }
+
+
+    @GetMapping(value = "/detail")
+    public ResponseEntity<Object> detail() throws IOException {
+        log.info("프로그램 방영정보 데이터 수집 Scheduler 호출");
+        List<Program> programList = programService.findAll();
+        for (int i = 0; i < programList.size(); i++) {
+            if (programList.get(i).getBookmarkCnt() == null) {
+                programList.get(i).setBookmarkCnt(0);
+            }
+            if (programList.get(i).getRatingCnt() == null) {
+                programList.get(i).setRatingCnt(0L);
+            }
+            Connection connection = Jsoup.connect("https://search.naver.com/search.naver?query=" + programList.get(i).getTitle());
+            Document document = connection.get();
+
+            Elements subTitles = document.select(".title_area");
+            if (subTitles.size() == 0) continue;
+            Elements subTitle = subTitles.get(0).select(".sub_title span");
+            if (subTitle.size() > 1) {
+                String age = subTitle.get(2).text();
+                programList.get(i).setAge(age);
+            }
+            Elements info = document.select(".info_group");
+            if (info.size() > 0) {
+                Elements infoDetail = info.get(0).select("dd span");
+                if (infoDetail.size() > 1) {
+                    String day = infoDetail.get(1).text();
+                    if (!day.equals("") && day != null) {
+                        programList.get(i).setEndFlag(true);
+                        programList.get(i).setBroadcastingDay(day);
+                    } else {
+                        programList.get(i).setEndFlag(false);
+                    }
+                }
+                String episode = info.get(0).select("dd .state").text();
+                programList.get(i).setBroadcastingEpisode(episode);
+            }
+            programService.save(programList.get(i));
+        }
+        log.info("프로그램 방영정보 데이터 수집 Scheduler 성공");
+        return ResponseEntity.ok()
+                .body(null);
+    }
 }
