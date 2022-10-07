@@ -17,7 +17,7 @@
         font-weight: 300;
       "
     >
-      평점 내역이 없습니다.
+      평점 내역이 없습니다.<br/><br /><br /><br /><br /><br/><br /><br /><br /><br /><br/><br /><br /><br /><br /><br/><br /><br /><br /><br /><br/><br /><br />
     </h2>
   </div>
 </template>
