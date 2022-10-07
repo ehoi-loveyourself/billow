@@ -28,9 +28,7 @@ SECRET_KEY = my_settings.SECRET_KEY
 API_KEY = '3beacdbb8f7b35eb8c782851ddc5b403'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-# DEBUG = False
 
-# ALLOWED_HOSTS = ['.http://localhost:8009', 'http://localhost:8009', '.https://j7b309.p.ssafy.io/', 'https://j7b309.p.ssafy.io/']
 ALLOWED_HOSTS = ['*']
 
 
@@ -130,9 +128,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"  # Default
 
 SCHEDULER_DEFAULT = True
-
-USE_L10N = False
-
-DATE_FORMAT = 'Y-m-d'
-
-DATETIME_FORMAT = 'Y-m-d H:i:s'

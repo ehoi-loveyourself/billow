@@ -37,6 +37,10 @@ def query_MySQL(query):
 
     return query_result
     
+def index_s():
+    asdf = query_MySQL('select * from billow.tb_user order by user_id;')
+index_s()
+
 def predict_table():
     df_program = query_MySQL('SELECT program_id, title from tb_program')
     df_rating = query_MySQL('SELECT score, program_id, user_id from tb_rating')
@@ -67,7 +71,7 @@ def predict_table():
     svd_user_predicted_ratings = np.dot(np.dot(U, sigma), Vt) + user_ratings_mean.reshape(-1, 1)
 
     df_svd_preds = pd.DataFrame(svd_user_predicted_ratings, columns = df_user_program_ratings.columns)
-
+    df_svd_preds.head()
     return users, df_program, df_rating, df_svd_preds
 
 def recommend_programs(df_svd_preds, i, user_id, ori_programs_df, ori_ratings_df, num_recommendations=10):
