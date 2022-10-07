@@ -42,9 +42,8 @@
           >&nbsp;
         </div>
       </span>
+      <br /><br /><br /><br /><br/>
     </div>
-
-    <br /><br /><br /><br />
   </div>
   <div v-else>
     <h2
@@ -55,7 +54,7 @@
         font-weight: 300;
       "
     >
-      예약된 방영 알림이 없습니다.
+      예약된 방영 알림이 없습니다.<br/><br /><br /><br /><br /><br/><br /><br /><br /><br /><br/><br /><br /><br /><br /><br/><br /><br /><br /><br /><br/><br /><br />
     </h2>
   </div>
 </template>
