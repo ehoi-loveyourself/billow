@@ -4,6 +4,8 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+.src/main/generated
+*.class
 
 ### STS ###
 .apt_generated
@@ -35,3 +37,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+application-api-key.properties
+application.properties
+#path/to/serviceAccountKey.json
