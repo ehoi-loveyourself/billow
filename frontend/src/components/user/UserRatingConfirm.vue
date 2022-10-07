@@ -200,7 +200,7 @@ body {
 
 .help-tip {
   position: absolute;
-  top: 1.25%;
+  top: 1.7%;
   right:1.2%;
   text-align: center;
   background-color: #6e7c7c;
@@ -211,6 +211,7 @@ body {
   line-height: 26px;
   cursor: default;
   padding-left: 2px;
+
 }
 
 .help-tip:before {
