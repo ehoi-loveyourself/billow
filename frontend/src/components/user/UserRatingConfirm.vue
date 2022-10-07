@@ -186,7 +186,7 @@ img:hover {
   height: 60px;
 }
 
-@font-face {
+/* @font-face {
   font-family: "GoyangIlsan";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff") format("woff");
   font-weight: normal;
@@ -196,7 +196,7 @@ img:hover {
 body {
   background-color: #1a237e;
   font-family: "GoyangIlsan";
-}
+} */
 
 .help-tip {
   position: absolute;
@@ -231,15 +231,15 @@ body {
   display: none;
   text-align: left;
   background-color: #1E2021;
-  width: 24vw;
+  width: 28vw;
   position: absolute;
   border-radius: 3px;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
   right: -4px;
   color: #FFF;
-  font-size: 13px;
+  font-size: 1vw;
   line-height: 1.4;
-  padding: 1px 1px 1px 1px;
+  padding:20px;
 }
 
 .help-tip p:before {

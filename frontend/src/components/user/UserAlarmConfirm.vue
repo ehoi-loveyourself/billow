@@ -278,9 +278,9 @@ body {
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
   right: -4px;
   color: #FFF;
-  font-size: 13px;
+  font-size: 1vw;
   line-height: 1.4;
-  padding: 1px 1px 1px 1px;
+  padding: 20px;
 }
 
 .help-tip p:before {
