@@ -9,6 +9,8 @@ COPY gradle gradle
 COPY build.gradle .
 COPY settings.gradle .
 COPY src src
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Asia/Seoul
 RUN chmod =x ./gradlew
 RUN ./gradlew bootJar
 #RUN ./gradlew clean build --exclude-task test
@@ -16,5 +18,5 @@ RUN ./gradlew bootJar
 FROM openjdk:11
 COPY --from=builder build/libs/billow-0.0.1-SNAPSHOT.jar billow.jar
 
-EXPOSE 8080
+EXPOSE 8009
 CMD ["java","-jar","/billow.jar"]
